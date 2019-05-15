@@ -1,0 +1,15 @@
+[
+    {
+        "type": "stack",
+        "title": "NGINX Manager",
+        "description": "The http entry point for all resources in our Swarm cluster",
+        "note": "The Nginx Server will be deployed globally inside the cluster and available on port 80.",
+        "categories": ["HTTPServer"],
+        "platform": "linux",
+        "logo": "https://avatars0.githubusercontent.com/u/38921410?s=200&v=4",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "nginx-manager/manager.yaml"
+        }
+    }
+]
