@@ -1,3 +1,4 @@
+# The NGINX stack
 version: '3.2'
 services:
   nginx-manager:
