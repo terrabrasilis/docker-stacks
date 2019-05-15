@@ -1,4 +1,3 @@
-# https://github.com/mko-x/docker-nginx-proxy
 version: '3.2'
 services:
   nginx-manager:
