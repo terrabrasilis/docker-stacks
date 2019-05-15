@@ -1,0 +1,14 @@
+# The service to sync data for the old deter_cerrado database in 150.163.2.47
+version: '3.2'
+services:
+  terrabrasilis-detercerrado:
+    image: terrabrasilis/cerradodeter-syncdata:v0.4
+    volumes: 
+      - /data/cerrado/deter/syncdata:/usr/local/data
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure

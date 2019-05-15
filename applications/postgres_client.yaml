@@ -1,0 +1,36 @@
+version: '3.2'
+services:
+  pgadmin4:
+  # https://hub.docker.com/r/dpage/pgadmin4/
+  # https://github.com/postgres/pgadmin4
+    image: terrabrasilis/pgadmin4:v0.1
+    container_name: pgadmin4
+    ports:
+      - 5555:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL_FILE: /run/secrets/client.user.pgadmin
+      PGADMIN_DEFAULT_PASSWORD_FILE: /run/secrets/client.pass.pgadmin
+    secrets:
+      - client.user.pgadmin
+      - client.pass.pgadmin
+    volumes:
+      - /data/pgadmin4:/var/lib/pgadmin
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks: 
+      - terrabrasilis
+      - proxy
+
+secrets:
+  client.user.pgadmin:
+    external: true
+  client.pass.pgadmin:
+    external: true
+
+networks: 
+  terrabrasilis:
+    external: false
+  proxy:
+    external: true

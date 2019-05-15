@@ -1,0 +1,49 @@
+version: '3.2'
+services:
+  ### Business API as a Service
+  business-api:
+    image: terrabrasilis/business-api:0.0.6
+    hostname: business.api
+    networks:
+      - proxy
+    ports:
+      - "13003:8090" 
+    environment:   
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      - mongodb
+    deploy:
+      replicas: 1
+      # placement:
+      #   constraints:
+      #     - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure
+        
+  ### MongoDB as a Container on MASTER  
+  mongodb:
+    image: mongo:latest
+    hostname: "mongo.db"
+    networks:
+      - proxy
+    environment:
+      - "MONGO_DATA_DIR=/data/db"
+      - "MONGO_LOG_DIR=/dev/null"
+      - "MONGODB_USER=<user_mongodb>"
+      - "MONGODB_PASS=<pass_mongodb>"
+    volumes:
+      - "/data/mongodb:/data/db"
+    ports:
+      - "27017"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==manager
+      restart_policy:
+        condition: on-failure
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+        
+networks:
+  proxy:
+    external: true

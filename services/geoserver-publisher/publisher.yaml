@@ -1,0 +1,24 @@
+version: "3.2"
+services:
+  raster-ftp-download:
+    image: terrabrasilis/raster-ftp-download:v0.1
+    volumes: 
+      - /data/raster/download/:/usr/local/data
+      - /data/raster/log/:/usr/local/raster-ftp-download/log
+      - /data/raster/config/:/usr/local/data/config
+  
+  raster-process:
+    image: terrabrasilis/raster-process:v0.1
+    volumes:             
+      - /data/raster/download/:/usr/local/data
+      - /data/raster/processed/:/usr/local/data/processed
+      - /data/raster/log/:/usr/local/raster-process/log
+      - /data/raster/config/:/usr/local/data/config
+  
+  raster-publisher:
+    image: terrabrasilis/raster-publisher:v0.1
+    volumes:                   
+      - /data/raster/processed/:/usr/local/data/processed
+      - /data/raster/log/:/usr/local/raster-publisher/log
+      - /data/raster/config/:/usr/local/data/config
+      - /home/dados/Imagens/:/home/dados/Imagens

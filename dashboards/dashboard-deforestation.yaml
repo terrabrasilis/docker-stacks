@@ -1,0 +1,71 @@
+version: '3.2'
+services:
+  redis-nginx:
+    image: terrabrasilis/redis-nginx:v01
+    ports:
+      - "80"
+    networks:
+      - proxy
+      - frontend
+    depends_on:
+      - redis-api
+      - redis-monitor
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  redis-api:
+    image: terrabrasilis/redis-api:v01
+    ports:
+      - "3000"
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - redis
+    environment:         
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  redis-monitor:
+    image: terrabrasilis/redis-monitor:v01
+    ports:
+      - "63790"
+    command: redis-stat --server redis --csv=/data/output.csv --verbose
+    volumes:
+      - /data/redis-monitor:/data
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - redis
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  redis:
+    image: terrabrasilis/redis:v01
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+    volumes:
+      - /data/redis:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  backend:
+    external: false
+  frontend:
+    external: false
+  proxy:
+    external: true

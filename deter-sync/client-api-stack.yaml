@@ -1,0 +1,130 @@
+# Use in Swarm (deterb_data_sync)
+version: '3.1'
+
+services:
+#  FTP sync was disabled because the sync API is online again.
+#  ftp-download:
+#    image: terrabrasilis/deter-ftp-download:v0.2
+#    volumes:
+#      - /data/deterb-sync/download-ftp:/usr/local/data
+#    secrets:
+#      - postgres.user.deter.amz
+#      - postgres.pass.deter.amz
+#      - postgres.user.deter.cerrado
+#      - postgres.pass.deter.cerrado
+#      - fip.ftp.user
+#      - fip.ftp.pass
+#    environment:
+#      FTP_USER: /run/secrets/fip.ftp.user
+#      FTP_PASS: /run/secrets/fip.ftp.pass
+#    networks:
+#      - proxy
+#    deploy:
+#      replicas: 1
+#      placement:
+#        constraints:
+#          - node.labels.master1==master1
+#      restart_policy:
+#        condition: on-failure
+        
+  script_job:
+    image: terrabrasilis/deter-scripts:v0.4
+    volumes:
+      - /data/deterb-sync/generated-files:/var/www/html
+      - /data/deterb-sync/generated-files/logs:/logs
+    secrets:
+      - geoserver.user.dashboard
+      - geoserver.pass.dashboard
+      - postgres.user.geoserver
+      - postgres.pass.geoserver
+    networks:
+      - proxy
+    ports:
+      - "7070:80"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure
+
+  client_api:
+    image: terrabrasilis/deter-amz-sync-client:v0.3
+    volumes:
+      - /data/deterb-sync/client-api/raw-data:/usr/local/php-client/rawData
+      - /data/deterb-sync/client-api/log:/usr/local/php-client/log
+    secrets:
+      - google.mail.user
+      - google.mail.pass
+      - api.sync.deterb.amz.user
+      - api.sync.deterb.amz.pass
+      - postgres.user.geoserver
+      - postgres.pass.geoserver
+    environment:
+      SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
+      SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
+      MAIL_TO: andre.carvalho@inpe.br,claudio.almeida@inpe.br
+      SYNC_SERVICE_USER_FILE: /run/secrets/api.sync.deterb.amz.user
+      SYNC_SERVICE_PASS_FILE: /run/secrets/api.sync.deterb.amz.pass
+      SYNC_SERVICE_HOST: http://200.18.85.22/
+      POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
+      POSTGRES_PASS_FILE: /run/secrets/postgres.pass.geoserver
+      POSTGRES_HOST: 150.163.2.177
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure
+
+  cerrado_intersection:
+    image: terrabrasilis/cerradodeter-syncdata:v0.5
+    volumes:
+      - /data/deterb-sync/intersection/cerrado:/usr/local/data
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure
+
+secrets:
+  google.mail.user:
+    external: true
+  google.mail.pass:
+    external: true
+  api.sync.deterb.amz.user:
+    external: true
+  api.sync.deterb.amz.pass:
+    external: true
+  postgres.user.geoserver:
+    external: true
+  postgres.pass.geoserver:
+    external: true
+  geoserver.user.dashboard:
+    external: true
+  geoserver.pass.dashboard:
+    external: true
+  postgres.user.deter.amz:
+    external: true
+  postgres.pass.deter.amz:
+    external: true
+  postgres.user.deter.cerrado:
+    external: true
+  postgres.pass.deter.cerrado:
+    external: true
+  fip.ftp.user:
+    external: true
+  fip.ftp.pass:
+    external: true
+
+networks:
+  proxy:
+    external: true

@@ -1,0 +1,105 @@
+version: '3.2'
+services:
+    nginx-geoserver:
+      image: terrabrasilis/nginx-geoserver:v05
+      hostname: nginx.geoserver
+      ports:
+        - "80"
+        - "443"
+      networks: 
+        - terrabrasilis
+        - proxy
+      tty: true
+      depends_on:
+        - geoserver-master  
+        - geoserver-slave-node-01
+      deploy:
+        replicas: 1
+        update_config:
+          parallelism: 2
+          delay: 10s
+        restart_policy:
+          condition: on-failure    
+
+    geoserver-master:
+      image: terrabrasilis/geoserver:v01
+      hostname: geoserver.master
+      ports:
+        - "10080:8080"
+      networks: 
+        - terrabrasilis
+        - proxy
+      volumes: 
+        - /data/geoserver:/data/geoserver
+      tty: true  
+      environment:
+        - "CLUSTER_CONFIG_DIR=/data/geoserver/cluster/instances/master"
+        - "CATALINA_OPTS=-server \
+              -Djava.awt.headless=true \
+              -Dfile.encoding=UTF-8 \
+              -Xms1024m -Xmx1024m -Xss512m -XX:PermSize=1024m -XX:MaxPermSize=2048m \
+              -XX:+DisableExplicitGC -XX:+UseParallelOldGC \
+              -XX:SoftRefLRUPolicyMSPerMB=36000 -XX:+HeapDumpOnOutOfMemoryError"
+      depends_on:
+        - activemq-broker
+      deploy:
+        replicas: 1
+        update_config:
+          parallelism: 2
+          delay: 10s
+        restart_policy:
+          condition: on-failure 
+
+    geoserver-slave-node-01:
+      image: terrabrasilis/geoserver:v01
+      hostname: geoserver.slave.node.01
+      ports:
+        - "8080"
+      networks: 
+        - terrabrasilis
+        - proxy
+      volumes: 
+        - /data/geoserver:/data/geoserver
+      tty: true
+      environment:
+        - "CLUSTER_CONFIG_DIR=/data/geoserver/cluster/instances/slave1"
+        - "CATALINA_OPTS=-server \
+              -Djava.awt.headless=true \
+              -Dfile.encoding=UTF-8 \
+              -Xms1024m -Xmx1024m -Xss512m -XX:PermSize=1024m -XX:MaxPermSize=2048m \
+              -XX:+DisableExplicitGC -XX:+UseParallelOldGC \
+              -XX:SoftRefLRUPolicyMSPerMB=36000 -XX:+HeapDumpOnOutOfMemoryError"
+      depends_on:
+        - activemq-broker
+      deploy:
+        replicas: 3
+        update_config:
+          parallelism: 2
+          delay: 10s
+        restart_policy:
+          condition: on-failure
+
+    activemq-broker:
+      image: terrabrasilis/activemq:v01
+      hostname: activemq
+      ports:
+        - "8161:8161"
+      networks: 
+        - terrabrasilis
+        - proxy
+      volumes: 
+        - /data/activemq:/opt/activemq/data
+      tty: true
+      deploy:
+        replicas: 1
+        update_config:
+          parallelism: 2
+          delay: 10s
+        restart_policy:
+          condition: on-failure
+
+networks: 
+  terrabrasilis:
+    external: false
+  proxy:
+    external: true

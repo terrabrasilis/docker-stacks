@@ -1,0 +1,21 @@
+version: '3.2'
+services:
+  redis-feeder:
+    image: terrabrasilis/redis-feeder:0.0.4
+    hostname: redis.feeder
+    networks:
+      - proxy
+    ports:
+      - "8080:8080" 
+    environment:   
+      - "SPRING_PROFILES_ACTIVE=prod"
+    deploy:
+      replicas: 1
+      # placement:
+      #   constraints:
+      #     - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure
+networks:
+  proxy:
+    external: true

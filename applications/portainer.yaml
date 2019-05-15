@@ -1,0 +1,44 @@
+# http://portainer.readthedocs.io/en/stable/deployment.html
+
+version: '3.2'
+#volumes:
+#  portainer:
+#    driver: local
+#    driver_opts:
+#      type: "nfs"
+#      device: ":/data/portainer"
+#      o: "proto=tcp,addr=153.163.2.190,nolock,soft,rw"
+
+services:
+  portainer:
+    image: portainer/portainer:latest
+    hostname: portainer
+    networks:
+      - proxy
+      - portainer
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+      - /data/portainer:/data
+      #- type: volume
+      #  source: portainer
+      #  target: /data
+      #  volume:
+      #    nocopy: true
+    #tty: true
+    environment:
+      - "GIT_SSL_NO_VERIFY=1"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  portainer: 
+    external: false
+  proxy:
+    external: true

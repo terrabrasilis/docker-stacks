@@ -1,0 +1,41 @@
+#
+# Docker secret works in Swarm node and should run into manager node.
+# More details in official docs: https://docs.docker.com/engine/reference/commandline/secret_create/#related-commands
+#
+version: '3.2'
+
+services:
+  postgresql10:
+    image: terrabrasilis/pg10pgis2.5-server:v0.1
+    environment:
+      POSTGRES_USER_FILE: /run/secrets/server.user.postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/server.pass.postgres
+    ports:
+      - 5432:5432
+    secrets:
+      - server.user.postgres
+      - server.pass.postgres
+    volumes:
+      - /data/postgresql:/var/lib/postgresql/data/pgdata
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure
+    networks: 
+      - terrabrasilis
+      - proxy
+
+secrets:
+  server.user.postgres:
+    external: true
+  server.pass.postgres:
+    external: true
+
+networks: 
+  terrabrasilis:
+    external: false
+  proxy:
+    external: true

@@ -1,0 +1,17 @@
+version: '3.2'
+services:
+  terrabrasilis-webapp:
+    image: terrabrasilis/terrabrasilis-webapp:2.0.4-beta
+    hostname: terrabrasilis.webapp
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+networks:
+  proxy:
+    external: true
