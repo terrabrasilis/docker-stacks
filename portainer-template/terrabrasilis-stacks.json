@@ -7,10 +7,80 @@
         "note": "The Nginx Server will be deployed globally inside the cluster and available on port 80.",
         "categories": ["webserver"],
         "platform": "linux",
-        "logo": "https://avatars0.githubusercontent.com/u/38921410?s=200&v=4",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/deforestation-maps.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "nginx-manager/manager.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "business-api",
+        "title": "Business API as a Service",
+        "description": "Using this API you can request for all data like Visions, Layers, Tools, Data Sources, Downloads and Subdomains.",
+        "note": "This service is mandatory to configure the TreeView of the WebApp and the Download list of WebSite. This stack includes an instance of API and a MongoDB to store JSON documents.",
+        "categories": ["API","services"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "api/business-api.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "geoserver-single",
+        "title": "GeoServer single instance",
+        "description": "The single instance of GeoServer Application.",
+        "note": "This service is needed to provide the OWS services. It's includes an instance of Nginx and one GeoServer.",
+        "categories": ["OWS","API","services"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/geoserver-single.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "geonetwork",
+        "title": "GeoNetwork instance",
+        "description": "The custom instance of GeoNetwork.",
+        "note": "This service is optional but recommended to provide a catalog of Metadata. It's includes an instance of GeoNetwork application.",
+        "categories": ["OWS","API","services"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/geonetwork.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "dashboard-alerts",
+        "title": "Alerts dashboard",
+        "description": "A set of dashboards for DETER project with alerts of deforestation into Amazon and Cerrado.",
+        "note": "This applications is optional and it's use only when the alerts database exists and is properly configured. It's includes four instances of panels each one with particular purpose.",
+        "categories": ["application"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/dashboard2.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "dashboards/dashboard-alerts.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "dashboard-deforestation",
+        "title": "Deforestation dashboard",
+        "description": "A single dashboard for PRODES project with increments of deforestation for all biomes of Brazil.",
+        "note": "This application is optional and it's use only when the deforestation database, called Dashboard-data-model, exists and is properly configured. It's includes one instance of application panel and another instances of ancillary software components as Nginx, REDIS and REDIS api.",
+        "categories": ["application"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/dashboard2.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "dashboards/dashboard-deforestation.yaml"
         }
     }
 ]
