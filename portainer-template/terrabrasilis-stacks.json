@@ -82,5 +82,19 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "dashboards/dashboard-deforestation.yaml"
         }
+    },
+    {
+        "type": 2,
+        "name": "deterb_data_sync",
+        "title": "DETER synchronization services",
+        "description": "A set of services compounds by a client for data sync calling an API service and a set of scripts to prepare the data to use for download and dashboard features.",
+        "note": "This services are optional and it's use only when the deforestation alerts database, called DETER-B, exists and is properly configured. Another configurations are necessary like Secrets inside Portainer. See the Stack definition file to more specific details.",
+        "categories": ["auto tasks"],
+        "platform": "linux",
+        "logo": "https://gitlab.dpi.inpe.br/uploads/project/avatar/189/backend_ms.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "deter-sync/client-api-stack.yaml"
+        }
     }
 ]

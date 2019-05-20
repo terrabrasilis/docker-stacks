@@ -28,7 +28,7 @@ services:
 #        condition: on-failure
         
   script_job:
-    image: terrabrasilis/deter-scripts:v0.4
+    image: terrabrasilis/deter-scripts:v0.5
     volumes:
       - /data/deterb-sync/generated-files:/var/www/html
       - /data/deterb-sync/generated-files/logs:/logs
@@ -50,7 +50,7 @@ services:
         condition: on-failure
 
   client_api:
-    image: terrabrasilis/deter-amz-sync-client:v0.3
+    image: terrabrasilis/deter-amz-sync-client:v0.4
     volumes:
       - /data/deterb-sync/client-api/raw-data:/usr/local/php-client/rawData
       - /data/deterb-sync/client-api/log:/usr/local/php-client/log
@@ -82,7 +82,7 @@ services:
         condition: on-failure
 
   cerrado_intersection:
-    image: terrabrasilis/cerradodeter-syncdata:v0.5
+    image: terrabrasilis/cerradodeter-syncdata:v0.6
     volumes:
       - /data/deterb-sync/intersection/cerrado:/usr/local/data
     networks:
