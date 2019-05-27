@@ -96,5 +96,33 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "deter-sync/client-api-stack.yaml"
         }
+    },
+    {
+        "type": 2,
+        "name": "terrabrasilis-website",
+        "title": "The entry point Website",
+        "description": "The TerraBrasilis Website based in Wordpress. It's the entry point of all TerraBrasilis resources.",
+        "note": "This stack are optional, but without this, no one responds by the root URL.",
+        "categories": ["application"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "terrabrasilis-website/terrabrasilis-website.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "terrabrasilis-webapp",
+        "title": "The WebApp",
+        "description": "The TerraBrasilis WebApp is the main component of the Web GUIs for explore data online. It's compound by the WebMap to explore our maps using the OGC services and Deforestation analytics panel.",
+        "note": "This stack are mandatory and responds by the map and analytics panel URLs.",
+        "categories": ["application"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "terrabrasilis-webapp/terrabrasilis-webapp.yaml"
+        }
     }
 ]
