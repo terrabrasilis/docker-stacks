@@ -1,4 +1,5 @@
-version: "3.2"
+# A docker compose used to deploy a stack services into fipcerrado server.
+version: "2"
 services:
   raster-ftp-download:
     image: terrabrasilis/raster-ftp-download:v0.1
@@ -6,6 +7,7 @@ services:
       - /data/raster/download/:/usr/local/data
       - /data/raster/log/:/usr/local/raster-ftp-download/log
       - /data/raster/config/:/usr/local/data/config
+    restart: always
   
   raster-process:
     image: terrabrasilis/raster-process:v0.1
@@ -14,6 +16,7 @@ services:
       - /data/raster/processed/:/usr/local/data/processed
       - /data/raster/log/:/usr/local/raster-process/log
       - /data/raster/config/:/usr/local/data/config
+    restart: always
   
   raster-publisher:
     image: terrabrasilis/raster-publisher:v0.1
@@ -22,3 +25,18 @@ services:
       - /data/raster/log/:/usr/local/raster-publisher/log
       - /data/raster/config/:/usr/local/data/config
       - /home/dados/Imagens/:/home/dados/Imagens
+    restart: always
+
+  nginx-geoserver:
+    image: terrabrasilis/nginx-geoserver:v06
+    hostname: nginx.geoserver
+    ports:
+      - "80:80"
+      #- "443"
+    volumes:        
+      ### configs        
+      - /data/nginx/geoserver/conf.d:/etc/nginx/conf.d
+      ### logs         
+      - /data/nginx/geoserver/log:/var/log/nginx
+    tty: true
+    restart: always
