@@ -2,7 +2,7 @@
 version: "2"
 services:
   raster-ftp-download:
-    image: terrabrasilis/raster-ftp-download:v0.1
+    image: terrabrasilis/raster-ftp-download:v0.2
     volumes: 
       - /data/raster/download/:/usr/local/data
       - /data/raster/log/:/usr/local/raster-ftp-download/log
