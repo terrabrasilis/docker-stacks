@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo docker-compose -f publisher.yaml down
+docker-compose -f publisher.yaml down
