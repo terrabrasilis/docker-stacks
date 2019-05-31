@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   geonetwork:
-    image: geonetwork:3.4
+    image: geonetwork:3.4.4
     restart: always
     networks:
       - proxy
@@ -10,9 +10,9 @@ services:
     environment:
       DATA_DIR: /var/lib/geonetwork_data
     volumes:
-      - /data/geonetwork:/var/lib/geonetwork_data
-      - /data/geonetwork/gn.h2.db:/usr/local/tomcat/webapps/gn.h2.db
-      - /data/geonetwork/gn.trace.db:/usr/local/tomcat/webapps/gn.trace.db
+      - /data/geonetwork_34:/var/lib/geonetwork_data
+      - /data/geonetwork_34/gn.h2.db:/usr/local/tomcat/webapps/gn.h2.db
+      - /data/geonetwork_34/gn.trace.db:/usr/local/tomcat/webapps/gn.trace.db
 
 networks:
   proxy:
