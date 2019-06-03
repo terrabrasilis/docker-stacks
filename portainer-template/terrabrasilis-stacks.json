@@ -30,7 +30,7 @@
     {
         "type": 2,
         "name": "business-api-homologation",
-        "title": "Business API as a Service",
+        "title": "Homologation of Business API",
         "description": "Using this API you can request for all data like Visions, Layers, Tools, Data Sources, Downloads and Subdomains.",
         "note": "This service is mandatory to configure the TreeView of the WebApp and the Download list of WebSite. This stack includes an instance of API and a MongoDB to store JSON documents.",
         "categories": ["API","services","homologation"],
