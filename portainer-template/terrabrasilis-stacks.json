@@ -138,5 +138,19 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "terrabrasilis-webapp/terrabrasilis-webapp.yaml"
         }
+    },
+    {
+        "type": 2,
+        "name": "portainer",
+        "title": "The Portainer App",
+        "description": "The Portainer App allows to manage the Docker stacks, containers, images, volumes, networks and more for the Docker Swarm.",
+        "note": "This stack are optional but is strongly recommended.",
+        "categories": ["application","manage"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/portainer.yaml"
+        }
     }
 ]
