@@ -3,7 +3,7 @@
 version: '3.2'
 services:
   portainer:
-    image: portainer/portainer:latest
+    image: portainer/portainer:1.20.2
     hostname: portainer
     networks:
       - proxy
