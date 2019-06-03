@@ -29,6 +29,20 @@
     },
     {
         "type": 2,
+        "name": "business-api-homologation",
+        "title": "Business API as a Service",
+        "description": "Using this API you can request for all data like Visions, Layers, Tools, Data Sources, Downloads and Subdomains.",
+        "note": "This service is mandatory to configure the TreeView of the WebApp and the Download list of WebSite. This stack includes an instance of API and a MongoDB to store JSON documents.",
+        "categories": ["API","services","homologation"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "api/business-api-homologation.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "geoserver-single",
         "title": "GeoServer single instance",
         "description": "The single instance of GeoServer Application.",

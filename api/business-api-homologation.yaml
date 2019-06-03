@@ -2,26 +2,29 @@ version: '3.2'
 services:
 
   ### Business API as a Service
-  business-api:
+  business-api-homologation:
     image: terrabrasilis/business-api:v1.0
-    hostname: "business.api"
+    hostname: "business.api.homologation"
     networks:
       - proxy
     ports:
-      - "13222:8090"
+      - "13111:8090"
     environment:   
       - "SPRING_PROFILES_ACTIVE=docker"
     depends_on:
-      - mongodb
+      - mongodbhomologation
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.role==manager
       restart_policy:
         condition: on-failure
 
   # The instance of MongoDB to store the BusinessAPI documents
-  mongodb:
+  mongodbhomologation:
     image: mongo:4
-    hostname: "mongo.db"
+    hostname: "mongo.homologation"
     networks:
       - proxy
     secrets:
@@ -33,11 +36,14 @@ services:
       MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo.user.businessapi
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo.pass.businessapi
     volumes:
-      - /data/mongodb:/data/db
+      - /data/mongodb-homologation:/data/db
     ports:
-      - "30044:27017"
+      - "30043:27017"
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.role==manager
       restart_policy:
         condition: on-failure
     command: mongod --smallfiles --logpath=/dev/null # --quiet
