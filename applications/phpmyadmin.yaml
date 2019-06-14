@@ -1,8 +1,7 @@
 version: '3.2'
 services:
   phpmyadmin:
-    #image: terrabrasilis/phpmyadmin:v0.1
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin/phpmyadmin:4.8.5
     hostname: phpmyadmin
     networks:
       - proxy
@@ -16,9 +15,6 @@ services:
       - db_mysql
     deploy:
       replicas: 1
-      # placement:
-      #   constraints:
-      #     - node.labels.master1==master1
       restart_policy:
         condition: on-failure
 networks:
