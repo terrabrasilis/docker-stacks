@@ -152,5 +152,19 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "applications/portainer.yaml"
         }
+    },
+    {
+        "type": 2,
+        "name": "phpmyadmin",
+        "title": "The WebClient interface for MySQL.",
+        "description": "The PhpMyAdmin App allows to manage the databases into any internal instance for MySQL.",
+        "note": "This stack are optional and is used for manage the databases of the WordPress such as TerraBrasilis Web site.",
+        "categories": ["application","manage"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/phpmyadmin.yaml"
+        }
     }
 ]
