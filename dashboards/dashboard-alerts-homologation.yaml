@@ -1,6 +1,6 @@
 version: '3.2'
 services:
-  cerrado-alert-daily:
+  cerrado-alert-daily-hom:
     image: terrabrasilis/cerrado-alert-daily:v2.2-beta
     networks:
         - proxy
@@ -10,7 +10,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-  cerrado-alert-aggregated:
+  cerrado-alert-aggregated-hom:
     image: terrabrasilis/cerrado-alert-aggregated:v2.2-beta
     networks:
         - proxy
@@ -20,7 +20,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-  amazon-alert-aggregated:
+  amazon-alert-aggregated-hom:
     image: terrabrasilis/amazon-alert-aggregated:v2.3-hom
     networks:
         - proxy
@@ -30,7 +30,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-  amazon-alert-daily:
+  amazon-alert-daily-hom:
     image: terrabrasilis/amazon-alert-daily:v2.2-beta
     networks:
         - proxy
