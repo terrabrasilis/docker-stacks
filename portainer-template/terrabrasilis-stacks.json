@@ -85,6 +85,20 @@
     },
     {
         "type": 2,
+        "name": "dashboard-alerts-homologation",
+        "title": "Homologation alerts dashboard",
+        "description": "(For homologation!) A set of dashboards for DETER project with alerts of deforestation into Amazon and Cerrado.",
+        "note": "(For homologation!) This applications is optional and it's use only when the alerts database exists and is properly configured. It's includes four instances of panels each one with particular purpose.",
+        "categories": ["application", "homologation"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/dashboard2.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "dashboards/dashboard-alerts-homologation.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "dashboard-deforestation",
         "title": "Deforestation dashboard",
         "description": "A single dashboard for PRODES project with increments of deforestation for all biomes of Brazil.",
