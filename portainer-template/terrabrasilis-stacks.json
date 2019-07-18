@@ -194,5 +194,5 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "api/timeseries-ocpu.yaml"
         }
-    },
+    }
 ]
