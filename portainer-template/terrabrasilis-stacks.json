@@ -184,10 +184,10 @@
     {
         "type": 2,
         "name": "timeseries-ocpu",
-        "title": "GeoNetwork instance",
-        "description": "The custom instance of GeoNetwork.",
-        "note": "This service is optional but recommended to provide a catalog of Metadata. It's includes an instance of GeoNetwork application.",
-        "categories": ["OWS","API","services"],
+        "title": "The timeseries using ocpu",
+        "description": "The timeseries app allows the integration between R package sits and TerraBrasilis webapp using openCPU.",
+        "note": "This stack are optional, but without this, no timeseries will be extracted.",
+        "categories": ["application"],
         "platform": "linux",
         "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
         "repository": {
