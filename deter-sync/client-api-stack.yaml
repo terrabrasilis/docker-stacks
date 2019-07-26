@@ -103,6 +103,7 @@ services:
       - postgres.user.geoserver
       - postgres.pass.geoserver
     environment:
+      MAIL_TO: andre.carvalho@inpe.br,claudio.almeida@inpe.br
       SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
       SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
       POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
