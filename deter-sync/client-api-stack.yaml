@@ -98,9 +98,13 @@ services:
   report_news:
     image: terrabrasilis/deter-report:v0.1
     secrets:
+      - google.mail.user
+      - google.mail.pass
       - postgres.user.geoserver
       - postgres.pass.geoserver
     environment:
+      SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
+      SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
       POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
       POSTGRES_PASS_FILE: /run/secrets/postgres.pass.geoserver
     networks:
