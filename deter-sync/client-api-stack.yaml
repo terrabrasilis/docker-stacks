@@ -97,6 +97,8 @@ services:
 
   report_news:
     image: terrabrasilis/deter-report:v0.1
+    volumes:
+      - /data/deterb-sync/report:/usr/local/data
     secrets:
       - google.mail.user
       - google.mail.pass
@@ -112,6 +114,9 @@ services:
       - proxy
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
       restart_policy:
         condition: on-failure
 
