@@ -18,25 +18,6 @@ services:
       #     - node.labels.master1==master1
       restart_policy:
         condition: on-failure
-        
-fipcerrado-website:
-    image: wordpress:5.0.3-apache
-    hostname: fipcerrado.website
-    networks:
-      - proxy    
-    volumes:
-      - /data/wordpress-fipcerrado:/var/www/html
-    ports:
-      - 25113:80
-    depends_on:
-      - db_mysql
-    deploy:
-      replicas: 1
-      # placement:
-      #   constraints:
-      #     - node.labels.master1==master1
-      restart_policy:
-        condition: on-failure
 
 networks:
   proxy:
