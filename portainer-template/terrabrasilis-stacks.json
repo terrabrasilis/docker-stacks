@@ -194,5 +194,19 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "api/timeseries-ocpu.yaml"
         }
+    },
+    {
+        "type": 2,
+        "name": "wordpress-general",
+        "title": "A stack to publish some websites based in wordpress.",
+        "description": "Used to deploy sites based in wordpress project.",
+        "note": "This stack are optional.",
+        "categories": ["application"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/wordpress.yaml"
+        }
     }
 ]
