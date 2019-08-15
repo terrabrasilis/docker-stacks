@@ -14,3 +14,9 @@ For details read [this documentation](https://portainer.readthedocs.io/en/stable
 A set of YAML files to deploy the services that compose the GeoTiffs Publisher for interpretation team of FIP project.
 
 See the [README file](services/geoserver-publisher) for more details.
+
+# Docker Compose for Demonstration
+
+A Docker Compose yaml to up the minimum containers and run the services of the WebMap.
+
+See the [README file](demo/) for more details.
