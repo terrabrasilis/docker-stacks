@@ -71,7 +71,7 @@ services:
         condition: on-failure
 
   report_news:
-    image: terrabrasilis/deter-report:v0.2
+    image: terrabrasilis/deter-report:v0.3
     volumes:
       - /data/deterb-sync/report:/usr/local/data
     secrets:
