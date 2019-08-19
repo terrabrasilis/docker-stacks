@@ -28,7 +28,7 @@ services:
 #        condition: on-failure
         
   script_job:
-    image: terrabrasilis/deter-scripts:v0.5
+    image: terrabrasilis/deter-scripts:v0.6
     volumes:
       - /data/deterb-sync/generated-files:/var/www/html
       - /data/deterb-sync/generated-files/logs:/logs
