@@ -2,31 +2,6 @@
 version: '3.1'
 
 services:
-#  FTP sync was disabled because the sync API is online again.
-#  ftp-download:
-#    image: terrabrasilis/deter-ftp-download:v0.2
-#    volumes:
-#      - /data/deterb-sync/download-ftp:/usr/local/data
-#    secrets:
-#      - postgres.user.deter.amz
-#      - postgres.pass.deter.amz
-#      - postgres.user.deter.cerrado
-#      - postgres.pass.deter.cerrado
-#      - fip.ftp.user
-#      - fip.ftp.pass
-#    environment:
-#      FTP_USER: /run/secrets/fip.ftp.user
-#      FTP_PASS: /run/secrets/fip.ftp.pass
-#    networks:
-#      - proxy
-#    deploy:
-#      replicas: 1
-#      placement:
-#        constraints:
-#          - node.labels.master1==master1
-#      restart_policy:
-#        condition: on-failure
-        
   script_job:
     image: terrabrasilis/deter-scripts:v0.6
     volumes:
@@ -119,6 +94,31 @@ services:
           - node.labels.master1==master1
       restart_policy:
         condition: on-failure
+
+#  FTP sync was disabled because the sync API is online again.
+#  ftp-download:
+#    image: terrabrasilis/deter-ftp-download:v0.2
+#    volumes:
+#      - /data/deterb-sync/download-ftp:/usr/local/data
+#    secrets:
+#      - postgres.user.deter.amz
+#      - postgres.pass.deter.amz
+#      - postgres.user.deter.cerrado
+#      - postgres.pass.deter.cerrado
+#      - fip.ftp.user
+#      - fip.ftp.pass
+#    environment:
+#      FTP_USER: /run/secrets/fip.ftp.user
+#      FTP_PASS: /run/secrets/fip.ftp.pass
+#    networks:
+#      - proxy
+#    deploy:
+#      replicas: 1
+#      placement:
+#        constraints:
+#          - node.labels.master1==master1
+#      restart_policy:
+#        condition: on-failure
 
 secrets:
   google.mail.user:
