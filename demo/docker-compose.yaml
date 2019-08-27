@@ -22,7 +22,7 @@ services:
       MONGO_LOG_DIR: /dev/null
       #MONGO_INITDB_DATABASE: businessapi
       #MONGO_INITDB_ROOT_USERNAME: business-api
-      #MONGO_INITDB_ROOT_PASSWORD: Bus1N3ss
+      #MONGO_INITDB_ROOT_PASSWORD: secret
     volumes:
       - /home/andre/Dados/tmp/mongodb:/data/db
     ports:
