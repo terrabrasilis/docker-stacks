@@ -1,0 +1,30 @@
+version: '2'
+services:
+
+  ### Business API as a Service
+  business-api:
+    image: terrabrasilis/business-api:1.1
+    hostname: "business.api"
+    ports:
+      - "2222:8090"
+    environment:   
+      - "SPRING_PROFILES_ACTIVE=docker"
+    links:
+      - mongodb
+    restart: always
+
+  # The instance of MongoDB to store the BusinessAPI documents
+  mongodb:
+    image: mongo:4
+    hostname: "mongo.db"
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+      #MONGO_INITDB_DATABASE: businessapi
+      #MONGO_INITDB_ROOT_USERNAME: business-api
+      #MONGO_INITDB_ROOT_PASSWORD: secret
+    volumes:
+      - /home/andre/Dados/tmp/mongodb:/data/db
+    ports:
+      - "27018:27017"
+    restart: always
