@@ -6,6 +6,7 @@ services:
     image: terrabrasilis/business-api:1.1
     hostname: "business.api"
     ports:
+      # the 8090 port is configured inside application terrabrasilis-business-api/src/main/resources/application.properties
       - "2222:8090"
     environment:   
       - "SPRING_PROFILES_ACTIVE=docker"
@@ -24,7 +25,9 @@ services:
       #MONGO_INITDB_ROOT_USERNAME: business-api
       #MONGO_INITDB_ROOT_PASSWORD: secret
     volumes:
+      # Use your path to map one volume
       - /home/andre/Dados/tmp/mongodb:/data/db
     ports:
+      # the 27018 port is exposed to avoid conflict with some mongo localhost instance.
       - "27018:27017"
     restart: always

@@ -1,0 +1,11 @@
+version: '2'
+services:
+
+  terrabrasilis-webapp:
+    image: terrabrasilis/terrabrasilis-webapp-for-compose:2.5.7
+    hostname: terrabrasilis.webapp
+    ports:
+      - "80:80"
+    volumes:
+      - /home/andre/Dados/tmp/webapp:/assets/i18n
+    restart: always
