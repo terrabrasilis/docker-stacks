@@ -3,7 +3,7 @@ services:
 
   ### Business API as a Service
   business-api-homologation:
-    image: terrabrasilis/business-api:v1.0
+    image: terrabrasilis/business-api:h1.0
     hostname: "business.api.homologation"
     networks:
       - proxy
@@ -27,14 +27,9 @@ services:
     hostname: "mongo.homologation"
     networks:
       - proxy
-    secrets:
-      - mongo.user.businessapi
-      - mongo.pass.businessapi
     environment:
       MONGO_DATA_DIR: /data/db
       MONGO_LOG_DIR: /dev/null
-      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo.user.businessapi
-      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo.pass.businessapi
     volumes:
       - /data/mongodb-homologation:/data/db
     ports:
@@ -47,12 +42,6 @@ services:
       restart_policy:
         condition: on-failure
     command: mongod --smallfiles --logpath=/dev/null # --quiet
-        
-secrets:
-  mongo.user.businessapi:
-    external: true
-  mongo.pass.businessapi:
-    external: true
 
 networks:
   proxy:
