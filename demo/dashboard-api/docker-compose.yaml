@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+
+#  redis-feeder:
+#    image: terrabrasilis/redis-feeder:0.0.4
+#    hostname: redis.feeder
+#    ports:
+#      - "8080:8080" 
+#    environment:   
+#      - "SPRING_PROFILES_ACTIVE=prod"
+#    links:
+#      - redisdb
+#    restart: always
+
+  # The instance of REDIS to store the BusinessAPI documents
+  redisdb:
+    image: terrabrasilis/redis:v01
+    hostname: "redis.db"
+    volumes:
+      # Use your path to map one volume
+      - /home/andre/Dados/tmp/redisdb:/data
+    ports:
+      - "6379:6379"
+    restart: always
+  
+  redis-nginx:
+    image: terrabrasilis/redis-nginx:v01
+    ports:
+      - "85:80"
+    links:
+      - redis-api
+      #- redis-monitor
+    restart: always
+  
+  redis-api:
+    # This image does not available yet into docker.hub
+    image: terrabrasilis/redis-api-compose:1.0
+    ports:
+      - "3000"
+    links:
+      - redisdb
+    environment:
+      DASHBOARD_API_PORT: 3000
+      DASHBOARD_API_REDIS_HOST: redisdb
+      DASHBOARD_API_REDIS_PORT: 6379
+    restart: always
