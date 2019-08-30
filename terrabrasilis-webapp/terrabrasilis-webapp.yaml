@@ -7,6 +7,8 @@ services:
       - proxy
     ports:
       - "80"
+    volumes:
+      - /data/webapp/assets/i18n:/assets/i18n
     deploy:
       replicas: 2
       restart_policy:

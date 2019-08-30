@@ -2,7 +2,7 @@ version: '2'
 services:
 
   terrabrasilis-webapp:
-    image: terrabrasilis/terrabrasilis-webapp-for-compose:2.5.7
+    image: terrabrasilis/terrabrasilis-webapp:2.5.7-local
     hostname: terrabrasilis.webapp
     ports:
       - "80:80"

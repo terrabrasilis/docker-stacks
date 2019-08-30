@@ -7,6 +7,8 @@ services:
       - proxy
     ports:
       - 2222:80
+    volumes:
+      - /data/webapp-homologation/assets/i18n:/assets/i18n
     deploy:
       replicas: 1
       restart_policy:
