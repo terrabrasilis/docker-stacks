@@ -35,7 +35,6 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
 
 networks:
   proxy:
