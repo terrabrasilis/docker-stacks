@@ -1,0 +1,71 @@
+version: '3.2'
+services:
+  redis-nginx-homologation:
+    image: terrabrasilis/redis-nginx:h01
+    ports:
+      - "81"
+    networks:
+      - proxy
+      - frontend_homologation
+    depends_on:
+      - redis-api-homologation
+      - redis-monitor-homologation
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  redis-api-homologation:
+    image: terrabrasilis/redis-api:h01
+    ports:
+      - "3001"
+    networks:
+      - frontend_homologation
+      - backend_homologation
+    depends_on:
+      - redis
+    environment:         
+      - REDIS_HOST=redis-homologation
+      - REDIS_PORT=6380
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  redis-monitor-homologation:
+    image: terrabrasilis/redis-monitor:h01
+    ports:
+      - "63791"
+    command: redis-stat --server redis-homologation:6380 --csv=/data/output.csv --verbose
+    volumes:
+      - /data/redis-monitor-homologation:/data
+    networks:
+      - frontend_homologation
+      - backend_homologation
+    depends_on:
+      - redis-homologation
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  redis-homologation:
+    image: terrabrasilis/redis:h01
+    ports:
+      - "6380:6380"
+    networks:
+      - backend_homologation
+    volumes:
+      - /data/redis-homologation:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  backend_homologation:
+    external: false
+  frontend_homologation:
+    external: false
+  proxy:
+    external: true

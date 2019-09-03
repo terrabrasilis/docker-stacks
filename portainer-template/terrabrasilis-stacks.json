@@ -100,15 +100,29 @@
     {
         "type": 2,
         "name": "dashboard-deforestation",
-        "title": "Deforestation dashboard",
-        "description": "A single dashboard for PRODES project with increments of deforestation for all biomes of Brazil.",
-        "note": "This application is optional and it's use only when the deforestation database, called Dashboard-data-model, exists and is properly configured. It's includes one instance of application panel and another instances of ancillary software components as Nginx, REDIS and REDIS api.",
-        "categories": ["application"],
+        "title": "Back-end of deforestation dashboard",
+        "description": "The back-end services to dashboard for PRODES project with increments of deforestation for all biomes of Brazil.",
+        "note": "This application is optional and it's use only when the deforestation database, called Dashboard-data-model, exists and is properly configured. It's includes instances of software components as Nginx, REDIS, REDIS-monitor and REDIS api.",
+        "categories": ["API","services"],
         "platform": "linux",
-        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/dashboard2.png",
+        "logo": "https://gitlab.dpi.inpe.br/uploads/project/avatar/189/backend_ms.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "dashboards/dashboard-deforestation.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "dashboard-deforestation-homologation",
+        "title": "Back-end of deforestation dashboard for homologation",
+        "description": "The back-end services to dashboard for PRODES project with increments of deforestation for all biomes of Brazil.",
+        "note": "This stack is optional and it's use only when the deforestation database, called Dashboard-data-model-homologation, exists and is properly configured. It's includes instances of software components as Nginx, REDIS, REDIS-monitor and REDIS api.",
+        "categories": ["API","services"],
+        "platform": "linux",
+        "logo": "https://gitlab.dpi.inpe.br/uploads/project/avatar/189/backend_ms.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "dashboards/dashboard-deforestation-homologation.yaml"
         }
     },
     {
