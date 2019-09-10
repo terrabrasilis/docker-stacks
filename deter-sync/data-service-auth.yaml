@@ -1,0 +1,60 @@
+# Stack of data service and authentication for release DETER data.
+# Use in Swarm (deter_release_data)
+version: '3.1'
+
+services:
+  scripts_generated_files:
+    image: terrabrasilis/deter-generated-files:v0.1
+    hostname: scripts.generated.files
+    volumes:
+      - /data/deter-auth/generated-files:/data/files
+      - /data/deter-auth/logs:/logs
+    secrets:
+      - geoserver.user.dashboard
+      - geoserver.pass.dashboard
+      - postgres.user.geoserver
+      - postgres.pass.geoserver
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure
+
+  file_delivery_api:
+    image: terrabrasilis/file-delivery-api:v0.1
+    hostname: file.delivery.auth
+    volumes:
+      - /data/deter-auth/generated-files:/data/files
+    secrets:
+      - jwt.private.key
+    environment:
+      JWT_SECRET: /run/secrets/jwt.private.key
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure
+
+secrets:
+  postgres.user.geoserver:
+    external: true
+  postgres.pass.geoserver:
+    external: true
+  geoserver.user.dashboard:
+    external: true
+  geoserver.pass.dashboard:
+    external: true
+  jwt.private.key:
+    external: true
+
+networks:
+  proxy:
+    external: true
