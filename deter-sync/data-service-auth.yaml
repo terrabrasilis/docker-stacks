@@ -28,13 +28,16 @@ services:
     image: terrabrasilis/file-delivery:v1.0.0
     hostname: file.delivery.auth
     volumes:
-      - /data/deter-auth/generated-files:/data/files
+      - /data/deter-auth/generated-files:/data/files:ro
+      - /data/deter-auth/logs:/logs
     secrets:
       - jwt.private.key
     environment:
       JWT_SECRET: /run/secrets/jwt.private.key
     networks:
       - proxy
+    ports:
+      - "71:9000"
     deploy:
       replicas: 1
       placement:
