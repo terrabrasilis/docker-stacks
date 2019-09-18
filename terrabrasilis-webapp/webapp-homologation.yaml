@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   terrabrasilis-webapp-homolog:
-    image: terrabrasilis/terrabrasilis-webapp:v2.6-homologation
+    image: terrabrasilis/terrabrasilis-webapp:maps-homologation-v1.0.0
     hostname: terrabrasilis.webapp.homologation
     networks:
       - proxy
