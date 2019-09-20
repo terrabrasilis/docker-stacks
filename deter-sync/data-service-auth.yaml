@@ -88,14 +88,11 @@ services:
       - proxy
     deploy:
       replicas: 1
-      placement:
-        constraints:
-          - node.labels.master1==master1
       restart_policy:
         condition: on-failure
 
   report_news:
-    image: terrabrasilis/deter-report:v0.3
+    image: terrabrasilis/deter-report:v0.4
     volumes:
       - /data/deterb-sync/report:/usr/local/data
     secrets:
@@ -113,9 +110,6 @@ services:
       - proxy
     deploy:
       replicas: 1
-      placement:
-        constraints:
-          - node.labels.master1==master1
       restart_policy:
         condition: on-failure
 
