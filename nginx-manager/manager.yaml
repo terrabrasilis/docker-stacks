@@ -2,41 +2,16 @@
 version: '3.2'
 services:
   nginx-manager:
-    image: terrabrasilis/nginx-manager:v0.2
+    image: terrabrasilis/nginx-manager:v0.3
     hostname: nginx.manager
     networks:
       - proxy
     ports:
       - "80:80"
       - "443:443"
-    #tty: true
     volumes: 
-      # - /data/nginx/certs:/etc/nginx/certs
-      # - /data/nginx/htpasswd:/etc/nginx/htpasswd
-      # - /data/nginx/vhost.d:/etc/nginx/vhost.d
       - /data/nginx/conf.d:/etc/nginx/conf.d
       - /data/nginx/log:/var/log/nginx
-    depends_on:
-      - portainer
-      - nginx-geoserver      
-      - terrabrasilis-webapp
-      - terrabrasilis-webapp-homo
-      - terrabrasilis-website
-      - proxy-ogc
-      - redis-nginx
-      - redis-feeder
-      - geonetwork
-      - cerrado-alert-daily
-      - cerrado-alert-aggregated
-      - amazon-alert-daily
-      - amazon-alert-aggregated
-      - pgadmin4
-      - app_certificates
-      - business-api
-      - app_training      
-      #- activemq-broker
-      #- geoserver-master
-      #- geoserver-slave-node-01
     deploy:
       replicas: 1
       placement:
