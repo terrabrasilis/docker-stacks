@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  download_static_files:
+    image: nginx:1.17-alpine
+    hostname: download.static.files
+    volumes:
+      - /data/download/static:/usr/share/nginx/html:ro
+    networks:
+      - proxy
+    ports:
+      - 80
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  proxy:
+    external: true
