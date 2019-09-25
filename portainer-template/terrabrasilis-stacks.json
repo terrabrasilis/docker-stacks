@@ -225,16 +225,30 @@
     },
     {
         "type": 2,
-        "name": "phpmyadmin",
-        "title": "The WebClient interface for MySQL.",
+        "name": "mysql",
+        "title": "The MySQL SGDB and the WebClient PhpMyAdmin.",
         "description": "The PhpMyAdmin App allows to manage the databases into any internal instance for MySQL.",
-        "note": "This stack are optional and is used for manage the databases of the WordPress such as TerraBrasilis Web site.",
-        "categories": ["application","manage"],
+        "note": "This stack are optional and is used for store and manage the databases of the WordPress such as TerraBrasilis Web site and another PHP web pages.",
+        "categories": ["application","manage", "SGDB", "mysql"],
         "platform": "linux",
         "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
-            "stackfile": "applications/phpmyadmin.yaml"
+            "stackfile": "applications/mysql.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "php-pages",
+        "title": "The general pages with PHP and MySQL",
+        "description": "Used to deploy pages made with PHP as survey and certificates.",
+        "note": "This stack are optional and is used when we have any PHP web pages.",
+        "categories": ["application"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/php-pages.yaml"
         }
     },
     {
