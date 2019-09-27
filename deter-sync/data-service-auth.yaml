@@ -4,7 +4,7 @@ version: '3.1'
 
 services:
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v0.7
+    image: terrabrasilis/deter-generate-files:v0.8
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
@@ -40,9 +40,6 @@ services:
       - "71:9000"
     deploy:
       replicas: 1
-      placement:
-        constraints:
-          - node.labels.master1==master1
       restart_policy:
         condition: on-failure
 
@@ -65,7 +62,7 @@ services:
       MAIL_TO: andre.carvalho@inpe.br
       SYNC_SERVICE_USER_FILE: /run/secrets/api.sync.deterb.amz.user
       SYNC_SERVICE_PASS_FILE: /run/secrets/api.sync.deterb.amz.pass
-      SYNC_SERVICE_HOST: http://150.163.54.22/
+      SYNC_SERVICE_HOST: http://200.18.85.22/
       POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
       POSTGRES_PASS_FILE: /run/secrets/postgres.pass.geoserver
       POSTGRES_HOST: 150.163.2.177
@@ -92,7 +89,7 @@ services:
         condition: on-failure
 
   report_news:
-    image: terrabrasilis/deter-report:v0.4
+    image: terrabrasilis/deter-report:v0.5
     volumes:
       - /data/deterb-sync/report:/usr/local/data
     secrets:
