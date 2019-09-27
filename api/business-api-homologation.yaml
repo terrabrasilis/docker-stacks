@@ -15,9 +15,6 @@ services:
       - mongodbhomologation
     deploy:
       replicas: 1
-      placement:
-        constraints:
-          - node.role==manager
       restart_policy:
         condition: on-failure
 
@@ -36,9 +33,6 @@ services:
       - "30043:27017"
     deploy:
       replicas: 1
-      placement:
-        constraints:
-          - node.role==manager
       restart_policy:
         condition: on-failure
 
