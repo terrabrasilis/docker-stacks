@@ -1,16 +1,17 @@
 version: '3.2'
 services:
-  terrabrasilis-webapp-homolog:
+  terrabrasilis-webmap-homolog:
     image: terrabrasilis/webmap:v2.0.7
-    hostname: terrabrasilis.webapp.homologation
+    hostname: terrabrasilis.webmap.homologation
     networks:
       - proxy
     ports:
       - 2222:80
-    volumes:
-      - /data/webapp-homologation/assets/i18n:/assets/i18n
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
       restart_policy:
         condition: on-failure
 
