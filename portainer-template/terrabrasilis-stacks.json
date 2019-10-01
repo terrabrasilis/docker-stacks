@@ -197,11 +197,11 @@
     },
     {
         "type": 2,
-        "name": "terrabrasilis-webapp-homologation",
-        "title": "The WebApp for homologation",
-        "description": "The TerraBrasilis WebApp is the main component of the Web GUIs for explore data online. It's compound by the WebMap to explore our maps using the OGC services and Deforestation analytics panel.",
-        "note": "This stack are optional and responds by the map and analytics panel URLs for homologation use.",
-        "categories": ["application"],
+        "name": "webmap-homologation",
+        "title": "The WebMap for homologation",
+        "description": "The TerraBrasilis WebMap is the main component of the Web GUIs for explore our maps using the OGC services.",
+        "note": "This stack are optional and responds by the map URLs for homologation use.",
+        "categories": ["application", "homologation"],
         "platform": "linux",
         "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
         "repository": {
