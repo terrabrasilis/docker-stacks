@@ -15,7 +15,7 @@ services:
       restart_policy:
         condition: on-failure
 
-deforestation-dashboard-homolog:
+  deforestation-dashboard-homolog:
     image: terrabrasilis/deforestation-dashboard:v2.0.7
     hostname: deforestation.dashboard.homologation
     networks:
