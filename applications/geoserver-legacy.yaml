@@ -16,7 +16,7 @@ services:
         delay: 10s
       placement:
         constraints:
-          - node.role==worker1
+          - node.role==worker
       restart_policy:
         condition: on-failure
 
@@ -36,7 +36,7 @@ services:
         delay: 10s
       placement:
         constraints:
-          - node.role==worker2
+          - node.role==worker
       restart_policy:
         condition: on-failure
 
