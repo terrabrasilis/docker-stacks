@@ -57,6 +57,20 @@
     },
     {
         "type": 2,
+        "name": "geoserver-redd-pac",
+        "title": "Legacy GeoServer instance for REDD-PAC",
+        "description": "The instance of GeoServer Application.",
+        "note": "This service is needed to provide the OWS services of REDD-PAC database.",
+        "categories": ["OWS","API","services", "legacy"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/geoserver-legacy.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "geonetwork",
         "title": "GeoNetwork instance",
         "description": "The custom instance of GeoNetwork.",
