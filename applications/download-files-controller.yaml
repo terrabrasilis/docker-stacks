@@ -9,15 +9,16 @@ services:
     volumes:
       - /data/download_by_uuid/config:/usr/local/data/config:ro
     secrets:
-      - inpe.mail.andre
-      - inpe.mail.andre.pass
+      - inpe.dpi.mail.user
+      - inpe.dpi.mail.pass
       - postgres.user.geoserver
       - postgres.pass.geoserver
     environment:
-      SMTP_INPE_MAIL_USER_FILE: /run/secrets/inpe.mail.andre
-      SMTP_INPE_MAIL_PASS_FILE: /run/secrets/inpe.mail.andre.pass
+      SMTP_INPE_MAIL_USER_FILE: /run/secrets/inpe.dpi.mail.user
+      SMTP_INPE_MAIL_PASS_FILE: /run/secrets/inpe.dpi.mail.pass
       POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
       POSTGRES_PASS_FILE: /run/secrets/postgres.pass.geoserver
+      MAIL_FROM_ALIAS: prodes@dpi.inpe.br
     networks:
       - proxy
     ports:
@@ -50,9 +51,9 @@ services:
         condition: on-failure
 
 secrets:
-  inpe.mail.andre:
+  inpe.dpi.mail.user:
     external: true
-  inpe.mail.andre.pass:
+  inpe.dpi.mail.pass:
     external: true
   postgres.user.geoserver:
     external: true
