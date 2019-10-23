@@ -155,6 +155,20 @@
     },
     {
         "type": 2,
+        "name": "prodes_download_controller",
+        "title": "An App and a service to control the download for special files.",
+        "description": "This stack is compounds by an app with the form to get client data and two services to store client data and send a download link by email.",
+        "note": "This service is optional and it's use only when you need to provide a special download service used to control who and when one file is get.",
+        "categories": ["services", "download", "application"],
+        "platform": "linux",
+        "logo": "https://gitlab.dpi.inpe.br/uploads/project/avatar/189/backend_ms.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/download-files-controller.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "deterb_data_sync",
         "title": "(DEPRECATED) DETER synchronization services",
         "description": "A set of services compounds by a client for data sync calling an API service and a set of scripts to prepare the data to use for download and dashboard features.",
