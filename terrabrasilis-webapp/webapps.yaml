@@ -1,32 +1,32 @@
 version: '3.2'
 services:
-  webmap-homolog:
+  webmap:
     image: terrabrasilis/webmap:v2.0.7
-    hostname: webmap.homologation
+    hostname: webmap.production
     networks:
       - proxy
     ports:
-      - 2222:80
+      - "80"
     deploy:
       replicas: 1
       placement:
         constraints:
-          - node.labels.master1==master1
+          - node.role==manager
       restart_policy:
         condition: on-failure
 
-  deforestation-dashboard-homolog:
+  deforestation-dashboard:
     image: terrabrasilis/deforestation-dashboard:v2.0.7
-    hostname: deforestation.dashboard.homologation
+    hostname: deforestation.dashboard.production
     networks:
       - proxy
     ports:
-      - 3333:80
+      - "80"
     deploy:
       replicas: 1
       placement:
         constraints:
-          - node.labels.master1==master1
+          - node.role==manager
       restart_policy:
         condition: on-failure
 

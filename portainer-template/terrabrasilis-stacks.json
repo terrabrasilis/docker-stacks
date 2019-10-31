@@ -225,16 +225,30 @@
     },
     {
         "type": 2,
-        "name": "webmap-homologation",
-        "title": "The WebMap for homologation",
-        "description": "The TerraBrasilis WebMap is the main component of the Web GUIs for explore our maps using the OGC services.",
-        "note": "This stack are optional and responds by the map URLs for homologation use.",
+        "name": "webmaps-homologation",
+        "title": "The WebMap and Deforestation Dashboard for homologation",
+        "description": "The TerraBrasilis WebMap is the main component of the Web GUIs for explore our maps using the OGC services. The dashboard is the main component Web GUI for explore the deforestation data analytics produced by PRODES.",
+        "note": "This stack are optional and responds by the Map and Deforestation-dashboard URLs for homologation use.",
         "categories": ["application", "homologation"],
         "platform": "linux",
         "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
-            "stackfile": "terrabrasilis-webapp/webapp-homologation.yaml"
+            "stackfile": "terrabrasilis-webapp/webapps-homologation.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "webapps",
+        "title": "The WebMap and deforestation-dashborad Apps for production",
+        "description": "The TerraBrasilis WebMap is the main component of the Web GUIs for explore our maps using the OGC services. The dashboard is the main component Web GUI for explore the deforestation data analytics produced by PRODES.",
+        "note": "This stack are optional and responds by the Map and Deforestation-dashboard URLs for production use.",
+        "categories": ["application"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "terrabrasilis-webapp/webapps.yaml"
         }
     },
     {
