@@ -9,7 +9,7 @@ services:
       networks: 
         - geoserverbroker
       volumes:
-        - /data/gs_cluster/gs_datadir:/var/local/geoserver
+        - /geoserver/cluster/gs_cluster/gs_datadir:/var/local/geoserver
       deploy:
         replicas: 1
         restart_policy:
@@ -24,8 +24,8 @@ services:
         - geoserverbroker
         - proxy
       volumes: 
-        - /data/gs_cluster/gs_datadir:/var/local/geoserver
-        - /data/gs_cluster/gs_extensions:/var/local/geoserver-exts
+        - /geoserver/cluster/gs_cluster/gs_datadir:/var/local/geoserver
+        - /geoserver/cluster/gs_cluster/gs_extensions:/var/local/geoserver-exts
       environment:
         COOKIE: JSESSIONID prefix
         CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
@@ -42,8 +42,8 @@ services:
         - geoserverbroker
         - proxy
       volumes:
-        - /data/gs_cluster/gs_datadir:/var/local/geoserver
-        - /data/gs_cluster/gs_extensions:/var/local/geoserver-exts
+        - /geoserver/cluster/gs_cluster/gs_datadir:/var/local/geoserver
+        - /geoserver/cluster/gs_cluster/gs_extensions:/var/local/geoserver-exts
       environment:
         COOKIE: JSESSIONID prefix
         CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave1
@@ -62,8 +62,8 @@ services:
         - geoserverbroker
         - proxy
       volumes:
-        - /data/gs_cluster/gs_datadir:/var/local/geoserver
-        - /data/gs_cluster/gs_extensions:/var/local/geoserver-exts
+        - /geoserver/cluster/gs_cluster/gs_datadir:/var/local/geoserver
+        - /geoserver/cluster/gs_cluster/gs_extensions:/var/local/geoserver-exts
       environment:
         COOKIE: JSESSIONID prefix
         CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave2
