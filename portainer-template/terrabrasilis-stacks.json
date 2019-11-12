@@ -43,6 +43,20 @@
     },
     {
         "type": 2,
+        "name": "geoserver-cluster",
+        "title": "GeoServer cluster",
+        "description": "The stack of the cluster GeoServer Application.",
+        "note": "This service is needed to provide the OWS services. It's includes some instances of GeoServer and one instance of ActiveMQ as a Broker.",
+        "categories": ["OWS","API","services"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/geoserver-cluster-mqueue.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "geoserver-single",
         "title": "GeoServer single instance",
         "description": "The single instance of GeoServer Application.",
