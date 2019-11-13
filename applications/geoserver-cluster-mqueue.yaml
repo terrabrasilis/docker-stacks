@@ -5,7 +5,6 @@ services:
       hostname: broker.geoserver
       ports:
         - "61666:61666"
-        - "8099:8080"
       networks: 
         - geoserverbroker
       volumes:
