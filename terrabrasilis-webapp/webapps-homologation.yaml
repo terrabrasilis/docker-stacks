@@ -15,20 +15,20 @@ services:
       restart_policy:
         condition: on-failure
 
-#  deforestation-dashboard-homolog:
-#    image: terrabrasilis/deforestation-dashboard:v2.0.7
-#    hostname: deforestation.dashboard.homologation
-#    networks:
-#      - proxy
-#    ports:
-#      - 3333:80
-#    deploy:
-#      replicas: 1
-#      placement:
-#        constraints:
-#          - node.role==manager
-#      restart_policy:
-#        condition: on-failure
+  deforestation-dashboard-homolog:
+    image: terrabrasilis/deforestation-dashboard:v2.0.8
+    hostname: deforestation.dashboard.homologation
+    networks:
+      - proxy
+    ports:
+      - 3333:80
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==manager
+      restart_policy:
+        condition: on-failure
 
 networks:
   proxy:
