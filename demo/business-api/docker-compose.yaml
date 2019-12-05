@@ -3,7 +3,7 @@ services:
 
   ### Business API as a Service
   business-api:
-    image: terrabrasilis/business-api:1.1
+    image: terrabrasilis/business-api:1.2
     hostname: "business.api"
     ports:
       # the 8090 port is configured inside application terrabrasilis-business-api/src/main/resources/application.properties
