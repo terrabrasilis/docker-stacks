@@ -80,7 +80,7 @@ services:
   cerrado_intersection:
     image: terrabrasilis/cerradodeter-syncdata:v0.6
     volumes:
-      - /data/deterb-sync/intersection/cerrado:/usr/local/data
+      - /data/deter-auth/intersection/cerrado:/usr/local/data
     networks:
       - proxy
     deploy:
@@ -91,7 +91,7 @@ services:
   report_news:
     image: terrabrasilis/deter-report:v0.5
     volumes:
-      - /data/deterb-sync/report:/usr/local/data
+      - /data/deter-auth/report:/usr/local/data
     secrets:
       - google.mail.user
       - google.mail.pass
