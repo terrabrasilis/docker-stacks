@@ -1,0 +1,95 @@
+version: '3.2'
+services:
+  node-check-master2:
+    image: terrabrasilis/cluster-check:v0.1
+    hostname: node-check-master2
+    networks:
+      - proxy
+    ports:
+      - "55550:5000"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==master2
+      restart_policy:
+        condition: on-failure
+        
+  node-check-worker1:
+    image: terrabrasilis/cluster-check:v0.1
+    hostname: node-check-worker1
+    networks:
+      - proxy
+    ports:
+      - "55551:5000"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==worker1
+      restart_policy:
+        condition: on-failure
+
+  node-check-worker2:
+    image: terrabrasilis/cluster-check:v0.1
+    hostname: node-check-worker2
+    networks:
+      - proxy
+    ports:
+      - "55552:5000"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==worker2
+      restart_policy:
+        condition: on-failure
+  
+  node-check-node3:
+    image: terrabrasilis/cluster-check:v0.1
+    hostname: node-check-node3
+    networks:
+      - proxy
+    ports:
+      - "55553:5000"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==node3
+      restart_policy:
+        condition: on-failure
+
+  node-check-node4:
+    image: terrabrasilis/cluster-check:v0.1
+    hostname: node-check-node4
+    networks:
+      - proxy
+    ports:
+      - "55554:5000"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==node4
+      restart_policy:
+        condition: on-failure
+        
+  node-check-node5:
+    image: terrabrasilis/cluster-check:v0.1
+    hostname: node-check-node5
+    networks:
+      - proxy
+    ports:
+      - "55555:5000"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==node5
+      restart_policy:
+        condition: on-failure
+
+networks:
+  proxy:
+    external: true

@@ -281,6 +281,20 @@
     },
     {
         "type": 2,
+        "name": "health-check",
+        "title": "The cluster health check service",
+        "description": "A simple service to response to a request with the node hostname where it runs.",
+        "note": "This stack are optional.",
+        "categories": ["manage"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "services/cluster-health-check.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "mysql",
         "title": "The MySQL SGDB and the WebClient PhpMyAdmin.",
         "description": "The PhpMyAdmin App allows to manage the databases into any internal instance for MySQL.",
