@@ -4,11 +4,12 @@ version: '3.1'
 
 services:
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v0.8
+    image: terrabrasilis/deter-generate-files:v0.9
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
       - /data/deter-auth/logs:/logs
+      - /data/download/static/deter-amz:/data/terrama/deter-amz
     secrets:
       - geoserver.user.dashboard
       - geoserver.pass.dashboard
