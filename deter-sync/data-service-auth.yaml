@@ -21,7 +21,7 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.labels.master1==master1
+          - node.role==manager
       restart_policy:
         condition: on-failure
 
@@ -74,7 +74,7 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.labels.master1==master1
+          - node.role==manager
       restart_policy:
         condition: on-failure
 
