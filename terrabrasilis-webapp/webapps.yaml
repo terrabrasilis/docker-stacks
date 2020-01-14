@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   webmap:
-    image: terrabrasilis/webmap:prod_v2.0.7
+    image: terrabrasilis/webmap:prod_v2.0.10
     hostname: webmap.production
     networks:
       - proxy
@@ -16,7 +16,7 @@ services:
         condition: on-failure
 
   deforestation-dashboard:
-    image: terrabrasilis/deforestation-dashboard:prod_v2.0.8
+    image: terrabrasilis/deforestation-dashboard:prod_v2.0.10
     hostname: deforestation.dashboard.production
     networks:
       - proxy
