@@ -15,6 +15,8 @@ services:
       - geoserver.pass.dashboard
       - postgres.user.geoserver
       - postgres.pass.geoserver
+      - ftp.user.queimadas
+      - ftp.pass.queimadas
     networks:
       - proxy
     deploy:
@@ -60,10 +62,11 @@ services:
     environment:
       SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
       SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
-      MAIL_TO: andre.carvalho@inpe.br
+      MAIL_TO: andre.carvalho@inpe.br,alessandra.gomes@inpe.br,adeline.maciel@inpe.br,davidnaoki@hotmail.com
       SYNC_SERVICE_USER_FILE: /run/secrets/api.sync.deterb.amz.user
       SYNC_SERVICE_PASS_FILE: /run/secrets/api.sync.deterb.amz.pass
       SYNC_SERVICE_HOST: http://200.18.85.22/
+      #SYNC_SERVICE_HOST: http://150.163.54.22/
       POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
       POSTGRES_PASS_FILE: /run/secrets/postgres.pass.geoserver
       POSTGRES_HOST: 150.163.2.177
@@ -99,7 +102,7 @@ services:
       - postgres.user.geoserver
       - postgres.pass.geoserver
     environment:
-      MAIL_TO: andre.carvalho@inpe.br,claudio.almeida@inpe.br
+      MAIL_TO: andre.carvalho@inpe.br,claudio.almeida@inpe.br,alessandra.gomes@inpe.br,adeline.maciel@inpe.br,davidnaoki@hotmail.com
       SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
       SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
       POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
@@ -129,6 +132,10 @@ secrets:
   geoserver.pass.dashboard:
     external: true
   jwt.private.key:
+    external: true
+  ftp.user.queimadas:
+    external: true
+  ftp.pass.queimadas:
     external: true
 
 networks:
