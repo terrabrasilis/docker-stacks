@@ -1,3 +1,6 @@
+# THIS STACK IS DEPRECATED!
+# The current stack is defined in data-service-auth.yaml
+#
 # Use in Swarm (deterb_data_sync)
 version: '3.1'
 
