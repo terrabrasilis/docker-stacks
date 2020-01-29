@@ -62,7 +62,7 @@ services:
     environment:
       SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
       SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
-      MAIL_TO: andre.carvalho@inpe.br,alessandra.gomes@inpe.br,adeline.maciel@inpe.br,davidnaoki@hotmail.com
+      MAIL_TO: andre.carvalho@inpe.br,alessandra.gomes@inpe.br,adeline.maciel@inpe.br,david.kawamura@inpe.br
       SYNC_SERVICE_USER_FILE: /run/secrets/api.sync.deterb.amz.user
       SYNC_SERVICE_PASS_FILE: /run/secrets/api.sync.deterb.amz.pass
       SYNC_SERVICE_HOST: http://200.18.85.22/
@@ -102,7 +102,7 @@ services:
       - postgres.user.geoserver
       - postgres.pass.geoserver
     environment:
-      MAIL_TO: andre.carvalho@inpe.br,claudio.almeida@inpe.br,alessandra.gomes@inpe.br,adeline.maciel@inpe.br,davidnaoki@hotmail.com
+      MAIL_TO: andre.carvalho@inpe.br,claudio.almeida@inpe.br,alessandra.gomes@inpe.br,adeline.maciel@inpe.br,david.kawamura@inpe.br
       SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
       SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
       POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
