@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   webmap:
-    image: terrabrasilis/webmap:prod_v2.0.10
+    image: terrabrasilis/webmap:prod_v2.0.11
     hostname: webmap.production
     networks:
       - proxy
