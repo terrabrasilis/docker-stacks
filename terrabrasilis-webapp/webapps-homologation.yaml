@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   webmap-homolog:
-    image: terrabrasilis/webmap:v2.0.13
+    image: terrabrasilis/webmap:v2.0.14
     hostname: webmap.homologation
     networks:
       - proxy
