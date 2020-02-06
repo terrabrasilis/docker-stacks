@@ -2,7 +2,7 @@
 version: '3.2'
 services:
   nginx-manager:
-    image: terrabrasilis/nginx-manager:v0.3
+    image: terrabrasilis/nginx-manager:v1.0
     hostname: nginx.manager
     networks:
       - proxy
@@ -16,7 +16,7 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.labels.master1==master1
+          - node.labels.nodename==master2
       restart_policy:
         condition: on-failure
 
