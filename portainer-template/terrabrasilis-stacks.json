@@ -133,7 +133,7 @@
         "note": "This application is optional and it's use only when the deforestation database, called Dashboard-data-model, exists and is properly configured. It's includes instances of software components as Nginx, REDIS, REDIS-monitor and REDIS api.",
         "categories": ["API","services"],
         "platform": "linux",
-        "logo": "https://gitlab.dpi.inpe.br/uploads/project/avatar/189/backend_ms.png",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "dashboards/dashboard-deforestation.yaml"
@@ -147,7 +147,7 @@
         "note": "This stack is optional and it's use only when the deforestation database, called Dashboard-data-model-homologation, exists and is properly configured. It's includes instances of software components as Nginx, REDIS, REDIS-monitor and REDIS api.",
         "categories": ["API","services"],
         "platform": "linux",
-        "logo": "https://gitlab.dpi.inpe.br/uploads/project/avatar/189/backend_ms.png",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "dashboards/dashboard-deforestation-homologation.yaml"
@@ -161,7 +161,7 @@
         "note": "This service is optional and it's use only when you need to provide a download service of static file directly from disc.",
         "categories": ["services", "nginx"],
         "platform": "linux",
-        "logo": "https://gitlab.dpi.inpe.br/uploads/project/avatar/189/backend_ms.png",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "services/nginx-static-download.yaml"
@@ -175,7 +175,7 @@
         "note": "This service is optional and it's use only when you need to provide a special download service used to control who and when one file is get.",
         "categories": ["services", "download", "application"],
         "platform": "linux",
-        "logo": "https://gitlab.dpi.inpe.br/uploads/project/avatar/189/backend_ms.png",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "applications/download-files-controller.yaml"
@@ -189,7 +189,7 @@
         "note": "This services are optional and it's use only when the deforestation alerts database, called DETER-B, exists and is properly configured. Another configurations are necessary like Secrets inside Portainer. See the Stack definition file to more specific details.",
         "categories": ["auto tasks"],
         "platform": "linux",
-        "logo": "https://gitlab.dpi.inpe.br/uploads/project/avatar/189/backend_ms.png",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "deter-sync/client-api-stack.yaml"
@@ -203,7 +203,7 @@
         "note": "This services are optional and it's use only when the deforestation alerts database, called DETER-B, exists and is properly configured. Another configurations are necessary like Secrets inside Portainer. See the Stack definition file to more specific details.",
         "categories": ["auto tasks", "services"],
         "platform": "linux",
-        "logo": "https://gitlab.dpi.inpe.br/uploads/project/avatar/189/backend_ms.png",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "deter-sync/data-service-auth.yaml"
