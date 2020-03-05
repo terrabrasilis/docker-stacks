@@ -5,7 +5,7 @@ services:
       hostname: broker.geoserver
       ports:
         - "61666:61666"
-      networks: 
+      networks:
         - geoserverbroker
       volumes:
         - /geoserver/cluster/gs_datadir:/var/local/geoserver
@@ -29,6 +29,9 @@ services:
         COOKIE: JSESSIONID prefix
         CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
         GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/master
+        GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/cluster/gwc
+        GWC_METASTORE_DISABLED: true
+        GWC_DISKQUOTA_DISABLED: true
         instanceName: master
       deploy:
         replicas: 1
@@ -48,6 +51,9 @@ services:
         COOKIE: JSESSIONID prefix
         CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave1
         GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave1
+        GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/cluster/gwc
+        GWC_METASTORE_DISABLED: true
+        GWC_DISKQUOTA_DISABLED: true
         instanceName: slave1
       ports:
         - "8080"
@@ -69,6 +75,9 @@ services:
         COOKIE: JSESSIONID prefix
         CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave2
         GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave2
+        GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/cluster/gwc
+        GWC_METASTORE_DISABLED: true
+        GWC_DISKQUOTA_DISABLED: true
         instanceName: slave2
       ports:
         - "8080"
