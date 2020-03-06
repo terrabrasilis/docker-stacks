@@ -12,7 +12,7 @@ services:
     depends_on:
       - db_mysql
     deploy:
-      replicas: 1
+      replicas: 2
       # placement:
       #   constraints:
       #     - node.labels.master1==master1
