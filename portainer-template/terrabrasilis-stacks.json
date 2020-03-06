@@ -15,6 +15,20 @@
     },
     {
         "type": 2,
+        "name": "php-pages",
+        "title": "A set of small PHP apps.",
+        "description": "A set of small PHP apps.",
+        "note": "This applications is optional and its use only to deploy some small apps written in PHP .",
+        "categories": ["application", "apps"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/dashboard2.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/postgres_client.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "nginx-manager",
         "title": "NGINX Manager",
         "description": "The http entry point for all resources in our Swarm cluster",
