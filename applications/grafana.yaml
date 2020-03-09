@@ -1,65 +1,55 @@
 ## https://www.mundodocker.com.br/tag/docker-stack/
-
 version: '3.2'
 services:
-    # nginx-metrics:
-    #   image: terrabrasilis/nginx-metrics:v02
-    #   hostname: nginx.metrics
-    #   ports:
-    #     - "80"
-    #     - "443"
-    #   networks: 
-    #     - metrics
-    #     - proxy
-    #   tty: true
-    #   depends_on:
-    #     - grafana
-    #   deploy:
-    #     replicas: 1
-    #     update_config:
-    #       parallelism: 2
-    #       delay: 10s
-    #     restart_policy:
-    #       condition: on-failure    
+  influx:
+    image: terrabrasilis/influxdb:v01
+    hostname: influx
+    ports:
+      - "8086"
+    networks:
+      - metrics
+    volumes:
+      - /data/influxdb:/var/lib/influxdb
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
-    # influx:
-    #   image: terrabrasilis/influxdb:v01
-    #   hostname: influx
-    #   ports:        
-    #     - "8086"
-    #   networks: 
-    #     - metrics
-    #     - proxy
-    #   volumes: 
-    #     - /data/influxdb:/var/lib/influxdb
-    #   deploy:
-    #     replicas: 1
-    #     update_config:
-    #       parallelism: 2
-    #       delay: 10s
-    #     restart_policy:
-    #       condition: on-failure
-
-    grafana:
-      image: terrabrasilis/grafana:v01
-      hostname: grafana
-      ports:        
-        - "3000:3000"
-      networks: 
-        - metrics
-        # - proxy
-      volumes: 
-        - /data/grafana:/var/lib/grafana
-      deploy:
-        replicas: 1
-        update_config:
-          parallelism: 2
-          delay: 10s
-        restart_policy:
-          condition: on-failure
+  grafana:
+    image: terrabrasilis/grafana:v01
+    hostname: grafana
+    ports:        
+      - "3000:3000"
+    networks: 
+      - metrics
+    volumes: 
+      - /data/grafana:/var/lib/grafana
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+  agent:
+    image: portainer/agent
+    environment:
+      AGENT_CLUSTER_ADDR: tasks.agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /data-docker/volumes:/var/lib/docker/volumes
+    ports:
+      - target: 9001
+        published: 9001
+        protocol: tcp
+        mode: host
+    networks:
+      - portainer_agent
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.platform.os == linux]
 
 networks: 
   metrics:
     external: true
-  # proxy:
-  #   external: true
+  portainer_agent:
+    driver: overlay
+    attachable: true
