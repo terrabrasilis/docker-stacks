@@ -4,8 +4,6 @@ services:
   influx:
     image: terrabrasilis/influxdb:v01
     hostname: influx
-    ports:
-      - "8086"
     networks:
       - metrics
     volumes:
@@ -29,23 +27,22 @@ services:
       restart_policy:
         condition: on-failure
   agent:
-    image: portainer/agent
-    environment:
-      AGENT_CLUSTER_ADDR: tasks.agent
+    image: terrabrasilis/cadivisor:v01
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /data-docker/volumes:/var/lib/docker/volumes
+      - /:/rootfs:ro
+      - /sys:/sys:ro
+      - /data-docker:/var/lib/docker:ro
+      - /var/run:/var/run
     ports:
       - target: 9001
         published: 9001
         protocol: tcp
         mode: host
+    entrypoint: "/usr/bin/cadvisor -logtostderr -docker_only -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=influx:8086"
     networks:
-      - portainer_agent
+      - metrics
     deploy:
       mode: global
-      placement:
-        constraints: [node.platform.os == linux]
 
 networks: 
   metrics:
