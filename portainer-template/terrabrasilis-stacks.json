@@ -295,6 +295,20 @@
     },
     {
         "type": 2,
+        "name": "monitor_panel",
+        "title": "The Grafana monitor panel and dependencies like influxdb and agents.",
+        "description": "The Monitor panel is an instance of grafana and its dependencies is compound by an agent per node and one influxdb to store the statistics from containers and services.",
+        "note": "This stack are optional and used to monitoring services on docker swarm.",
+        "categories": ["application","manage"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "applications/grafana.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "health-check",
         "title": "The cluster health check service",
         "description": "A simple service to response to a request with the node hostname where it runs.",
