@@ -376,5 +376,18 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "applications/wordpress.yaml"
         }
+    },
+    {
+        "type": 2,
+        "name": "terrabrasilis-oauth-api",
+        "title": "Stack of user authentication and validation service.",
+        "description": "A set of services compounds by an API to validate a JWT token, to provide an API to be integrated on any terrbrasilis app.",
+        "categories": ["services"],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "services/oauth-api.yaml"
+        }
     }
 ]
