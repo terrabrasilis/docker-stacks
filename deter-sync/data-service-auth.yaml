@@ -3,6 +3,18 @@
 version: '3.1'
 
 services:
+  forest_monitor_service:
+    image: terrabrasilis/deter-amz-fm-service:v1.0.0
+    hostname: forest.monitor.intersection
+    volumes:
+      - /data/deter-auth/intersection/forest-monitor:/service/intersection_service/data
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
   scripts_generate_files:
     image: terrabrasilis/deter-generate-files:v1.2
     hostname: scripts.generate.files
