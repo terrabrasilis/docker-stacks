@@ -389,5 +389,18 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "services/oauth-api.yaml"
         }
+    },
+    {
+        "type": 2,
+        "name": "file-delivery-homologation",
+        "title": "Stack of a file provider user validator (homologation)",
+        "description": "A service to provider file according to the user permission, this services uses oauth-api to check user validation .",
+        "categories": ["services"],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "services/file-delivery-homologation.yaml"
+        }
     }
 ]
