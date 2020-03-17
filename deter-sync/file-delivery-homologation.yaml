@@ -16,7 +16,7 @@ services:
     networks:
       - proxy
     ports:
-      - "71:9000"
+      - "9000"
     deploy:
       replicas: 1
       restart_policy:
