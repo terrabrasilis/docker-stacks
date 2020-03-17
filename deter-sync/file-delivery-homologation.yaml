@@ -1,0 +1,51 @@
+# Stack of data service and authentication for release DETER data.
+# Use in Swarm (deter_release_data)
+version: '3.1'
+
+services:
+  file_delivery_api_homologation:
+    image: terrabrasilis/file-delivery:v1.0.1
+    hostname: file.delivery.auth
+    volumes:
+      - /data/deter-auth/generated-files:/data/files:ro
+      - /data/deter-auth/logs:/logs
+    secrets:
+      - jwt.private.key
+    environment:
+      JWT_SECRET: /run/secrets/jwt.private.key
+    networks:
+      - proxy
+    ports:
+      - "71:9000"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+secrets:
+  google.mail.user:
+    external: true
+  google.mail.pass:
+    external: true
+  api.sync.deterb.amz.user:
+    external: true
+  api.sync.deterb.amz.pass:
+    external: true
+  postgres.user.geoserver:
+    external: true
+  postgres.pass.geoserver:
+    external: true
+  geoserver.user.dashboard:
+    external: true
+  geoserver.pass.dashboard:
+    external: true
+  jwt.private.key:
+    external: true
+  ftp.user.queimadas:
+    external: true
+  ftp.pass.queimadas:
+    external: true
+
+networks:
+  proxy:
+    external: true
