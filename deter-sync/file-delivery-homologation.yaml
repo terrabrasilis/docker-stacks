@@ -1,4 +1,4 @@
-# Stack of data service and authentication for release DETER data.
+# Stack of a file provider user validator 
 # Use in Swarm 
 version: '3.1'
 
