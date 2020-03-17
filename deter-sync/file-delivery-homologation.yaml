@@ -6,7 +6,7 @@ services:
 
   file_delivery_api_homologation:
     image: terrabrasilis/file-delivery:v1.0.1
-    hostname: file.delivery.auth
+    hostname: file.delivery.auth.homologation
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
       - /data/deter-auth/logs:/logs
