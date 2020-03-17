@@ -1,5 +1,5 @@
 # Stack of data service and authentication for release DETER data.
-# Use in Swarm (deter_release_data)
+# Use in Swarm 
 version: '3.1'
 
 services:
