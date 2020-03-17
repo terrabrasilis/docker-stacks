@@ -3,6 +3,7 @@
 version: '3.1'
 
 services:
+
   file_delivery_api_homologation:
     image: terrabrasilis/file-delivery:v1.0.1
     hostname: file.delivery.auth
@@ -23,27 +24,7 @@ services:
         condition: on-failure
 
 secrets:
-  google.mail.user:
-    external: true
-  google.mail.pass:
-    external: true
-  api.sync.deterb.amz.user:
-    external: true
-  api.sync.deterb.amz.pass:
-    external: true
-  postgres.user.geoserver:
-    external: true
-  postgres.pass.geoserver:
-    external: true
-  geoserver.user.dashboard:
-    external: true
-  geoserver.pass.dashboard:
-    external: true
   jwt.private.key:
-    external: true
-  ftp.user.queimadas:
-    external: true
-  ftp.pass.queimadas:
     external: true
 
 networks:
