@@ -4,7 +4,7 @@ version: '3.1'
 
 services:
   forest_monitor_service:
-    image: terrabrasilis/deter-amz-fm-service:v1.0.0
+    image: terrabrasilis/deter-amz-fm-service:v1.0.1
     hostname: forest.monitor.intersection
     volumes:
       - /data/deter-auth/intersection/forest-monitor:/service/intersection_service/data
