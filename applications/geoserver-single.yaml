@@ -1,30 +1,5 @@
 version: '3.2'
 services:
-    nginx-geoserver:
-      image: terrabrasilis/nginx-geoserver:v0.7
-      hostname: nginx.geoserver
-      ports:
-        - "80"
-        - "443"
-      networks: 
-        - proxy
-      volumes:        
-        ### configs        
-        - /data/nginx/geoserver/conf.d:/etc/nginx/conf.d
-        ### logs         
-        - /data/nginx/geoserver/log:/var/log/nginx        
-      tty: true
-      depends_on:
-        - geoserver-master  
-        #- geoserver-slave-node-01
-      deploy:
-        replicas: 1
-        update_config:
-          parallelism: 2
-          delay: 10s
-        restart_policy:
-          condition: on-failure    
-
     geoserver-master:
       image: terrabrasilis/geoserver:v03
       hostname: geoserver.master
@@ -53,34 +28,6 @@ services:
         restart_policy:
           condition: on-failure 
     
-#    geoserver-slave-node-01:
-#      image: terrabrasilis/geoserver:v03
-#      hostname: geoserver.slave.node.01
-#      ports:
-#        - "8080"
-#      networks: 
-#        - proxy
-#      volumes: 
-#        - /data/geoserver:/data/geoserver
-#      tty: true  
-#      environment:
-#        - "CATALINA_OPTS=-server \
-#              -Djava.awt.headless=true \
-#              -Dfile.encoding=UTF-8 \
-#              -Xms1024m -Xmx2048m -Xss512m -XX:MaxMetaspaceSize=2048m \
-#              -XX:+DisableExplicitGC -XX:+UseParallelOldGC \
-#              -XX:SoftRefLRUPolicyMSPerMB=36000 -XX:+HeapDumpOnOutOfMemoryError"
-#      deploy:
-#        replicas: 1
-#        update_config:
-#          parallelism: 2
-#          delay: 10s
-#        placement:        
-#          constraints:
-#            - node.role==manager
-#        restart_policy:
-#          condition: on-failure
-
 networks: 
   proxy:
     external: true
