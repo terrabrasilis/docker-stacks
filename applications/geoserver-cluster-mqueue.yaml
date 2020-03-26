@@ -1,7 +1,7 @@
 version: '3.2'
 services:
     gsbroker:
-      image: terrabrasilis/geoserver-broker:v1.0
+      image: terrabrasilis/geoserver-broker:v1.0.1
       hostname: broker.geoserver
       ports:
         - "61666:61666"
@@ -15,7 +15,7 @@ services:
           condition: on-failure
 
     gsmaster:
-      image: terrabrasilis/geoserver-master:v1.0
+      image: terrabrasilis/geoserver-master:v1.0.1
       hostname: master.geoserver
       ports:
         - "8888:8080"
@@ -36,7 +36,7 @@ services:
           condition: on-failure 
 
     gsslave1:
-      image: terrabrasilis/geoserver-worker:v1.0
+      image: terrabrasilis/geoserver-worker:v1.0.1
       hostname: slave1.geoserver
       networks:
         - geoserverbroker
@@ -57,7 +57,7 @@ services:
           condition: on-failure
 
     gsslave2:
-      image: terrabrasilis/geoserver-worker:v1.0
+      image: terrabrasilis/geoserver-worker:v1.0.1
       hostname: slave2.geoserver
       networks:
         - geoserverbroker
