@@ -1,7 +1,7 @@
 version: '3.2'
 services:
     gsbroker:
-      image: terrabrasilis/geoserver-broker:v1.0.1
+      image: terrabrasilis/geoserver-broker:v1.0
       hostname: broker.geoserver
       ports:
         - "61666:61666"
