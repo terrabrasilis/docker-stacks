@@ -9,6 +9,7 @@ services:
       - "25111:80" 
     environment:   
       - "PMA_ARBITRARY=1"
+      - "PMA_ABSOLUTE_URI=http://terrabrasilis.dpi.inpe.br/phpmyadmin/"
     volumes: 
       - /data/phpmyadmin/sessions:/sessions
     depends_on:
