@@ -239,20 +239,6 @@
     },
     {
         "type": 2,
-        "name": "wordpress-general",
-        "title": "A stack to publish some websites based in wordpress.",
-        "description": "Used to deploy sites based in wordpress project.",
-        "note": "This stack are optional.",
-        "categories": ["application"],
-        "platform": "linux",
-        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
-        "repository": {
-            "url": "https://github.com/Terrabrasilis/docker-stacks",
-            "stackfile": "applications/wordpress.yaml"
-        }
-    },
-    {
-        "type": 2,
         "name": "terrabrasilis-oauth-api",
         "title": "Stack of user authentication and validation service.",
         "description": "A set of services compounds by an API to validate a JWT token, to provide an API to be integrated on any terrbrasilis app.",
@@ -262,6 +248,20 @@
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "services/oauth-api.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "postgres_server",
+        "title": "The PostgreSQL SGDB with PostGIS.",
+        "description": "The internal instance for PostgreSQL.",
+        "note": "This stack are optional and is used for store and manage the databases of the GeoServer and other caontroller databases.",
+        "categories": ["services", "SGDB", "postgres"],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "cluster2/backend/postgres.yaml"
         }
     }
 ]
