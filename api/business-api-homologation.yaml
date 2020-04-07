@@ -3,7 +3,7 @@ services:
 
   ### Business API as a Service
   business-api-homologation:
-    image: terrabrasilis/business-api:h1.2
+    image: terrabrasilis/business-api:v1.2.1
     hostname: "business.api.homologation"
     networks:
       - proxy
