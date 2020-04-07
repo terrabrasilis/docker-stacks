@@ -1,0 +1,16 @@
+[
+  {
+      "type": 2,
+      "name": "DETER-SAR",
+      "title": "The scheduled task to load deter-sar from FTP and import into database.",
+      "description": "Tasks to download a ZIP file from FTP, unzip it and import it into a postgres database.",
+      "note": "This service can be deployed without dependencies.",
+      "categories": ["service"],
+      "platform": "linux",
+      "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+      "repository": {
+          "url": "https://github.com/Terrabrasilis/docker-stacks",
+          "stackfile": "cluster2/backend/deter-sar.yaml"
+      }
+  }
+]
