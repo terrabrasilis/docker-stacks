@@ -1,0 +1,33 @@
+version: '3.2'
+services:
+  pg11_postgis2_5:
+    image: terrabrasilis/pgadmin4:v0.1
+    container_name: pg11_postgis2_5
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER_FILE: /run/secrets/server.user.postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/server.pass.postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    secrets:
+      - server.user.postgres
+      - server.pass.postgres
+    volumes:
+      - /data/postgres/pgdata:/var/lib/postgresql/data
+      - /data/postgres/scripts:/scripts
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - proxy
+
+secrets:
+  server.user.postgres:
+    external: true
+  server.pass.postgres:
+    external: true
+
+networks:
+  proxy:
+    external: true
