@@ -3,7 +3,7 @@ version: '3.2'
 services:
 
   deter-sar:
-    image: terrabrasilis/deter-sar-ftp-download:v0.1.0
+    image: terrabrasilis/deter-sar-ftp-download:v0.1.1
     volumes:
       - /data/deter-sar/download-sar-ftp:/usr/local/data
     secrets:
