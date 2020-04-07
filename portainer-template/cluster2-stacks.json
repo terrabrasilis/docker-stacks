@@ -15,6 +15,20 @@
     },
     {
         "type": 2,
+        "name": "cluster2-nginx",
+        "title": "NGINX proxies for only for cluster2",
+        "description": "The http entry point only for resources in our Cluster2 Swarm in normal operation.",
+        "note": "The Nginx Server will be deployed globally inside the cluster and available on port 80.",
+        "categories": ["server","proxy"],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "cluster2/backend/nginx-proxy.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "deter_release_data",
         "title": "Stack of data service and authentication for release DETER data.",
         "description": "A set of services compounds by an API to validate a JWT token and delivery JSON data and a set of scripts to prepare the data to use for download and dashboard features.",
@@ -43,8 +57,8 @@
     },
     {
         "type": 2,
-        "name": "nginx-manager",
-        "title": "NGINX Manager",
+        "name": "cluster1-nginx",
+        "title": "NGINX for main cluster",
         "description": "The http entry point for all resources in our Swarm cluster",
         "note": "The Nginx Server will be deployed globally inside the cluster and available on port 80.",
         "categories": ["webserver"],
