@@ -14,7 +14,7 @@ services:
 #    restart: always
 
   # The instance of REDIS to store the BusinessAPI documents
-  redisdb:
+  redis:
     image: terrabrasilis/redis:v01
     hostname: "redis.db"
     volumes:
@@ -24,24 +24,23 @@ services:
       - "6379:6379"
     restart: always
   
-  redis-nginx:
-    image: terrabrasilis/redis-nginx:v01
-    ports:
-      - "85:80"
-    links:
-      - redis-api
-      #- redis-monitor
-    restart: always
+  # redis-nginx:
+  #   image: terrabrasilis/redis-nginx:v01
+  #   ports:
+  #     - "85:80"
+  #   links:
+  #     - redis-api
+  #     #- redis-monitor
+  #   restart: always
   
   redis-api:
-    # This image does not available yet into docker.hub
-    image: terrabrasilis/redis-api-compose:1.0
+    image: terrabrasilis/redis-api:v01
     ports:
-      - "3000"
+      - "3000:3000"
     links:
-      - redisdb
-    environment:
-      DASHBOARD_API_PORT: 3000
-      DASHBOARD_API_REDIS_HOST: redisdb
-      DASHBOARD_API_REDIS_PORT: 6379
+      - redis
+    # environment:
+    #   DASHBOARD_API_PORT: 3000
+    #   DASHBOARD_API_REDIS_HOST: redisdb
+    #   DASHBOARD_API_REDIS_PORT: 6379
     restart: always
