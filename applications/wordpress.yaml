@@ -20,11 +20,27 @@ services:
     image: wordpress:5.2.2-apache
     hostname: lades.website
     networks:
-      - proxy    
+      - proxy
     volumes:
       - /data/wordpress/lades:/var/www/html
     ports:
       - 25115:80
+    depends_on:
+      - db_mysql
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  workshop-fip-2020-website:
+    image: wordpress:5.2.2-apache
+    hostname: workshop-fip-2020.website
+    networks:
+      - proxy
+    volumes:
+      - /data/wordpress/workshop-fip-2020:/var/www/html
+    ports:
+      - 25116:80
     depends_on:
       - db_mysql
     deploy:
