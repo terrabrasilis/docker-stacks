@@ -36,7 +36,7 @@ services:
           condition: on-failure 
 
     gsslave1:
-      image: terrabrasilis/geoserver-worker:v1.0.1
+      image: terrabrasilis/geoserver-worker:v1.0.2
       hostname: slave1.geoserver
       networks:
         - geoserverbroker
@@ -57,7 +57,7 @@ services:
           condition: on-failure
 
     gsslave2:
-      image: terrabrasilis/geoserver-worker:v1.0.1
+      image: terrabrasilis/geoserver-worker:v1.0.2
       hostname: slave2.geoserver
       networks:
         - geoserverbroker
@@ -70,6 +70,27 @@ services:
         CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave2
         GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave2
         instanceName: slave2
+      ports:
+        - "8080"
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+
+    gsslave3:
+      image: terrabrasilis/geoserver-worker:v1.0.2
+      hostname: slave3.geoserver
+      networks:
+        - geoserverbroker
+        - proxy
+      volumes:
+        - /geoserver/cluster/gs_datadir:/var/local/geoserver
+        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
+      environment:
+        COOKIE: JSESSIONID prefix
+        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave3
+        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave3
+        instanceName: slave3
       ports:
         - "8080"
       deploy:
