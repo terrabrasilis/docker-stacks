@@ -19,7 +19,10 @@ services:
       hostname: master.geoserver
       ports:
         - "8888:8080"
+      depends_on:
+        - gsbroker
       networks:
+        - db_pg11_internal
         - geoserverbroker
         - proxy
       volumes: 
@@ -38,7 +41,12 @@ services:
     gsslave1:
       image: terrabrasilis/geoserver-worker:v1.0.2
       hostname: slave1.geoserver
+      ports:
+        - "30001:8080"
+      depends_on:
+        - gsbroker
       networks:
+        - db_pg11_internal
         - geoserverbroker
         - proxy
       volumes:
@@ -49,8 +57,6 @@ services:
         CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave1
         GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave1
         instanceName: slave1
-      ports:
-        - "8080"
       deploy:
         replicas: 1
         restart_policy:
@@ -59,7 +65,12 @@ services:
     gsslave2:
       image: terrabrasilis/geoserver-worker:v1.0.2
       hostname: slave2.geoserver
+      ports:
+        - "30002:8080"
+      depends_on:
+        - gsbroker
       networks:
+        - db_pg11_internal
         - geoserverbroker
         - proxy
       volumes:
@@ -70,8 +81,6 @@ services:
         CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave2
         GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave2
         instanceName: slave2
-      ports:
-        - "8080"
       deploy:
         replicas: 1
         restart_policy:
@@ -80,7 +89,12 @@ services:
     gsslave3:
       image: terrabrasilis/geoserver-worker:v1.0.2
       hostname: slave3.geoserver
+      ports:
+        - "30003:8080"
+      depends_on:
+        - gsbroker
       networks:
+        - db_pg11_internal
         - geoserverbroker
         - proxy
       volumes:
@@ -91,14 +105,14 @@ services:
         CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave3
         GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave3
         instanceName: slave3
-      ports:
-        - "8080"
       deploy:
         replicas: 1
         restart_policy:
           condition: on-failure
 
 networks:
+  db_pg11_internal:
+    external: true
   geoserverbroker:
     external: false
   proxy:
