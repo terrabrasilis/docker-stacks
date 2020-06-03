@@ -17,9 +17,14 @@ services:
       - /data/postgres/scripts:/scripts
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          # keeping instance in node3 to access disk data direct without NFS tier
+          - node.labels.nodename==node3.master.cluster2
       restart_policy:
         condition: on-failure
     networks:
+      - db_pg11_internal
       - proxy
 
 secrets:
@@ -29,5 +34,7 @@ secrets:
     external: true
 
 networks:
+  db_pg11_internal:
+    external: false
   proxy:
     external: true
