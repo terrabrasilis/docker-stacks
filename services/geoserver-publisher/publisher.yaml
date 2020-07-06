@@ -44,31 +44,31 @@ services:
       - /geoserver/data/production/amazonia:/geoserver/storage/data
     restart: always
 
-    cerrado-ftp-download:
-      image: terrabrasilis/raster-ftp-download:v1.0.0
-      volumes: 
-        - /data/cerrado/raster/download:/usr/local/data
-        - /data/cerrado/raster/log:/usr/local/raster-ftp-download/log
-        - /data/cerrado/raster/config:/usr/local/data/config
-      restart: always
-    
-    cerrado-process:
-      image: terrabrasilis/raster-process:v1.0.0
-      volumes:             
-        - /data/cerrado/raster/download:/usr/local/data
-        - /data/cerrado/raster/processed:/usr/local/data/processed
-        - /data/cerrado/raster/log:/usr/local/raster-process/log
-        - /data/cerrado/raster/config:/usr/local/data/config
-      restart: always
-    
-    cerrado-publisher:
-      image: terrabrasilis/raster-publisher:v1.0.0
-      volumes:                   
-        - /data/cerrado/raster/processed:/usr/local/data/processed
-        - /data/cerrado/raster/log:/usr/local/raster-publisher/log
-        - /data/cerrado/raster/config:/usr/local/data/config
-        - /geoserver/data/production/cerrado:/geoserver/storage/data
-      restart: always
+  cerrado-ftp-download:
+    image: terrabrasilis/raster-ftp-download:v1.0.0
+    volumes: 
+      - /data/cerrado/raster/download:/usr/local/data
+      - /data/cerrado/raster/log:/usr/local/raster-ftp-download/log
+      - /data/cerrado/raster/config:/usr/local/data/config
+    restart: always
+  
+  cerrado-process:
+    image: terrabrasilis/raster-process:v1.0.0
+    volumes:             
+      - /data/cerrado/raster/download:/usr/local/data
+      - /data/cerrado/raster/processed:/usr/local/data/processed
+      - /data/cerrado/raster/log:/usr/local/raster-process/log
+      - /data/cerrado/raster/config:/usr/local/data/config
+    restart: always
+  
+  cerrado-publisher:
+    image: terrabrasilis/raster-publisher:v1.0.0
+    volumes:                   
+      - /data/cerrado/raster/processed:/usr/local/data/processed
+      - /data/cerrado/raster/log:/usr/local/raster-publisher/log
+      - /data/cerrado/raster/config:/usr/local/data/config
+      - /geoserver/data/production/cerrado:/geoserver/storage/data
+    restart: always
 
   # Used only if we deploy a GeoServer cluster to provide load balancing.
   # nginx-geoserver:
