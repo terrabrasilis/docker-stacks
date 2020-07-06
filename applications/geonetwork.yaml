@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   geonetwork:
-    image: geonetwork:3.4.4
+    image: terrabrasilis/geonetwork:v3.4.4
     restart: always
     networks:
       - proxy
