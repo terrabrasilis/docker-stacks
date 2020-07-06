@@ -1,42 +1,86 @@
-# A docker compose used to deploy a stack services into fipcerrado server.
+# A compose docker used to deploy stack services to automate the publication of the
+# DETER project's GeoTiffs.
 version: "2"
 services:
-  raster-ftp-download:
-    image: terrabrasilis/raster-ftp-download:v0.2
-    volumes: 
-      - /data/raster/download/:/usr/local/data
-      - /data/raster/log/:/usr/local/raster-ftp-download/log
-      - /data/raster/config/:/usr/local/data/config
-    restart: always
-  
-  raster-process:
-    image: terrabrasilis/raster-process:v0.1
-    volumes:             
-      - /data/raster/download/:/usr/local/data
-      - /data/raster/processed/:/usr/local/data/processed
-      - /data/raster/log/:/usr/local/raster-process/log
-      - /data/raster/config/:/usr/local/data/config
-    restart: always
-  
-  raster-publisher:
-    image: terrabrasilis/raster-publisher:v0.1
-    volumes:                   
-      - /data/raster/processed/:/usr/local/data/processed
-      - /data/raster/log/:/usr/local/raster-publisher/log
-      - /data/raster/config/:/usr/local/data/config
-      - /home/dados/Imagens/:/home/dados/Imagens
+  gsmaster:
+    image: terrabrasilis/geoserver-deter:v1.0.0
+    hostname: master.geoserver
+    ports:
+      - "8080:8080"
+    volumes:
+      - /geoserver/gs_datadir:/var/local/geoserver
+      - /geoserver/gs_extensions:/var/local/geoserver-exts
+      - /geoserver/data/production:/var/local/geoserver/data-files:ro
+    environment:
+      COOKIE: JSESSIONID prefix
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/master
+      instanceName: master
     restart: always
 
-  nginx-geoserver:
-    image: terrabrasilis/nginx-geoserver:v06
-    hostname: nginx.geoserver
-    ports:
-      - "80:80"
-      #- "443"
-    volumes:        
-      ### configs        
-      - /data/nginx/geoserver/conf.d:/etc/nginx/conf.d
-      ### logs         
-      - /data/nginx/geoserver/log:/var/log/nginx
-    tty: true
+  amz-ftp-download:
+    image: terrabrasilis/raster-ftp-download:v1.0.0
+    volumes: 
+      - /data/amazonia/raster/download:/usr/local/data
+      - /data/amazonia/raster/log:/usr/local/raster-ftp-download/log
+      - /data/amazonia/raster/config:/usr/local/data/config
     restart: always
+  
+  amz-process:
+    image: terrabrasilis/raster-process:v1.0.0
+    volumes:             
+      - /data/amazonia/raster/download:/usr/local/data
+      - /data/amazonia/raster/processed:/usr/local/data/processed
+      - /data/amazonia/raster/log:/usr/local/raster-process/log
+      - /data/amazonia/raster/config:/usr/local/data/config
+    restart: always
+  
+  amz-publisher:
+    image: terrabrasilis/raster-publisher:v1.0.0
+    volumes:                   
+      - /data/amazonia/raster/processed:/usr/local/data/processed
+      - /data/amazonia/raster/log:/usr/local/raster-publisher/log
+      - /data/amazonia/raster/config:/usr/local/data/config
+      - /geoserver/data/production/amazonia:/geoserver/storage/data
+    restart: always
+
+    cerrado-ftp-download:
+      image: terrabrasilis/raster-ftp-download:v1.0.0
+      volumes: 
+        - /data/cerrado/raster/download:/usr/local/data
+        - /data/cerrado/raster/log:/usr/local/raster-ftp-download/log
+        - /data/cerrado/raster/config:/usr/local/data/config
+      restart: always
+    
+    cerrado-process:
+      image: terrabrasilis/raster-process:v1.0.0
+      volumes:             
+        - /data/cerrado/raster/download:/usr/local/data
+        - /data/cerrado/raster/processed:/usr/local/data/processed
+        - /data/cerrado/raster/log:/usr/local/raster-process/log
+        - /data/cerrado/raster/config:/usr/local/data/config
+      restart: always
+    
+    cerrado-publisher:
+      image: terrabrasilis/raster-publisher:v1.0.0
+      volumes:                   
+        - /data/cerrado/raster/processed:/usr/local/data/processed
+        - /data/cerrado/raster/log:/usr/local/raster-publisher/log
+        - /data/cerrado/raster/config:/usr/local/data/config
+        - /geoserver/data/production/cerrado:/geoserver/storage/data
+      restart: always
+
+  # Used only if we deploy a GeoServer cluster to provide load balancing.
+  # nginx-geoserver:
+  #   image: terrabrasilis/nginx-geoserver:v06
+  #   hostname: nginx.geoserver
+  #   ports:
+  #     - "80:80"
+  #     #- "443"
+  #   volumes:        
+  #     ### configs        
+  #     - /data/nginx/geoserver/conf.d:/etc/nginx/conf.d
+  #     ### logs         
+  #     - /data/nginx/geoserver/log:/var/log/nginx
+  #   tty: true
+  #   restart: always
