@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo docker-compose -f publisher.yaml logs -f
+docker-compose -f publisher.yaml -p "publisher" logs -f

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f publisher.yaml down
+docker-compose -f publisher.yaml -p "publisher" down
