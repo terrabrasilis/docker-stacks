@@ -2,6 +2,19 @@
 # DETER project's GeoTiffs.
 version: "2"
 services:
+  postgresdb:
+    image: terrabrasilis/postgis-shp2pgsql:11-2.5
+    hostname: postgresdb
+    ports:
+      - 5432
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - /data/postgres/pgdata:/var/lib/postgresql/data
+      - /data/postgres/scripts:/scripts
+    restart: always
+
   gsmaster:
     image: terrabrasilis/geoserver-deter:v1.0.0
     hostname: master.geoserver
