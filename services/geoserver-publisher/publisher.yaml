@@ -41,7 +41,7 @@ services:
       - /data/amazonia/raster/processed:/usr/local/data/processed
       - /data/amazonia/raster/log:/usr/local/raster-publisher/log
       - /data/amazonia/raster/config:/usr/local/data/config
-      - /geoserver/data/production/amazonia:/var/local/geoserver/data-files
+      - /geoserver/data/production/amazonia:/var/local/geoserver/data-files/amazonia
     restart: always
 
   cerrado-ftp-download:
@@ -67,7 +67,7 @@ services:
       - /data/cerrado/raster/processed:/usr/local/data/processed
       - /data/cerrado/raster/log:/usr/local/raster-publisher/log
       - /data/cerrado/raster/config:/usr/local/data/config
-      - /geoserver/data/production/cerrado:/var/local/geoserver/data-files
+      - /geoserver/data/production/cerrado:/var/local/geoserver/data-files/cerrado
     restart: always
 
   # Used only if we deploy a GeoServer cluster to provide load balancing.
