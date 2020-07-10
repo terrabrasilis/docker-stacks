@@ -42,7 +42,7 @@ services:
       image: terrabrasilis/geoserver-worker:v1.0.2
       hostname: slave1.geoserver
       ports:
-        - "30001:8080"
+        - "30000:8080"
       depends_on:
         - gsbroker
       networks:
@@ -66,7 +66,7 @@ services:
       image: terrabrasilis/geoserver-worker:v1.0.2
       hostname: slave2.geoserver
       ports:
-        - "30002:8080"
+        - "30001:8080"
       depends_on:
         - gsbroker
       networks:
@@ -90,7 +90,7 @@ services:
       image: terrabrasilis/geoserver-worker:v1.0.2
       hostname: slave3.geoserver
       ports:
-        - "30003:8080"
+        - "30002:8080"
       depends_on:
         - gsbroker
       networks:
