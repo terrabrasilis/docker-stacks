@@ -6,7 +6,7 @@ services:
   
 
   terrabrasilis_oauth_api:
-    image: terrabrasilis/terrabrasilis-oauth-api:v1.0.5
+    image: terrabrasilis/terrabrasilis-oauth-api:v1.0.6
     hostname: oauth.api
     volumes:
       - /data/oauth-api/logs:/logs
