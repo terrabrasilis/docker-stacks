@@ -1,7 +1,6 @@
-### Geoserver Publisher Microservice
+### Geoserver Publisher Microservices
 
-This service uses the entire functionality of Python language to download FTP, to execute GDAL command and consume to publish new layers into Geoserver.
-Neither of these services uses shell scripts anymore, just the Python libraries to execute all necessities.
+This stack consists of three services. These services use the Python language to download files from FTP, run the GDAL command and publish new layers to Geoserver.
 
 Location of yaml and deploy.sh file into server FIP-SERVICE, see directory:`cd /data/raster` 
 
@@ -24,11 +23,11 @@ To follow logs in real time:
 2. `sh log.sh`
 
 #### >> raster-ftp-download
-This service performs the images download
+This service performs the download of images from FTP using a trigger file called geoserver.txt and performs the unzipping on the downloaded files.
 
 #### >> raster-process
 This service performs GDAL command to each image was downloaded
 
 #### >> raster-publisher
-This service consumes and send to Geoserver the data to publish one new layer. 
+This service consumes and sends the data to the Geoserver to publish the new layers. 
 
