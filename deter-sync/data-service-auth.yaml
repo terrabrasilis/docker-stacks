@@ -3,25 +3,13 @@
 version: '3.1'
 
 services:
-  forest_monitor_service:
-    image: terrabrasilis/deter-amz-fm-service:v1.0.1
-    hostname: forest.monitor.intersection
-    volumes:
-      - /data/deter-auth/intersection/forest-monitor:/service/intersection_service/data
-    networks:
-      - proxy
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v1.4.1
+    image: terrabrasilis/deter-generate-files:v1.5.0
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
       - /data/deter-auth/logs:/logs
-      - /data/download/static/deter-amz:/data/terrama/deter-amz
+      - /data/deter-auth/to-terrama:/data/terrama/deter-amz
     secrets:
       - geoserver.user.dashboard
       - geoserver.pass.dashboard
@@ -59,7 +47,7 @@ services:
         condition: on-failure
 
   amz_sync_client:
-    image: terrabrasilis/deter-amz-sync-client:v1.2
+    image: terrabrasilis/deter-amz-sync-client:v1.5.0
     hostname: amz.sync.client
     volumes:
       - /data/deter-auth/client-api/raw-data:/usr/local/php-client/rawData
@@ -113,7 +101,7 @@ services:
       - postgres.user.geoserver
       - postgres.pass.geoserver
     environment:
-      MAIL_TO: andre.carvalho@inpe.br,claudio.almeida@inpe.br,alessandra.gomes@inpe.br,adeline.maciel@inpe.br,david.kawamura@inpe.br
+      MAIL_TO: andre.carvalho@inpe.br,claudio.almeida@inpe.br,alessandra.gomes@inpe.br,adeline.maciel@inpe.br,david.kawamura@inpe.br,marcos.adami@inpe.br
       SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
       SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
       POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
@@ -124,6 +112,18 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+  
+  # forest_monitor_service:
+  #   image: terrabrasilis/deter-amz-fm-service:v1.0.1
+  #   hostname: forest.monitor.intersection
+  #   volumes:
+  #     - /data/deter-auth/intersection/forest-monitor:/service/intersection_service/data
+  #   networks:
+  #     - proxy
+  #   deploy:
+  #     replicas: 1
+  #     restart_policy:
+  #       condition: on-failure
 
 secrets:
   google.mail.user:
