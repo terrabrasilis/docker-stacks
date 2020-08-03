@@ -112,7 +112,46 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-  
+
+  daily_deter_for_ibama:
+    image: terrabrasilis/daily-deter-for-ibama:v1.0.0
+    hostname: daily.deter.for.ibama
+    volumes:
+      - /data/deter-auth/deter-ibama:/data/files
+    secrets:
+      - postgres.host.fm
+      - postgres.port.fm
+      - postgres.user.fm
+      - postgres.pass.fm
+      - postgres.db.fm
+      - postgres.schema.fm
+      - postgres.table.fm
+      - ftp.user.censipam
+      - ftp.pass.censipam
+      - ftp.host.censipam
+      - ftp.path.censipam
+    environment:
+      POSTGRES_HOST_FILE: secrets/postgres.host.fm
+      POSTGRES_PORT_FILE: secrets/postgres.port.fm
+      POSTGRES_USER_FILE: secrets/postgres.user.fm
+      POSTGRES_PASS_FILE: secrets/postgres.pass.fm
+      POSTGRES_DB_FILE: secrets/postgres.db.fm
+      POSTGRES_SCHEMA_FILE: secrets/postgres.schema.fm
+      POSTGRES_TABLE_FILE: secrets/postgres.table.fm
+      FTP_USER_FILE: secrets/ftp.user.censipam
+      FTP_PASS_FILE: secrets/ftp.pass.censipam
+      FTP_HOST_FILE: secrets/ftp.host.censipam
+      FTP_PATH_FILE: secrets/ftp.path.censipam
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==manager
+      restart_policy:
+        condition: on-failure
+      
   # forest_monitor_service:
   #   image: terrabrasilis/deter-amz-fm-service:v1.0.1
   #   hostname: forest.monitor.intersection
@@ -126,6 +165,28 @@ services:
   #       condition: on-failure
 
 secrets:
+  postgres.host.fm:
+    external: true
+  postgres.port.fm:
+    external: true
+  postgres.user.fm:
+    external: true
+  postgres.pass.fm:
+    external: true
+  postgres.db.fm:
+    external: true
+  postgres.schema.fm:
+    external: true
+  postgres.table.fm:
+    external: true
+  ftp.user.censipam:
+    external: true
+  ftp.pass.censipam:
+    external: true
+  ftp.host.censipam:
+    external: true
+  ftp.path.censipam:
+    external: true
   google.mail.user:
     external: true
   google.mail.pass:
