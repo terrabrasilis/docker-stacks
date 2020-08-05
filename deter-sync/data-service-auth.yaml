@@ -131,18 +131,9 @@ services:
       - ftp.pass.censipam
       - ftp.host.censipam
       - ftp.path.censipam
-    environment:
-      POSTGRES_HOST_FILE: secrets/postgres.host.fm
-      POSTGRES_PORT_FILE: secrets/postgres.port.fm
-      POSTGRES_USER_FILE: secrets/postgres.user.fm
-      POSTGRES_PASS_FILE: secrets/postgres.pass.fm
-      POSTGRES_DB_FILE: secrets/postgres.db.fm
-      POSTGRES_SCHEMA_FILE: secrets/postgres.schema.fm
-      POSTGRES_TABLE_FILE: secrets/postgres.table.fm
-      FTP_USER_FILE: secrets/ftp.user.censipam
-      FTP_PASS_FILE: secrets/ftp.pass.censipam
-      FTP_HOST_FILE: secrets/ftp.host.censipam
-      FTP_PATH_FILE: secrets/ftp.path.censipam
+      - www1.ecdsa.private.key
+      - www1.user.scp
+      - www1.path.scp
     networks:
       - proxy
     deploy:
@@ -150,6 +141,7 @@ services:
       restart_policy:
         condition: on-failure
       
+  # to generate the data to dashboard for FM
   # forest_monitor_service:
   #   image: terrabrasilis/deter-amz-fm-service:v1.0.1
   #   hostname: forest.monitor.intersection
@@ -163,6 +155,12 @@ services:
   #       condition: on-failure
 
 secrets:
+  www1.ecdsa.private.key:
+    external: true
+  www1.user.scp:
+    external: true
+  www1.path.scp:
+    external: true
   postgres.host.fm:
     external: true
   postgres.port.fm:
