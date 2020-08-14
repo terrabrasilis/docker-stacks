@@ -4,7 +4,7 @@ version: '3.1'
 
 services:
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v1.5.0
+    image: terrabrasilis/deter-generate-files:v1.6.0
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
@@ -47,7 +47,7 @@ services:
         condition: on-failure
 
   amz_sync_client:
-    image: terrabrasilis/deter-amz-sync-client:v1.5.0
+    image: terrabrasilis/deter-amz-sync-client:v1.6.0
     hostname: amz.sync.client
     volumes:
       - /data/deter-auth/client-api/raw-data:/usr/local/php-client/rawData
