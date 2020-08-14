@@ -92,7 +92,7 @@ services:
         condition: on-failure
 
   report_news:
-    image: terrabrasilis/deter-report:v0.5
+    image: terrabrasilis/deter-report:v0.6.0
     volumes:
       - /data/deter-auth/report:/usr/local/data
     secrets:
@@ -101,7 +101,7 @@ services:
       - postgres.user.geoserver
       - postgres.pass.geoserver
     environment:
-      MAIL_TO: andre.carvalho@inpe.br,claudio.almeida@inpe.br,alessandra.gomes@inpe.br,adeline.maciel@inpe.br,david.kawamura@inpe.br,marcos.adami@inpe.br
+      MAIL_TO: andre.carvalho@inpe.br,luis.maurano@inpe.br,claudio.almeida@inpe.br,alessandra.gomes@inpe.br,adeline.maciel@inpe.br,david.kawamura@inpe.br,marcos.adami@inpe.br
       SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
       SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
       POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
