@@ -92,7 +92,7 @@ services:
         condition: on-failure
 
   report_news:
-    image: terrabrasilis/deter-report:v0.6.0
+    image: terrabrasilis/deter-report:v0.6.1
     volumes:
       - /data/deter-auth/report:/usr/local/data
     secrets:
