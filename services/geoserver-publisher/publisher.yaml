@@ -49,7 +49,7 @@ services:
     restart: always
   
   amz-publisher:
-    image: terrabrasilis/raster-publisher:v1.0.1
+    image: terrabrasilis/raster-publisher:v1.1.0
     volumes:
       - /data/amazonia/raster/processed:/usr/local/data/processed
       - /data/amazonia/raster/log:/usr/local/raster-publisher/log
@@ -75,7 +75,7 @@ services:
     restart: always
   
   cerrado-publisher:
-    image: terrabrasilis/raster-publisher:v1.0.1
+    image: terrabrasilis/raster-publisher:v1.1.0
     volumes:
       - /data/cerrado/raster/processed:/usr/local/data/processed
       - /data/cerrado/raster/log:/usr/local/raster-publisher/log
