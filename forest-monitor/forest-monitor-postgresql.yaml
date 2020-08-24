@@ -4,7 +4,7 @@ services:
     image: terrabrasilis/postgis-shp2pgsql:11-2.5
     container_name: pg11_postgis2_5
     ports:
-      - 5432:5432
+      - 5433:5432
     environment:
       POSTGRES_USER_FILE: /run/secrets/server.user.postgres
       POSTGRES_PASSWORD_FILE: /run/secrets/server.pass.postgres
