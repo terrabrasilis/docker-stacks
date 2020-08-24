@@ -2,6 +2,7 @@ version: '3.2'
 services:
   pg11_postgis2_5:
     image: terrabrasilis/postgis-shp2pgsql:11-2.5
+    hostname: forestmonitor.postgis
     ports:
       - 5434:5432
     environment:
