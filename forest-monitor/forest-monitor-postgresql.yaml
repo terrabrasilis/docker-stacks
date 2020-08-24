@@ -2,9 +2,8 @@ version: '3.2'
 services:
   pg11_postgis2_5:
     image: terrabrasilis/postgis-shp2pgsql:11-2.5
-    container_name: pg11_postgis2_5
     ports:
-      - 5433:5432
+      - 5434:5432
     environment:
       POSTGRES_USER_FILE: /run/secrets/server.user.postgres
       POSTGRES_PASSWORD_FILE: /run/secrets/server.pass.postgres
@@ -13,8 +12,8 @@ services:
       - server.user.postgres
       - server.pass.postgres
     volumes:
-      - /data/postgres/pgdata:/var/lib/postgresql/data
-      - /data/postgres/scripts:/scripts
+      - /data/cluster2/fm/postgres/pgdata:/var/lib/postgresql/data/pgdata
+      - /data/cluster2/fm/postgres/scripts:/scripts
     deploy:
       replicas: 1
       placement:
