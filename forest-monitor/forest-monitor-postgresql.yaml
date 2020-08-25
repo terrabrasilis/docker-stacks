@@ -1,6 +1,6 @@
 version: '3.2'
 services:
-  pg11_postgis2_5:
+  pg11_postgis2_5_fm:
     image: terrabrasilis/postgis-shp2pgsql:11-2.5
     hostname: forestmonitor.postgis
     ports:
@@ -24,7 +24,6 @@ services:
       restart_policy:
         condition: on-failure
     networks:
-      - db_pg11_internal
       - proxy
 
 secrets:
@@ -34,7 +33,5 @@ secrets:
     external: true
 
 networks:
-  db_pg11_internal:
-    external: false
   proxy:
     external: true
