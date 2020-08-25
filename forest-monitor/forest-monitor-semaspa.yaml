@@ -1,0 +1,88 @@
+version: '3'
+services:
+  forest-monitor-frontend-semaspa:
+    image: forestmonitor/forest-monitor-frontend:v1.1.4
+    hostname: "forest-monitor-frontend-semaspa"
+    ports:
+      - "8010:4200"
+    environment:   
+      - "URL_GEOSERVER=http://terrabrasilis.dpi.inpe.br/geoserver"
+      - "BASE_PATH=forest-monitor-semaspa"
+      - "URL_FOREST_API=http://terrabrasilis.dpi.inpe.br/forest-monitor-backend-semaspa/api"
+      - "URL_BDC_CACHE=http://terrabrasilis.dpi.inpe.br/forest-monitor-backend-semaspa/bdc-cache/tms"
+      - "URL_SLIDER_GROUP_DAYS=1"
+      - "APP_NAME=forest-monitor-semaspa"
+      - "WORKSPACE_GEOSERVER=forest-monitor-semaspa" 
+      - "URL_LAMBDA_CBERS=https://dektfzn49e.execute-api.us-east-1.amazonaws.com/production/tiles"
+      - "URL_LAMBDA_LANDSAT=https://jnj5vx5tvi.execute-api.us-west-2.amazonaws.com/production/tiles"
+      - "URL_LAMBDA_SENTINEL=https://n79mab8azi.execute-api.eu-central-1.amazonaws.com/production/s2/tiles"
+      - "AWS_TOKEN=changeme"
+      - "URL_OAUTH=http://oauth.dpi.inpe.br/api/oauth"
+      - "URL_OAUTH_APP=http://oauth.dpi.inpe.br"
+      - "API_KEY=changeme"
+      - "GEOSERVER_LAYERS=
+[ {
+        id: 'areas_interesse_semaspa',
+        enabled: true,
+        name: 'Area Teste',
+        layer: null,
+        filter: false,
+        style: 'area_test',
+        destinationLayer: false
+    },
+    {
+      id: 'mascara_prodes_semaspa',
+      enabled: true,
+      name: 'Mascara_Prodes',
+      layer: null,
+      filter: false,
+      style: 'mascara_desmatamento',
+      destinationLayer: false
+    },
+    {
+        id: 'mascara_deter_semaspa',
+        enabled: true,
+        name: 'MASCARA_DETER - 2020',
+        layer: null,
+        filter: false,
+        style: 'class_deter',
+        destinationLayer: false
+    },
+    {
+        id: 'grade_semaspa',
+        enabled: true,
+        name: 'Grade Semas',
+        layer: null,
+        filter: false,
+        style: 'area_test',
+        destinationLayer: false
+    },    
+    {
+      id: 'deter_semaspa',
+      enabled: true,
+      name: 'DETER - 2020',
+      layer: null,
+      filter: false,
+      style: 'class_deter',
+      destinationLayer: true
+    }
+]
+"
+  forest-monitor-backend-semaspa:
+    image: forestmonitor/forest-monitor-backend:v1.1.2
+    hostname: "forest-monitor-backend-semaspa"
+    ports:
+      - "8006:5000"
+    environment:   
+      - "PORT=5000"
+      - "KEYSYSTEM=changeme"
+      - "SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://postgres:changeme@150.163.2.253:5433/forest_monitor"
+      - "CLIENT_SECRET_KEY=changeme"
+      - "CLIENT_AUDIENCE=forest-monitor-semaspa"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "MASK_TABLE_DETER=mascara_deter"
+      - "MASK_TABLE_PRODES=mascara_prodes"
+      - "DESTINATION_TABLE=deter"   
+      
+    restart: always
+

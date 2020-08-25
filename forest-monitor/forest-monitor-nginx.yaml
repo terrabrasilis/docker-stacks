@@ -1,0 +1,28 @@
+# The NGINX stack for cluster2
+version: '3.2'
+services:
+  cluster2-nginx:
+    image: terrabrasilis/nginx-manager:v1.0
+    networks:
+      - proxy
+    environment:
+      NGINX_PORT: "7099"
+      NGINX_HOST: "150.163.2.253"
+    ports:
+      - "7099:80"
+    volumes: 
+      - /data/cluster2/fm/nginx/conf.d:/etc/nginx/conf.d
+      - /data/cluster2/fm/nginx/log:/var/log/nginx
+      - /data/cluster2/fm/nginx/www:/var/www/forest-monitor
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==node3.master.cluster2
+      restart_policy:
+        condition: on-failure
+
+networks:
+  proxy:
+    external: true
+
