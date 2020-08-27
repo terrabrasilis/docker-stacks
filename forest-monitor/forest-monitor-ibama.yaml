@@ -40,16 +40,6 @@ services:
       destinationLayer: false
     },
     {
-        id: 'areas_ibama_cell25km_ibama',
-        enabled: true,
-        name: 'Celulas',
-        layer: null,
-        filter: false,
-        style: 'area_test',
-        destinationLayer: false
-    },
-
-    {
         id: 'mascara_deter_ibama',
         enabled: true,
         name: 'MASCARA_DETER - 2020',
@@ -88,7 +78,7 @@ services:
     environment:   
       - "PORT=5000"
       - "KEYSYSTEM=changeme"
-      - "SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://postgres:changeme@150.163.2.253:5433/forest_monitor"
+      - "SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://forest_monitor:changeme@150.163.2.47:5432/forest_monitor"
       - "CLIENT_SECRET_KEY=changeme"
       - "CLIENT_AUDIENCE=forest-monitor-ibama"
       - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
