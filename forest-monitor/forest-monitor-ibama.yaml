@@ -1,7 +1,7 @@
 version: '3'
 services:
   forest-monitor-frontend-ibama:
-    image: forestmonitor/forest-monitor-frontend:v1.1.4
+    image: forestmonitor/forest-monitor-frontend:v1.1.5
     hostname: "forest-monitor-frontend-ibama"
     ports:
       - "8009:4200"
