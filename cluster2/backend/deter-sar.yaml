@@ -7,15 +7,15 @@ services:
     volumes:
       - /data/deter-sar/download-sar-ftp:/usr/local/data
     secrets:
-      - forest-monitor-postgis.user.postgres
-      - forest-monitor-postgis.pass.postgres
+      - postgres.fm.user
+      - postgres.fm.pass
       - ftp.dpi.user
       - ftp.dpi.pass
     environment:
       FTP_USER: /run/secrets/ftp.dpi.user
       FTP_PASS: /run/secrets/ftp.dpi.pass
-      POSTGRES_USER_FILE: /run/secrets/forest-monitor-postgis.user.postgres
-      POSTGRES_PASS_FILE: /run/secrets/forest-monitor-postgis.pass.postgres
+      POSTGRES_USER_FILE: /run/secrets/postgres.fm.user
+      POSTGRES_PASS_FILE: /run/secrets/postgres.fm.pass
     networks:
       - proxy
     deploy:
@@ -27,9 +27,9 @@ services:
         condition: on-failure
 
 secrets:
-  forest-monitor-postgis.user.postgres:
+  postgres.fm.user:
     external: true
-  forest-monitor-postgis.pass.postgres:
+  postgres.fm.pass:
     external: true
   ftp.dpi.user:
     external: true
