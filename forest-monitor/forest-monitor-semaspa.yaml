@@ -76,7 +76,7 @@ services:
     environment:   
       - "PORT=5000"
       - "KEYSYSTEM=changeme"
-      - "SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://postgres:changeme@150.163.2.253:5433/forest_monitor"
+      - "SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://forest_monitor:changeme@150.163.2.47:5433/forest_monitor"
       - "CLIENT_SECRET_KEY=changeme"
       - "CLIENT_AUDIENCE=forest-monitor-semaspa"
       - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
