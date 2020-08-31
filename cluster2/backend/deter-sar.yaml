@@ -1,3 +1,4 @@
+# Disabled in 2020-08-31 in favor of a single script deployed on the DETER_SAR VM
 version: '3.2'
 
 services:
