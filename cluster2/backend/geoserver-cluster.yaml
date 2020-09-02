@@ -1,0 +1,87 @@
+#geoserver-cluster
+
+version: '3.2'
+services:
+    gsmaster:
+      image: terrabrasilis/geoserver-master:v1.0.1
+      hostname: master.geoserver
+      ports:
+        - "8888:8080"
+      networks:
+        - proxy
+      volumes: 
+        - /geoserver/cluster/gs_datadir:/var/local/geoserver
+        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
+      environment:
+        COOKIE: JSESSIONID prefix
+        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
+        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/master
+        instanceName: master
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure 
+
+    gsslave1:
+      image: terrabrasilis/geoserver-worker:v1.0.2
+      hostname: slave1.geoserver
+      networks:
+        - proxy
+      volumes:
+        - /geoserver/cluster/gs_datadir:/var/local/geoserver
+        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
+      environment:
+        COOKIE: JSESSIONID prefix
+        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave1
+        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave1
+        instanceName: slave1
+      ports:
+        - "30000:8080"
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+
+    gsslave2:
+      image: terrabrasilis/geoserver-worker:v1.0.2
+      hostname: slave2.geoserver
+      networks:
+        - proxy
+      volumes:
+        - /geoserver/cluster/gs_datadir:/var/local/geoserver
+        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
+      environment:
+        COOKIE: JSESSIONID prefix
+        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave2
+        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave2
+        instanceName: slave2
+      ports:
+        - "30001:8080"
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+
+    gsslave3:
+      image: terrabrasilis/geoserver-worker:v1.0.2
+      hostname: slave3.geoserver
+      networks:
+        - proxy
+      volumes:
+        - /geoserver/cluster/gs_datadir:/var/local/geoserver
+        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
+      environment:
+        COOKIE: JSESSIONID prefix
+        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave3
+        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave3
+        instanceName: slave3
+      ports:
+        - "30002:8080"
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+
+networks:
+  proxy:
+    external: true
