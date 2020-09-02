@@ -94,7 +94,7 @@
         "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
-            "stackfile": "applications/geoserver-cluster-mqueue.yaml"
+            "stackfile": "cluster2/backend/geoserver-cluster.yaml"
         }
     },
     {
