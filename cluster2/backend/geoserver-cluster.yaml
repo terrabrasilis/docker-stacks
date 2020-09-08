@@ -3,7 +3,7 @@
 version: '3.2'
 services:
     gsmaster:
-      image: terrabrasilis/geoserver-master:v1.0.1
+      image: terrabrasilis/geoserver-master:v1.0.5
       hostname: master.geoserver
       ports:
         - "8888:8080"
@@ -23,7 +23,7 @@ services:
           condition: on-failure 
 
     gsslave1:
-      image: terrabrasilis/geoserver-worker:v1.0.2
+      image: terrabrasilis/geoserver-worker:v1.0.5
       hostname: slave1.geoserver
       networks:
         - proxy
@@ -43,7 +43,7 @@ services:
           condition: on-failure
 
     gsslave2:
-      image: terrabrasilis/geoserver-worker:v1.0.2
+      image: terrabrasilis/geoserver-worker:v1.0.5
       hostname: slave2.geoserver
       networks:
         - proxy
@@ -63,7 +63,7 @@ services:
           condition: on-failure
 
     gsslave3:
-      image: terrabrasilis/geoserver-worker:v1.0.2
+      image: terrabrasilis/geoserver-worker:v1.0.5
       hostname: slave3.geoserver
       networks:
         - proxy
