@@ -1,0 +1,12 @@
+version: '3.2'
+services:
+  focuses-of-fires:
+    image: terrabrasilis/focuses-of-fires-dashboard:v0.1.0
+    networks:
+        - proxy
+    ports:
+        - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
