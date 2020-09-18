@@ -113,6 +113,20 @@
     },
     {
         "type": 2,
+        "name": "experimental-dashboards",
+        "title": "Experimental dashboards",
+        "description": "A set of dashboards for experimental projects.",
+        "note": "This applications is optional. It's includes some instances of panels each one with particular purpose.",
+        "categories": ["application"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/dashboard2.png",
+        "repository": {
+            "url": "https://github.com/terrabrasilis/docker-stacks",
+            "stackfile": "dashboards/experimental-dashboards-stack.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "dashboard-alerts",
         "title": "Alerts dashboard",
         "description": "A set of dashboards for DETER project with alerts of deforestation into Amazon and Cerrado.",
