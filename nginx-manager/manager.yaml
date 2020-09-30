@@ -2,7 +2,7 @@
 version: '3.2'
 services:
   nginx-manager:
-    image: terrabrasilis/nginx-manager:v1.0
+    image: terrabrasilis/nginx-manager:v1.1.0
     hostname: nginx.manager
     networks:
       - proxy
