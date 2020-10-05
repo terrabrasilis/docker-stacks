@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   focuses-of-fires:
-    image: terrabrasilis/focuses-of-fires-dashboard:v1.0.0
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.0.1
     networks:
       - proxy
     ports:
