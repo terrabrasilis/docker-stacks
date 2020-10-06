@@ -1,0 +1,31 @@
+# A compose docker used to deploy the TerraAmazon-Monitor App
+# This stack uses an env file that must be created on the host based on the sample file.
+version: "2"
+services:
+  app-monitor:
+    image: app-monitor:version
+    container_name: app-monitor
+    ports:
+      - "36003:8107"
+      - "36004:8108"
+      - "36005:8109"
+    env_file:
+      - ./monitor.env
+    volumes:
+      - /data/monitor:/
+    restart: always
+
+  geoserver-monitor:
+    image: terrabrasilis/geoserver-deter:v1.0.0
+    container_name: geoserver-monitor
+    ports:
+      - "80:8080"
+    volumes:
+      - /data/monitor/geoserver/gs_datadir:/var/local/geoserver
+      - /data/monitor/geoserver/gs_extensions:/var/local/geoserver-exts
+    environment:
+      COOKIE: JSESSIONID prefix
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/master
+      instanceName: master
+    restart: always
