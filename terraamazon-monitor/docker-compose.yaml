@@ -22,6 +22,7 @@ services:
       - "80:8080"
     volumes:
       - /data/monitor/geoserver/data_dir:/opt/geoserver/data_dir
+      - ${PWD}/geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh
     environment:
       - "GEOSERVER_URL=/geoserver"
       - "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir"
