@@ -3,29 +3,26 @@
 version: "2"
 services:
   app-monitor:
-    image: app-monitor:version
+    image: terraamazon_monitor:1.1
     container_name: app-monitor
     ports:
       - "36003:8107"
       - "36004:8108"
       - "36005:8109"
-    env_file:
-      - ./monitor.env
+    # env_file:
+    #   - ./monitor.env
     volumes:
-      - /data/monitor:/
+      - /data/monitor/app:/data
     restart: always
 
   geoserver-monitor:
-    image: terrabrasilis/geoserver-deter:v1.0.0
+    image: terrama2/geoserver:2.11
     container_name: geoserver-monitor
     ports:
       - "80:8080"
     volumes:
-      - /data/monitor/geoserver/gs_datadir:/var/local/geoserver
-      - /data/monitor/geoserver/gs_extensions:/var/local/geoserver-exts
+      - /data/monitor/geoserver/data_dir:/opt/geoserver/data_dir
     environment:
-      COOKIE: JSESSIONID prefix
-      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
-      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/master
-      instanceName: master
-    restart: always
+      - "GEOSERVER_URL=/geoserver"
+      - "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir"
+    restart: unless-stopped
