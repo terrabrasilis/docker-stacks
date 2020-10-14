@@ -1,29 +1,35 @@
 # A compose docker used to deploy the TerraAmazon-Monitor App
-# This stack uses an env file that must be created on the host based on the sample file.
 version: "2"
 services:
-  app-monitor:
-    image: terraamazon_monitor:1.1
-    container_name: app-monitor
+  app-monitor-bookmark:
+    image: terrabrasilis/ta-monitor:v1.0.0
+    container_name: app-monitor-bookmark
     ports:
-      - "36003:8107"
-      - "36004:8108"
-      - "36005:8109"
-    # env_file:
-    #   - ./monitor.env
+      - "81:36003"
+      - "82:36004"
     volumes:
-      - /data/monitor/app:/data
+      - /data/monitor/app/monitor-bookmark:/data
+    restart: always
+
+  app-monitor-updated:
+    image: terrabrasilis/ta-monitor:v1.0.0
+    container_name: app-monitor-updated
+    ports:
+      - "83:36005"
+    volumes:
+      - /data/monitor/app/monitor_updated:/data
     restart: always
 
   geoserver-monitor:
-    image: terrama2/geoserver:2.11
+    image: terrabrasilis/geoserver-monitor:v2.11
     container_name: geoserver-monitor
     ports:
-      - "80:8080"
+      - "8181:8080"
     volumes:
       - /data/monitor/geoserver/data_dir:/opt/geoserver/data_dir
       - ${PWD}/geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh
     environment:
       - "GEOSERVER_URL=/geoserver"
       - "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir"
-    restart: unless-stopped
+    restart: always
+
