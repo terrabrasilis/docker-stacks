@@ -3,7 +3,7 @@ services:
 
   ### Business API as a Service
   business-api:
-    image: terrabrasilis/business-api:v1.2
+    image: terrabrasilis/business-api:v1.2.1
     hostname: "business.api"
     networks:
       - proxy
