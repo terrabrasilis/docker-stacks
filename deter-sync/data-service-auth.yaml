@@ -81,9 +81,10 @@ services:
         condition: on-failure
 
   cerrado_intersection:
-    image: terrabrasilis/cerradodeter-syncdata:v0.6
+    image: terrabrasilis/cerradodeter-syncdata:v1.0.0
     volumes:
       - /data/deter-auth/intersection/cerrado:/usr/local/data
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - proxy
     deploy:
@@ -95,6 +96,7 @@ services:
     image: terrabrasilis/deter-report:v1.0.0
     volumes:
       - /data/deter-auth/report:/usr/local/data
+      - /etc/localtime:/etc/localtime:ro
     secrets:
       - google.mail.user
       - google.mail.pass
