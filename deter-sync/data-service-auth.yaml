@@ -1,10 +1,10 @@
 # Stack of data service and authentication for release DETER data.
 # Use in Swarm (deter_release_data)
-version: '3.1'
+version: '3.3'
 
 services:
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v1.6.0
+    image: terrabrasilis/deter-generate-files:v1.7.0
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
@@ -17,6 +17,9 @@ services:
       - postgres.pass.geoserver
       - ftp.user.queimadas
       - ftp.pass.queimadas
+    configs:
+      - source: ssmtp-tb.conf
+        target: /etc/ssmtp/ssmtp.conf
     networks:
       - proxy
     deploy:
@@ -122,13 +125,13 @@ services:
       - /data/deter-auth/deter-ibama:/data/files
       - /data/deter-auth/logs:/logs
     secrets:
-      - postgres.host.fm
       - postgres.port.fm
+      - postgres.db.fm
+      - postgres.host.fm
       - postgres.user.fm
       - postgres.pass.fm
-      - postgres.db.fm
-      - postgres.schema.fm
       - postgres.table.fm
+      - postgres.schema.fm
       - ftp.user.censipam
       - ftp.pass.censipam
       - ftp.host.censipam
@@ -142,19 +145,10 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-      
-  # to generate the data to dashboard for FM
-  # forest_monitor_service:
-  #   image: terrabrasilis/deter-amz-fm-service:v1.0.1
-  #   hostname: forest.monitor.intersection
-  #   volumes:
-  #     - /data/deter-auth/intersection/forest-monitor:/service/intersection_service/data
-  #   networks:
-  #     - proxy
-  #   deploy:
-  #     replicas: 1
-  #     restart_policy:
-  #       condition: on-failure
+
+configs:
+  ssmtp-tb.conf:
+    external: true
 
 secrets:
   www1.ecdsa.private.key:
@@ -163,19 +157,19 @@ secrets:
     external: true
   www1.path.scp:
     external: true
-  postgres.host.fm:
-    external: true
   postgres.port.fm:
+    external: true
+  postgres.db.fm:
+    external: true
+  postgres.host.fm:
     external: true
   postgres.user.fm:
     external: true
   postgres.pass.fm:
     external: true
-  postgres.db.fm:
+  postgres.table.fm:
     external: true
   postgres.schema.fm:
-    external: true
-  postgres.table.fm:
     external: true
   ftp.user.censipam:
     external: true
