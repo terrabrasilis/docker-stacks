@@ -253,20 +253,6 @@
     },
     {
         "type": 2,
-        "name": "terrabrasilis-webapp",
-        "title": "DEPRECATED - The WebApp",
-        "description": "The TerraBrasilis WebApp is the main component of the Web GUIs for explore data online. It's compound by the WebMap to explore our maps using the OGC services and Deforestation analytics panel.",
-        "note": "This stack are mandatory and responds by the map and analytics panel URLs.",
-        "categories": ["application"],
-        "platform": "linux",
-        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
-        "repository": {
-            "url": "https://github.com/Terrabrasilis/docker-stacks",
-            "stackfile": "terrabrasilis-webapp/webapp.yaml"
-        }
-    },
-    {
-        "type": 2,
         "name": "webapps-homologation",
         "title": "The WebMap and Deforestation Dashboard for homologation",
         "description": "The TerraBrasilis WebMap is the main component of the Web GUIs for explore our maps using the OGC services. The dashboard is the main component Web GUI for explore the deforestation data analytics produced by PRODES.",
