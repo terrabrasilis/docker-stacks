@@ -54,7 +54,7 @@ services:
     networks:
       - proxy
     volumes:
-      - /data/wordpress/sbsr-2021-interim:/var/www/html
+      - /data/wordpress/sbsr-2021:/var/www/html
     ports:
       - 25117:80
     depends_on:
