@@ -96,7 +96,7 @@ services:
         condition: on-failure
 
   report_news:
-    image: terrabrasilis/deter-report:v1.0.0
+    image: terrabrasilis/deter-report:v1.0.1
     volumes:
       - /data/deter-auth/report:/usr/local/data
       - /etc/localtime:/etc/localtime:ro
