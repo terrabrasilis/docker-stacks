@@ -31,7 +31,7 @@ services:
         condition: on-failure
 
   file_delivery_api:
-    image: terrabrasilis/file-delivery:v1.0.2
+    image: terrabrasilis/file-delivery:v1.0.3
     hostname: file.delivery.auth
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
