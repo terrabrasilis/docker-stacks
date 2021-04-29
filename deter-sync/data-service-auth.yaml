@@ -119,19 +119,19 @@ services:
         condition: on-failure
 
   daily_deter_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.1.3
+    image: terrabrasilis/daily-deter-for-ibama:v1.2.0
     hostname: daily.deter.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
       - /data/deter-auth/logs:/logs
     secrets:
-      - postgres.port.fm
-      - postgres.db.fm
-      - postgres.host.fm
-      - postgres.user.fm
-      - postgres.pass.fm
-      - postgres.table.fm
-      - postgres.schema.fm
+      - postgres.port.deter_r
+      - postgres.db.deter_r
+      - postgres.host.deter_r
+      - postgres.user.deter_r
+      - postgres.pass.deter_r
+      - postgres.table.deter_r
+      - postgres.schema.deter_r
       - ftp.user.censipam
       - ftp.pass.censipam
       - ftp.host.censipam
@@ -157,19 +157,19 @@ secrets:
     external: true
   www1.path.scp:
     external: true
-  postgres.port.fm:
+  postgres.port.deter_r:
     external: true
-  postgres.db.fm:
+  postgres.db.deter_r:
     external: true
-  postgres.host.fm:
+  postgres.host.deter_r:
     external: true
-  postgres.user.fm:
+  postgres.user.deter_r:
     external: true
-  postgres.pass.fm:
+  postgres.pass.deter_r:
     external: true
-  postgres.table.fm:
+  postgres.table.deter_r:
     external: true
-  postgres.schema.fm:
+  postgres.schema.deter_r:
     external: true
   ftp.user.censipam:
     external: true
