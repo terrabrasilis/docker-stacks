@@ -84,7 +84,7 @@ services:
         condition: on-failure
 
   cerrado_intersection:
-    image: terrabrasilis/cerradodeter-syncdata:v1.0.1
+    image: terrabrasilis/cerradodeter-syncdata:v1.0.2
     volumes:
       - /data/deter-auth/intersection/cerrado:/usr/local/data
       - /etc/localtime:/etc/localtime:ro
