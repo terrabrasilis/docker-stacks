@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   focuses-of-fires:
-    image: terrabrasilis/focuses-of-fires-dashboard:v1.0.7
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.1.1
     volumes:
       - /data/fires:/data
     networks:

@@ -252,16 +252,16 @@
     },
     {
         "type": 2,
-        "name": "postgres_server",
+        "name": "deter_replication",
         "title": "The PostgreSQL SGDB with PostGIS.",
         "description": "The internal instance for PostgreSQL.",
-        "note": "This stack are optional and is used for store and manage the databases of the GeoServer and other caontroller databases.",
+        "note": "This stack are optional and is used for replication as standby server from production database at Belem.",
         "categories": ["services", "SGDB", "postgres"],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
-            "stackfile": "cluster2/backend/postgres.yaml"
+            "stackfile": "cluster2/backend/pg_standby.yaml"
         }
     }
 ]

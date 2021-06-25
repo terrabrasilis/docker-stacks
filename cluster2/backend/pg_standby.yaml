@@ -1,8 +1,8 @@
 version: '3.2'
 services:
-  pg11_postgis2_5:
-    image: terrabrasilis/postgis-shp2pgsql:11-2.5
-    container_name: pg11_postgis2_5
+  pg13_standby:
+    image: 'terrabrasilis/postgres13-3.1-standby:v13-3.1'
+    container_name: pg13-3.1.standby
     ports:
       - 5432:5432
     environment:

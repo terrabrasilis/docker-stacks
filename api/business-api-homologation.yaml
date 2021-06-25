@@ -20,7 +20,7 @@ services:
 
   # The instance of MongoDB to store the BusinessAPI documents
   mongodbhomologation:
-    image: mongo:4
+    image: mongo:4.4
     hostname: "mongo.homologation"
     networks:
       - proxy

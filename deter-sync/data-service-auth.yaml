@@ -4,7 +4,7 @@ version: '3.3'
 
 services:
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v1.7.0
+    image: terrabrasilis/deter-generate-files:v1.8.3
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
@@ -31,7 +31,7 @@ services:
         condition: on-failure
 
   file_delivery_api:
-    image: terrabrasilis/file-delivery:v1.0.0
+    image: terrabrasilis/file-delivery:v1.0.3
     hostname: file.delivery.auth
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
@@ -50,7 +50,7 @@ services:
         condition: on-failure
 
   amz_sync_client:
-    image: terrabrasilis/deter-amz-sync-client:v1.6.0
+    image: terrabrasilis/deter-amz-sync-client:v1.8.3
     hostname: amz.sync.client
     volumes:
       - /data/deter-auth/client-api/raw-data:/usr/local/php-client/rawData
@@ -84,7 +84,7 @@ services:
         condition: on-failure
 
   cerrado_intersection:
-    image: terrabrasilis/cerradodeter-syncdata:v1.0.0
+    image: terrabrasilis/cerradodeter-syncdata:v1.0.2
     volumes:
       - /data/deter-auth/intersection/cerrado:/usr/local/data
       - /etc/localtime:/etc/localtime:ro
@@ -96,7 +96,7 @@ services:
         condition: on-failure
 
   report_news:
-    image: terrabrasilis/deter-report:v1.0.0
+    image: terrabrasilis/deter-report:v1.0.1
     volumes:
       - /data/deter-auth/report:/usr/local/data
       - /etc/localtime:/etc/localtime:ro
@@ -119,19 +119,19 @@ services:
         condition: on-failure
 
   daily_deter_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.1.1
+    image: terrabrasilis/daily-deter-for-ibama:v1.2.3
     hostname: daily.deter.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
       - /data/deter-auth/logs:/logs
     secrets:
-      - postgres.port.fm
-      - postgres.db.fm
-      - postgres.host.fm
-      - postgres.user.fm
-      - postgres.pass.fm
-      - postgres.table.fm
-      - postgres.schema.fm
+      - postgres.port.deter_r
+      - postgres.db.deter_r
+      - postgres.host.deter_r
+      - postgres.user.deter_r
+      - postgres.pass.deter_r
+      - postgres.table.deter_r
+      - postgres.schema.deter_r
       - ftp.user.censipam
       - ftp.pass.censipam
       - ftp.host.censipam
@@ -157,19 +157,19 @@ secrets:
     external: true
   www1.path.scp:
     external: true
-  postgres.port.fm:
+  postgres.port.deter_r:
     external: true
-  postgres.db.fm:
+  postgres.db.deter_r:
     external: true
-  postgres.host.fm:
+  postgres.host.deter_r:
     external: true
-  postgres.user.fm:
+  postgres.user.deter_r:
     external: true
-  postgres.pass.fm:
+  postgres.pass.deter_r:
     external: true
-  postgres.table.fm:
+  postgres.table.deter_r:
     external: true
-  postgres.schema.fm:
+  postgres.schema.deter_r:
     external: true
   ftp.user.censipam:
     external: true
