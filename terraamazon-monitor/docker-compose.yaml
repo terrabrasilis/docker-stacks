@@ -7,18 +7,20 @@ services:
     ports:
       - "81:36003"
       - "82:36004"
+      - "83:36005"
+      - "84:36006"
     volumes:
       - /data/monitor/app/monitor-bookmark:/data
     restart: always
 
-  app-monitor-updated:
-    image: terrabrasilis/ta-monitor:v1.0.0
-    container_name: app-monitor-updated
-    ports:
-      - "83:36005"
-    volumes:
-      - /data/monitor/app/monitor_updated:/data
-    restart: always
+#  app-monitor-updated:
+#    image: terrabrasilis/ta-monitor:v1.0.0
+#    container_name: app-monitor-updated
+#    ports:
+#      - "83:36005"
+#    volumes:
+#      - /data/monitor/app/monitor_updated:/data
+#    restart: always
 
   geoserver-monitor:
     image: terrabrasilis/geoserver-monitor:v2.11
