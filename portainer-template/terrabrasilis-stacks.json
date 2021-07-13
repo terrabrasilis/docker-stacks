@@ -402,5 +402,18 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "services/file-delivery-homologation.yaml"
         }
+    },
+    {
+        "type": 2,
+        "name": "sos-base-stack",
+        "title": "SOS Mata Atlântica stack",
+        "description": "SOS Mata Atlântica stack with all instances of services and Apps.",
+        "categories": ["API", "services", "application"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "sos/base-stack.yaml"
+        }
     }
 ]
