@@ -1,12 +1,12 @@
-# Stack of data service and authentication for release DETER data.
-# Use in Swarm (deter_release_data)
+# Middleware authentication service stack
+# Use in Swarm (terrabrasilis-oauth-api)
 version: '3.1'
 
 services:
   
 
   terrabrasilis_oauth_api:
-    image: terrabrasilis/terrabrasilis-oauth-api:v1.0.6
+    image: terrabrasilis/terrabrasilis-oauth-api:v1.1.0
     hostname: oauth.api
     volumes:
       - /data/oauth-api/logs:/logs
