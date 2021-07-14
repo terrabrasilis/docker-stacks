@@ -1,18 +1,18 @@
 version: '3.2'
 services:
   soswebsite:
-    image: wordpress:5.0.3-apache
+    image: wordpress:5.2.2-apache
     hostname: soswebsite
     networks:
       - proxy    
     volumes:
-      - /data/soswebsite:/var/www/html
+      - /data/soswebsite/sos:/var/www/html
     ports:
       - 25223:80
     depends_on:
       - db_mysql
     deploy:
-      replicas: 2
+      replicas: 1
       restart_policy:
         condition: on-failure
 
@@ -57,7 +57,7 @@ services:
     volumes:
       - /data/sosmongodb:/data/db
     ports:
-      - "30056:27017"
+      - "30100:27017"
     deploy:
       replicas: 1
       restart_policy:
