@@ -1,0 +1,20 @@
+# Tools service stack
+# Use in Swarm (terrabrasilis-tools)
+version: '3.1'
+services:
+  shp2pgsql:
+    image: terrabrasilis/postgis-shp2pgsql:11-2.5
+    hostname: shp2pgsql
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - /data/tools/postgres/shp2pgsql/pgdata:/var/lib/postgresql/data
+      - /data/tools/postgres/shp2pgsql/scripts:/scripts
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.master1==master1
+      restart_policy:
+        condition: on-failure

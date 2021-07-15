@@ -415,5 +415,18 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "sos/base-stack.yaml"
         }
+    },
+    {
+        "type": 2,
+        "name": "terrabrasilis-tools",
+        "title": "Tools service stack",
+        "description": "The service stack with tools for internal use. It is usually a standalone service.",
+        "categories": ["tools", "services"],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "tools/export-pg-2-shp.yaml"
+        }
     }
 ]
