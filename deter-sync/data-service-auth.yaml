@@ -119,7 +119,7 @@ services:
         condition: on-failure
 
   daily_deter_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.2.3
+    image: terrabrasilis/daily-deter-for-ibama:v1.2.4
     hostname: daily.deter.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
