@@ -113,16 +113,16 @@
     },
     {
         "type": 2,
-        "name": "mixed-dashboards",
-        "title": "Mixed dashboards",
-        "description": "A set of dashboards for mixed projects.",
-        "note": "This applications is optional. It's includes some instances of panels each one with particular purpose.",
-        "categories": ["application"],
+        "name": "dashboard-fires",
+        "title": "Back-end and front-end for fire panel.",
+        "description": "A back-end service to update data monthly and the Web App front-end dashboard.",
+        "note": "This stack is optional. It includes an instance of the fire dashboard and another instance of the data update service.",
+        "categories": ["application", "services"],
         "platform": "linux",
         "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/dashboard2.png",
         "repository": {
             "url": "https://github.com/terrabrasilis/docker-stacks",
-            "stackfile": "dashboards/mixed-dashboard-stack.yaml"
+            "stackfile": "dashboards/dashboard-fires.yaml"
         }
     },
     {

@@ -12,6 +12,14 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+  fires-data-task:
+    image: terrabrasilis/fires-data-task-main:v2.0.0
+    volumes:
+      - /data/fires/input/raster:/usr/local/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
 networks:
   proxy:
