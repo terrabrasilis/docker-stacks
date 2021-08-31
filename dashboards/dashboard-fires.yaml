@@ -13,7 +13,7 @@ services:
       restart_policy:
         condition: on-failure
   fires-data-task:
-    image: terrabrasilis/fires-data-task-main:v2.0.0
+    image: terrabrasilis/fires-data-task-release-1:v1.2.2
     volumes:
       - /data/fires/input/raster:/usr/local/data
     deploy:
