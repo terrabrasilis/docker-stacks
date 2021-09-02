@@ -426,7 +426,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
-            "stackfile": "tools/export-pg-2-shp.yaml"
+            "stackfile": "tools/terrabrasilis-tools.yaml"
         }
     }
 ]
