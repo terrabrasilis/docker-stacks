@@ -1,9 +1,7 @@
 version: '3.2'
 services:
   focuses-of-fires-biomes:
-    image: terrabrasilis/focuses-of-fires-dashboard:v1.2.1
-    volumes:
-      - /data/fires:/data
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.2.2
     networks:
       - proxy
     ports:
