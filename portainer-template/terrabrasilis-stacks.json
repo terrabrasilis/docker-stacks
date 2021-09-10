@@ -211,20 +211,6 @@
     },
     {
         "type": 2,
-        "name": "deterb_data_sync",
-        "title": "(DEPRECATED) DETER synchronization services",
-        "description": "A set of services compounds by a client for data sync calling an API service and a set of scripts to prepare the data to use for download and dashboard features.",
-        "note": "This services are optional and it's use only when the deforestation alerts database, called DETER-B, exists and is properly configured. Another configurations are necessary like Secrets inside Portainer. See the Stack definition file to more specific details.",
-        "categories": ["auto tasks"],
-        "platform": "linux",
-        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
-        "repository": {
-            "url": "https://github.com/Terrabrasilis/docker-stacks",
-            "stackfile": "deter-sync/client-api-stack.yaml"
-        }
-    },
-    {
-        "type": 2,
         "name": "deter_release_data",
         "title": "Stack of data service and authentication for release DETER data.",
         "description": "A set of services compounds by an API to validate a JWT token and delivery JSON data and a set of scripts to prepare the data to use for download and dashboard features.",
