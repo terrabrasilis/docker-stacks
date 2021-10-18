@@ -3,7 +3,7 @@
   "templates": [
     {
       "type": 2,
-      "name": "proxy-ogc",
+      "name": "ogc-proxy",
       "title": "The proxy to bypass CORS",
       "description": "The http used to bypass CORS when webmap calls GeoServer capabilities",
       "note": "The PROXY Server will be deployed globally inside the cluster and available on port 80.",
@@ -15,15 +15,15 @@
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
       "repository": {
         "url": "https://github.com/Terrabrasilis/docker-stacks",
-        "stackfile": "cluster3/stacks/proxy-ogc.yaml"
+        "stackfile": "cluster3/stacks/ogc-proxy.yaml"
       }
     },
     {
       "type": 2,
-      "name": "Nginx HTTP proxy",
-      "title": "Nginx HTTP proxy",
-      "description": "The main Nginx-based http proxy as the entry point to all resources in our Swarm cluster",
-      "note": "This stack is mandatory to provide a bridge as a proxy for services between the cluster and external access.",
+      "name": "webservers",
+      "title": "Nginx HTTP web server based services",
+      "description": "Includes the main http proxy and another instance for delivery static files.",
+      "note": "This stack is mandatory to provide the main proxy and delivery of files for download.",
       "categories": [
         "webserver",
         "proxy"
@@ -32,24 +32,26 @@
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
       "repository": {
         "url": "https://github.com/Terrabrasilis/docker-stacks",
-        "stackfile": "cluster3/stacks/nginx-manager.yaml"
+        "stackfile": "cluster3/stacks/webservers.yaml"
       }
     },
     {
       "type": 2,
-      "name": "business-api",
-      "title": "Business API as a Service",
-      "description": "Using this API you can request for all data like Visions, Layers, Tools, Data Sources, Downloads and Subdomains.",
-      "note": "This service is mandatory to configure the TreeView of the WebApp and the Download list of WebSite. This stack includes an instance of API and a MongoDB to store JSON documents.",
+      "name": "apis",
+      "title": "Backend APIs.",
+      "description": "A collection of APIs for most backend services.",
+      "note": "This stack is mandatory to configure WebMap's TreeView and WebSite's Download list, in addition to providing middleware service for authentication and time series. This stack includes an instance of MongoDB to store JSON documents.",
       "categories": [
         "API",
-        "service"
+        "service",
+        "oauth",
+        "timeseries"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
       "repository": {
         "url": "https://github.com/Terrabrasilis/docker-stacks",
-        "stackfile": "cluster3/stacks/business-api.yaml"
+        "stackfile": "cluster3/stacks/apis.yaml"
       }
     },
     {
@@ -73,7 +75,7 @@
     },
     {
       "type": 2,
-      "name": "PgAdmin",
+      "name": "pg-client",
       "title": "The PgAdmin4 Web Client for PostgreSQL.",
       "description": "The PgAdmin4 App allows to manage the databases into any internal instance for PostgreSQL.",
       "note": "This stack is optional and serves to manage the databases used for publishing PRODES and DETER data by TerraBrasilis Applications.",
@@ -87,12 +89,12 @@
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
       "repository": {
         "url": "https://github.com/Terrabrasilis/docker-stacks",
-        "stackfile": "cluster3/stacks/pgclient.yaml"
+        "stackfile": "cluster3/stacks/pg-client.yaml"
       }
     },
     {
       "type": 2,
-      "name": "GeoNetwork",
+      "name": "metadata-app",
       "title": "The GeoNetwork app for managing metadata.",
       "description": "The GeoNetwork application allows managing the metadata catalog and serving it through the WCS API.",
       "note": "This stack is mandatory and serves to manage the metadata catalog for TerraBrasilis data.",
@@ -106,24 +108,26 @@
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
       "repository": {
         "url": "https://github.com/Terrabrasilis/docker-stacks",
-        "stackfile": "cluster3/stacks/geonetwork.yaml"
+        "stackfile": "cluster3/stacks/metadata-app.yaml"
       }
     },
     {
       "type": 2,
-      "name": "Download static files",
-      "title": "The web server for delivering static files.",
-      "description": "A Nginx web server for delivering static files.",
-      "note": "This stack is mandatory and serves to deliver files on the main download page of TerraBrasilis.",
+      "name": "geoserver-cluster",
+      "title": "The GeoServer cluster to publish data compliant with the OGC services standard.",
+      "description": "The GeoServer application allows managing data sources and making them available through the OGC API as WMS and WFS services.",
+      "note": "This stack is mandatory and serves to manage the publication of data layers for TerraBrasilis databases.",
       "categories": [
+        "application",
+        "manage",
         "service",
-        "webserver"
+        "API"
       ],
       "platform": "linux",
-      "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+      "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
       "repository": {
         "url": "https://github.com/Terrabrasilis/docker-stacks",
-        "stackfile": "cluster3/stacks/nginx-static-download.yaml"
+        "stackfile": "cluster3/stacks/geoserver-cluster.yaml"
       }
     }
   ]

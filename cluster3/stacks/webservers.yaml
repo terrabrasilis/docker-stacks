@@ -1,9 +1,8 @@
 # The NGINX stack
 version: '3.2'
 services:
-  nginx-manager:
+  main_proxy:
     image: terrabrasilis/nginx-manager:v1.1.0
-    hostname: nginx.manager
     networks:
       - proxy
     ports:
@@ -12,6 +11,19 @@ services:
     volumes: 
       - /data/nginx/conf.d:/etc/nginx/conf.d
       - /data/nginx/log:/var/log/nginx
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  download_static_files:
+    image: nginx:1.17-alpine
+    volumes:
+      - /data/download/static:/usr/share/nginx/html:ro
+    networks:
+      - proxy
+    ports:
+      - 80
     deploy:
       replicas: 1
       restart_policy:

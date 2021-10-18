@@ -4,11 +4,10 @@ services:
   ### Business API as a Service
   business-api:
     image: terrabrasilis/business-api:v1.2.1
-    hostname: "business.api"
     networks:
       - proxy
     ports:
-      - "13222:8090"
+      - "8090:8090"
     environment:   
       - "SPRING_PROFILES_ACTIVE=docker"
     depends_on:
@@ -30,11 +29,41 @@ services:
     volumes:
       - /data/mongodb:/data/db
     ports:
-      - "30046:27017"
+      - "27017"
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure
+
+  # Middleware authentication service
+  oauth_api:
+    image: terrabrasilis/terrabrasilis-oauth-api:v1.1.2
+    hostname: oauth.api
+    volumes:
+      - /data/oauth-api/logs:/logs
+    secrets:
+      - jwt.private.key
+    environment:
+      JWT_SECRET: /run/secrets/jwt.private.key
+    networks:
+      - proxy
+    ports:
+      - "9000"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # Middleware timeseries service 
+  timeseries_ocpu:
+    image: terrabrasilis/terrabrasilis-timeseries:v1.0.0
+    ports:
+      - "8004:8004"
+    restart: always
+
+secrets:
+  jwt.private.key:
+    external: true
 
 networks:
   proxy:
