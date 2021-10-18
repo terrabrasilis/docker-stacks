@@ -1,0 +1,19 @@
+version: '3.2'
+services:
+  proxy-ogc:
+    image: terrabrasilis/proxy-cors:v1.0.0
+    hostname: proxy.ogc
+    networks:
+      - proxy
+    volumes:
+      - "/data/logs/apache2/proxy:/var/log/apache2"
+    ports:
+      - "7000:80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  proxy:
+    external: true

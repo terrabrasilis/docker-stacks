@@ -1,0 +1,32 @@
+# Middleware authentication service stack
+# Use in Swarm (terrabrasilis-oauth-api)
+version: '3.1'
+
+services:
+  
+
+  terrabrasilis_oauth_api:
+    image: terrabrasilis/terrabrasilis-oauth-api:v1.1.2
+    hostname: oauth.api
+    volumes:
+      - /data/oauth-api/logs:/logs
+    secrets:
+      - jwt.private.key
+    environment:
+      JWT_SECRET: /run/secrets/jwt.private.key
+    networks:
+      - proxy
+    ports:
+      - "9000"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+secrets:
+  jwt.private.key:
+    external: true
+
+networks:
+  proxy:
+    external: true

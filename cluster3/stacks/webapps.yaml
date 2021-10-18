@@ -1,0 +1,35 @@
+version: '3.2'
+services:
+  webmap:
+    image: terrabrasilis/webmap:prod_v2.3.0
+    hostname: webmap.production
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==manager
+      restart_policy:
+        condition: on-failure
+
+  deforestation-dashboard:
+    image: terrabrasilis/deforestation-dashboard:prod_v2.0.19
+    hostname: deforestation.dashboard.production
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==manager
+      restart_policy:
+        condition: on-failure
+
+networks:
+  proxy:
+    external: true
