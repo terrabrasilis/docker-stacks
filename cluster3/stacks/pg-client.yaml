@@ -6,13 +6,13 @@ services:
     image: dpage/pgadmin4:5.1
     ports:
       - 5555:80
-    environment:
+    #environment:
       # after starting for the first time, use the web app to change this password
       # and then remove these entries.
       # the initial email
-      - "PGADMIN_DEFAULT_EMAIL=andre.carvalho@inpe.br"
+      #- "PGADMIN_DEFAULT_EMAIL=<an_email>"
       # the initial password
-      - "PGADMIN_DEFAULT_PASSWORD=12qwaszx"
+      #- "PGADMIN_DEFAULT_PASSWORD=<a_secret>"
     volumes:
       - /data/pgclient/pgadmin4:/var/lib/pgadmin
     deploy:
