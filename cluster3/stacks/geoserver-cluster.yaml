@@ -6,9 +6,11 @@ services:
       image: terrabrasilis/geoserver-master:v1.0.6
       hostname: master.geoserver
       ports:
-        - "8888:8080"
+        - "8080"
       networks:
         - proxy
+      extra_hosts:
+        - "pg13webstandby:192.168.1.16"
       volumes: 
         - /geoserver/cluster/gs_datadir:/var/local/geoserver
         - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
@@ -29,6 +31,8 @@ services:
       hostname: slave1.geoserver
       networks:
         - proxy
+      extra_hosts:
+        - "pg13webstandby:192.168.1.16"
       volumes:
         - /geoserver/cluster/gs_datadir:/var/local/geoserver
         - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
@@ -40,7 +44,7 @@ services:
         CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
         instanceName: slave1
       ports:
-        - "30001:8080"
+        - "8080"
       deploy:
         replicas: 1
         restart_policy:
@@ -51,6 +55,8 @@ services:
       hostname: slave2.geoserver
       networks:
         - proxy
+      extra_hosts:
+        - "pg13webstandby:192.168.1.16"
       volumes:
         - /geoserver/cluster/gs_datadir:/var/local/geoserver
         - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
@@ -62,7 +68,7 @@ services:
         CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
         instanceName: slave2
       ports:
-        - "30002:8080"
+        - "8080"
       deploy:
         replicas: 1
         restart_policy:
@@ -73,6 +79,8 @@ services:
       hostname: slave3.geoserver
       networks:
         - proxy
+      extra_hosts:
+        - "pg13webstandby:192.168.1.16"
       volumes:
         - /geoserver/cluster/gs_datadir:/var/local/geoserver
         - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
@@ -84,7 +92,7 @@ services:
         CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
         instanceName: slave3
       ports:
-        - "30003:8080"
+        - "8080"
       deploy:
         replicas: 1
         restart_policy:
