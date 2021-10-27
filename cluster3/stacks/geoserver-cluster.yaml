@@ -44,7 +44,7 @@ services:
         CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
         instanceName: slave1
       ports:
-        - "30001:8080"
+        - "30010:8080"
       deploy:
         replicas: 1
         restart_policy:
@@ -68,7 +68,7 @@ services:
         CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
         instanceName: slave2
       ports:
-        - "30002:8080"
+        - "30020:8080"
       deploy:
         replicas: 1
         restart_policy:
@@ -92,7 +92,7 @@ services:
         CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
         instanceName: slave3
       ports:
-        - "30003:8080"
+        - "30030:8080"
       deploy:
         replicas: 1
         restart_policy:
