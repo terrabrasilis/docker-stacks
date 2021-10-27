@@ -13,7 +13,7 @@ services:
 #      - redisdb
 #    restart: always
 
-  # The instance of REDIS to store the BusinessAPI documents
+  # The instance of REDIS to store the deforestation data documents
   redis:
     image: terrabrasilis/redis:v01
     hostname: "redis.db"
