@@ -17,14 +17,14 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    healthcheck:
-      # "curl", "-s", "-o", "/dev/null", "--head", "-w", "\"%{http_code}\"", "http://localhost:8090/api/v1/layer/health"]
-      #  ["CMD", "curl", "-f", "http://localhost:8090/api/v1/layer/health"]
-      test: ["CMD-SHELL", "curl -f http://localhost:8090/api/v1/layer/health || exit 1"]
-      interval: 1m
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+    # healthcheck:
+    #   # "curl", "-s", "-o", "/dev/null", "--head", "-w", "\"%{http_code}\"", "http://localhost:8090/api/v1/layer/health"]
+    #   #  ["CMD", "curl", "-f", "http://localhost:8090/api/v1/layer/health"]
+    #   test: ["CMD-SHELL", "curl -f http://localhost:8090/api/v1/layer/health || exit 1"]
+    #   interval: 1m
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 40s
 
   # The instance of MongoDB to store the BusinessAPI documents
   mongodb:
@@ -63,13 +63,13 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    healthcheck:
-      # httpcode=`curl -s -o /dev/null --head -w "%{http_code}" -X GET "http://localhost:9000/health"`; if [ ! $httpcode == "200" ]; then exit 1; fi
-      test: ["CMD-SHELL", "curl -f http://localhost:9000/health || exit 1"]
-      interval: 1m
-      timeout: 10s
-      retries: 3
-      start_period: 30s
+    # healthcheck:
+    #   # httpcode=`curl -s -o /dev/null --head -w "%{http_code}" -X GET "http://localhost:9000/health"`; if [ ! $httpcode == "200" ]; then exit 1; fi
+    #   test: ["CMD-SHELL", "curl -f http://localhost:9000/health || exit 1"]
+    #   interval: 1m
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 30s
         
   # Middleware authentication service
   oauth_api:
