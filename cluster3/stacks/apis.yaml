@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.4'
 services:
 
   ### Business API as a Service
@@ -6,8 +6,9 @@ services:
     image: terrabrasilis/business-api:v1.2.1
     networks:
       - proxy
+      - backend_db
     ports:
-      - "8090:8090"
+      - "8090"
     environment:   
       - "SPRING_PROFILES_ACTIVE=docker"
     depends_on:
@@ -16,13 +17,21 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+    healthcheck:
+      # "curl", "-s", "-o", "/dev/null", "--head", "-w", "\"%{http_code}\"", "http://localhost:8090/api/v1/layer/health"]
+      #  ["CMD", "curl", "-f", "http://localhost:8090/api/v1/layer/health"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8090/api/v1/layer/health || exit 1"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   # The instance of MongoDB to store the BusinessAPI documents
   mongodb:
     image: mongo:4.4
     hostname: "mongo.db"
     networks:
-      - proxy
+      - backend_db
     environment:
       MONGO_DATA_DIR: /data/db
       MONGO_LOG_DIR: /dev/null
@@ -35,6 +44,33 @@ services:
       restart_policy:
         condition: on-failure
 
+  # File delivery service API with authentication
+  file_delivery_api:
+    image: terrabrasilis/file-delivery:v1.0.4
+    hostname: file.delivery.auth
+    volumes:
+      - /data/deter-auth/generated-files:/data/files:ro
+      - /data/deter-auth/logs:/logs
+    secrets:
+      - jwt.private.key
+    environment:
+      JWT_SECRET: /run/secrets/jwt.private.key
+    networks:
+      - proxy
+    ports:
+      - "9000"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      # httpcode=`curl -s -o /dev/null --head -w "%{http_code}" -X GET "http://localhost:9000/health"`; if [ ! $httpcode == "200" ]; then exit 1; fi
+      test: ["CMD-SHELL", "curl -f http://localhost:9000/health || exit 1"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+        
   # Middleware authentication service
   oauth_api:
     image: terrabrasilis/terrabrasilis-oauth-api:v1.1.2
@@ -68,3 +104,5 @@ secrets:
 networks:
   proxy:
     external: true
+  backend_db:
+    external: false
