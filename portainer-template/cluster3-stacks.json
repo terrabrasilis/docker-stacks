@@ -129,6 +129,20 @@
         "url": "https://github.com/Terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/geoserver-cluster.yaml"
       }
+    },
+    {
+        "type": 2,
+        "name": "webapps",
+        "title": "The WebMap and deforestation-dashborad Apps for production",
+        "description": "The TerraBrasilis WebMap is the main component of the Web GUIs for explore our maps using the OGC services. The dashboard is the main component Web GUI for explore the deforestation data analytics produced by PRODES.",
+        "note": "This stack are mandatory and responds by the Map and Deforestation-dashboard URLs for production use.",
+        "categories": ["application"],
+        "platform": "linux",
+        "logo": "http://terrabrasilis.dpi.inpe.br/wp-content/uploads/2019/03/geoespaciais1.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "cluster3/stacks/webapps.yaml"
+        }
     }
   ]
 }
