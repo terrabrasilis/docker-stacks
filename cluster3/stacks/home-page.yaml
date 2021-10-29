@@ -1,10 +1,11 @@
-version: '3.2'
+version: '3.4'
 services:
-  terrabrasilis-website:
+  website:
     image: wordpress:5.0.3-apache
-    hostname: terrabrasilis.website
+    hostname: website
     networks:
-      - proxy    
+      - proxy
+      - backend
     volumes:
       - /data/website:/var/www/html
     ports:
@@ -18,4 +19,6 @@ services:
 
 networks:
   proxy:
+    external: true
+  backend:
     external: true
