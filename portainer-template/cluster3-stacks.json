@@ -40,7 +40,7 @@
       "name": "apis",
       "title": "Backend APIs.",
       "description": "A collection of APIs for most backend services.",
-      "note": "This stack is mandatory to configure WebMap's TreeView and WebSite's Download list, in addition to providing middleware service for authentication and time series. This stack includes an instance of MongoDB to store JSON documents.",
+      "note": "This stack is mandatory to configure Dashboards, WebMap and WebSite Download list, in addition to providing middleware service for authentication and time series. This stack includes an instance of MongoDB and Redis to store and delivery the JSON documents.",
       "categories": [
         "API",
         "service",

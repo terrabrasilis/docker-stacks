@@ -1,7 +1,57 @@
 version: '3.4'
 services:
 
-  ### Business API as a Service
+  # The instance of MongoDB to store the BusinessAPI documents
+  mongodb:
+    image: mongo:4.4
+    hostname: "mongo.db"
+    networks:
+      - backend
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+    volumes:
+      - /data/mongodb:/data/db
+    ports:
+      - "27017"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # The instance of RedisDB to store the Deforestation dashboard documents
+  redisdb:
+    image: terrabrasilis/redis:v01
+    ports:
+      - "6379"
+    networks:
+      - backend
+    volumes:
+      - /data/redis:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # Deforestation dashbaord API
+  redis-api:
+    image: terrabrasilis/redis-api:v01
+    ports:
+      - "3000"
+    networks:
+      - proxy
+      - backend
+    depends_on:
+      - redisdb
+    environment:         
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # Business API as a Service
   business-api:
     image: terrabrasilis/business-api:v1.2.1
     networks:
@@ -25,24 +75,6 @@ services:
     #   timeout: 10s
     #   retries: 3
     #   start_period: 40s
-
-  # The instance of MongoDB to store the BusinessAPI documents
-  mongodb:
-    image: mongo:4.4
-    hostname: "mongo.db"
-    networks:
-      - backend
-    environment:
-      MONGO_DATA_DIR: /data/db
-      MONGO_LOG_DIR: /dev/null
-    volumes:
-      - /data/mongodb:/data/db
-    ports:
-      - "27017"
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
 
   # File delivery service API with authentication
   file_delivery_api:
