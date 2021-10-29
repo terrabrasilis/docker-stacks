@@ -133,7 +133,7 @@
     {
         "type": 2,
         "name": "webapps",
-        "title": "The WebMap and deforestation-dashborad Apps for production",
+        "title": "The WebMap and deforestation-dashboard Apps for production",
         "description": "The TerraBrasilis WebMap is the main component of the Web GUIs for explore our maps using the OGC services. The dashboard is the main component Web GUI for explore the deforestation data analytics produced by PRODES.",
         "note": "This stack are mandatory and responds by the Map and Deforestation-dashboard URLs for production use.",
         "categories": ["application"],
@@ -142,6 +142,20 @@
         "repository": {
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "cluster3/stacks/webapps.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "homepage",
+        "title": "The home page as an entry point to the site",
+        "description": "The home page of TerraBrasilis based on Wordpress. It is the gateway to all TerraBrasilis resources.",
+        "note": "This stack is mandatory and responds by the root URL.",
+        "categories": ["application"],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "cluster3/stacks/home-page.yaml"
         }
     }
   ]
