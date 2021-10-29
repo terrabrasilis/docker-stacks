@@ -25,7 +25,7 @@ services:
         condition: on-failure
 
   focuses-of-fires:
-    image: terrabrasilis/focuses-of-fires-dashboard:v1.2.3
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.0
     networks:
       - proxy
     ports:
