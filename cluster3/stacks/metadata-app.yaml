@@ -2,7 +2,6 @@ version: '3.4'
 services:
   geonetwork:
     image: terrabrasilis/geonetwork:v3.4.4
-    restart: always
     networks:
       - proxy
     ports:
@@ -17,7 +16,7 @@ services:
       restart_policy:
         condition: on-failure
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:8080\"`; if [ ! $httpcode == \"200\" ]; then exit 1; fi"]
       interval: 1m30s
       timeout: 10s
       retries: 3
