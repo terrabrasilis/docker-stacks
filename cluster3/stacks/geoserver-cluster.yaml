@@ -11,7 +11,7 @@ services:
         - proxy
       extra_hosts:
         - "pg13webstandby:192.168.1.16"
-      volumes: 
+      volumes:
         - /geoserver/cluster/gs_datadir:/var/local/geoserver
         - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
       environment:

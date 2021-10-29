@@ -6,7 +6,7 @@ services:
     image: terrabrasilis/business-api:v1.2.1
     networks:
       - proxy
-      - backend_db
+      - backend
     ports:
       - "8090"
     environment:   
@@ -31,7 +31,7 @@ services:
     image: mongo:4.4
     hostname: "mongo.db"
     networks:
-      - backend_db
+      - backend
     environment:
       MONGO_DATA_DIR: /data/db
       MONGO_LOG_DIR: /dev/null
@@ -95,6 +95,8 @@ services:
     image: terrabrasilis/terrabrasilis-timeseries:v1.0.0
     ports:
       - "8004:8004"
+    networks:
+      - proxy
     restart: always
 
 secrets:
@@ -104,5 +106,5 @@ secrets:
 networks:
   proxy:
     external: true
-  backend_db:
-    external: false
+  backend:
+    external: true

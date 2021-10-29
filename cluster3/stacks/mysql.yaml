@@ -5,11 +5,12 @@ services:
     hostname: phpmyadmin
     networks:
       - proxy
+      - backend
     ports:
       - "25111:80" 
     environment:   
       - "PMA_ARBITRARY=1"
-      - "PMA_ABSOLUTE_URI=http://terrabrasilis.dpi.inpe.br/phpmyadmin/"
+      - "PMA_ABSOLUTE_URI=http://pve9.dpi.inpe.br/phpmyadmin/"
     volumes: 
       - /data/phpmyadmin/sessions:/sessions
     depends_on:
@@ -38,8 +39,7 @@ services:
       restart_policy:
         condition: on-failure
     networks: 
-      - terrabrasilis
-      - proxy
+      - backend
 
 secrets:
   server.user.mysql:
@@ -52,7 +52,7 @@ secrets:
     external: true
 
 networks: 
-  terrabrasilis:
-    external: false
+  backend:
+    external: true
   proxy:
     external: true
