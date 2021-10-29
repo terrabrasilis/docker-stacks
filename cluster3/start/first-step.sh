@@ -10,11 +10,13 @@ if [[ "$1" = "rm" ]];then
   docker stack rm portainer
   docker volume rm portainer_data
   docker network rm proxy
+  docker network rm backend
   docker network rm agent_network
 else
 
   # First, create two networks:
   docker network create -d overlay proxy
+  docker network create -d overlay backend
   docker network create -d overlay --attachable agent_network
 
   # Next, create the volume:
