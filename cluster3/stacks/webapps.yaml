@@ -25,7 +25,7 @@ services:
         condition: on-failure
 
   focuses-of-fires:
-    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.0
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.1
     networks:
       - proxy
     ports:
@@ -42,7 +42,7 @@ services:
       start_period: 40s
 
   cerrado-alert-daily:
-    image: terrabrasilis/cerrado-alert-daily:v2.7.5
+    image: terrabrasilis/cerrado-alert-daily:v2.7.6
     networks:
       - proxy
     ports:
@@ -59,7 +59,7 @@ services:
       start_period: 40s
 
   cerrado-alert-aggregated:
-    image: terrabrasilis/cerrado-alert-aggregated:v2.7.5
+    image: terrabrasilis/cerrado-alert-aggregated:v2.7.6
     networks:
       - proxy
     ports:
@@ -76,7 +76,7 @@ services:
       start_period: 40s
 
   amazon-alert-aggregated:
-    image: terrabrasilis/amazon-alert-aggregated:v2.9.4
+    image: terrabrasilis/amazon-alert-aggregated:v2.9.5
     networks:
       - proxy
     ports:
@@ -93,7 +93,7 @@ services:
       start_period: 40s
 
   amazon-alert-daily:
-    image: terrabrasilis/amazon-alert-daily:v2.9.4
+    image: terrabrasilis/amazon-alert-daily:v2.9.5
     networks:
       - proxy
     ports:
