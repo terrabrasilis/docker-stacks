@@ -11,6 +11,12 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   deforestation-dashboard:
     image: terrabrasilis/deforestation-dashboard:prod_v2.0.19
