@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   website:
-    image: wordpress:5.0.3-apache
+    image: wordpress:5.8.2-apache
     hostname: website
     networks:
       - proxy
@@ -9,7 +9,7 @@ services:
     volumes:
       - /data/website:/var/www/html
     ports:
-      - 25112:80
+      - 80
     depends_on:
       - db_mysql
     deploy:
