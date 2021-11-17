@@ -1,13 +1,13 @@
 version: '3.4'
 services:
-  website:
+  homepage:
     image: wordpress:5.8.2-apache
-    hostname: website
+    hostname: homepage
     networks:
       - proxy
       - backend
     volumes:
-      - /data/website:/var/www/html
+      - /data/homepage:/var/www/html
     ports:
       - 80
     depends_on:
