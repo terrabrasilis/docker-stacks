@@ -44,7 +44,7 @@ services:
     depends_on:
       - redisdb
     environment:         
-      - REDIS_HOST=redis
+      - REDIS_HOST=redisdb
       - REDIS_PORT=6379
     deploy:
       replicas: 1
