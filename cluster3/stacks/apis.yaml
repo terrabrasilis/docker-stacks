@@ -43,9 +43,9 @@ services:
       - backend
     depends_on:
       - redisdb
-    environment:         
-      - REDIS_HOST=redisdb
-      - REDIS_PORT=6379
+    environment:
+      - DASHBOARD_API_REDIS_HOST=redisdb
+      - DASHBOARD_API_REDIS_PORT=6379
     deploy:
       replicas: 1
       restart_policy:
