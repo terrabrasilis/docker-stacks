@@ -35,7 +35,7 @@ services:
 
   # Deforestation dashboard API
   redis-api:
-    image: terrabrasilis/redis-api:v1.1.0
+    image: terrabrasilis/redis-api:v1.1.1
     ports:
       - "3000"
     networks:
@@ -51,10 +51,16 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:3000/dashboard/api/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   # Business API as a Service
   business-api:
-    image: terrabrasilis/business-api:v1.2.3 # shoul be test the health test before deploy it!
+    image: terrabrasilis/business-api:v1.2.3
     networks:
       - proxy
       - backend
@@ -70,7 +76,7 @@ services:
         condition: on-failure
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:8090/api/v1/layer/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m
+      interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s

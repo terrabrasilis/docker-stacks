@@ -14,9 +14,9 @@ services:
 #    restart: always
 
   # The instance of REDIS to store the deforestation data documents
-  redis:
+  redisdb:
     image: terrabrasilis/redis:v01
-    hostname: "redis.db"
+    hostname: "redisdb"
     volumes:
       # Use your path to map one volume
       - /home/andre/Dados/tmp/redisdb:/data
@@ -34,13 +34,13 @@ services:
   #   restart: always
   
   redis-api:
-    image: terrabrasilis/redis-api:v01
+    image: terrabrasilis/redis-api:v1.1.1
     ports:
       - "3000:3000"
     links:
-      - redis
-    # environment:
-    #   DASHBOARD_API_PORT: 3000
-    #   DASHBOARD_API_REDIS_HOST: redisdb
-    #   DASHBOARD_API_REDIS_PORT: 6379
+      - redisdb
+    environment:
+      - REDIS_HOSTNAME=redisdb
+      - REDIS_PORT=6379
+      - API_PORT=3000
     restart: always
