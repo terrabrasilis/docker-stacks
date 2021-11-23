@@ -35,7 +35,7 @@ services:
 
   # Deforestation dashboard API
   redis-api:
-    image: terrabrasilis/redis-api:v01
+    image: terrabrasilis/redis-api:v1.0.0
     ports:
       - "3000"
     networks:
@@ -46,6 +46,7 @@ services:
     environment:
       - DASHBOARD_API_REDIS_HOST=redisdb
       - DASHBOARD_API_REDIS_PORT=6379
+      - DASHBOARD_API_PORT=3000
     deploy:
       replicas: 1
       restart_policy:
