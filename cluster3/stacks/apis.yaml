@@ -35,7 +35,7 @@ services:
 
   # Deforestation dashboard API
   redis-api:
-    image: terrabrasilis/redis-api:v1.1.1
+    image: terrabrasilis/redis-api:v1.1.2
     ports:
       - "3000"
     networks:
