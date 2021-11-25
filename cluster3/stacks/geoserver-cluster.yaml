@@ -10,7 +10,7 @@ services:
       networks:
         - proxy
       extra_hosts:
-        - "pg13webstandby:192.168.1.16"
+        - "pg13web:192.168.1.16"
       volumes:
         - /geoserver/cluster/gs_datadir:/var/local/geoserver
         - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
@@ -32,7 +32,7 @@ services:
       networks:
         - proxy
       extra_hosts:
-        - "pg13webstandby:192.168.1.16"
+        - "pg13web:192.168.1.16"
       volumes:
         - /geoserver/cluster/gs_datadir:/var/local/geoserver
         - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
@@ -56,7 +56,7 @@ services:
       networks:
         - proxy
       extra_hosts:
-        - "pg13webstandby:192.168.1.16"
+        - "pg13web:192.168.1.16"
       volumes:
         - /geoserver/cluster/gs_datadir:/var/local/geoserver
         - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
@@ -80,7 +80,7 @@ services:
       networks:
         - proxy
       extra_hosts:
-        - "pg13webstandby:192.168.1.16"
+        - "pg13web:192.168.1.16"
       volumes:
         - /geoserver/cluster/gs_datadir:/var/local/geoserver
         - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
