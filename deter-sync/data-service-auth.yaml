@@ -86,7 +86,7 @@ services:
   cerrado_intersection:
     image: terrabrasilis/cerradodeter-syncdata:v1.0.2
     volumes:
-      - /data/deter-auth/intersection/cerrado:/usr/local/data
+      - /data/deter-auth/intersection/cerrado-nb:/usr/local/data
       - /etc/localtime:/etc/localtime:ro
     networks:
       - proxy
