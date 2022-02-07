@@ -1,6 +1,6 @@
 version: '3.2'
 services:
-  cerrado-alert-daily:
+  cerrado-nb-alert-daily:
     image: terrabrasilis/cerrado-alert-daily:v2.8.0
     networks:
         - proxy
@@ -10,8 +10,28 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-  cerrado-alert-aggregated:
+  cerrado-nb-alert-aggregated:
     image: terrabrasilis/cerrado-alert-aggregated:v2.8.0
+    networks:
+        - proxy
+    ports:
+        - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+  cerrado-alert-daily:
+    image: terrabrasilis/cerrado-alert-daily:v2.7.5
+    networks:
+        - proxy
+    ports:
+        - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+  cerrado-alert-aggregated:
+    image: terrabrasilis/cerrado-alert-aggregated:v2.7.5
     networks:
         - proxy
     ports:
