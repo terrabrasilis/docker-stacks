@@ -4,7 +4,7 @@ version: '3.3'
 
 services:
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v1.8.7
+    image: terrabrasilis/deter-generate-files:v1.8.8
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
@@ -84,7 +84,7 @@ services:
         condition: on-failure
 
   cerrado_intersection:
-    image: terrabrasilis/cerradodeter-syncdata:v1.0.2
+    image: terrabrasilis/cerradodeter-syncdata:v1.1.0
     volumes:
       - /data/deter-auth/intersection/cerrado-nb:/usr/local/data
       - /etc/localtime:/etc/localtime:ro
