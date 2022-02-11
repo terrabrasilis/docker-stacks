@@ -41,7 +41,7 @@ services:
       restart_policy:
         condition: on-failure
   amazon-alert-aggregated:
-    image: terrabrasilis/amazon-alert-aggregated:v2.9.5
+    image: terrabrasilis/amazon-alert-aggregated:v2.9.6
     networks:
         - proxy
     ports:
@@ -51,7 +51,7 @@ services:
       restart_policy:
         condition: on-failure
   amazon-alert-daily:
-    image: terrabrasilis/amazon-alert-daily:v2.9.5
+    image: terrabrasilis/amazon-alert-daily:v2.9.6
     networks:
         - proxy
     ports:
