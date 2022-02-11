@@ -121,6 +121,24 @@ services:
       retries: 3
       start_period: 40s
 
+  app_survey:
+    image: terrabrasilis/survey:v0.3
+    ports:
+      - "80"
+    volumes:
+      - /data/survey:/var/www/html
+    depends_on:
+      - db_mysql
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks: 
+      - proxy
+      - backend
+
 networks:
   proxy:
+    external: true
+  backend:
     external: true
