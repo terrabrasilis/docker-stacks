@@ -1,0 +1,56 @@
+version: '3.2'
+services:
+  ams-webapp:
+    image: terrabrasilis/ams-webapp:v1.3.2
+    hostname: ams.webapp
+    entrypoint: /docker-entrypoint.sh
+    networks:
+      - proxy
+    ports:
+      - 80:7000
+    environment:
+      - "SCRIPT_NAME=/ams"
+      - "GEOSERVER_URL=http://terrabrasilis.dpi.inpe.br/geoserver"
+      - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
+      - "APPLICATION_ROOT=/ams/"
+      - "DETER_DAILY_UPDATE_TIME=6:30"
+    secrets:
+      - deter.database.url
+      - ams.database.url
+    environment:
+      DETER_DATABASE_URL: /run/secrets/deter.database.url
+      DATABASE_URL: /run/secrets/ams.database.url
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  ams-sync:
+    image: terrabrasilis/ams-sync:v1.3.2
+    hostname: ams.sync
+    networks:
+      - proxy
+    volumes:
+      - /docker/input/data:/usr/local/data
+    environment:
+      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_lzw_4326.tif"
+    secrets:
+      - deter.database.url
+      - ams.database.url
+    environment:
+      DETER_DATABASE_URL: /run/secrets/deter.database.url
+      DATABASE_URL: /run/secrets/ams.database.url
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+secrets:
+  deter.database.url:
+    external: true
+  ams.database.url:
+    external: true
+
+networks:
+  proxy:
+    external: true

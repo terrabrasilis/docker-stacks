@@ -414,5 +414,33 @@
             "url": "https://github.com/Terrabrasilis/docker-stacks",
             "stackfile": "tools/terrabrasilis-tools.yaml"
         }
+    },
+    {
+        "type": 2,
+        "name": "ams",
+        "title": "The complete AMS stack",
+        "description": "Used to deploy the AMS Webapp and background task.",
+        "note": "This stack is part of TerraBrasilis core.",
+        "categories": ["application", "auto tasks"],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "terrabrasilis-webapp/ams.yaml"
+        }
+    },
+    {
+        "type": 2,
+        "name": "ams-homologation",
+        "title": "The Homologation AMS stack",
+        "description": "Used to deploy the Homologation AMS Webapp.",
+        "note": "This stack is optional.",
+        "categories": ["application", "homologation"],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+        "repository": {
+            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "stackfile": "terrabrasilis-webapp/ams-homologation.yaml"
+        }
     }
 ]
