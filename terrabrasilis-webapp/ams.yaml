@@ -31,7 +31,7 @@ services:
     networks:
       - proxy
     volumes:
-      - /docker/input/data:/usr/local/data
+      - /data/ams/sync:/usr/local/data
     environment:
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_lzw_4326.tif"
     secrets:
