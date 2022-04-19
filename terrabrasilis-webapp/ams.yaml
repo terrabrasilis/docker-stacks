@@ -23,12 +23,6 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    healthcheck:
-      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:7000/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
   ams-sync:
     image: terrabrasilis/ams-sync:v1.3.2
