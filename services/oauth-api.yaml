@@ -3,8 +3,6 @@
 version: '3.1'
 
 services:
-  
-
   terrabrasilis_oauth_api:
     image: terrabrasilis/terrabrasilis-oauth-api:v1.1.2
     hostname: oauth.api
