@@ -1,0 +1,74 @@
+# Backend and frontend authentication service stack
+# Use in Swarm (base-oauth)
+# Warning: path of all env files is in portainer base path
+version: '3.3'
+
+services:
+  oauth-service:
+    #image: terrabrasilis/oauth-service:v1.0.0
+    image: registry.dpi.inpe.br/dpi/oauth:0.1.1
+    hostname: oauth-service
+    env_file:
+      - /data/oauth-service.env
+    ports:
+      - "80"
+    volumes:
+      - "/data/oauth-service/certs:/data/certs"
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==master2
+      restart_policy:
+        condition: on-failure
+
+  mongo-oauth:
+    image: mongo:4.2.7
+    hostname: mongo-oauth
+    env_file:
+      - /data/mongo-oauth.env
+    ports:
+      - "27017"
+    volumes:
+      - /data/oauth-service/configdb:/data/configdb
+      - /data/oauth-service/db:/data/db
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  redis-oauth:
+    image: bitnami/redis:latest
+    hostname: redis-oauth
+    env_file:
+      - /data/redis-oauth.env
+    volumes:
+      - /data/oauth-service/redisdata:/data
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  oauth-app:
+    image: terrabrasilis/oauth-app:v1.0.0
+    hostname: oauth-app
+    env_file:
+      - /data/oauth-app.env
+    ports:
+      - "8080"
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  proxy:
+    external: true
