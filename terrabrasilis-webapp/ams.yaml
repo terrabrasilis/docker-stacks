@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   ams-webapp:
-    image: terrabrasilis/ams-webapp:v1.3.6.rc
+    image: terrabrasilis/ams-webapp:v1.3.9.rc
     hostname: ams.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -9,16 +9,13 @@ services:
     ports:
       - 7000
     environment:
-      - "SCRIPT_NAME=/ams"
+      - "SCRIPT_NAME=/ams-homologation"
       - "GEOSERVER_URL=http://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
-      - "APPLICATION_ROOT=/ams/"
-      - "DETER_DAILY_UPDATE_TIME=6:30"
-      - "DETER_DATABASE_URL=/run/secrets/deter.database.url"
-      - "DATABASE_URL=/run/secrets/ams.database.url"
+      - "APPLICATION_ROOT=/ams-homologation/"
+      - "DATABASE_URL=/run/secrets/amst.database.url"
     secrets:
-      - deter.database.url
-      - ams.database.url
+      - amst.database.url
     deploy:
       replicas: 1
       restart_policy:
@@ -43,6 +40,23 @@ services:
       restart_policy:
         condition: on-failure
 
+  amst-sync:
+    image: terrabrasilis/ams-sync:v1.3.9.rc
+    hostname: amst.sync
+    networks:
+      - proxy
+    volumes:
+      - /data/ams/sync:/usr/local/data
+    environment:
+      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2022.tif"
+      - "DATABASE_URL=/run/secrets/amst.database.url"
+    secrets:
+      - amst.database.url
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
   fires-sync:
     image: terrabrasilis/general-fires-data-task-main:v1.0.0
     hostname: fires.sync
@@ -55,6 +69,8 @@ secrets:
   deter.database.url:
     external: true
   ams.database.url:
+    external: true
+  amst.database.url:
     external: true
 
 networks:
