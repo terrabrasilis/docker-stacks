@@ -125,7 +125,7 @@ services:
       - /data/deter-auth/deter-ibama:/data/files
       - /data/deter-auth/logs:/logs
     environment:
-      IBAMA_REF_DATE: '2021-06-01'
+      IBAMA_REF_DATE: '2022-06-01'
     secrets:
       - postgres.port.deter_r
       - postgres.db.deter_r
