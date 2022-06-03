@@ -1,8 +1,8 @@
 version: '3.2'
 services:
-  ams-webapp:
+  amsh-webapp:
     image: terrabrasilis/ams-webapp:v1.3.10.rc
-    hostname: ams.webapp
+    hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
       - proxy
@@ -13,6 +13,27 @@ services:
       - "GEOSERVER_URL=http://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams-homologation/"
+      - "DATABASE_URL=/run/secrets/amst.database.url"
+    secrets:
+      - amst.database.url
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  ams-webapp:
+    image: terrabrasilis/ams-webapp:v1.4.0
+    hostname: ams.webapp
+    entrypoint: /docker-entrypoint.sh
+    networks:
+      - proxy
+    ports:
+      - 7000
+    environment:
+      - "SCRIPT_NAME=/ams"
+      - "GEOSERVER_URL=http://terrabrasilis.dpi.inpe.br/geoserver"
+      - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
+      - "APPLICATION_ROOT=/ams/"
       - "DATABASE_URL=/run/secrets/amst.database.url"
     secrets:
       - amst.database.url
