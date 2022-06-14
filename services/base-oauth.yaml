@@ -11,7 +11,7 @@ services:
     env_file:
       - /data/oauth-service.env
     ports:
-      - "80"
+      - "30035:80"
     volumes:
       - "/data/oauth-service/certs:/data/certs"
     networks:
