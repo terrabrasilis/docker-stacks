@@ -79,7 +79,7 @@ services:
         condition: on-failure
 
   fires-sync:
-    image: terrabrasilis/general-fires-data-task-main:v1.0.0
+    image: terrabrasilis/general-fires-data-task-main:v1.1.0
     hostname: fires.sync
     networks:
       - proxy
