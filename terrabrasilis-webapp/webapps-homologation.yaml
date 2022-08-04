@@ -1,12 +1,12 @@
 version: '3.2'
 services:
   webmap-homolog:
-    image: terrabrasilis/webmap:hom_v2.1.4
+    image: terrabrasilis/webmap:hom_v2.2.1
     hostname: webmap.homologation
     networks:
       - proxy
     ports:
-      - 2222:80
+      - 80
     deploy:
       replicas: 1
       placement:
@@ -16,12 +16,12 @@ services:
         condition: on-failure
 
   deforestation-dashboard-homolog:
-    image: terrabrasilis/deforestation-dashboard:v2.0.11
+    image: terrabrasilis/deforestation-dashboard:v2.1.0
     hostname: deforestation.dashboard.homologation
     networks:
       - proxy
     ports:
-      - 3333:80
+      - 80
     deploy:
       replicas: 1
       placement:
