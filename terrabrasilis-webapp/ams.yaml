@@ -62,7 +62,7 @@ services:
         condition: on-failure
 
   amst-sync:
-    image: terrabrasilis/ams-sync:v1.3.9.rc
+    image: terrabrasilis/ams-sync:v1.4.0.rc
     hostname: amst.sync
     networks:
       - proxy
