@@ -1,0 +1,21 @@
+# The NGINX stack
+version: '3.2'
+services:
+  main_proxy:
+    image: terrabrasilis/nginx-manager:v1.1.0
+    networks:
+      - proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes: 
+      - /data/nginx/conf.d:/etc/nginx/conf.d
+      - /data/nginx/log:/var/log/nginx
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  proxy:
+    external: true
