@@ -2,7 +2,7 @@ version: "3.2"
 services:
   terrabrasilis-timeseries:
     image: terrabrasilis/timeseries-ocpu:0.1
-    container_name: timeseries
+    hostname: timeseries
     ports:
       - "8004:8004"
     restart: always
