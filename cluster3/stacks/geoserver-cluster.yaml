@@ -6,7 +6,7 @@ services:
       image: terrabrasilis/geoserver-master:v1.0.6
       hostname: master.geoserver
       ports:
-        - "8080"
+        - "30000:8080"
       networks:
         - proxy
       extra_hosts:
