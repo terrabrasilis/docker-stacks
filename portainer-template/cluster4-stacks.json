@@ -1,0 +1,57 @@
+{
+    "version": "2",
+    "templates": [
+      {
+        "type": 2,
+        "name": "backend",
+        "title": "Some tasks of TerraBrasilis platform",
+        "description": "Backend tasks",
+        "categories": [
+          "service",
+          "proxy"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+          "url": "https://github.com/Terrabrasilis/docker-stacks",
+          "stackfile": "cluster4/stacks/tasks.yaml"
+        }
+      },
+      {
+        "type": 2,
+        "name": "proxy",
+        "title": "Nginx HTTP web server based services",
+        "description": "Includes the main http proxy and another instance for delivery static files.",
+        "note": "This stack is mandatory to provide the main proxy and delivery of files for download.",
+        "categories": [
+          "webserver",
+          "proxy"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+          "url": "https://github.com/Terrabrasilis/docker-stacks",
+          "stackfile": "cluster4/stacks/proxy.yaml"
+        }
+      },
+      {
+        "type": 2,
+        "name": "geoserver-cluster",
+        "title": "The GeoServer cluster to publish data compliant with the OGC services standard.",
+        "description": "The GeoServer application allows managing data sources and making them available through the OGC API as WMS and WFS services.",
+        "note": "This stack is mandatory and serves to manage the publication of data layers for TerraBrasilis databases.",
+        "categories": [
+          "application",
+          "manage",
+          "service",
+          "API"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+          "url": "https://github.com/Terrabrasilis/docker-stacks",
+          "stackfile": "cluster4/stacks/geoserver-cluster.yaml"
+        }
+      }
+    ]
+  }
