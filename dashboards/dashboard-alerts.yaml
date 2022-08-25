@@ -3,9 +3,9 @@ services:
   cerrado-nb-alert-daily:
     image: terrabrasilis/cerrado-alert-daily:v2.8.4
     networks:
-        - proxy
+      - proxy
     ports:
-        - "80"
+      - "80"
     deploy:
       replicas: 1
       restart_policy:
@@ -13,19 +13,19 @@ services:
   cerrado-nb-alert-aggregated:
     image: terrabrasilis/cerrado-alert-aggregated:v2.8.4
     networks:
-        - proxy
+      - proxy
     ports:
-        - "80"
+      - "80"
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure
-  cerrado-alert-daily:
+  cerrado-alert-daily: # do not change this image, it is the frozen data
     image: terrabrasilis/cerrado-alert-daily:v2.7.8
     networks:
-        - proxy
+      - proxy
     ports:
-        - "80"
+      - "80"
     deploy:
       replicas: 1
       restart_policy:
@@ -33,9 +33,9 @@ services:
   cerrado-alert-aggregated:
     image: terrabrasilis/cerrado-alert-aggregated:v2.7.8
     networks:
-        - proxy
+      - proxy
     ports:
-        - "80"
+      - "80"
     deploy:
       replicas: 1
       restart_policy:
@@ -43,9 +43,9 @@ services:
   amazon-alert-aggregated:
     image: terrabrasilis/amazon-alert-aggregated:v2.9.9
     networks:
-        - proxy
+      - proxy
     ports:
-        - "80"
+      - "80"
     deploy:
       replicas: 1
       restart_policy:
@@ -53,9 +53,9 @@ services:
   amazon-alert-daily:
     image: terrabrasilis/amazon-alert-daily:v2.9.9
     networks:
-        - proxy
+      - proxy
     ports:
-        - "80"
+      - "80"
     deploy:
       replicas: 1
       restart_policy:
