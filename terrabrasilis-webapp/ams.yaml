@@ -42,25 +42,7 @@ services:
       restart_policy:
         condition: on-failure
 
-  ams-sync:
-    image: terrabrasilis/ams-sync:v1.3.6.rc
-    hostname: ams.sync
-    networks:
-      - proxy
-    volumes:
-      - /data/ams/sync:/usr/local/data
-    environment:
-      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2022.tif"
-      - "DETER_DATABASE_URL=/run/secrets/deter.database.url"
-      - "DATABASE_URL=/run/secrets/ams.database.url"
-    secrets:
-      - deter.database.url
-      - ams.database.url
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-
+  # task used to copy deter and focuses data to ams database and process the spatial unit statistics
   amst-sync:
     image: terrabrasilis/ams-sync:v1.4.0.rc
     hostname: amst.sync
@@ -78,6 +60,7 @@ services:
       restart_policy:
         condition: on-failure
 
+  # task used to copy focuses from queimadas geoserver to local database
   fires-sync:
     image: terrabrasilis/general-fires-data-task-main:v1.1.0
     hostname: fires.sync
@@ -85,6 +68,10 @@ services:
       - proxy
     volumes:
       - /data/fires/sync:/usr/local/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
 secrets:
   deter.database.url:
