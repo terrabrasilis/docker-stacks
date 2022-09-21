@@ -432,10 +432,10 @@
     {
         "type": 2,
         "name": "ams-homologation",
-        "title": "The Homologation AMS stack",
-        "description": "Used to deploy the Homologation AMS Webapp.",
+        "title": "The homologation AMS stack",
+        "description": "Used to deploy the homologation AMS Webapp and background task.",
         "note": "This stack is optional.",
-        "categories": ["application", "homologation"],
+        "categories": ["application", "homologation", "auto tasks"],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
         "repository": {
