@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v1.4.2.rc
+    image: terrabrasilis/ams-webapp:v1.5.1
     hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -10,12 +10,13 @@ services:
       - 7000
     environment:
       - "SCRIPT_NAME=/ams-homologation"
+      - "GEOSERVER_WORKSPACE=ams"
       - "GEOSERVER_URL=http://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams-homologation/"
-      - "DATABASE_URL=/run/secrets/amst.database.url"
+      - "DATABASE_URL=/run/secrets/ams2.database.url"
     secrets:
-      - amst.database.url
+      - ams2.database.url
     deploy:
       replicas: 1
       restart_policy:
@@ -41,13 +42,14 @@ services:
 
   # test with new database and task
   ams2-sync:
-    image: terrabrasilis/ams-sync:v1.4.4.amazonia.rc
+    image: terrabrasilis/ams-sync:v1.5.0
     hostname: ams2.sync
     networks:
       - proxy
     volumes:
       - /data/ams2/sync:/usr/local/data
     environment:
+      - "BIOME='Amazônia'"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2022.tif"
       - "DATABASE_URL=/run/secrets/ams2.database.url"
       - "ALL_DATA=False"
@@ -59,13 +61,14 @@ services:
         condition: on-failure
   # test with new cerrado database and task
   ces-sync:
-    image: terrabrasilis/ams-sync:v1.4.4.cerrado.rc
+    image: terrabrasilis/ams-sync:v1.5.0
     hostname: ces.sync
     networks:
       - proxy
     volumes:
       - /data/ces/sync:/usr/local/data
     environment:
+      - "BIOME='Cerrado'"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
       - "DATABASE_URL=/run/secrets/ces.database.url"
       - "ALL_DATA=False"
