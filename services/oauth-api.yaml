@@ -1,10 +1,10 @@
 # Middleware authentication service stack
 # Use in Swarm (terrabrasilis-oauth-api)
 version: '3.1'
-
 services:
+
   terrabrasilis_oauth_api:
-    image: terrabrasilis/terrabrasilis-oauth-api:v1.1.2
+    image: terrabrasilis/terrabrasilis-oauth-api:v1.2.3
     hostname: oauth.api
     volumes:
       - /data/oauth-api/logs:/logs
