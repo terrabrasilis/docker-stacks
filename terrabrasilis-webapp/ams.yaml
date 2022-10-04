@@ -41,7 +41,7 @@ services:
 
   # task used to copy focuses from queimadas geoserver to local database
   fires-sync:
-    image: terrabrasilis/general-fires-data-task-main:v1.1.0
+    image: terrabrasilis/general-fires-data-task-main:v1.1.2
     hostname: fires.sync
     networks:
       - proxy
