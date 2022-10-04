@@ -41,7 +41,7 @@ services:
       restart_policy:
         condition: on-failure
 
-  # test with new database and task
+  # test with new database and task for amazonia
   ams2-sync:
     image: terrabrasilis/ams-sync:v1.5.0
     hostname: ams2.sync
@@ -60,7 +60,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-  # test with new cerrado database and task
+  # test with new database and task for cerrado
   ces-sync:
     image: terrabrasilis/ams-sync:v1.5.0
     hostname: ces.sync
@@ -72,7 +72,7 @@ services:
       - "BIOME='Cerrado'"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
       - "DATABASE_URL=/run/secrets/ces.database.url"
-      - "ALL_DATA=True"
+      - "ALL_DATA=False"
     secrets:
       - ces.database.url
     deploy:
@@ -81,8 +81,6 @@ services:
         condition: on-failure
 
 secrets:
-  deter.database.url:
-    external: true
   amst.database.url:
     external: true
   ams2.database.url:
