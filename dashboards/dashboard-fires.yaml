@@ -11,15 +11,18 @@ services:
       restart_policy:
         condition: on-failure
   # This task was moved to another VM because it failed out of memory after swap area was disabled on VMs in Swarm cluster
-  # fires-data-task:
-  #   image: terrabrasilis/fires-data-task-release-1:v1.3.9
-  #   volumes:
-  #     - /data/fires/input/raster:/usr/local/data
-  #     - /data/download/static/fires-dashboard/deter/raster:/usr/local/download
-  #   deploy:
-  #     replicas: 1
-  #     restart_policy:
-  #       condition: on-failure
+  fires-data-task:
+    image: terrabrasilis/fires-data-task-release-1:v1.3.11
+    volumes:
+      - /data/fires/input/raster:/usr/local/data
+      - /data/download/static/fires-dashboard/deter/raster:/usr/local/download
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==worker2
+      restart_policy:
+        condition: on-failure
 
 networks:
   proxy:
