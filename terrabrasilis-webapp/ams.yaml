@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   ams-webapp:
-    image: terrabrasilis/ams-webapp:v1.4.0
+    image: terrabrasilis/ams-webapp:v1.5.8
     hostname: ams.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -13,35 +13,59 @@ services:
       - "GEOSERVER_URL=http://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams/"
-      - "DATABASE_URL=/run/secrets/ams.database.url"
+      - "DB_AMAZON_URL=/run/secrets/ams2.database.url"
+      - "DB_CERRADO_URL=/run/secrets/ces.database.url"
     secrets:
-      - ams.database.url
+      - ams2.database.url
+      - ces.database.url
     deploy:
-      replicas: 1
+      replicas: 4
       restart_policy:
         condition: on-failure
 
-  # task used to copy deter and focuses data to ams database and process the spatial unit statistics
-  ams-sync:
-    image: terrabrasilis/ams-sync:v1.4.1.rc
-    hostname: ams.sync
+  # Amazon Database Update Task
+  ams2-sync:
+    image: terrabrasilis/ams-sync:v1.5.0
+    hostname: ams2.sync
     networks:
       - proxy
     volumes:
-      - /data/ams/sync:/usr/local/data
+      - /data/ams2/sync:/usr/local/data
     environment:
+      - "BIOME='Amazônia'"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2022.tif"
-      - "DATABASE_URL=/run/secrets/ams.database.url"
+      - "DATABASE_URL=/run/secrets/ams2.database.url"
+      - "ALL_DATA=False"
     secrets:
-      - ams.database.url
+      - ams2.database.url
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure
 
-  # task used to copy focuses from queimadas geoserver to local database
+  # Cerrado Database Update Task
+  ces-sync:
+    image: terrabrasilis/ams-sync:v1.5.0
+    hostname: ces.sync
+    networks:
+      - proxy
+    volumes:
+      - /data/ces/sync:/usr/local/data
+    environment:
+      - "BIOME='Cerrado'"
+      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
+      - "DATABASE_URL=/run/secrets/ces.database.url"
+      - "ALL_DATA=False"
+    secrets:
+      - ces.database.url
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # Queimadas Database Update Task
   fires-sync:
-    image: terrabrasilis/general-fires-data-task-main:v1.1.2
+    image: terrabrasilis/general-fires-data-task-main:v1.1.3
     hostname: fires.sync
     networks:
       - proxy
@@ -53,9 +77,9 @@ services:
         condition: on-failure
 
 secrets:
-  deter.database.url:
+  ams2.database.url:
     external: true
-  ams.database.url:
+  ces.database.url:
     external: true
 
 networks:

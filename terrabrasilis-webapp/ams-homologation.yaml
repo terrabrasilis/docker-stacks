@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v1.5.7
+    image: terrabrasilis/ams-webapp:v1.5.8
     hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -23,48 +23,47 @@ services:
       restart_policy:
         condition: on-failure
 
-  # test with new database and task for amazonia
-  ams2-sync:
-    image: terrabrasilis/ams-sync:v1.5.0
-    hostname: ams2.sync
-    networks:
-      - proxy
-    volumes:
-      - /data/ams2/sync:/usr/local/data
-    environment:
-      - "BIOME='Amazônia'"
-      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2022.tif"
-      - "DATABASE_URL=/run/secrets/ams2.database.url"
-      - "ALL_DATA=False"
-    secrets:
-      - ams2.database.url
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-  # test with new database and task for cerrado
-  ces-sync:
-    image: terrabrasilis/ams-sync:v1.5.0
-    hostname: ces.sync
-    networks:
-      - proxy
-    volumes:
-      - /data/ces/sync:/usr/local/data
-    environment:
-      - "BIOME='Cerrado'"
-      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
-      - "DATABASE_URL=/run/secrets/ces.database.url"
-      - "ALL_DATA=False"
-    secrets:
-      - ces.database.url
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
+  # # test with new database and task for amazonia
+  # ams2-sync:
+  #   image: terrabrasilis/ams-sync:v1.5.0
+  #   hostname: ams2.sync
+  #   networks:
+  #     - proxy
+  #   volumes:
+  #     - /data/ams2/sync:/usr/local/data
+  #   environment:
+  #     - "BIOME='Amazônia'"
+  #     - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2022.tif"
+  #     - "DATABASE_URL=/run/secrets/ams2.database.url"
+  #     - "ALL_DATA=False"
+  #   secrets:
+  #     - ams2.database.url
+  #   deploy:
+  #     replicas: 1
+  #     restart_policy:
+  #       condition: on-failure
+
+  # # test with new database and task for cerrado
+  # ces-sync:
+  #   image: terrabrasilis/ams-sync:v1.5.0
+  #   hostname: ces.sync
+  #   networks:
+  #     - proxy
+  #   volumes:
+  #     - /data/ces/sync:/usr/local/data
+  #   environment:
+  #     - "BIOME='Cerrado'"
+  #     - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
+  #     - "DATABASE_URL=/run/secrets/ces.database.url"
+  #     - "ALL_DATA=False"
+  #   secrets:
+  #     - ces.database.url
+  #   deploy:
+  #     replicas: 1
+  #     restart_policy:
+  #       condition: on-failure
 
 secrets:
-  amst.database.url:
-    external: true
   ams2.database.url:
     external: true
   ces.database.url:
