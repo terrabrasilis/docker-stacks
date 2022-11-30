@@ -13,14 +13,14 @@ services:
         condition: on-failure
 
   deforestation-dashboard:
-    image: terrabrasilis/deforestation-dashboard:prod_v2.0.23
+    image: terrabrasilis/deforestation-dashboard:prod_v2.0.25
     hostname: deforestation.dashboard.production
     networks:
       - proxy
     ports:
       - "80"
     deploy:
-      replicas: 1
+      replicas: 2
       restart_policy:
         condition: on-failure
 
