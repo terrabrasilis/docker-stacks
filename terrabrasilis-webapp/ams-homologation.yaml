@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v1.6.0
+    image: terrabrasilis/ams-webapp:v1.6.1
     hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
