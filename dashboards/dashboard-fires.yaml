@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   focuses-of-fires-biomes:
-    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.5
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.6
     networks:
       - proxy
     ports:
@@ -10,7 +10,18 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-  # This task was moved to another VM because it failed out of memory after swap area was disabled on VMs in Swarm cluster
+        
+  hfocuses-of-fires-biomes:
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.6
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
   fires-data-task:
     image: terrabrasilis/fires-data-task-release-1:v1.3.12
     volumes:
