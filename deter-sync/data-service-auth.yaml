@@ -84,12 +84,14 @@ services:
         condition: on-failure
 
   cerrado_intersection:
-    image: terrabrasilis/cerradodeter-syncdata:v1.2.2
+    image: terrabrasilis/cerradodeter-syncdata:v1.3.0
     volumes:
       - /data/deter-auth/intersection/cerrado-nb:/usr/local/data
       - /etc/localtime:/etc/localtime:ro
     networks:
       - proxy
+    environment:
+      CREATED_DATE: '2022-12-01'
     deploy:
       replicas: 1
       restart_policy:
