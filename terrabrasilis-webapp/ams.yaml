@@ -45,7 +45,7 @@ services:
 
   # Cerrado Database Update Task
   ces-sync:
-    image: terrabrasilis/ams-sync:v1.5.8
+    image: terrabrasilis/ams-sync:v1.6.1.land_use_selector.rc
     hostname: ces.sync
     networks:
       - proxy
