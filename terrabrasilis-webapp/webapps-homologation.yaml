@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   webmap-homolog:
-    image: terrabrasilis/webmap:hom_v2.2.1
+    image: terrabrasilis/webmap:hom_v2.3.10
     hostname: webmap.homologation
     networks:
       - proxy
@@ -16,7 +16,7 @@ services:
         condition: on-failure
 
   deforestation-dashboard-homolog:
-    image: terrabrasilis/deforestation-dashboard:v2.1.0
+    image: terrabrasilis/deforestation-dashboard:v3.0.1
     hostname: deforestation.dashboard.homologation
     networks:
       - proxy
