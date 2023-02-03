@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   ams-webapp:
-    image: terrabrasilis/ams-webapp:v1.5.8
+    image: terrabrasilis/ams-webapp:v1.6.4
     hostname: ams.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -25,7 +25,7 @@ services:
 
   # Amazon Database Update Task
   ams2-sync:
-    image: terrabrasilis/ams-sync:v1.5.8
+    image: terrabrasilis/ams-sync:v1.6.4
     hostname: ams2.sync
     networks:
       - proxy
@@ -33,9 +33,9 @@ services:
       - /data/ams2/sync:/usr/local/data
     environment:
       - "BIOME='Amazônia'"
-      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2022.tif"
+      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
       - "DATABASE_URL=/run/secrets/ams2.database.url"
-      - "ALL_DATA=False"
+      - "ALL_DATA=True"
     secrets:
       - ams2.database.url
     deploy:
@@ -45,7 +45,7 @@ services:
 
   # Cerrado Database Update Task
   ces-sync:
-    image: terrabrasilis/ams-sync:v1.6.1.land_use_selector.rc
+    image: terrabrasilis/ams-sync:v1.6.4
     hostname: ces.sync
     networks:
       - proxy
@@ -55,7 +55,7 @@ services:
       - "BIOME='Cerrado'"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
       - "DATABASE_URL=/run/secrets/ces.database.url"
-      - "ALL_DATA=False"
+      - "ALL_DATA=True"
     secrets:
       - ces.database.url
     deploy:
