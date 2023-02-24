@@ -11,7 +11,7 @@ services:
     ports:
       - "13111:8090"
     environment:   
-      - "SPRING_PROFILES_ACTIVE=docker"
+      - "SPRING_PROFILES_ACTIVE=docker-homologation"
     deploy:
       replicas: 1
       restart_policy:
