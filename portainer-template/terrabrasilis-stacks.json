@@ -15,8 +15,8 @@
     },
     {
         "type": 2,
-        "name": "nginx-manager",
-        "title": "NGINX Manager",
+        "name": "main-proxy",
+        "title": "The main proxy using Nginx",
         "description": "The http entry point for all resources in our Swarm cluster",
         "note": "The Nginx Server will be deployed globally inside the cluster and available on port 80.",
         "categories": ["webserver"],
