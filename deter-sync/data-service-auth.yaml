@@ -4,7 +4,7 @@ version: '3.3'
 
 services:
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v1.8.10
+    image: terrabrasilis/deter-generate-files:v1.9.0
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
@@ -31,7 +31,7 @@ services:
         condition: on-failure
 
   file_delivery_api:
-    image: terrabrasilis/file-delivery:v1.0.4
+    image: terrabrasilis/file-delivery:v1.0.6
     hostname: file.delivery.auth
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
