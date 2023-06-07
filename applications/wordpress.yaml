@@ -16,22 +16,6 @@ services:
       restart_policy:
         condition: on-failure
 
-  lades-website:
-    image: wordpress:5.2.2-apache
-    hostname: lades.website
-    networks:
-      - proxy
-    volumes:
-      - /data/wordpress/lades:/var/www/html
-    ports:
-      - 25115:80
-    depends_on:
-      - db_mysql
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-
   workshop-biomas-2020-website:
     image: wordpress:5.2.2-apache
     hostname: workshop-biomas-2020.website
@@ -41,38 +25,6 @@ services:
       - /data/wordpress/workshop-biomas-2020:/var/www/html
     ports:
       - 25116:80
-    depends_on:
-      - db_mysql
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-
-  sbsr-2021-interim:
-    image: wordpress:5.2.2-apache
-    hostname: sbsr-2021.website
-    networks:
-      - proxy
-    volumes:
-      - /data/wordpress/sbsr-2021:/var/www/html
-    ports:
-      - 25117:80
-    depends_on:
-      - db_mysql
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-
-  imaplab:
-    image: wordpress:5.2.2-apache
-    hostname: imaplab.website
-    networks:
-      - proxy
-    volumes:
-      - /data/wordpress/imaplab:/var/www/html
-    ports:
-      - 25118:80
     depends_on:
       - db_mysql
     deploy:
