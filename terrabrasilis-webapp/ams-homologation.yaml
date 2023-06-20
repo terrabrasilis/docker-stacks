@@ -32,7 +32,7 @@ services:
     volumes:
       - /data/ams4h/sync:/usr/local/data
     environment:
-      - "BIOME='Amazônia'"
+      - "BIOME=Amazônia"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
       - "DATABASE_URL=/run/secrets/ams4h.database.url"
       - "ALL_DATA=True"
@@ -44,6 +44,11 @@ services:
       - "RISK_OUTPUT_PATH=/usr/local/data"
     secrets:
       - ams4h.database.url
+      - risk.ftp.host
+      - risk.ftp.port
+      - risk.ftp.path
+      - risk.ftp.user
+      - risk.ftp.pass
     deploy:
       replicas: 1
       restart_policy:
@@ -75,6 +80,16 @@ secrets:
   ams4h.database.url:
     external: true
   cesh.database.url:
+    external: true
+  risk.ftp.host:
+    external: true
+  risk.ftp.port:
+    external: true
+  risk.ftp.path:
+    external: true
+  risk.ftp.user:
+    external: true
+  risk.ftp.pass:
     external: true
     
 networks:
