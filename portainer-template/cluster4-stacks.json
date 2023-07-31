@@ -3,22 +3,6 @@
     "templates": [
       {
         "type": 2,
-        "name": "backend",
-        "title": "Some tasks of TerraBrasilis platform",
-        "description": "Backend tasks",
-        "categories": [
-          "service",
-          "proxy"
-        ],
-        "platform": "linux",
-        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
-        "repository": {
-          "url": "https://github.com/Terrabrasilis/docker-stacks",
-          "stackfile": "cluster4/stacks/tasks.yaml"
-        }
-      },
-      {
-        "type": 2,
         "name": "proxy",
         "title": "Nginx HTTP web server based services",
         "description": "Includes the main http proxy and another instance for delivery static files.",
@@ -36,13 +20,31 @@
       },
       {
         "type": 2,
+        "name": "pg-client",
+        "title": "The PgAdmin4 Web Client for PostgreSQL.",
+        "description": "The PgAdmin4 App allows to manage the databases into any internal instance for PostgreSQL.",
+        "note": "This stack is optional and serves to manage the databases used for publishing PRODES and DETER data by TerraBrasilis Applications.",
+        "categories": [
+          "application",
+          "manage",
+          "SGDB",
+          "PostgreSQL"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+        "repository": {
+          "url": "https://github.com/Terrabrasilis/docker-stacks",
+          "stackfile": "cluster3/stacks/pg-client.yaml"
+        }
+      },
+      {
+        "type": 2,
         "name": "geoserver-cluster",
         "title": "The GeoServer cluster to publish data compliant with the OGC services standard.",
         "description": "The GeoServer application allows managing data sources and making them available through the OGC API as WMS and WFS services.",
         "note": "This stack is mandatory and serves to manage the publication of data layers for TerraBrasilis databases.",
         "categories": [
           "application",
-          "manage",
           "service",
           "API"
         ],

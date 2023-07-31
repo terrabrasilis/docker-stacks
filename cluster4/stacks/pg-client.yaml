@@ -1,0 +1,27 @@
+version: '3.2'
+services:
+  pgadmin4:
+    # https://hub.docker.com/r/dpage/pgadmin4/
+    # https://github.com/postgres/pgadmin4
+    image: dpage/pgadmin4:7.5
+    ports:
+      - 5555:80
+    environment:
+      # after starting for the first time, use the web app to change this password
+      # and then remove these entries.
+      # the initial email
+      #- "PGADMIN_DEFAULT_EMAIL=<an_email>"
+      # the initial password
+      #- "PGADMIN_DEFAULT_PASSWORD=<a_secret>"
+    volumes:
+      - /data/pgclient/pgadmin4:/var/lib/pgadmin
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - proxy
+
+networks: 
+  proxy:
+    external: true
