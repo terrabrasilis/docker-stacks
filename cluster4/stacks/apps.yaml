@@ -3,6 +3,10 @@ services:
 
   situacao-atual:
     image: terrabrasilis/queimadas-situacao-atual:v1.0.0
+    ports:
+      - "80"
+    networks:
+      - proxy
     deploy:
       replicas: 2
       restart_policy:
