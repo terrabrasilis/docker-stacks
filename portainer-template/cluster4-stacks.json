@@ -3,6 +3,23 @@
     "templates": [
       {
         "type": 2,
+        "name": "Apps",
+        "title": "The Apps of Queimadas project",
+        "description": "The frontend and backend for Apps of Queimadas.",
+        "categories": [
+          "Apps",
+          "backend",
+          "frontend"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+        "repository": {
+          "url": "https://github.com/Terrabrasilis/docker-stacks",
+          "stackfile": "cluster4/stacks/apps.yaml"
+        }
+      },
+      {
+        "type": 2,
         "name": "proxy",
         "title": "Nginx HTTP web server based services",
         "description": "Includes the main http proxy and another instance for delivery static files.",

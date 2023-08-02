@@ -1,0 +1,13 @@
+version: '3.2'
+services:
+
+  situacao-atual:
+    image: terrabrasilis/queimadas-situacao-atual:v1.0.0
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+networks:
+  proxy:
+    external: true
