@@ -3,7 +3,7 @@
     "templates": [
       {
         "type": 2,
-        "name": "Apps",
+        "name": "apps",
         "title": "The Apps of Queimadas project",
         "description": "The frontend and backend for Apps of Queimadas.",
         "categories": [
