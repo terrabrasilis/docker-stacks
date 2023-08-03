@@ -2,7 +2,7 @@ version: '3.2'
 services:
 
   situacao-atual:
-    image: terrabrasilis/queimadas-situacao-atual:v1.0.0
+    image: terrabrasilis/queimadas-situacao-atual:v1.1.0
     ports:
       - "80"
     networks:
