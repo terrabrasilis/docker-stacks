@@ -4,8 +4,8 @@
       {
         "type": 2,
         "name": "frontend-apps",
-        "title": "The Apps of Queimadas project",
-        "description": "The frontend and backend for Apps of Queimadas.",
+        "title": "The frontend Apps of Queimadas",
+        "description": "The frontend Apps of Queimadas project used as Web View Apps.",
         "categories": [
           "Apps",
           "frontend"

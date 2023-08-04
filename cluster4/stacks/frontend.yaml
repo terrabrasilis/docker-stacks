@@ -1,16 +1,17 @@
 version: '3.2'
 services:
 
-  # backend service
-  situacao-atual-gerador:
-    image: terrabrasilis/queimadas-situacao-atual-gerador:v1.1.0.fix-runtime-error.rc
+  # frontend app
+  situacao-atual:
+    image: terrabrasilis/queimadas-situacao-atual:v1.1.2
+    ports:
+      - "80"
     networks:
       - proxy
     volumes:
-      - /data/apps/media:/app/media
-      - /data/apps/gerador/config.ini:/app/config.ini
+      - /data/apps/media:/var/www/html/media
     deploy:
-      replicas: 1
+      replicas: 2
       restart_policy:
         condition: on-failure
 
