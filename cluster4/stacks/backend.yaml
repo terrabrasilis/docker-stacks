@@ -3,7 +3,7 @@ services:
 
   # backend service
   situacao-atual-gerador:
-    image: terrabrasilis/queimadas-situacao-atual-gerador:v1.1.0.fix-runtime-error.rc
+    image: terrabrasilis/queimadas-situacao-atual-gerador:v1.1.1
     networks:
       - proxy
     volumes:
