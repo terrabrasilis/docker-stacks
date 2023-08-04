@@ -3,19 +3,34 @@
     "templates": [
       {
         "type": 2,
-        "name": "apps",
+        "name": "frontend-apps",
         "title": "The Apps of Queimadas project",
         "description": "The frontend and backend for Apps of Queimadas.",
         "categories": [
           "Apps",
-          "backend",
           "frontend"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
         "repository": {
           "url": "https://github.com/Terrabrasilis/docker-stacks",
-          "stackfile": "cluster4/stacks/apps.yaml"
+          "stackfile": "cluster4/stacks/frontend.yaml"
+        }
+      },
+      {
+        "type": 2,
+        "name": "backend-apps",
+        "title": "The backend Apps of Queimadas.",
+        "description": "The backend Apps of Queimadas project used as tasks or APIs.",
+        "categories": [
+          "Apps",
+          "backend"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+        "repository": {
+          "url": "https://github.com/Terrabrasilis/docker-stacks",
+          "stackfile": "cluster4/stacks/backend.yaml"
         }
       },
       {
