@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+  portal-teste:
+    image: terrabrasilis/queimadas-portal:v1.0.0
+    ports:
+      - "80"
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure        
+
+networks:
+  proxy:
+    external: true
