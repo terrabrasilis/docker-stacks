@@ -4,7 +4,7 @@ version: '3.3'
 
 services:
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v1.9.0
+    image: terrabrasilis/deter-generate-files:v2.0.0
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
@@ -15,11 +15,15 @@ services:
       - geoserver.pass.dashboard
       - postgres.user.geoserver
       - postgres.pass.geoserver
+      - postgres.user.prod
+      - postgres.pass.prod
       - ftp.user.queimadas
       - ftp.pass.queimadas
     configs:
       - source: ssmtp-tb.conf
         target: /etc/ssmtp/ssmtp.conf
+      - source: deter-etc-environment
+        target: /etc/environment
     networks:
       - proxy
     deploy:
@@ -31,7 +35,7 @@ services:
         condition: on-failure
 
   file_delivery_api:
-    image: terrabrasilis/file-delivery:v1.0.6
+    image: terrabrasilis/file-delivery:v1.0.4
     hostname: file.delivery.auth
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
@@ -153,6 +157,8 @@ services:
 configs:
   ssmtp-tb.conf:
     external: true
+  deter-etc-environment:
+    external: true
 
 secrets:
   www1.ecdsa.private.key:
@@ -204,6 +210,10 @@ secrets:
   ftp.user.queimadas:
     external: true
   ftp.pass.queimadas:
+    external: true
+  postgres.user.prod:
+    external: true
+  postgres.pass.prod:
     external: true
 
 networks:
