@@ -4,7 +4,7 @@ version: '3.3'
 
 services:
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v2.0.0
+    image: terrabrasilis/deter-generate-files:v2.0.3
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
