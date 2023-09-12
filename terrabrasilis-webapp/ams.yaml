@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   ams-webapp:
-    image: terrabrasilis/ams-webapp:v1.6.4
+    image: terrabrasilis/ams-webapp:v1.6.5
     hostname: ams.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -19,7 +19,7 @@ services:
       - ams3.database.url
       - ces2.database.url
     deploy:
-      replicas: 2
+      replicas: 1
       restart_policy:
         condition: on-failure
 
