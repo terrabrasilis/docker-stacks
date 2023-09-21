@@ -4,7 +4,7 @@ version: '3.3'
 
 services:
   scripts_generate_files:
-    image: terrabrasilis/deter-generate-files:v2.0.4
+    image: terrabrasilis/deter-generate-files:v2.0.5
     hostname: scripts.generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
@@ -124,13 +124,31 @@ services:
       restart_policy:
         condition: on-failure
 
+  # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
   daily_deter_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.2.6
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.0
     hostname: daily.deter.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
       - /data/deter-auth/logs:/logs
     environment:
+      POSTGRES_HOST_FILE: /run/secrets/postgres.host.deter_r
+      POSTGRES_PORT_FILE: /run/secrets/postgres.port.deter_r
+      POSTGRES_USER_FILE: /run/secrets/postgres.user.deter_r
+      POSTGRES_PASS_FILE: /run/secrets/postgres.pass.deter_r
+      POSTGRES_DB_FILE: /run/secrets/postgres.db.deter_r
+      POSTGRES_SCHEMA_FILE: /run/secrets/postgres.schema.deter_r
+      POSTGRES_TABLE_FILE: /run/secrets/postgres.table.deter_r
+      FTP_USER_FILE: /run/secrets/ftp.user.censipam
+      FTP_PASS_FILE: /run/secrets/ftp.pass.censipam
+      FTP_HOST_FILE: /run/secrets/ftp.host.censipam
+      FTP_PATH_FILE: /run/secrets/ftp.path.censipam
+      WWW1_USER_FILE: /run/secrets/www1.user.scp
+      WWW1_PATH_FILE: /run/secrets/www1.path.scp
+      WWW1_PRIVATE_KEY_FILE: /run/secrets/www1.ecdsa.private.key
+      WWW1_HOST: www1.dpi.inpe.br
+      SUFFIX_PROJECT: amz
+      PREFIX_CONTROL_FILE: deter
       IBAMA_REF_DATE: '2022-06-01'
     secrets:
       - postgres.port.deter_r
@@ -140,6 +158,54 @@ services:
       - postgres.pass.deter_r
       - postgres.table.deter_r
       - postgres.schema.deter_r
+      - ftp.user.censipam
+      - ftp.pass.censipam
+      - ftp.host.censipam
+      - ftp.path.censipam
+      - www1.ecdsa.private.key
+      - www1.user.scp
+      - www1.path.scp
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
+  daily_deter_cerrado_for_ibama:
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.0
+    hostname: daily.deter.cerrado.for.ibama
+    volumes:
+      - /data/deter-auth/deter-ibama:/data/files
+      - /data/deter-auth/logs:/logs
+    environment:
+      POSTGRES_HOST_FILE: /run/secrets/postgres.host.deter_cerrado_ibama
+      POSTGRES_PORT_FILE: /run/secrets/postgres.port.deter_cerrado_ibama
+      POSTGRES_USER_FILE: /run/secrets/postgres.user.deter_cerrado_ibama
+      POSTGRES_PASS_FILE: /run/secrets/postgres.pass.deter_cerrado_ibama
+      POSTGRES_DB_FILE: /run/secrets/postgres.db.deter_cerrado_ibama
+      POSTGRES_SCHEMA_FILE: /run/secrets/postgres.schema.deter_cerrado_ibama
+      POSTGRES_TABLE_FILE: /run/secrets/postgres.table.deter_cerrado_ibama
+      FTP_USER_FILE: /run/secrets/ftp.user.censipam
+      FTP_PASS_FILE: /run/secrets/ftp.pass.censipam
+      FTP_HOST_FILE: /run/secrets/ftp.host.censipam
+      FTP_PATH_FILE: /run/secrets/ftp.path.censipam
+      WWW1_USER_FILE: /run/secrets/www1.user.scp
+      WWW1_PATH_FILE: /run/secrets/www1.path.scp
+      WWW1_PRIVATE_KEY_FILE: /run/secrets/www1.ecdsa.private.key
+      WWW1_HOST: www1.dpi.inpe.br
+      SUFFIX_PROJECT: cerrado
+      PREFIX_CONTROL_FILE: deter_cerrado
+      IBAMA_REF_DATE: '2022-06-01'
+    secrets:
+      - postgres.port.deter_cerrado_ibama
+      - postgres.db.deter_cerrado_ibama
+      - postgres.host.deter_cerrado_ibama
+      - postgres.user.deter_cerrado_ibama
+      - postgres.pass.deter_cerrado_ibama
+      - postgres.table.deter_cerrado_ibama
+      - postgres.schema.deter_cerrado_ibama
       - ftp.user.censipam
       - ftp.pass.censipam
       - ftp.host.censipam
@@ -180,6 +246,20 @@ secrets:
   postgres.table.deter_r:
     external: true
   postgres.schema.deter_r:
+    external: true
+  postgres.port.deter_cerrado_ibama:
+    external: true
+  postgres.db.deter_cerrado_ibama:
+    external: true
+  postgres.host.deter_cerrado_ibama:
+    external: true
+  postgres.user.deter_cerrado_ibama:
+    external: true
+  postgres.pass.deter_cerrado_ibama:
+    external: true
+  postgres.table.deter_cerrado_ibama:
+    external: true
+  postgres.schema.deter_cerrado_ibama:
     external: true
   ftp.user.censipam:
     external: true
