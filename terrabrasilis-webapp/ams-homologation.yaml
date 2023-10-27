@@ -15,9 +15,20 @@ services:
       - "APPLICATION_ROOT=/ams-homologation/"
       - "DB_AMAZON_URL=/run/secrets/ams4h.database.url"
       - "DB_CERRADO_URL=/run/secrets/ces2.database.url"
+      - "FTP_HOST=/run/secrets/risk.ftp.host"
+      - "FTP_PORT=/run/secrets/risk.ftp.port"
+      - "FTP_PATH=/run/secrets/risk.ftp.path"
+      - "FTP_USER=/run/secrets/risk.ftp.user"
+      - "FTP_PASS=/run/secrets/risk.ftp.pass"
+      - "RISK_OUTPUT_PATH=/usr/local/data"
     secrets:
       - ams4h.database.url
       - ces2.database.url
+      - risk.ftp.host
+      - risk.ftp.port
+      - risk.ftp.path
+      - risk.ftp.user
+      - risk.ftp.pass
     deploy:
       replicas: 1
       restart_policy:
