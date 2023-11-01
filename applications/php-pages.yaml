@@ -75,6 +75,19 @@ services:
     networks: 
       - proxy
 
+  deter_pantanal_report:
+    image: terrabrasilis/deter-pantanal-app:v0.0.1
+    ports:
+      - "80"
+    volumes:
+      - /data/deter-app:/var/www/html/config
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks: 
+      - proxy
+
 networks:
   proxy:
     external: true
