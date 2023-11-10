@@ -14,7 +14,7 @@ services:
         condition: on-failure
 
   deforestation-dashboard:
-    image: terrabrasilis/deforestation-dashboard:prod_v3.1.2
+    image: terrabrasilis/deforestation-dashboard:prod_v3.1.3
     hostname: deforestation.dashboard.production
     networks:
       - proxy
