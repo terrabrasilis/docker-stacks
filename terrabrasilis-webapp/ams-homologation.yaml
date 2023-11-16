@@ -31,6 +31,7 @@ services:
       - proxy
     volumes:
       - /data/ams4h/sync:/usr/local/data
+      - /geoserver/cluster/gs_datadir/data-file/ams/risk/raster:/usr/local/data/geoserver
     environment:
       - "BIOME=Amazônia"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
@@ -51,6 +52,9 @@ services:
       - risk.ftp.pass
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==master2
       restart_policy:
         condition: on-failure
 
