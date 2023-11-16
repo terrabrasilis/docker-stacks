@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v2.0.6.risk_features.rc
+    image: terrabrasilis/ams-webapp:v2.0.7.risk_features.rc
     hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -25,7 +25,7 @@ services:
 
   # Amazon Database Update Task
   ams4h-sync:
-    image: terrabrasilis/ams-sync:v2.0.6.risk_features.rc
+    image: terrabrasilis/ams-sync:v2.0.7.risk_features.rc
     hostname: ams4h.sync
     networks:
       - proxy
