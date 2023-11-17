@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v2.0.7.risk_features.rc
+    image: terrabrasilis/ams-webapp:v2.0.8.risk_features.rc
     hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -25,13 +25,13 @@ services:
 
   # Amazon Database Update Task
   ams4h-sync:
-    image: terrabrasilis/ams-sync:v2.0.7.risk_features.rc
+    image: terrabrasilis/ams-sync:v2.0.8.risk_features.rc
     hostname: ams4h.sync
     networks:
       - proxy
     volumes:
       - /data/ams4h/sync:/usr/local/data
-      - /geoserver/cluster/gs_datadir/data-file/ams/risk/raster:/usr/local/data/geoserver
+      - /geoserver/cluster/gs_datadir/data-file/ams/risk/raster:/usr/local/geoserver
     environment:
       - "BIOME=Amazônia"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
@@ -43,6 +43,7 @@ services:
       - "FTP_USER=/run/secrets/risk.ftp.user"
       - "FTP_PASS=/run/secrets/risk.ftp.pass"
       - "RISK_OUTPUT_PATH=/usr/local/data"
+      - "GEOSERVER_OUTPUT_PATH=/usr/local/geoserver"
     secrets:
       - ams4h.database.url
       - risk.ftp.host
