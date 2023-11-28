@@ -68,7 +68,7 @@ services:
     volumes:
       - /data/cesh/sync:/usr/local/data
     environment:
-      - "BIOME='Cerrado'"
+      - "BIOME=Cerrado"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
       - "DATABASE_URL=/run/secrets/ces2h.database.url"
       - "ALL_DATA=True"
@@ -76,6 +76,9 @@ services:
       - ces2h.database.url
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.labels.nodename==master2
       restart_policy:
         condition: on-failure
 
