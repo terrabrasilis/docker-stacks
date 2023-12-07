@@ -126,7 +126,7 @@ services:
 
   # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
   daily_deter_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.3.1
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.2
     hostname: daily.deter.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
@@ -174,7 +174,7 @@ services:
 
   # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
   daily_deter_cerrado_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.3.1
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.2
     hostname: daily.deter.cerrado.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
