@@ -12,6 +12,7 @@ services:
       MONGO_LOG_DIR: /dev/null
     volumes:
       - /data/mongodb:/data/db
+      - /data/backup/mongodb:/data/backup
     ports:
       - "27017"
     deploy:
