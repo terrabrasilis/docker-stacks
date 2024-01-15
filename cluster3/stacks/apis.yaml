@@ -67,7 +67,7 @@ services:
 
   # Business API as a Service
   business-api:
-    image: terrabrasilis/business-api:v1.2.2
+    image: terrabrasilis/business-api:v1.2.3
     networks:
       - proxy
       - backend
