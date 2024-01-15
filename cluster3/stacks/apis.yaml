@@ -6,7 +6,7 @@ services:
     image: mongo:4.4
     hostname: "mongo.db"
     networks:
-      - proxy
+      - backend
     environment:
       MONGO_DATA_DIR: /data/db
       MONGO_LOG_DIR: /dev/null
@@ -70,6 +70,7 @@ services:
     image: terrabrasilis/business-api:v1.2.2
     networks:
       - proxy
+      - backend
     ports:
       - "8090"
     environment:   
