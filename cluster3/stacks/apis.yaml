@@ -90,7 +90,7 @@ services:
 
   # File delivery service API with authentication
   file_delivery_api:
-    image: terrabrasilis/file-delivery:v1.0.5
+    image: terrabrasilis/file-delivery:v1.0.6
     hostname: file.delivery.auth
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
