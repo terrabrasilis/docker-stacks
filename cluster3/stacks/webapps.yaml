@@ -137,6 +137,28 @@ services:
       - proxy
       - backend
 
+  cerrado-nb-alert-daily:
+    image: terrabrasilis/cerrado-alert-daily:v2.10.0
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        
+  cerrado-nb-alert-aggregated:
+    image: terrabrasilis/cerrado-alert-aggregated:v2.10.0
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure      
+
 networks:
   proxy:
     external: true
