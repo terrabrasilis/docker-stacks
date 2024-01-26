@@ -99,6 +99,7 @@ services:
       - jwt.private.key
     environment:
       JWT_SECRET: /run/secrets/jwt.private.key
+      OAUTH_API_URL: "https://pve9.dpi.inpe.br/oauth-api/"
     networks:
       - proxy
     ports:
