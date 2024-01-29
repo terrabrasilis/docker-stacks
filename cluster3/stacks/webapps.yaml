@@ -88,7 +88,7 @@ services:
       start_period: 40s
 
   amazon-alert-aggregated:
-    image: terrabrasilis/amazon-alert-aggregated:v2.11.1
+    image: terrabrasilis/amazon-alert-aggregated:v2.10.0
     networks:
       - proxy
     ports:
@@ -105,7 +105,7 @@ services:
       start_period: 40s
 
   amazon-alert-daily:
-    image: terrabrasilis/amazon-alert-daily:v2.11.1
+    image: terrabrasilis/amazon-alert-daily:v2.10.0
     networks:
       - proxy
     ports:
@@ -138,7 +138,7 @@ services:
       - backend
 
   cerrado-nb-alert-daily:
-    image: terrabrasilis/cerrado-alert-daily:v2.10.0
+    image: terrabrasilis/cerrado-alert-daily:v2.9.0
     networks:
       - proxy
     ports:
@@ -149,7 +149,7 @@ services:
         condition: on-failure
         
   cerrado-nb-alert-aggregated:
-    image: terrabrasilis/cerrado-alert-aggregated:v2.10.0
+    image: terrabrasilis/cerrado-alert-aggregated:v2.9.0
     networks:
       - proxy
     ports:
