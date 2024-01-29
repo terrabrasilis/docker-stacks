@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   webmap:
-    image: terrabrasilis/webmap:prod_v2.3.4
+    image: terrabrasilis/webmap:prod_v2.5.0
     hostname: webmap.production
     networks:
       - proxy
@@ -19,7 +19,7 @@ services:
       start_period: 40s
 
   deforestation-dashboard:
-    image: terrabrasilis/deforestation-dashboard:prod_v2.0.21
+    image: terrabrasilis/deforestation-dashboard:prod_v3.1.3
     hostname: deforestation.dashboard.production
     networks:
       - proxy
@@ -37,7 +37,7 @@ services:
       start_period: 40s
 
   focuses-of-fires:
-    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.1
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.8
     networks:
       - proxy
     ports:
@@ -54,7 +54,7 @@ services:
       start_period: 40s
 
   cerrado-alert-daily:
-    image: terrabrasilis/cerrado-alert-daily:v2.7.6
+    image: terrabrasilis/cerrado-alert-daily:v2.7.8
     networks:
       - proxy
     ports:
@@ -71,7 +71,7 @@ services:
       start_period: 40s
 
   cerrado-alert-aggregated:
-    image: terrabrasilis/cerrado-alert-aggregated:v2.7.6
+    image: terrabrasilis/cerrado-alert-aggregated:v2.7.8
     networks:
       - proxy
     ports:
@@ -88,7 +88,7 @@ services:
       start_period: 40s
 
   amazon-alert-aggregated:
-    image: terrabrasilis/amazon-alert-aggregated:v2.9.5
+    image: terrabrasilis/amazon-alert-aggregated:v2.10.0
     networks:
       - proxy
     ports:
@@ -105,7 +105,7 @@ services:
       start_period: 40s
 
   amazon-alert-daily:
-    image: terrabrasilis/amazon-alert-daily:v2.9.5
+    image: terrabrasilis/amazon-alert-daily:v2.10.0
     networks:
       - proxy
     ports:
@@ -136,6 +136,28 @@ services:
     networks: 
       - proxy
       - backend
+
+  cerrado-nb-alert-daily:
+    image: terrabrasilis/cerrado-alert-daily:v2.10.1
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        
+  cerrado-nb-alert-aggregated:
+    image: terrabrasilis/cerrado-alert-aggregated:v2.10.1
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
 networks:
   proxy:

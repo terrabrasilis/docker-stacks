@@ -90,7 +90,7 @@ services:
 
   # File delivery service API with authentication
   file_delivery_api:
-    image: terrabrasilis/file-delivery:v1.0.5
+    image: terrabrasilis/file-delivery:v1.0.6
     hostname: file.delivery.auth
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
@@ -99,6 +99,8 @@ services:
       - jwt.private.key
     environment:
       JWT_SECRET: /run/secrets/jwt.private.key
+      OAUTH_API_URL: "https://pve9.dpi.inpe.br/oauth-api/"
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
     networks:
       - proxy
     ports:
@@ -116,7 +118,7 @@ services:
         
   # Middleware authentication service
   oauth_api:
-    image: terrabrasilis/terrabrasilis-oauth-api:v1.2.2
+    image: terrabrasilis/terrabrasilis-oauth-api:v1.3.0
     hostname: oauth.api
     volumes:
       - /data/oauth-api/logs:/logs
