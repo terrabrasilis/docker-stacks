@@ -1,0 +1,273 @@
+# Use in Swarm (background_tasks)
+version: '3.4'
+
+services:
+  generate_files:
+    image: terrabrasilis/deter-generate-files:v2.0.7
+    hostname: generate.files
+    volumes:
+      - /data/deter-auth/generated-files:/data/files
+      - /data/deter-auth/logs:/logs
+      - /data/deter-auth/to-terrama:/data/terrama/deter-amz
+    secrets:
+      - geoserver.user.dashboard
+      - geoserver.pass.dashboard
+      - postgres.user.geoserver
+      - postgres.pass.geoserver
+      - postgres.user.prod
+      - postgres.pass.prod
+      - ftp.user.queimadas
+      - ftp.pass.queimadas
+    configs:
+      - source: ssmtp-tb.conf
+        target: /etc/ssmtp/ssmtp.conf
+      - source: deter-etc-environment
+        target: /etc/environment
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  amz_sync:
+    image: terrabrasilis/deter-amz-sync-client:v1.8.10
+    hostname: amz.sync.client
+    volumes:
+      - /data/deter-auth/client-api/raw-data:/usr/local/php-client/rawData
+      - /data/deter-auth/client-api/log:/usr/local/php-client/log
+    secrets:
+      - google.mail.user
+      - google.mail.pass
+      - api.sync.deterb.amz.user
+      - api.sync.deterb.amz.pass
+      - postgres.user.geoserver
+      - postgres.pass.geoserver
+    environment:
+      SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
+      SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
+      MAIL_TO: andre.carvalho@inpe.br,alessandra.gomes@inpe.br,david.kawamura@inpe.br
+      SYNC_SERVICE_USER_FILE: /run/secrets/api.sync.deterb.amz.user
+      SYNC_SERVICE_PASS_FILE: /run/secrets/api.sync.deterb.amz.pass
+      SYNC_SERVICE_HOST: http://150.163.54.22/
+      POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
+      POSTGRES_PASS_FILE: /run/secrets/postgres.pass.geoserver
+      POSTGRES_HOST: 150.163.2.177
+      OUTPUT_DATABASE: DETER-B
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  cerrado_sync:
+    image: terrabrasilis/cerradodeter-syncdata:v1.3.0
+    volumes:
+      - /data/deter-auth/intersection/cerrado-nb:/usr/local/data
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - proxy
+    environment:
+      CREATED_DATE: '2022-12-01'
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  report_amz:
+    image: terrabrasilis/deter-report:v1.0.1
+    volumes:
+      - /data/deter-auth/report:/usr/local/data
+      - /etc/localtime:/etc/localtime:ro
+    secrets:
+      - google.mail.user
+      - google.mail.pass
+      - postgres.user.geoserver
+      - postgres.pass.geoserver
+    environment:
+      MAIL_TO: andre.carvalho@inpe.br,arlessonantonio@gmail.com,luis.maurano@inpe.br,claudio.almeida@inpe.br,alessandra.gomes@inpe.br,david.kawamura@inpe.br,marcos.adami@inpe.br
+      SMTP_GOOGLE_MAIL_USER_FILE: /run/secrets/google.mail.user
+      SMTP_GOOGLE_MAIL_PASS_FILE: /run/secrets/google.mail.pass
+      POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
+      POSTGRES_PASS_FILE: /run/secrets/postgres.pass.geoserver
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
+  deter_amazonia_for_ibama:
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.2
+    hostname: deter.amazonia.for.ibama
+    volumes:
+      - /data/deter-auth/deter-ibama:/data/files
+      - /data/deter-auth/logs:/logs
+    environment:
+      POSTGRES_HOST_FILE: /run/secrets/postgres.host.deter_r
+      POSTGRES_PORT_FILE: /run/secrets/postgres.port.deter_r
+      POSTGRES_USER_FILE: /run/secrets/postgres.user.deter_r
+      POSTGRES_PASS_FILE: /run/secrets/postgres.pass.deter_r
+      POSTGRES_DB_FILE: /run/secrets/postgres.db.deter_r
+      POSTGRES_SCHEMA_FILE: /run/secrets/postgres.schema.deter_r
+      POSTGRES_TABLE_FILE: /run/secrets/postgres.table.deter_r
+      FTP_USER_FILE: /run/secrets/ftp.user.censipam
+      FTP_PASS_FILE: /run/secrets/ftp.pass.censipam
+      FTP_HOST_FILE: /run/secrets/ftp.host.censipam
+      FTP_PATH_FILE: /run/secrets/ftp.path.censipam
+      WWW1_USER_FILE: /run/secrets/www1.user.scp
+      WWW1_PATH_FILE: /run/secrets/www1.path.scp
+      WWW1_PRIVATE_KEY_FILE: /run/secrets/www1.ecdsa.private.key
+      WWW1_HOST: www1.dpi.inpe.br
+      SUFFIX_PROJECT: amz
+      PREFIX_CONTROL_FILE: deter
+      IBAMA_REF_DATE: '2022-06-01'
+    secrets:
+      - postgres.port.deter_r
+      - postgres.db.deter_r
+      - postgres.host.deter_r
+      - postgres.user.deter_r
+      - postgres.pass.deter_r
+      - postgres.table.deter_r
+      - postgres.schema.deter_r
+      - ftp.user.censipam
+      - ftp.pass.censipam
+      - ftp.host.censipam
+      - ftp.path.censipam
+      - www1.ecdsa.private.key
+      - www1.user.scp
+      - www1.path.scp
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
+  deter_cerrado_for_ibama:
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.2
+    hostname: deter.cerrado.for.ibama
+    volumes:
+      - /data/deter-auth/deter-ibama:/data/files
+      - /data/deter-auth/logs:/logs
+    environment:
+      POSTGRES_HOST_FILE: /run/secrets/postgres.host.deter_cerrado_ibama
+      POSTGRES_PORT_FILE: /run/secrets/postgres.port.deter_cerrado_ibama
+      POSTGRES_USER_FILE: /run/secrets/postgres.user.deter_cerrado_ibama
+      POSTGRES_PASS_FILE: /run/secrets/postgres.pass.deter_cerrado_ibama
+      POSTGRES_DB_FILE: /run/secrets/postgres.db.deter_cerrado_ibama
+      POSTGRES_SCHEMA_FILE: /run/secrets/postgres.schema.deter_cerrado_ibama
+      POSTGRES_TABLE_FILE: /run/secrets/postgres.table.deter_cerrado_ibama
+      FTP_USER_FILE: /run/secrets/ftp.user.censipam
+      FTP_PASS_FILE: /run/secrets/ftp.pass.censipam
+      FTP_HOST_FILE: /run/secrets/ftp.host.censipam
+      FTP_PATH_FILE: /run/secrets/ftp.path.censipam
+      WWW1_USER_FILE: /run/secrets/www1.user.scp
+      WWW1_PATH_FILE: /run/secrets/www1.path.scp
+      WWW1_PRIVATE_KEY_FILE: /run/secrets/www1.ecdsa.private.key
+      WWW1_HOST: www1.dpi.inpe.br
+      SUFFIX_PROJECT: cerrado
+      PREFIX_CONTROL_FILE: deter_cerrado
+      IBAMA_REF_DATE: '2022-06-01'
+    secrets:
+      - postgres.port.deter_cerrado_ibama
+      - postgres.db.deter_cerrado_ibama
+      - postgres.host.deter_cerrado_ibama
+      - postgres.user.deter_cerrado_ibama
+      - postgres.pass.deter_cerrado_ibama
+      - postgres.table.deter_cerrado_ibama
+      - postgres.schema.deter_cerrado_ibama
+      - ftp.user.censipam
+      - ftp.pass.censipam
+      - ftp.host.censipam
+      - ftp.path.censipam
+      - www1.ecdsa.private.key
+      - www1.user.scp
+      - www1.path.scp
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+configs:
+  ssmtp-tb.conf:
+    external: true
+  deter-etc-environment:
+    external: true
+
+secrets:
+  www1.ecdsa.private.key:
+    external: true
+  www1.user.scp:
+    external: true
+  www1.path.scp:
+    external: true
+  postgres.port.deter_r:
+    external: true
+  postgres.db.deter_r:
+    external: true
+  postgres.host.deter_r:
+    external: true
+  postgres.user.deter_r:
+    external: true
+  postgres.pass.deter_r:
+    external: true
+  postgres.table.deter_r:
+    external: true
+  postgres.schema.deter_r:
+    external: true
+  postgres.port.deter_cerrado_ibama:
+    external: true
+  postgres.db.deter_cerrado_ibama:
+    external: true
+  postgres.host.deter_cerrado_ibama:
+    external: true
+  postgres.user.deter_cerrado_ibama:
+    external: true
+  postgres.pass.deter_cerrado_ibama:
+    external: true
+  postgres.table.deter_cerrado_ibama:
+    external: true
+  postgres.schema.deter_cerrado_ibama:
+    external: true
+  ftp.user.censipam:
+    external: true
+  ftp.pass.censipam:
+    external: true
+  ftp.host.censipam:
+    external: true
+  ftp.path.censipam:
+    external: true
+  google.mail.user:
+    external: true
+  google.mail.pass:
+    external: true
+  api.sync.deterb.amz.user:
+    external: true
+  api.sync.deterb.amz.pass:
+    external: true
+  postgres.user.geoserver:
+    external: true
+  postgres.pass.geoserver:
+    external: true
+  geoserver.user.dashboard:
+    external: true
+  geoserver.pass.dashboard:
+    external: true
+  ftp.user.queimadas:
+    external: true
+  ftp.pass.queimadas:
+    external: true
+  postgres.user.prod:
+    external: true
+  postgres.pass.prod:
+    external: true
+
+networks:
+  proxy:
+    external: true

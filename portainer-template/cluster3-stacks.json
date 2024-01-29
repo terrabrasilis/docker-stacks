@@ -14,7 +14,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
       "repository": {
-        "url": "https://github.com/Terrabrasilis/docker-stacks",
+        "url": "https://github.com/terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/ogc-proxy.yaml"
       }
     },
@@ -31,7 +31,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
       "repository": {
-        "url": "https://github.com/Terrabrasilis/docker-stacks",
+        "url": "https://github.com/terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/webservers.yaml"
       }
     },
@@ -50,8 +50,25 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
       "repository": {
-        "url": "https://github.com/Terrabrasilis/docker-stacks",
+        "url": "https://github.com/terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/apis.yaml"
+      }
+    },
+    {
+      "type": 2,
+      "name": "background_tasks",
+      "title": "Background tasks",
+      "description": "A collection of services as background tasks.",
+      "note": "This stack is mandatory to sync DETER data and prepare Dashboards cached files.",
+      "categories": [
+        "tasks",
+        "service"
+      ],
+      "platform": "linux",
+      "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+      "repository": {
+        "url": "https://github.com/terrabrasilis/docker-stacks",
+        "stackfile": "cluster3/stacks/background-tasks.yaml"
       }
     },
     {
@@ -69,7 +86,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
       "repository": {
-        "url": "https://github.com/Terrabrasilis/docker-stacks",
+        "url": "https://github.com/terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/mysql.yaml"
       }
     },
@@ -88,7 +105,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
       "repository": {
-        "url": "https://github.com/Terrabrasilis/docker-stacks",
+        "url": "https://github.com/terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/pg-client.yaml"
       }
     },
@@ -107,7 +124,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
       "repository": {
-        "url": "https://github.com/Terrabrasilis/docker-stacks",
+        "url": "https://github.com/terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/metadata-app.yaml"
       }
     },
@@ -126,7 +143,7 @@
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
       "repository": {
-        "url": "https://github.com/Terrabrasilis/docker-stacks",
+        "url": "https://github.com/terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/geoserver-cluster.yaml"
       }
     },
@@ -140,7 +157,7 @@
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
         "repository": {
-            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "url": "https://github.com/terrabrasilis/docker-stacks",
             "stackfile": "cluster3/stacks/webapps.yaml"
         }
     },
@@ -154,7 +171,7 @@
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
         "repository": {
-            "url": "https://github.com/Terrabrasilis/docker-stacks",
+            "url": "https://github.com/terrabrasilis/docker-stacks",
             "stackfile": "cluster3/stacks/home-page.yaml"
         }
     }
