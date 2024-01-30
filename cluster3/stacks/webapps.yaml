@@ -138,7 +138,7 @@ services:
       - backend
 
   cerrado-nb-alert-daily:
-    image: terrabrasilis/cerrado-alert-daily:v2.10.1
+    image: terrabrasilis/cerrado-alert-daily:v2.11.0
     networks:
       - proxy
     ports:
@@ -149,7 +149,7 @@ services:
         condition: on-failure
         
   cerrado-nb-alert-aggregated:
-    image: terrabrasilis/cerrado-alert-aggregated:v2.10.1
+    image: terrabrasilis/cerrado-alert-aggregated:v2.11.0
     networks:
       - proxy
     ports:
