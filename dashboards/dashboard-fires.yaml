@@ -23,20 +23,6 @@ services:
       restart_policy:
         condition: on-failure
 
-  fires-data-task:
-    image: terrabrasilis/fires-data-task-release-1:v1.3.13
-    volumes:
-      - /data/fires/input/raster:/usr/local/data
-      - /data/download/static/fires-dashboard/deter/raster:/usr/local/download
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-          # force the service on worker2 node because its has more memory than others
-          - node.labels.nodename==worker2
-      restart_policy:
-        condition: on-failure
-
 networks:
   proxy:
     external: true
