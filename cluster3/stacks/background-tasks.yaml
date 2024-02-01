@@ -2,6 +2,7 @@
 version: '3.4'
 
 services:
+  # export DETER data to shp and json files, among other things
   generate_files:
     image: terrabrasilis/deter-generate-files:v2.0.7
     hostname: generate.files
@@ -30,7 +31,7 @@ services:
       restart_policy:
         condition: on-failure
 
-  amz_sync:
+  deter_amz_sync:
     image: terrabrasilis/deter-amz-sync-client:v1.8.10
     hostname: amz.sync.client
     volumes:
@@ -61,7 +62,7 @@ services:
       restart_policy:
         condition: on-failure
 
-  cerrado_sync:
+  deter_cerrado_sync:
     image: terrabrasilis/cerradodeter-syncdata:v1.3.0
     volumes:
       - /data/deter-auth/intersection/cerrado-nb:/usr/local/data
@@ -75,7 +76,8 @@ services:
       restart_policy:
         condition: on-failure
 
-  report_amz:
+  # verify DETER amz data and send a report by email
+  deter_report_amz:
     image: terrabrasilis/deter-report:v1.0.1
     volumes:
       - /data/deter-auth/report:/usr/local/data
@@ -194,8 +196,8 @@ services:
       restart_policy:
         condition: on-failure
 
-  # Queimadas Database Update Task
-  fires-sync:
+  # Queimadas database update task within the TerraBrasilis infrastructure
+  general-fires-data-task:
     image: terrabrasilis/general-fires-data-task-main:v1.2.0
     hostname: fires.sync
     volumes:
@@ -211,7 +213,7 @@ services:
         condition: on-failure
 
   # to update dashboard-fires database statistics
-  fires-data-task:
+  dashboard-fires-data-task:
     image: terrabrasilis/fires-data-task-main:v1.4.0
     volumes:
       - /data/fires/input/raster:/usr/local/data
@@ -231,11 +233,11 @@ services:
         condition: on-failure
 
   # Amazon Biome Database Update Task for AMS Application
-  ams3-sync:
+  ams-sync-amazonia:
     image: terrabrasilis/ams-sync:v1.6.4
-    hostname: ams3.sync
+    hostname: amz3.sync
     volumes:
-      - /data/ams2/sync:/usr/local/data
+      - /data/ams-task/amz3/sync:/usr/local/data
     environment:
       - "BIOME='Amazônia'"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
@@ -251,11 +253,11 @@ services:
         condition: on-failure
 
   # Cerrado Biome Database Update Task for AMS Application
-  ces2-sync:
+  ams-sync-cerrado:
     image: terrabrasilis/ams-sync:v1.6.4
-    hostname: ces2.sync
+    hostname: cer2.sync
     volumes:
-      - /data/ces/sync:/usr/local/data
+      - /data/ams-task/cer2/sync:/usr/local/data
     environment:
       - "BIOME='Cerrado'"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
