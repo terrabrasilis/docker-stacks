@@ -63,19 +63,6 @@ services:
       restart_policy:
         condition: on-failure
 
-  # Queimadas Database Update Task
-  fires-sync:
-    image: terrabrasilis/general-fires-data-task-main:v1.1.4
-    hostname: fires.sync
-    networks:
-      - proxy
-    volumes:
-      - /data/fires/sync:/usr/local/data
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-
 secrets:
   ams3.database.url:
     external: true
