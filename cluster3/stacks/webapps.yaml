@@ -19,7 +19,7 @@ services:
       start_period: 40s
 
   deforestation-dashboard:
-    image: terrabrasilis/deforestation-dashboard:prod_v3.1.3
+    image: terrabrasilis/deforestation-dashboard:prod_v3.2.0
     hostname: deforestation.dashboard.production
     networks:
       - proxy
@@ -54,7 +54,7 @@ services:
       start_period: 40s
 
   cerrado-alert-daily:
-    image: terrabrasilis/cerrado-alert-daily:v2.7.8
+    image: terrabrasilis/cerrado-alert-daily:v2.7.9
     networks:
       - proxy
     ports:
@@ -71,7 +71,7 @@ services:
       start_period: 40s
 
   cerrado-alert-aggregated:
-    image: terrabrasilis/cerrado-alert-aggregated:v2.7.8
+    image: terrabrasilis/cerrado-alert-aggregated:v2.7.9
     networks:
       - proxy
     ports:
@@ -88,7 +88,7 @@ services:
       start_period: 40s
 
   amazon-alert-aggregated:
-    image: terrabrasilis/amazon-alert-aggregated:v2.10.0
+    image: terrabrasilis/amazon-alert-aggregated:v2.12.1
     networks:
       - proxy
     ports:
@@ -105,7 +105,7 @@ services:
       start_period: 40s
 
   amazon-alert-daily:
-    image: terrabrasilis/amazon-alert-daily:v2.10.0
+    image: terrabrasilis/amazon-alert-daily:v2.12.1
     networks:
       - proxy
     ports:
@@ -138,7 +138,7 @@ services:
       - backend
 
   cerrado-nb-alert-daily:
-    image: terrabrasilis/cerrado-alert-daily:v2.10.1
+    image: terrabrasilis/cerrado-alert-daily:v2.11.0
     networks:
       - proxy
     ports:
@@ -149,7 +149,7 @@ services:
         condition: on-failure
         
   cerrado-nb-alert-aggregated:
-    image: terrabrasilis/cerrado-alert-aggregated:v2.10.1
+    image: terrabrasilis/cerrado-alert-aggregated:v2.11.0
     networks:
       - proxy
     ports:
@@ -158,6 +158,35 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+
+  ams-webapp:
+    image: terrabrasilis/ams-webapp:v1.6.5
+    hostname: ams.webapp
+    entrypoint: /docker-entrypoint.sh
+    networks:
+      - proxy
+    ports:
+      - 7000
+    environment:
+      - "SCRIPT_NAME=/ams"
+      - "GEOSERVER_URL=https://pve9.dpi.inpe.br/geoserver"
+      - "SERVER_NAME=pve9.dpi.inpe.br"
+      - "APPLICATION_ROOT=/ams/"
+      - "DB_AMAZON_URL=/run/secrets/ams3.database.url"
+      - "DB_CERRADO_URL=/run/secrets/ces2.database.url"
+    secrets:
+      - ams3.database.url
+      - ces2.database.url
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        
+secrets:
+  ams3.database.url:
+    external: true
+  ces2.database.url:
+    external: true
 
 networks:
   proxy:
