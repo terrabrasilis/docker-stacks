@@ -181,7 +181,12 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-
+        
+secrets:
+  ams3.database.url:
+    external: true
+  ces2.database.url:
+    external: true
 
 networks:
   proxy:
