@@ -204,7 +204,7 @@ services:
       - /data/fires/sync:/usr/local/data
     environment:
       GEOSERVER_BASE_URL: http://terrabrasilis.dpi.inpe.br
-      GEOSERVER_BASE_PATH: geoserver
+      GEOSERVER_BASE_PATH: queimadas/geoserver
     networks:
       - backgroundtask
     deploy:
