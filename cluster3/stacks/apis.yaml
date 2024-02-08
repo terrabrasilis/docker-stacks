@@ -118,14 +118,16 @@ services:
         
   # Middleware authentication service
   oauth_api:
-    image: terrabrasilis/terrabrasilis-oauth-api:v1.3.0
+    image: terrabrasilis/terrabrasilis-oauth-api:v1.3.0-proxy
     hostname: oauth.api
     volumes:
       - /data/oauth-api/logs:/logs
+      - /data/oauth-api/config:/data/oauth-api/config
     secrets:
       - jwt.private.key
     environment:
       JWT_SECRET: /run/secrets/jwt.private.key
+      PROXY_CONFIG_FILE: /data/oauth-api/config/proxy_config.json
     networks:
       - proxy
     ports:
