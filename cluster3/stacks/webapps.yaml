@@ -12,7 +12,7 @@ services:
       restart_policy:
         condition: on-failure
   environment:
-      - "AUTHENTICATION_PROXY_HOST=/oauth-api/proxy?url="
+      AUTHENTICATION_PROXY_HOST: "/oauth-api/proxy?url="
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
       interval: 1m30s
