@@ -76,7 +76,7 @@ services:
       - proxy
 
   deter_pantanal_report:
-    image: terrabrasilis/deter-pantanal-app:v0.0.4
+    image: terrabrasilis/deter-pantanal-app:v0.0.5
     ports:
       - "80"
     volumes:
