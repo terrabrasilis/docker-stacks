@@ -139,6 +139,19 @@ services:
       - proxy
       - backend
 
+  deter_pantanal_report:
+    image: terrabrasilis/deter-pantanal-app:v0.0.5
+    ports:
+      - "80"
+    volumes:
+      - /data/deter-app:/var/www/html/config
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks: 
+      - proxy
+
   cerrado-nb-alert-daily:
     image: terrabrasilis/cerrado-alert-daily:v2.12.0
     networks:
