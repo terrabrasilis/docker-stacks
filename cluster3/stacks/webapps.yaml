@@ -12,7 +12,7 @@ services:
       restart_policy:
         condition: on-failure
     environment:
-      - "AUTHENTICATION_PROXY_HOST=https://pve9.dpi.inpe.br/oauth-api/proxy?url="
+      - "AUTHENTICATION_PROXY_HOST=https://terrabrasilis.dpi.inpe.br/oauth-api/proxy?url="
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
       interval: 1m30s
@@ -171,8 +171,8 @@ services:
       - 7000
     environment:
       - "SCRIPT_NAME=/ams"
-      - "GEOSERVER_URL=https://pve9.dpi.inpe.br/geoserver"
-      - "SERVER_NAME=pve9.dpi.inpe.br"
+      - "GEOSERVER_URL=https://terrabrasilis.dpi.inpe.br/geoserver"
+      - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams/"
       - "DB_AMAZON_URL=/run/secrets/ams3.database.url"
       - "DB_CERRADO_URL=/run/secrets/ces2.database.url"
