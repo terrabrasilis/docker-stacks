@@ -143,6 +143,26 @@ services:
       retries: 3
       start_period: 40s
 
+  oauth-jwt-api:
+    image: registry.dpi.inpe.br/dpi/oauth:0.1.1
+    hostname: oauth-jwt-api
+    env_file:
+      - /data/oauth-service.env
+    ports:
+      - "30035:80"
+    volumes:
+      - "/data/oauth-service/certs:/data/certs"
+    networks:
+      - proxy
+      - backend
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname==node1cluster3
+      restart_policy:
+        condition: on-failure
+
   # Middleware timeseries service 
   timeseries_ocpu:
     image: terrabrasilis/terrabrasilis-timeseries:v1.0.0
