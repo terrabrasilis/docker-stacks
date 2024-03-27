@@ -198,7 +198,7 @@ services:
         condition: on-failure
 
   oauth-app:
-    image: terrabrasilis/oauth-app:v1.0.0
+    image: terrabrasilis/oauth-app:v1.0.1
     hostname: oauth-app
     ports:
       - "8080"
