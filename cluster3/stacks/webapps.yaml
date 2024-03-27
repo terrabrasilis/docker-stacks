@@ -196,7 +196,21 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-        
+
+  oauth-app:
+    image: terrabrasilis/oauth-app:v1.0.0
+    hostname: oauth-app
+    ports:
+      - "8080"
+    networks:
+      - proxy
+    environment:
+      - "URL_OAUTH=https://terrabrasilis.dpi.inpe.br/api/oauth"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
 secrets:
   ams3.database.url:
     external: true
