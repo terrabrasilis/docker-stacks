@@ -1,0 +1,51 @@
+version: '3.4'
+services:
+
+  # The instance of MongoDB to store the Oauth Service data
+  mongo-oauth:
+    image: mongo:4.2.7
+    hostname: mongo-oauth
+    ports:
+      - "30036:27017"
+    volumes:
+      - /data/oauth-service/db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo.user.oauth
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo.pass.oauth
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # The instance of RedisDB to store the Oauth Service data on memory
+  redis-oauth:
+    image: bitnami/redis:7.0.2
+    hostname: redis-oauth
+    volumes:
+      - /data/oauth-service/redisdata:/bitnami/redis/data
+    networks:
+      - proxy
+    environment:
+      REDIS_PASSWORD_FILE: /run/secrets/redis.pass.oauth
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+
+# configuration files in Portainer
+configs:
+  ssmtp-tb.conf:
+    external: true
+  deter-etc-environment:
+    external: true
+
+secrets:
+  mongo.user.oauth:
+    external: true
+  mongo.pass.oauth:
+    external: true
+  redis.pass.oauth:
+    external: true
