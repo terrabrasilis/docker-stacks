@@ -163,6 +163,20 @@
     },
     {
         "type": 2,
+        "name": "homologation-webapps",
+        "title": "The Apps Stack for homologation",
+        "description": "The TerraBrasilis homologation WeaApps stack.",
+        "note": "This stack are optional for homologation use.",
+        "categories": ["application", "homologation"],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+        "repository": {
+            "url": "https://github.com/terrabrasilis/docker-stacks",
+            "stackfile": "cluster3/stacks/webapps-homologation.yaml"
+        }
+    },
+    {
+        "type": 2,
         "name": "homepage",
         "title": "The home page as an entry point to the site",
         "description": "The home page of TerraBrasilis based on Wordpress. It is the gateway to all TerraBrasilis resources.",
