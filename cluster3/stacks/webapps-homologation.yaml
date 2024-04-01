@@ -13,7 +13,7 @@ services:
       - 7000
     environment:
       - "SCRIPT_NAME=/ams-homologation"
-      - "GEOSERVER_URL=http://terrabrasilis.dpi.inpe.br/geoserver"
+      - "GEOSERVER_URL=https://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams-homologation/"
       - "DB_AMAZON_URL=/run/secrets/ams4h.database.url"
