@@ -140,7 +140,7 @@ services:
       - backend
 
   deter_pantanal_report:
-    image: terrabrasilis/deter-pantanal-app:v0.0.6
+    image: terrabrasilis/deter-pantanal-app:v0.0.7
     ports:
       - "80"
     volumes:
