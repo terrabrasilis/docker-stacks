@@ -125,7 +125,7 @@ services:
       WWW1_HOST: www1.dpi.inpe.br
       SUFFIX_PROJECT: amz
       PREFIX_CONTROL_FILE: deter
-      IBAMA_REF_DATE: '2022-06-01'
+      IBAMA_REF_DATE: '2023-08-01'
     secrets:
       - postgres.port.deter_r
       - postgres.db.deter_r
@@ -173,7 +173,7 @@ services:
       WWW1_HOST: www1.dpi.inpe.br
       SUFFIX_PROJECT: cerrado
       PREFIX_CONTROL_FILE: deter_cerrado
-      IBAMA_REF_DATE: '2022-06-01'
+      IBAMA_REF_DATE: '2023-08-01'
     secrets:
       - postgres.port.deter_cerrado_ibama
       - postgres.db.deter_cerrado_ibama
