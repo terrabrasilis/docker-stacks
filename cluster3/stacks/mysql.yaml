@@ -1,24 +1,6 @@
-version: '3.2'
+version: '3.4'
+
 services:
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:4.8.5
-    hostname: phpmyadmin
-    networks:
-      - proxy
-      - backend
-    ports:
-      - "25111:80" 
-    environment:   
-      - "PMA_ARBITRARY=1"
-      - "PMA_ABSOLUTE_URI=http://pve9.dpi.inpe.br/phpmyadmin/"
-    volumes: 
-      - /data/phpmyadmin/sessions:/sessions
-    depends_on:
-      - db_mysql
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
 
   db_mysql:
     image: mysql:5.7
@@ -53,6 +35,4 @@ secrets:
 
 networks: 
   backend:
-    external: true
-  proxy:
     external: true

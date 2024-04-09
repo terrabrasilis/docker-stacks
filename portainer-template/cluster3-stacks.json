@@ -92,21 +92,22 @@
     },
     {
       "type": 2,
-      "name": "pg-client",
-      "title": "The PgAdmin4 Web Client for PostgreSQL.",
-      "description": "The PgAdmin4 App allows to manage the databases into any internal instance for PostgreSQL.",
-      "note": "This stack is optional and serves to manage the databases used for publishing PRODES and DETER data by TerraBrasilis Applications.",
+      "name": "manager-apps",
+      "title": "The Web Client manager Apps.",
+      "description": "The Apps to allow manage the resources like PostgreSQL databases.",
+      "note": "This stack is optional and serves to manage the resources on TerraBrasilis cluster.",
       "categories": [
         "application",
         "manage",
         "SGDB",
-        "PostgreSQL"
+        "PostgreSQL",
+        "MySQL"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
       "repository": {
         "url": "https://github.com/terrabrasilis/docker-stacks",
-        "stackfile": "cluster3/stacks/pg-client.yaml"
+        "stackfile": "cluster3/stacks/webapps-manager.yaml"
       }
     },
     {
