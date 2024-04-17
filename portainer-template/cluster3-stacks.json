@@ -164,20 +164,6 @@
     },
     {
         "type": 2,
-        "name": "homologation-webapps",
-        "title": "The Apps Stack for homologation",
-        "description": "The TerraBrasilis homologation WeaApps stack.",
-        "note": "This stack are optional for homologation use.",
-        "categories": ["application", "homologation"],
-        "platform": "linux",
-        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
-        "repository": {
-            "url": "https://github.com/terrabrasilis/docker-stacks",
-            "stackfile": "cluster3/stacks/webapps-homologation.yaml"
-        }
-    },
-    {
-        "type": 2,
         "name": "homepage",
         "title": "The home page as an entry point to the site",
         "description": "The home page of TerraBrasilis based on Wordpress. It is the gateway to all TerraBrasilis resources.",
@@ -209,6 +195,62 @@
       "repository": {
         "url": "https://github.com/terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/sgdb.yaml"
+      }
+    },
+    {
+        "type": 2,
+        "name": "homologation-webapps",
+        "title": "The Apps Stack for homologation",
+        "description": "The TerraBrasilis homologation WebApps stack.",
+        "note": "This stack are optional for homologation use.",
+        "categories": ["application", "homologation"],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+        "repository": {
+            "url": "https://github.com/terrabrasilis/docker-stacks",
+            "stackfile": "cluster3/stacks/webapps-homologation.yaml"
+        }
+    },
+    {
+      "type": 2,
+      "name": "homologation-sgdbs",
+      "title": "The homologation SGDBs stack with relational SQL and NoSQL databases.",
+      "description": "The TerraBrasilis homologation SGDBs stack.",
+      "note": "This stack are optional for homologation use.",
+      "categories": [
+        "SQL",
+        "NoSQL",
+        "SGDB",
+        "redis",
+        "Mongo",
+        "MySQL",
+        "homologation"
+      ],
+      "platform": "linux",
+      "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+      "repository": {
+        "url": "https://github.com/terrabrasilis/docker-stacks",
+        "stackfile": "cluster3/stacks/sgdb-homologation.yaml"
+      }
+    },
+    {
+      "type": 2,
+      "name": "homologation-apis",
+      "title": "Homologation backend APIs.",
+      "description": "The TerraBrasilis homologation APIs stack.",
+      "note": "This stack are optional for homologation use.",
+      "categories": [
+        "API",
+        "service",
+        "oauth",
+        "timeseries",
+        "homologation"
+      ],
+      "platform": "linux",
+      "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+      "repository": {
+        "url": "https://github.com/terrabrasilis/docker-stacks",
+        "stackfile": "cluster3/stacks/apis-homologation.yaml"
       }
     }
   ]
