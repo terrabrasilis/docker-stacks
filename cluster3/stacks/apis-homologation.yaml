@@ -1,0 +1,34 @@
+version: '3.4'
+services:
+
+  # Deforestation dashboard API
+  redis-api-homologation:
+    image: terrabrasilis/redis-api:v1.1.2
+    ports:
+      - "3001"
+    networks:
+      - proxy
+      - backend
+    depends_on:
+      - redis-homologation
+    environment:
+      - REDIS_HOSTNAME=redis-homologation
+      - REDIS_PORT=6380
+      - API_PORT=3001
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:3001/dashboard/api/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+
+networks:
+  proxy:
+    external: true
+  backend:
+    external: true
