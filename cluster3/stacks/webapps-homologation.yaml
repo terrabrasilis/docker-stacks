@@ -26,9 +26,9 @@ services:
       restart_policy:
         condition: on-failure
 
-  deforestation-dashboard:
+  deforestation-dashboard-h:
     image: terrabrasilis/deforestation-dashboard:hom_v3.2.3
-    hostname: deforestation.dashboard.production
+    hostname: deforestation.dashboard.homologation
     networks:
       - proxy
     ports:
