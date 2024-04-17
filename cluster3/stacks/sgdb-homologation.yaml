@@ -3,7 +3,7 @@ services:
 
   # The instance of RedisDB to store the Deforestation dashboard documents
   redis-homologation:
-    image: terrabrasilis/redis:h01
+    image: terrabrasilis/redis:v01
     ports:
       - "6380:6380"
     networks:
@@ -14,12 +14,6 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 30s
-      retries: 50
-      start_period: 30s
 
 networks: 
   backend:
