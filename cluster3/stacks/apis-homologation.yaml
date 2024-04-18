@@ -1,6 +1,20 @@
 version: '3.4'
 services:
 
+  # The instance of RedisDB to store the Deforestation dashboard documents
+  redis-homologation:
+    image: terrabrasilis/redis:v01
+    ports:
+      - "6379"
+    networks:
+      - backend_h
+    volumes:
+      - /data/homologation/redis:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
   # Deforestation dashboard API
   redis-api-homologation:
     image: terrabrasilis/redis-api:v1.1.2
@@ -8,12 +22,12 @@ services:
       - "3001"
     networks:
       - proxy
-      - backend
+      - backend_h
     depends_on:
       - redis-homologation
     environment:
       - REDIS_HOSTNAME=redis-homologation
-      - REDIS_PORT=6380
+      - REDIS_PORT=6379
       - API_PORT=3001
     deploy:
       replicas: 1
@@ -30,5 +44,5 @@ services:
 networks:
   proxy:
     external: true
-  backend:
-    external: true
+  backend_h:
+    external: false
