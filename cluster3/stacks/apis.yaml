@@ -99,7 +99,7 @@ services:
       - jwt.private.key
     environment:
       JWT_SECRET: /run/secrets/jwt.private.key
-      OAUTH_API_URL: "https://pve9.dpi.inpe.br/oauth-api/"
+      OAUTH_API_URL: "https://terrabrasilis.dpi.inpe.br/oauth-api/"
       NODE_TLS_REJECT_UNAUTHORIZED: "0"
     networks:
       - proxy
