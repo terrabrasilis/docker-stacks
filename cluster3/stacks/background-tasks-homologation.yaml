@@ -11,7 +11,7 @@ services:
       - /data/ams-task/amz4h/sync:/usr/local/data
       - /geoserver/cluster/gs_datadir/data-file/ams/risk/raster:/usr/local/geoserver
     networks:
-      - backgroundtask
+      - backgroundtask-h
     environment:
       - "BIOME=Amazônia"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
@@ -45,7 +45,7 @@ services:
     image: terrabrasilis/ams-sync:v2.1.2.risk_features.rc
     hostname: cer2h.sync
     networks:
-      - backgroundtask
+      - backgroundtask-h
     volumes:
       - /data/ams-task/cer2h/sync:/usr/local/data
     environment:
@@ -81,5 +81,5 @@ secrets:
     external: true
     
 networks:
-  backgroundtask:
-    external: true
+  backgroundtask-h:
+    external: false
