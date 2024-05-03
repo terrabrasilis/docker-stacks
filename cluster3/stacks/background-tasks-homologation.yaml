@@ -1,0 +1,85 @@
+# Use in Swarm (homologation-background-tasks)
+version: '3.4'
+
+services:
+
+  # Amazon Biome Database Update Task for AMS Application
+  ams-sync-amazonia:
+    image: terrabrasilis/ams-sync:v2.1.2.risk_features.rc
+    hostname: amz4h.sync
+    volumes:
+      - /data/ams-task/amz4h/sync:/usr/local/data
+      - /geoserver/cluster/gs_datadir/data-file/ams/risk/raster:/usr/local/geoserver
+    networks:
+      - backgroundtask
+    environment:
+      - "BIOME=Amazônia"
+      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
+      - "DATABASE_URL=/run/secrets/amz4h.database.url"
+      - "ALL_DATA=True"
+      - "FTP_HOST=/run/secrets/risk.ftp.host"
+      - "FTP_PORT=/run/secrets/risk.ftp.port"
+      - "FTP_PATH=/run/secrets/risk.ftp.path"
+      - "FTP_USER=/run/secrets/risk.ftp.user"
+      - "FTP_PASS=/run/secrets/risk.ftp.pass"
+      - "RISK_OUTPUT_PATH=/usr/local/data"
+      - "GEOSERVER_OUTPUT_PATH=/usr/local/geoserver"
+    secrets:
+      - amz4h.database.url
+      - risk.ftp.host
+      - risk.ftp.port
+      - risk.ftp.path
+      - risk.ftp.user
+      - risk.ftp.pass
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          # force the service on node5cluster3 node because its has more memory than others
+          - node.hostname==node5cluster3
+      restart_policy:
+        condition: on-failure
+
+  # Cerrado Biome Database Update Task for AMS Application
+  ams-sync-cerrado:
+    image: terrabrasilis/ams-sync:v2.1.2.risk_features.rc
+    hostname: cer2h.sync
+    networks:
+      - backgroundtask
+    volumes:
+      - /data/ams-task/cer2h/sync:/usr/local/data
+    environment:
+      - "BIOME=Cerrado"
+      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
+      - "DATABASE_URL=/run/secrets/cer2h.database.url"
+      - "ALL_DATA=True"
+    secrets:
+      - cer2h.database.url
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          # force the service on node5cluster3 node because its has more memory than others
+          - node.hostname==node5cluster3
+      restart_policy:
+        condition: on-failure
+
+secrets:
+  amz4h.database.url:
+    external: true
+  cer2h.database.url:
+    external: true
+  risk.ftp.host:
+    external: true
+  risk.ftp.port:
+    external: true
+  risk.ftp.path:
+    external: true
+  risk.ftp.user:
+    external: true
+  risk.ftp.pass:
+    external: true
+    
+networks:
+  backgroundtask:
+    external: true

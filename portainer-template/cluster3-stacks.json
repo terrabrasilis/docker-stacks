@@ -56,7 +56,7 @@
     },
     {
       "type": 2,
-      "name": "background_tasks",
+      "name": "background-tasks",
       "title": "Background tasks",
       "description": "A collection of services as background tasks.",
       "note": "This stack is mandatory to sync DETER data and prepare Dashboards cached files.",
@@ -251,6 +251,24 @@
       "repository": {
         "url": "https://github.com/terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/apis-homologation.yaml"
+      }
+    },
+    {
+      "type": 2,
+      "name": "homologation-background-tasks",
+      "title": "Homologation background tasks",
+      "description": "A collection of services as Homologation background tasks.",
+      "note": "This stack are optional for homologation use.",
+      "categories": [
+        "tasks",
+        "service",
+        "homologation"
+      ],
+      "platform": "linux",
+      "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+      "repository": {
+        "url": "https://github.com/terrabrasilis/docker-stacks",
+        "stackfile": "cluster3/stacks/background-tasks-homologation.yaml"
       }
     }
   ]
