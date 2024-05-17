@@ -203,7 +203,7 @@ services:
     volumes:
       - /data/fires/sync:/usr/local/data
     environment:
-      GEOSERVER_BASE_URL: http://terrabrasilis.dpi.inpe.br
+      GEOSERVER_BASE_URL: https://terrabrasilis.dpi.inpe.br
       GEOSERVER_BASE_PATH: queimadas/geoserver
     networks:
       - backgroundtask
@@ -219,7 +219,7 @@ services:
       - /data/fires/input/raster:/usr/local/data
       - /data/download/static/fires-dashboard/deter/raster:/usr/local/download
     environment:
-      GEOSERVER_BASE_URL: http://terrabrasilis.dpi.inpe.br
+      GEOSERVER_BASE_URL: https://terrabrasilis.dpi.inpe.br
       GEOSERVER_BASE_PATH: geoserver
     networks:
       - backgroundtask
