@@ -276,7 +276,7 @@ services:
 configs:
   ssmtp-tb.conf:
     external: true
-  deter-etc-environment:
+  deter-etc-environment_ssl:
     external: true
 
 secrets:
