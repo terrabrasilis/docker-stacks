@@ -131,7 +131,7 @@
     },
     {
       "type": 2,
-      "name": "geoserver-cluster",
+      "name": "cluster-geoserver",
       "title": "The GeoServer cluster to publish data compliant with the OGC services standard.",
       "description": "The GeoServer application allows managing data sources and making them available through the OGC API as WMS and WFS services.",
       "note": "This stack is mandatory and serves to manage the publication of data layers for TerraBrasilis databases.",
@@ -139,7 +139,8 @@
         "application",
         "manage",
         "service",
-        "API"
+        "API",
+        "Geoserver"
       ],
       "platform": "linux",
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",

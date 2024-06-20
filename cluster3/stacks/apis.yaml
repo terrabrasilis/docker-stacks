@@ -163,15 +163,6 @@ services:
       restart_policy:
         condition: on-failure
 
-  # Middleware timeseries service 
-  timeseries_ocpu:
-    image: terrabrasilis/terrabrasilis-timeseries:v1.0.0
-    ports:
-      - "8004:8004"
-    networks:
-      - proxy
-    restart: always
-
 secrets:
   jwt.private.key:
     external: true

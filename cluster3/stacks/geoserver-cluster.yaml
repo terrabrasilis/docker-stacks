@@ -1,4 +1,4 @@
-#geoserver-cluster
+#cluster-geoserver
 
 version: '3.2'
 services:
@@ -27,7 +27,7 @@ services:
           constraints:
             - node.hostname==node1cluster3
         restart_policy:
-          condition: on-failure 
+          condition: on-failure
 
     gsslave1:
       image: terrabrasilis/geoserver-worker:v1.0.6
@@ -50,6 +50,9 @@ services:
         - "30010:8080"
       deploy:
         replicas: 1
+        placement:
+          constraints:
+            - node.hostname==node2cluster3
         restart_policy:
           condition: on-failure
 
@@ -74,6 +77,9 @@ services:
         - "30020:8080"
       deploy:
         replicas: 1
+        placement:
+          constraints:
+            - node.hostname==node3cluster3
         restart_policy:
           condition: on-failure
 
@@ -98,6 +104,9 @@ services:
         - "30030:8080"
       deploy:
         replicas: 1
+        placement:
+          constraints:
+            - node.hostname==node4cluster3
         restart_policy:
           condition: on-failure
 
@@ -122,6 +131,9 @@ services:
         - "30040:8080"
       deploy:
         replicas: 1
+        placement:
+          constraints:
+            - node.hostname==node5cluster3
         restart_policy:
           condition: on-failure
 
@@ -146,6 +158,9 @@ services:
         - "30050:8080"
       deploy:
         replicas: 1
+        placement:
+          constraints:
+            - node.hostname==node5cluster3
         restart_policy:
           condition: on-failure
 

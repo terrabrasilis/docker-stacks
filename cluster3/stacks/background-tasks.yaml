@@ -4,7 +4,7 @@ version: '3.4'
 services:
   # export DETER data to shp and json files, among other things
   generate_files:
-    image: terrabrasilis/deter-generate-files:v2.0.12
+    image: terrabrasilis/deter-generate-files:v2.1.0
     hostname: generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
@@ -22,7 +22,7 @@ services:
     configs:
       - source: ssmtp-tb.conf
         target: /etc/ssmtp/ssmtp.conf
-      - source: deter-etc-environment
+      - source: deter-etc-environment_ssl
         target: /etc/environment
     networks:
       - backgroundtask
@@ -276,7 +276,7 @@ services:
 configs:
   ssmtp-tb.conf:
     external: true
-  deter-etc-environment:
+  deter-etc-environment_ssl:
     external: true
 
 secrets:

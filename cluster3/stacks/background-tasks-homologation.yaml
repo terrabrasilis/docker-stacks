@@ -5,7 +5,7 @@ services:
 
   # Amazon Biome Database Update Task for AMS Application
   ams-sync-amazonia:
-    image: terrabrasilis/ams-sync:v2.1.5.risk_features.rc
+    image: terrabrasilis/ams-sync:v2.1.10.risk_features.rc
     hostname: amz4h.sync
     volumes:
       - /data/ams-task/amz4h/sync:/usr/local/data
@@ -42,7 +42,7 @@ services:
 
   # Cerrado Biome Database Update Task for AMS Application
   ams-sync-cerrado:
-    image: terrabrasilis/ams-sync:v2.1.5.risk_features.rc
+    image: terrabrasilis/ams-sync:v2.1.10.risk_features.rc
     hostname: cer2h.sync
     networks:
       - backgroundtask-h
