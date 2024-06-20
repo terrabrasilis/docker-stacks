@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   webmap:
-    image: terrabrasilis/webmap:v2.2
+    image: terrabrasilis/webmap:prod_v2.5.7
     hostname: webmap.production
     networks:
       - proxy
@@ -175,7 +175,7 @@ services:
         condition: on-failure
 
   ams-webapp:
-    image: terrabrasilis/ams-webapp:v1.6.8.rc
+    image: terrabrasilis/ams-webapp:v2.2
     hostname: ams.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
