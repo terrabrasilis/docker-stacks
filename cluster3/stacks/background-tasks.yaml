@@ -241,10 +241,10 @@ services:
     environment:
       - "BIOME='Amazônia'"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
-      - "DATABASE_URL=/run/secrets/ams.database.url.v2.2"
+      - "DATABASE_URL=/run/secrets/ams.database.url.v2"
       - "ALL_DATA=True"
     secrets:
-      - ams.database.url.v2.2
+      - ams.database.url.v2
     networks:
       - backgroundtask
     deploy:
@@ -261,10 +261,10 @@ services:
     environment:
       - "BIOME='Cerrado'"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
-      - "DATABASE_URL=/run/secrets/cer.database.url.v2.2"
+      - "DATABASE_URL=/run/secrets/cer.database.url.v2"
       - "ALL_DATA=True"
     secrets:
-      - cer.database.url.v2.2
+      - cer.database.url.v2
     networks:
       - backgroundtask
     deploy:
@@ -346,9 +346,9 @@ secrets:
     external: true
   postgres.pass.prod:
     external: true
-  ams.database.url.v2.2:
+  ams.database.url.v2:
     external: true
-  cer.database.url.v2.2:
+  cer.database.url.v2:
     external: true
 
 networks:
