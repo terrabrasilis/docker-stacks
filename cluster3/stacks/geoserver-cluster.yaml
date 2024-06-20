@@ -1,4 +1,4 @@
-#geoserver-cluster
+#cluster-geoserver
 
 version: '3.2'
 services:
