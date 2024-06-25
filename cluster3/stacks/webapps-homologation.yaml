@@ -27,7 +27,7 @@ services:
         condition: on-failure
 
   deforestation-dashboard-h:
-    image: terrabrasilis/deforestation-dashboard:hom_v3.2.4
+    image: terrabrasilis/deforestation-dashboard:hom_v3.3.0
     hostname: deforestation.dashboard.homologation
     networks:
       - proxy
