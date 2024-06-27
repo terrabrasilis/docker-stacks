@@ -274,7 +274,7 @@
     },
     {
       "type": 2,
-      "name": "pg-client",
+      "name": "stack-01",
       "title": "This stack is used for some tests",
       "description": "This stack is used for some tests",
       "note": "This stack is used for some tests",
@@ -285,7 +285,7 @@
       "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
       "repository": {
         "url": "https://github.com/terrabrasilis/docker-stacks",
-        "stackfile": "cluster3/stacks/pg-client.yaml"
+        "stackfile": "cluster3/stacks/stack-01.yaml"
       }
     }
   ]
