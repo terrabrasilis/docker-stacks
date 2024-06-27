@@ -6,9 +6,9 @@ services:
   # Amazon Biome Database Update Task for AMS Application
   ams-sync-amazonia:
     image: terrabrasilis/ams-sync:v2.1.10.risk_features.rc
-    hostname: amz4h.sync
+    hostname: amazonia_h.sync
     volumes:
-      - /data/ams-task/amz4h/sync:/usr/local/data
+      - /data/ams-task/amazonia_h/sync:/usr/local/data
       - /geoserver/cluster/gs_datadir/data-file/ams/risk/raster:/usr/local/geoserver
     networks:
       - backgroundtask-h
@@ -43,11 +43,11 @@ services:
   # Cerrado Biome Database Update Task for AMS Application
   ams-sync-cerrado:
     image: terrabrasilis/ams-sync:v2.1.10.risk_features.rc
-    hostname: cer2h.sync
+    hostname: cerrado_h.sync
     networks:
       - backgroundtask-h
     volumes:
-      - /data/ams-task/cer2h/sync:/usr/local/data
+      - /data/ams-task/cerrado_h/sync:/usr/local/data
     environment:
       - "BIOME=Cerrado"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
