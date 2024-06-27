@@ -234,10 +234,10 @@ services:
 
   # Amazon Biome Database Update Task for AMS Application
   ams-sync-amazonia:
-    image: terrabrasilis/ams-sync:v2.2
-    hostname: amz3.sync
+    image: terrabrasilis/ams-sync:v2.2.1
+    hostname: ams.amazonia.sync
     volumes:
-      - /data/ams-task/amz3/sync:/usr/local/data
+      - /data/ams-task/amazonia/sync:/usr/local/data
     environment:
       - "BIOME=Amazônia"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
@@ -249,7 +249,6 @@ services:
       - "FTP_USER=/run/secrets/risk.ftp.user"
       - "FTP_PASS=/run/secrets/risk.ftp.pass"
       - "RISK_OUTPUT_PATH=/usr/local/data"
-      - "GEOSERVER_OUTPUT_PATH=/usr/local/geoserver"
     secrets:
       - ams.database.url.v2
     networks:
@@ -261,10 +260,10 @@ services:
 
   # Cerrado Biome Database Update Task for AMS Application
   ams-sync-cerrado:
-    image: terrabrasilis/ams-sync:v2.2
-    hostname: cer2.sync
+    image: terrabrasilis/ams-sync:v2.2.1
+    hostname: ams.cerrado.sync
     volumes:
-      - /data/ams-task/cer2/sync:/usr/local/data
+      - /data/ams-task/cerrado/sync:/usr/local/data
     environment:
       - "BIOME=Cerrado"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
