@@ -243,6 +243,13 @@ services:
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
       - "DATABASE_URL=/run/secrets/ams.database.url.v2"
       - "ALL_DATA=True"
+      - "FTP_HOST=/run/secrets/risk.ftp.host"
+      - "FTP_PORT=/run/secrets/risk.ftp.port"
+      - "FTP_PATH=/run/secrets/risk.ftp.path"
+      - "FTP_USER=/run/secrets/risk.ftp.user"
+      - "FTP_PASS=/run/secrets/risk.ftp.pass"
+      - "RISK_OUTPUT_PATH=/usr/local/data"
+      - "GEOSERVER_OUTPUT_PATH=/usr/local/geoserver"
     secrets:
       - ams.database.url.v2
     networks:
