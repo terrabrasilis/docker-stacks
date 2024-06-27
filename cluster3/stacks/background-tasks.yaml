@@ -251,6 +251,11 @@ services:
       - "RISK_OUTPUT_PATH=/usr/local/data"
     secrets:
       - ams.database.url.v2
+      - risk.ftp.host
+      - risk.ftp.port
+      - risk.ftp.path
+      - risk.ftp.user
+      - risk.ftp.pass
     networks:
       - backgroundtask
     deploy:
@@ -355,6 +360,16 @@ secrets:
   ams.database.url.v2:
     external: true
   cer.database.url.v2:
+    external: true
+  risk.ftp.host:
+    external: true
+  risk.ftp.port:
+    external: true
+  risk.ftp.path:
+    external: true
+  risk.ftp.user:
+    external: true
+  risk.ftp.pass:
     external: true
 
 networks:
