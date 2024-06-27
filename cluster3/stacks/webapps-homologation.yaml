@@ -16,11 +16,11 @@ services:
       - "GEOSERVER_URL=https://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams-homologation/"
-      - "DB_AMAZON_URL=/run/secrets/amz4h.database.url"
-      - "DB_CERRADO_URL=/run/secrets/cer2h.database.url"
+      - "DB_AMAZON_URL=/run/secrets/ams.database.url.amzh.v2"
+      - "DB_CERRADO_URL=/run/secrets/ams.database.url.cerh.v2"
     secrets:
-      - amz4h.database.url
-      - cer2h.database.url
+      - ams.database.url.amzh.v2
+      - ams.database.url.cerh.v2
     deploy:
       replicas: 1
       restart_policy:
@@ -46,9 +46,9 @@ services:
 
 
 secrets:
-  amz4h.database.url:
+  ams.database.url.amzh.v2:
     external: true
-  cer2h.database.url:
+  ams.database.url.cerh.v2:
     external: true
 
 networks:

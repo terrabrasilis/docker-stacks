@@ -187,11 +187,11 @@ services:
       - "GEOSERVER_URL=https://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams/"
-      - "DB_AMAZON_URL=/run/secrets/ams.database.url.v2"
-      - "DB_CERRADO_URL=/run/secrets/cer.database.url.v2"
+      - "DB_AMAZON_URL=/run/secrets/ams.database.url.amz.v2"
+      - "DB_CERRADO_URL=/run/secrets/ams.database.url.cer.v2"
     secrets:
-      - ams.database.url.v2
-      - cer.database.url.v2
+      - ams.database.url.amz.v2
+      - ams.database.url.cer.v2
     deploy:
       replicas: 1
       restart_policy:
@@ -212,9 +212,9 @@ services:
         condition: on-failure
 
 secrets:
-  ams.database.url.v2:
+  ams.database.url.amz.v2:
     external: true
-  cer.database.url.v2:
+  ams.database.url.cer.v2:
     external: true
 
 networks:
