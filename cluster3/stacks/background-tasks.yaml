@@ -239,7 +239,7 @@ services:
     volumes:
       - /data/ams-task/amz3/sync:/usr/local/data
     environment:
-      - "BIOME='Amazônia'"
+      - "BIOME=Amazônia"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
       - "DATABASE_URL=/run/secrets/ams.database.url.v2"
       - "ALL_DATA=True"
@@ -259,7 +259,7 @@ services:
     volumes:
       - /data/ams-task/cer2/sync:/usr/local/data
     environment:
-      - "BIOME='Cerrado'"
+      - "BIOME=Cerrado"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
       - "DATABASE_URL=/run/secrets/cer.database.url.v2"
       - "ALL_DATA=True"
