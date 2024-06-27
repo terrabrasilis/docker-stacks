@@ -241,7 +241,7 @@ services:
     environment:
       - "BIOME=Amazônia"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
-      - "DATABASE_URL=/run/secrets/ams.database.url.v2"
+      - "DATABASE_URL=/run/secrets/ams.database.url.amz.v2"
       - "ALL_DATA=True"
       - "FTP_HOST=/run/secrets/risk.ftp.host"
       - "FTP_PORT=/run/secrets/risk.ftp.port"
@@ -250,7 +250,7 @@ services:
       - "FTP_PASS=/run/secrets/risk.ftp.pass"
       - "RISK_OUTPUT_PATH=/usr/local/data"
     secrets:
-      - ams.database.url.v2
+      - ams.database.url.amz.v2
       - risk.ftp.host
       - risk.ftp.port
       - risk.ftp.path
@@ -272,10 +272,10 @@ services:
     environment:
       - "BIOME=Cerrado"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
-      - "DATABASE_URL=/run/secrets/cer.database.url.v2"
+      - "DATABASE_URL=/run/secrets/ams.database.url.cer.v2"
       - "ALL_DATA=True"
     secrets:
-      - cer.database.url.v2
+      - ams.database.url.cer.v2
     networks:
       - backgroundtask
     deploy:
@@ -357,9 +357,9 @@ secrets:
     external: true
   postgres.pass.prod:
     external: true
-  ams.database.url.v2:
+  ams.database.url.amz.v2:
     external: true
-  cer.database.url.v2:
+  ams.database.url.cer.v2:
     external: true
   risk.ftp.host:
     external: true

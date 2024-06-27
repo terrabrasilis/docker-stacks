@@ -15,7 +15,7 @@ services:
     environment:
       - "BIOME=Amazônia"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
-      - "DATABASE_URL=/run/secrets/amz4h.database.url"
+      - "DATABASE_URL=/run/secrets/ams.database.url.amzh.v2"
       - "ALL_DATA=True"
       - "FTP_HOST=/run/secrets/risk.ftp.host"
       - "FTP_PORT=/run/secrets/risk.ftp.port"
@@ -25,7 +25,7 @@ services:
       - "RISK_OUTPUT_PATH=/usr/local/data"
       - "GEOSERVER_OUTPUT_PATH=/usr/local/geoserver"
     secrets:
-      - amz4h.database.url
+      - ams.database.url.amzh.v2
       - risk.ftp.host
       - risk.ftp.port
       - risk.ftp.path
@@ -51,10 +51,10 @@ services:
     environment:
       - "BIOME=Cerrado"
       - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
-      - "DATABASE_URL=/run/secrets/cer2h.database.url"
+      - "DATABASE_URL=/run/secrets/ams.database.url.cerh.v2"
       - "ALL_DATA=True"
     secrets:
-      - cer2h.database.url
+      - ams.database.url.cerh.v2
     deploy:
       replicas: 1
       placement:
@@ -65,9 +65,9 @@ services:
         condition: on-failure
 
 secrets:
-  amz4h.database.url:
+  ams.database.url.amzh.v2:
     external: true
-  cer2h.database.url:
+  ams.database.url.cerh.v2:
     external: true
   risk.ftp.host:
     external: true
