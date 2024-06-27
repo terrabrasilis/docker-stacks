@@ -271,6 +271,22 @@
         "url": "https://github.com/terrabrasilis/docker-stacks",
         "stackfile": "cluster3/stacks/background-tasks-homologation.yaml"
       }
+    },
+    {
+      "type": 2,
+      "name": "pg-client",
+      "title": "This stack is used for some tests",
+      "description": "This stack is used for some tests",
+      "note": "This stack is used for some tests",
+      "categories": [
+        "test"
+      ],
+      "platform": "linux",
+      "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+      "repository": {
+        "url": "https://github.com/terrabrasilis/docker-stacks",
+        "stackfile": "cluster3/stacks/pg-client.yaml"
+      }
     }
   ]
 }
