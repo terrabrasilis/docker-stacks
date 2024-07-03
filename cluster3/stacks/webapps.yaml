@@ -175,7 +175,7 @@ services:
         condition: on-failure
 
   ams-webapp:
-    image: terrabrasilis/ams-webapp:v2.2
+    image: terrabrasilis/ams-webapp:v2.2.3
     hostname: ams.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
