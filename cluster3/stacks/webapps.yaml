@@ -21,7 +21,7 @@ services:
       start_period: 40s
 
   deforestation-dashboard:
-    image: terrabrasilis/deforestation-dashboard:prod_v3.2.4
+    image: terrabrasilis/deforestation-dashboard:prod_v3.3.0
     hostname: deforestation.dashboard.production
     networks:
       - proxy
