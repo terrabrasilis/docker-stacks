@@ -46,7 +46,7 @@ services:
     hostname: file.delivery.auth.homologation
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
-      - /data/deter-auth/logs:/logs
+      - /data/deter-auth/logs-h:/logs
     secrets:
       - jwt.private.key
     environment:
