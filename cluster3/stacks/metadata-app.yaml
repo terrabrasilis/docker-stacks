@@ -10,8 +10,7 @@ services:
       DATA_DIR: /var/lib/geonetwork_data
     volumes:
       - /data/geonetwork_34:/var/lib/geonetwork_data
-      - /data/geonetwork_34/gn.h2.db:/usr/local/tomcat/webapps/gn.h2.db
-      - /data/geonetwork_34/gn.trace.db:/usr/local/tomcat/webapps/gn.trace.db
+      - /data/geonetwork_34/gn.h2.db:/usr/local/tomcat/webapps/gn.h2.db      
     deploy:
       replicas: 1
       restart_policy:
