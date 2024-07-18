@@ -1,0 +1,28 @@
+version: '3.4'
+services:
+  geonetwork:
+    image: terrabrasilis/geonetwork:v3.4.4
+    networks:
+      - proxy
+    ports:
+      - "8080"
+    environment:
+      DATA_DIR: /var/lib/geonetwork_data
+    volumes:
+      - /data/geonetwork_34:/var/lib/geonetwork_data
+      - /data/geonetwork_34/gn.h2.db:/usr/local/tomcat/webapps/gn.h2.db
+      - /data/geonetwork_34/gn.trace.db:/usr/local/tomcat/webapps/gn.trace.db
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:8080\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+networks:
+  proxy:
+    external: true

@@ -1,0 +1,91 @@
+# Used for deploy manager Apps
+version: '3.4'
+
+services:
+
+  pgadmin4_57:
+  # https://hub.docker.com/r/dpage/pgadmin4/
+  # https://github.com/postgres/pgadmin4
+    image: dpage/pgadmin4:5.7
+    ports:
+      - 5656:80
+    volumes:
+      - /data/manager-apps/pgadmin4_57:/var/lib/pgadmin
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - proxy
+
+  pgadmin4:
+  # https://hub.docker.com/r/dpage/pgadmin4/
+  # https://github.com/postgres/pgadmin4
+    image: dpage/pgadmin4:8.5
+    ports:
+      - 5555:80
+    #environment:
+      # after starting for the first time, use the web app to change this password
+      # and then remove these entries.
+      # the initial email
+      #- "PGADMIN_DEFAULT_EMAIL=<an_email>"
+      # the initial password
+      #- "PGADMIN_DEFAULT_PASSWORD=<a_secret>"
+    volumes:
+      - /data/manager-apps/pgadmin4:/var/lib/pgadmin
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - proxy
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.8.5
+    hostname: phpmyadmin
+    networks:
+      - proxy
+      - backend
+    ports:
+      - "25111:80" 
+    environment:   
+      - "PMA_ARBITRARY=1"
+      - "PMA_ABSOLUTE_URI=https://terrabrasilis.dpi.inpe.br/phpmyadmin/"
+    volumes: 
+      - /data/manager-apps/phpmyadmin/sessions:/sessions
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+
+  geoserver-analyzer:
+    image: terrabrasilis/geoserver-analyzer:v1.0.0
+    networks:
+      - proxy
+    volumes:
+      - /data/manager-apps/geoserver-analyzer/output/:/usr/local/geoserver-analyzer/output/
+    environment:      
+      GEOSERVER_USERNAME_FILE: /run/secrets/geoserver.admin.user
+      GEOSERVER_PASSWORD_FILE: /run/secrets/geoserver.admin.password
+      BUSINESS_API_URL: "https://terrabrasilis.dpi.inpe.br/business/api/v1/vision/name/deforestation/all;https://terrabrasilis.dpi.inpe.br/business/api/v1/vision/name/alerts/all;https://terrabrasilis.dpi.inpe.br/business/api/v1/vision/name/vegetation/all"
+      GEOSERVER_URL: "https://terrabrasilis.dpi.inpe.br/geoserver/"    
+    secrets:
+      - geoserver.admin.user
+      - geoserver.admin.password
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+
+networks: 
+  proxy:
+    external: true
+  backend:
+    external: true
+
+secrets:
+  geoserver.admin.user:
+    external: true
+  geoserver.admin.password:
+    external: true   

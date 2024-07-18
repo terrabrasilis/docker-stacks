@@ -1,0 +1,79 @@
+version: '3.4'
+services:
+
+  # The instance of RedisDB to store the Deforestation dashboard documents
+  redis-homologation:
+    image: terrabrasilis/redis:v01
+    ports:
+      - "6379"
+    networks:
+      - backend_h
+    volumes:
+      - /data/homologation/redis:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # Deforestation dashboard API
+  redis-api-homologation:
+    image: terrabrasilis/redis-api:v1.1.2
+    ports:
+      - "3001"
+    networks:
+      - proxy
+      - backend_h
+    depends_on:
+      - redis-homologation
+    environment:
+      - REDIS_HOSTNAME=redis-homologation
+      - REDIS_PORT=6379
+      - API_PORT=3001
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:3001/dashboard/api/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # File delivery service API with authentication
+  file-delivery-api-h:
+    image: terrabrasilis/file-delivery:v1.0.6
+    hostname: file.delivery.auth.homologation
+    volumes:
+      - /data/deter-auth/generated-files:/data/files:ro
+      - /data/deter-auth/logs-h:/logs
+    secrets:
+      - jwt.private.key
+    environment:
+      JWT_SECRET: /run/secrets/jwt.private.key
+      OAUTH_API_URL: "https://terrabrasilis.dpi.inpe.br/oauth-api/"
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
+    networks:
+      - proxy
+    ports:
+      - "9000"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:9000/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+secrets:
+  jwt.private.key:
+    external: true
+
+networks:
+  proxy:
+    external: true
+  backend_h:
+    external: false

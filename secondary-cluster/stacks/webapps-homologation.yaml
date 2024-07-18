@@ -1,0 +1,111 @@
+# Used for deploy homologation Apps
+version: '3.4'
+
+services:
+
+  amsh-webapp:
+    image: terrabrasilis/ams-webapp:v2.2.2.devel.rc
+    hostname: amsh.webapp
+    entrypoint: /docker-entrypoint.sh
+    networks:
+      - proxy
+    ports:
+      - 7000
+    environment:
+      - "SCRIPT_NAME=/ams-homologation"
+      - "GEOSERVER_URL=https://terrabrasilis.dpi.inpe.br/geoserver"
+      - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
+      - "APPLICATION_ROOT=/ams-homologation/"
+      - "DB_AMAZON_URL=/run/secrets/ams.database.url.amzh.v2"
+      - "DB_CERRADO_URL=/run/secrets/ams.database.url.cerh.v2"
+    secrets:
+      - ams.database.url.amzh.v2
+      - ams.database.url.cerh.v2
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  deforestation-dashboard-h:
+    image: terrabrasilis/deforestation-dashboard:hom_v3.3.0
+    hostname: deforestation.dashboard.homologation
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  amazon-alert-aggregated-h:
+    image: terrabrasilis/amazon-alert-aggregated:v2.13.1
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  amazon-alert-daily-h:
+    image: terrabrasilis/amazon-alert-daily:v2.13.1
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  cerrado-nb-alert-daily-h:
+    image: terrabrasilis/cerrado-alert-daily:v2.12.1
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        
+  cerrado-nb-alert-aggregated-h:
+    image: terrabrasilis/cerrado-alert-aggregated:v2.12.1
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+secrets:
+  ams.database.url.amzh.v2:
+    external: true
+  ams.database.url.cerh.v2:
+    external: true
+
+networks:
+  proxy:
+    external: true
