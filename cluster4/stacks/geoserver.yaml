@@ -1,0 +1,49 @@
+#geoserver-single
+
+version: '3.2'
+services:
+    gs_2_25_2:
+      image: kartoza/geoserver:2.25.2
+      hostname: geoserver_2_25_2
+      ports:
+        - "30010:8080"
+      networks:
+        - proxy
+      extra_hosts:
+        - "pg13queimadas:192.168.1.17"
+      volumes:
+        - /geoserver/2_25_2/datadir:/var/local/geoserver
+      environment:
+        GEOSERVER_DATA_DIR: /var/local/geoserver
+        GEOSERVER_ADMIN_PASSWORD_FILE: /run/secrets/geoserver.admin.pass
+        GEOSERVER_CONTEXT_ROOT: geoservice
+        GEOSERVER_LOG_PROFILE: DEFAULT_LOGGING
+        GEOSERVER_LOG_DIR: /var/local/geoserver/logs
+        GEOSERVER_PORT: 8080
+        CLUSTERING: 'False'
+        # JVM options
+        INITIAL_MEMORY: 1G
+        # https://docs.geoserver.org/stable/en/user/production/container.html#optimize-your-jvm
+        MAXIMUM_MEMORY: 2G
+        INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+        # JVM Startup option for encoding
+        ENCODING: 'UTF8'
+        # JVM Startup option for timezone
+        TIMEZONE: 'GMT'
+        # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+        # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
+        ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      secrets:
+      - geoserver.admin.pass
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure 
+
+secrets:
+  geoserver.admin.pass:
+    external: true
+
+networks:
+  proxy:
+    external: true

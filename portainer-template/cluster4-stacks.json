@@ -78,13 +78,33 @@
         "categories": [
           "application",
           "service",
-          "API"
+          "API",
+          "geoserver"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
           "url": "https://github.com/Terrabrasilis/docker-stacks",
           "stackfile": "cluster4/stacks/geoserver-cluster.yaml"
+        }
+      },
+      {
+        "type": 2,
+        "name": "geoserver-single",
+        "title": "The GeoServer single instance used to test a new version.",
+        "description": "The GeoServer application allows managing data sources and making them available through the OGC API as WMS and WFS services.",
+        "note": "This stack is optional and serves to manage the publication of data layers for Queimadas databases.",
+        "categories": [
+          "application",
+          "service",
+          "API",
+          "geoserver"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+          "url": "https://github.com/Terrabrasilis/docker-stacks",
+          "stackfile": "cluster4/stacks/geoserver.yaml"
         }
       }
     ]
