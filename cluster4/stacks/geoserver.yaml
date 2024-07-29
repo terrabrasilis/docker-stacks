@@ -17,10 +17,11 @@ services:
         GEOSERVER_DATA_DIR: /var/local/geoserver
         GEOSERVER_ADMIN_PASSWORD_FILE: /run/secrets/geoserver.admin.pass
         GEOSERVER_CONTEXT_ROOT: geoservice
-        GEOSERVER_LOG_PROFILE: DEFAULT_LOGGING
+        GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
         GEOSERVER_LOG_DIR: /var/local/geoserver/logs
         GEOSERVER_PORT: 8080
         CLUSTERING: 'False'
+        EXISTING_DATA_DIR: false
         # JVM options
         INITIAL_MEMORY: 1G
         # https://docs.geoserver.org/stable/en/user/production/container.html#optimize-your-jvm
