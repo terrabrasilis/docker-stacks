@@ -102,7 +102,7 @@ services:
 
   # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
   deter_amazonia_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.3.5
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.6
     hostname: deter.amazonia.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
@@ -125,7 +125,7 @@ services:
       WWW1_HOST: www1.dpi.inpe.br
       SUFFIX_PROJECT: amz
       PREFIX_CONTROL_FILE: deter
-      IBAMA_REF_DATE: '2023-08-01'
+      IBAMA_REF_DATE: '2024-08-01'
     secrets:
       - postgres.port.deter_r
       - postgres.db.deter_r
@@ -150,7 +150,7 @@ services:
 
   # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
   deter_cerrado_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.3.5
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.6
     hostname: deter.cerrado.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
@@ -173,7 +173,7 @@ services:
       WWW1_HOST: www1.dpi.inpe.br
       SUFFIX_PROJECT: cerrado
       PREFIX_CONTROL_FILE: deter_cerrado
-      IBAMA_REF_DATE: '2023-08-01'
+      IBAMA_REF_DATE: '2024-08-01'
     secrets:
       - postgres.port.deter_cerrado_ibama
       - postgres.db.deter_cerrado_ibama
