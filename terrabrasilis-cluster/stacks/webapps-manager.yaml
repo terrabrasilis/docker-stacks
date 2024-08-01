@@ -3,21 +3,6 @@ version: '3.4'
 
 services:
 
-  pgadmin4_57:
-  # https://hub.docker.com/r/dpage/pgadmin4/
-  # https://github.com/postgres/pgadmin4
-    image: dpage/pgadmin4:5.7
-    ports:
-      - 5656:80
-    volumes:
-      - /data/manager-apps/pgadmin4_57:/var/lib/pgadmin
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    networks:
-      - proxy
-
   pgadmin4:
   # https://hub.docker.com/r/dpage/pgadmin4/
   # https://github.com/postgres/pgadmin4
@@ -57,7 +42,6 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-
 
   geoserver-analyzer:
     image: terrabrasilis/geoserver-analyzer:v1.0.0
