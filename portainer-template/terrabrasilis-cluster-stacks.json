@@ -1,7 +1,8 @@
 {
-    "version": "2",
+    "version": "3",
     "templates": [
       {
+        "id": 1,
         "type": 2,
         "name": "ogc-proxy",
         "title": "The proxy to bypass CORS",
@@ -19,6 +20,7 @@
         }
       },
       {
+        "id": 2,
         "type": 2,
         "name": "webservers",
         "title": "Nginx HTTP web server based services",
@@ -36,6 +38,7 @@
         }
       },
       {
+        "id": 3,
         "type": 2,
         "name": "apis",
         "title": "Backend APIs.",
@@ -55,6 +58,7 @@
         }
       },
       {
+        "id": 4,
         "type": 2,
         "name": "background-tasks",
         "title": "Background tasks",
@@ -72,36 +76,34 @@
         }
       },
       {
+        "id": 5,
         "type": 2,
-        "name": "mysql",
-        "title": "The MySQL SGDB and the WebClient PhpMyAdmin.",
-        "description": "The PhpMyAdmin App allows to manage the databases into any internal instance for MySQL.",
-        "note": "This stack is mandatory and is used for store and manage the databases of the WordPress such as TerraBrasilis Web site and another PHP web pages.",
+        "name": "security",
+        "title": "Keycloak",
+        "description": "Open Source Identity and Access Management",
+        "note": "This stack is mandatory and is used for store and manage the credential of users to authentication and authorization flow.",
         "categories": [
-          "application",
-          "manage",
-          "SGDB",
-          "mysql"
+          "security",
+          "API",
+          "application"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "terrabrasilis-cluster/stacks/mysql.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/security.yaml"
         }
       },
       {
+        "id": 6,
         "type": 2,
         "name": "manager-apps",
         "title": "The Web Client manager Apps.",
         "description": "The Apps to allow manage the resources like PostgreSQL databases.",
         "note": "This stack is optional and serves to manage the resources on TerraBrasilis cluster.",
         "categories": [
-          "application",
-          "manage",
-          "SGDB",
-          "PostgreSQL",
-          "MySQL"
+          "manager",
+          "application"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
@@ -111,16 +113,16 @@
         }
       },
       {
+        "id": 7,
         "type": 2,
         "name": "metadata-app",
         "title": "The GeoNetwork app for managing metadata.",
         "description": "The GeoNetwork application allows managing the metadata catalog and serving it through the WCS API.",
         "note": "This stack is mandatory and serves to manage the metadata catalog for TerraBrasilis data.",
         "categories": [
-          "application",
-          "manage",
-          "WCS",
-          "matadata"
+          "service",
+          "API",
+          "GeoNetwork"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
@@ -130,14 +132,13 @@
         }
       },
       {
+        "id": 8,
         "type": 2,
         "name": "cluster-geoserver",
         "title": "The GeoServer cluster to publish data compliant with the OGC services standard.",
         "description": "The GeoServer application allows managing data sources and making them available through the OGC API as WMS and WFS services.",
         "note": "This stack is mandatory and serves to manage the publication of data layers for TerraBrasilis databases.",
         "categories": [
-          "application",
-          "manage",
           "service",
           "API",
           "Geoserver"
@@ -150,7 +151,8 @@
         }
       },
       {
-          "type": 2,
+          "id": 9,
+        "type": 2,
           "name": "webapps",
           "title": "The WebMap and deforestation-dashboard Apps for production",
           "description": "The TerraBrasilis WebMap is the main component of the Web GUIs for explore our maps using the OGC services. The dashboard is the main component Web GUI for explore the deforestation data analytics produced by PRODES.",
@@ -164,7 +166,8 @@
           }
       },
       {
-          "type": 2,
+          "id": 10,
+        "type": 2,
           "name": "homepage",
           "title": "The home page as an entry point to the site",
           "description": "The home page of TerraBrasilis based on Wordpress. It is the gateway to all TerraBrasilis resources.",
@@ -178,19 +181,13 @@
           }
       },
       {
+        "id": 11,
         "type": 2,
         "name": "sgdbs",
         "title": "The SGDBs stack with relational SQL and NoSQL databases.",
         "description": "The main stack with document databases and relational databases.",
         "note": "This stack is mandatory to support some Applications and services stacks.",
-        "categories": [
-          "SQL",
-          "NoSQL",
-          "SGDB",
-          "redis",
-          "Mongo",
-          "MySQL"
-        ],
+        "categories": ["SGDB"],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
@@ -199,7 +196,8 @@
         }
       },
       {
-          "type": 2,
+          "id": 12,
+        "type": 2,
           "name": "homologation-webapps",
           "title": "The Apps Stack for homologation",
           "description": "The TerraBrasilis homologation WebApps stack.",
@@ -213,18 +211,14 @@
           }
       },
       {
+        "id": 13,
         "type": 2,
         "name": "homologation-sgdbs",
         "title": "The homologation SGDBs stack with relational SQL and NoSQL databases.",
         "description": "The TerraBrasilis homologation SGDBs stack.",
         "note": "This stack are optional for homologation use.",
         "categories": [
-          "SQL",
-          "NoSQL",
           "SGDB",
-          "redis",
-          "Mongo",
-          "MySQL",
           "homologation"
         ],
         "platform": "linux",
@@ -235,6 +229,7 @@
         }
       },
       {
+        "id": 14,
         "type": 2,
         "name": "homologation-apis",
         "title": "Homologation backend APIs.",
@@ -242,9 +237,6 @@
         "note": "This stack are optional for homologation use.",
         "categories": [
           "API",
-          "service",
-          "oauth",
-          "timeseries",
           "homologation"
         ],
         "platform": "linux",
@@ -255,6 +247,7 @@
         }
       },
       {
+        "id": 15,
         "type": 2,
         "name": "homologation-background-tasks",
         "title": "Homologation background tasks",
@@ -262,7 +255,6 @@
         "note": "This stack are optional for homologation use.",
         "categories": [
           "tasks",
-          "service",
           "homologation"
         ],
         "platform": "linux",

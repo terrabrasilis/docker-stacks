@@ -1,0 +1,61 @@
+# Used for deploy and test keycloak into swarm
+version: '3.4'
+
+services:
+  # https://www.keycloak.org/server/all-config
+  keycloak:
+    image: keycloak/keycloak:25.0
+    hostname: keycloak.service
+    # if we include the optimized, do not starting
+    #command: start --optimized
+    command: start
+    configs:
+      - source: keycloak.conf
+        target: /opt/keycloak/conf/keycloak.conf
+        mode: 0644
+      - source: keycloak.cert.pem
+        target: /opt/keycloak/certificate/cert.pem
+        mode: 0644
+      - source: keycloak.key.pem
+        target: /opt/keycloak/certificate/key.pem
+        mode: 0644
+    environment:
+      - "KC_DB=postgres"
+      - "KC_DB_SCHEMA=public"
+      - "KC_DB_URL=jdbc:postgresql://192.168.1.18:5432/keycloak"
+      - "KC_HTTPS_CERTIFICATE_FILE=/opt/keycloak/certificate/cert.pem"
+      - "KC_HTTPS_CERTIFICATE_KEY_FILE=/opt/keycloak/certificate/key.pem"
+      #- "KC_HEALTH_ENABLED=true"
+      #- "KC_PROXY_HEADERS=xforwarded"
+      - "KC_HTTP_RELATIVE_PATH=/app/security/"
+      - "KC_HOSTNAME=pve12.dpi.inpe.br"
+      # https://pve12.dpi.inpe.br/app/security/
+      - "KC_HOSTNAME_ADMIN=https://pve12.dpi.inpe.br/app/security/"
+    networks:
+      - proxy
+    ports:
+      - 8080:8080
+      - 8443:8443
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    # healthcheck:
+    #   test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"https://localhost:8443/health/live\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+    #   interval: 1m30s
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 40s
+
+# configuration files in Portainer
+configs:
+  keycloak.conf:
+    external: true
+  keycloak.cert.pem:
+    external: true
+  keycloak.key.pem:
+    external: true
+
+networks:
+  proxy:
+    external: true
