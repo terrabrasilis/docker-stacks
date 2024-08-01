@@ -15,7 +15,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/ogc-proxy.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/ogc-proxy.yaml"
         }
       },
       {
@@ -32,7 +32,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/webservers.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/webservers.yaml"
         }
       },
       {
@@ -51,7 +51,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/apis.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/apis.yaml"
         }
       },
       {
@@ -68,7 +68,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/background-tasks.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/background-tasks.yaml"
         }
       },
       {
@@ -87,7 +87,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/mysql.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/mysql.yaml"
         }
       },
       {
@@ -107,7 +107,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/webapps-manager.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/webapps-manager.yaml"
         }
       },
       {
@@ -126,7 +126,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/metadata-app.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/metadata-app.yaml"
         }
       },
       {
@@ -146,7 +146,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/geoserver-cluster.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/geoserver-cluster.yaml"
         }
       },
       {
@@ -160,7 +160,7 @@
           "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
           "repository": {
               "url": "https://github.com/terrabrasilis/docker-stacks",
-              "stackfile": "secondary-cluster/stacks/webapps.yaml"
+              "stackfile": "terrabrasilis-cluster/stacks/webapps.yaml"
           }
       },
       {
@@ -174,7 +174,7 @@
           "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
           "repository": {
               "url": "https://github.com/terrabrasilis/docker-stacks",
-              "stackfile": "secondary-cluster/stacks/home-page.yaml"
+              "stackfile": "terrabrasilis-cluster/stacks/home-page.yaml"
           }
       },
       {
@@ -195,7 +195,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/sgdb.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/sgdb.yaml"
         }
       },
       {
@@ -209,7 +209,7 @@
           "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
           "repository": {
               "url": "https://github.com/terrabrasilis/docker-stacks",
-              "stackfile": "secondary-cluster/stacks/webapps-homologation.yaml"
+              "stackfile": "terrabrasilis-cluster/stacks/webapps-homologation.yaml"
           }
       },
       {
@@ -231,7 +231,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/sgdb-homologation.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/sgdb-homologation.yaml"
         }
       },
       {
@@ -251,7 +251,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/apis-homologation.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/apis-homologation.yaml"
         }
       },
       {
@@ -269,7 +269,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "secondary-cluster/stacks/background-tasks-homologation.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/background-tasks-homologation.yaml"
         }
       }
     ]
