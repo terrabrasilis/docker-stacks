@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.4'
 
 services:
   agent:
@@ -24,6 +24,7 @@ services:
       - /data/portainer:/data
     networks:
       - agent_network
+      - proxy
     deploy:
       mode: replicated
       replicas: 1
@@ -34,3 +35,5 @@ networks:
   agent_network:
     driver: overlay
     attachable: true
+  proxy:
+    external: true
