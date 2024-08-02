@@ -19,29 +19,39 @@ services:
       - source: keycloak.key.pem
         target: /opt/keycloak/certificate/key.pem
         mode: 0644
+    volumes:
+      - "/data/security/keycloak:/data"
     environment:
       - "KC_DB=postgres"
       - "KC_DB_SCHEMA=public"
       - "KC_DB_URL=jdbc:postgresql://192.168.1.18:5432/keycloak"
       - "KC_HTTPS_CERTIFICATE_FILE=/opt/keycloak/certificate/cert.pem"
       - "KC_HTTPS_CERTIFICATE_KEY_FILE=/opt/keycloak/certificate/key.pem"
-      #- "KC_HEALTH_ENABLED=true"
-      #- "KC_PROXY_HEADERS=xforwarded"
+      - "KC_LOG=file"
+      - "KC_LOG_FILE=/data/log/keycloak.log"
+      - "KC_FEATURES=hostname:v2"
+      - "KC_HEALTH_ENABLED=true"
+      - "KC_PROXY_HEADERS=xforwarded"
       - "KC_HTTP_RELATIVE_PATH=/app/security/"
       - "KC_HOSTNAME=pve12.dpi.inpe.br"
-      # https://pve12.dpi.inpe.br/app/security/
       - "KC_HOSTNAME_ADMIN=https://pve12.dpi.inpe.br/app/security/"
     networks:
       - proxy
     ports:
       - 8080:8080
       - 8443:8443
+      # used for health check endpoints
+      - 9090:9000
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.hostname==node1
       restart_policy:
         condition: on-failure
+    # to enable the health check feature we need to build an image with CURL installed
     # healthcheck:
-    #   test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"https://localhost:8443/health/live\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+    #   test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"https://localhost:9000/health/live\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
     #   interval: 1m30s
     #   timeout: 10s
     #   retries: 3
