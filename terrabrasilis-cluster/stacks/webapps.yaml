@@ -18,7 +18,7 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 10s
 
   deforestation-dashboard:
     image: terrabrasilis/deforestation-dashboard:prod_v3.3.0
@@ -36,7 +36,7 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 10s
 
   focuses-of-fires:
     image: terrabrasilis/focuses-of-fires-dashboard:v1.3.8
@@ -53,7 +53,7 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 10s
 
   cerrado-alert-daily:
     image: terrabrasilis/cerrado-alert-daily:v2.7.9
@@ -70,7 +70,7 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 10s
 
   cerrado-alert-aggregated:
     image: terrabrasilis/cerrado-alert-aggregated:v2.7.9
@@ -87,7 +87,7 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 10s
 
   amazon-alert-aggregated:
     image: terrabrasilis/amazon-alert-aggregated:v2.13.0
@@ -104,7 +104,7 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 10s
 
   amazon-alert-daily:
     image: terrabrasilis/amazon-alert-daily:v2.13.0
@@ -121,23 +121,7 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 3
-      start_period: 40s
-
-  app_survey:
-    image: terrabrasilis/survey:v0.3
-    ports:
-      - "80"
-    volumes:
-      - /data/survey:/var/www/html
-    depends_on:
-      - db_mysql
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    networks: 
-      - proxy
-      - backend
+      start_period: 10s
 
   deter_pantanal_report:
     image: terrabrasilis/deter-pantanal-app:v0.0.8
@@ -197,20 +181,6 @@ services:
       restart_policy:
         condition: on-failure
 
-  oauth-app:
-    image: terrabrasilis/oauth-app:v1.0.1
-    hostname: oauth-app
-    ports:
-      - "8080"
-    networks:
-      - proxy
-    environment:
-      - "URL_OAUTH=https://terrabrasilis.dpi.inpe.br/security/oauth"
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-
 secrets:
   ams.database.url.amz.v2:
     external: true
@@ -219,6 +189,4 @@ secrets:
 
 networks:
   proxy:
-    external: true
-  backend:
     external: true
