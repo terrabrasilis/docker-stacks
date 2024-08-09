@@ -1,168 +1,247 @@
-#cluster-geoserver
+# ogc-services
 
-version: '3.2'
+version: '3.4'
 services:
-    gsmaster:
-      image: terrabrasilis/geoserver-master:v1.0.6
-      hostname: master.geoserver
-      ports:
-        - "30000:8080"
-      networks:
-        - proxy
-      extra_hosts:
-        - "pg13web:192.168.1.16"
-      volumes:
-        - /geoserver/cluster/gs_datadir:/var/local/geoserver
-        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
-      environment:
-        GEOSERVER_CSRF_DISABLED: "true"
-        COOKIE: JSESSIONID prefix
-        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
-        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/master
-        CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
-        instanceName: master
-      deploy:
-        replicas: 1
-        placement:
-          constraints:
-            - node.hostname==node1
-        restart_policy:
-          condition: on-failure
+  gsmaster:
+    image: kartoza/geoserver:2.25.2
+    hostname: geoserver-master
+    ports:
+      - 8080
+    networks:
+      - proxy
+    volumes:
+      - /geoserver/cluster/gs_datadir:/var/local/geoserver
+    environment:
+      GEOSERVER_DATA_DIR: /var/local/geoserver
+      GEOSERVER_CONTEXT_ROOT: geoserver
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/master/logs
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
+      instanceName: master
+      GEOSERVER_PORT: 8080
+      CLUSTERING: 'False'
+      EXISTING_DATA_DIR: 'true'
+      ENABLE_JSONP: 'false'
+      # JVM options
+      INITIAL_MEMORY: 1G
+      # https://docs.geoserver.org/stable/en/user/production/container.html#optimize-your-jvm
+      MAXIMUM_MEMORY: 2G
+      INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+      # JVM Startup option for encoding
+      ENCODING: 'UTF8'
+      # JVM Startup option for timezone
+      TIMEZONE: 'GMT'
+      # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+      # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname==node1
+      restart_policy:
+        condition: on-failure
 
-    gsslave1:
-      image: terrabrasilis/geoserver-worker:v1.0.6
-      hostname: slave1.geoserver
-      networks:
-        - proxy
-      extra_hosts:
-        - "pg13web:192.168.1.16"
-      volumes:
-        - /geoserver/cluster/gs_datadir:/var/local/geoserver
-        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
-      environment:
-        GEOSERVER_CSRF_DISABLED: "true"
-        COOKIE: JSESSIONID prefix
-        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave1
-        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave1
-        CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
-        instanceName: slave1
-      ports:
-        - "30010:8080"
-      deploy:
-        replicas: 1
-        placement:
-          constraints:
-            - node.hostname==node2
-        restart_policy:
-          condition: on-failure
+  gsslave1:
+    image: kartoza/geoserver:2.25.2
+    hostname: geoserver-slave1
+    ports:
+      - 8080
+    networks:
+      - proxy
+    volumes:
+      - /geoserver/cluster/gs_datadir:/var/local/geoserver
+    environment:
+      GEOSERVER_DATA_DIR: /var/local/geoserver
+      GEOSERVER_CONTEXT_ROOT: geoserver
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave1/logs
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave1
+      instanceName: slave1
+      GEOSERVER_PORT: 8080
+      CLUSTERING: 'False'
+      EXISTING_DATA_DIR: 'true'
+      ENABLE_JSONP: 'false'
+      # JVM options
+      INITIAL_MEMORY: 1G
+      # https://docs.geoserver.org/stable/en/user/production/container.html#optimize-your-jvm
+      MAXIMUM_MEMORY: 2G
+      INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+      # JVM Startup option for encoding
+      ENCODING: 'UTF8'
+      # JVM Startup option for timezone
+      TIMEZONE: 'GMT'
+      # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+      # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname==node1
+      restart_policy:
+        condition: on-failure
 
-    gsslave2:
-      image: terrabrasilis/geoserver-worker:v1.0.6
-      hostname: slave2.geoserver
-      networks:
-        - proxy
-      extra_hosts:
-        - "pg13web:192.168.1.16"
-      volumes:
-        - /geoserver/cluster/gs_datadir:/var/local/geoserver
-        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
-      environment:
-        GEOSERVER_CSRF_DISABLED: "true"
-        COOKIE: JSESSIONID prefix
-        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave2
-        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave2
-        CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
-        instanceName: slave2
-      ports:
-        - "30020:8080"
-      deploy:
-        replicas: 1
-        placement:
-          constraints:
-            - node.hostname==node3
-        restart_policy:
-          condition: on-failure
+  gsslave2:
+    image: kartoza/geoserver:2.25.2
+    hostname: geoserver-slave2
+    ports:
+      - 8080
+    networks:
+      - proxy
+    volumes:
+      - /geoserver/cluster/gs_datadir:/var/local/geoserver
+    environment:
+      GEOSERVER_DATA_DIR: /var/local/geoserver
+      GEOSERVER_CONTEXT_ROOT: geoserver
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave2/logs
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave2
+      instanceName: slave2
+      GEOSERVER_PORT: 8080
+      CLUSTERING: 'False'
+      EXISTING_DATA_DIR: 'true'
+      ENABLE_JSONP: 'false'
+      # JVM options
+      INITIAL_MEMORY: 1G
+      # https://docs.geoserver.org/stable/en/user/production/container.html#optimize-your-jvm
+      MAXIMUM_MEMORY: 2G
+      INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+      # JVM Startup option for encoding
+      ENCODING: 'UTF8'
+      # JVM Startup option for timezone
+      TIMEZONE: 'GMT'
+      # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+      # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname==node2
+      restart_policy:
+        condition: on-failure
 
-    gsslave3:
-      image: terrabrasilis/geoserver-worker:v1.0.6
-      hostname: slave3.geoserver
-      networks:
-        - proxy
-      extra_hosts:
-        - "pg13web:192.168.1.16"
-      volumes:
-        - /geoserver/cluster/gs_datadir:/var/local/geoserver
-        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
-      environment:
-        GEOSERVER_CSRF_DISABLED: "true"
-        COOKIE: JSESSIONID prefix
-        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave3
-        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave3
-        CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
-        instanceName: slave3
-      ports:
-        - "30030:8080"
-      deploy:
-        replicas: 1
-        placement:
-          constraints:
-            - node.hostname==node4
-        restart_policy:
-          condition: on-failure
+  gsslave3:
+    image: kartoza/geoserver:2.25.2
+    hostname: geoserver-slave3
+    ports:
+      - 8080
+    networks:
+      - proxy
+    volumes:
+      - /geoserver/cluster/gs_datadir:/var/local/geoserver
+    environment:
+      GEOSERVER_DATA_DIR: /var/local/geoserver
+      GEOSERVER_CONTEXT_ROOT: geoserver
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave3/logs
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave3
+      instanceName: slave3
+      GEOSERVER_PORT: 8080
+      CLUSTERING: 'False'
+      EXISTING_DATA_DIR: 'true'
+      ENABLE_JSONP: 'false'
+      # JVM options
+      INITIAL_MEMORY: 1G
+      # https://docs.geoserver.org/stable/en/user/production/container.html#optimize-your-jvm
+      MAXIMUM_MEMORY: 2G
+      INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+      # JVM Startup option for encoding
+      ENCODING: 'UTF8'
+      # JVM Startup option for timezone
+      TIMEZONE: 'GMT'
+      # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+      # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname==node3
+      restart_policy:
+        condition: on-failure
 
-    gsslave4:
-      image: terrabrasilis/geoserver-worker:v1.0.6
-      hostname: slave4.geoserver
-      networks:
-        - proxy
-      extra_hosts:
-        - "pg13web:192.168.1.16"
-      volumes:
-        - /geoserver/cluster/gs_datadir:/var/local/geoserver
-        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
-      environment:
-        GEOSERVER_CSRF_DISABLED: "true"
-        COOKIE: JSESSIONID prefix
-        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave4
-        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave4
-        CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
-        instanceName: slave4
-      ports:
-        - "30040:8080"
-      deploy:
-        replicas: 1
-        placement:
-          constraints:
-            - node.hostname==node5
-        restart_policy:
-          condition: on-failure
+  gsslave4:
+    image: kartoza/geoserver:2.25.2
+    hostname: geoserver-slave4
+    ports:
+      - 8080
+    networks:
+      - proxy
+    volumes:
+      - /geoserver/cluster/gs_datadir:/var/local/geoserver
+    environment:
+      GEOSERVER_DATA_DIR: /var/local/geoserver
+      GEOSERVER_CONTEXT_ROOT: geoserver
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave4/logs
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave4
+      instanceName: slave4
+      GEOSERVER_PORT: 8080
+      CLUSTERING: 'False'
+      EXISTING_DATA_DIR: 'true'
+      ENABLE_JSONP: 'false'
+      # JVM options
+      INITIAL_MEMORY: 1G
+      # https://docs.geoserver.org/stable/en/user/production/container.html#optimize-your-jvm
+      MAXIMUM_MEMORY: 2G
+      INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+      # JVM Startup option for encoding
+      ENCODING: 'UTF8'
+      # JVM Startup option for timezone
+      TIMEZONE: 'GMT'
+      # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+      # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname==node4
+      restart_policy:
+        condition: on-failure
 
-    gsslave5:
-      image: terrabrasilis/geoserver-worker:v1.0.6
-      hostname: slave5.geoserver
-      networks:
-        - proxy
-      extra_hosts:
-        - "pg13web:192.168.1.16"
-      volumes:
-        - /geoserver/cluster/gs_datadir:/var/local/geoserver
-        - /geoserver/cluster/gs_extensions:/var/local/geoserver-exts
-      environment:
-        GEOSERVER_CSRF_DISABLED: "true"
-        COOKIE: JSESSIONID prefix
-        CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave5
-        GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/logs/slave5
-        CATALINA_OPTS: -XX:OnOutOfMemoryError="kill -9 %p" -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx3072m -Xss1024k -XX:NewSize=768m -XX:+UseParallelGC -XX:MaxGCPauseMillis=500 -DGEOSERVER_DATA_DIR=/var/local/geoserver
-        instanceName: slave5
-      ports:
-        - "30050:8080"
-      deploy:
-        replicas: 1
-        placement:
-          constraints:
-            - node.hostname==node5
-        restart_policy:
-          condition: on-failure
+  gsslave5:
+    image: kartoza/geoserver:2.25.2
+    hostname: geoserver-slave5
+    ports:
+      - 8080
+    networks:
+      - proxy
+    volumes:
+      - /geoserver/cluster/gs_datadir:/var/local/geoserver
+    environment:
+      GEOSERVER_DATA_DIR: /var/local/geoserver
+      GEOSERVER_CONTEXT_ROOT: geoserver
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave5/logs
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave5
+      instanceName: slave5
+      GEOSERVER_PORT: 8080
+      CLUSTERING: 'False'
+      EXISTING_DATA_DIR: 'true'
+      ENABLE_JSONP: 'false'
+      # JVM options
+      INITIAL_MEMORY: 1G
+      # https://docs.geoserver.org/stable/en/user/production/container.html#optimize-your-jvm
+      MAXIMUM_MEMORY: 2G
+      INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+      # JVM Startup option for encoding
+      ENCODING: 'UTF8'
+      # JVM Startup option for timezone
+      TIMEZONE: 'GMT'
+      # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+      # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname==node5
+      restart_policy:
+        condition: on-failure
+
 
 networks:
   proxy:
