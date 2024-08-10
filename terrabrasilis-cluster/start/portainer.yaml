@@ -31,9 +31,9 @@ services:
       placement:
         constraints: [node.role == manager]
 
+# we need create that networks before start this stack
 networks:
   agent_network:
-    driver: overlay
-    attachable: true
+    external: true
   proxy:
     external: true
