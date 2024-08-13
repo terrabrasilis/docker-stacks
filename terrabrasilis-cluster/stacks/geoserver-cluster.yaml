@@ -11,12 +11,14 @@ services:
       - proxy
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
+      - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/master/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
+      GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: master
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
@@ -51,12 +53,14 @@ services:
       - proxy
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
+      - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave1/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave1
+      GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave1
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
@@ -91,12 +95,14 @@ services:
       - proxy
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
+      - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave2/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave2
+      GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave2
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
@@ -131,12 +137,14 @@ services:
       - proxy
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
+      - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave3/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave3
+      GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave3
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
@@ -171,12 +179,14 @@ services:
       - proxy
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
+      - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave4/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave4
+      GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave4
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
@@ -211,12 +221,14 @@ services:
       - proxy
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
+      - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave5/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave5
+      GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave5
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
@@ -246,3 +258,4 @@ services:
 networks:
   proxy:
     external: true
+
