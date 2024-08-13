@@ -6,7 +6,7 @@ services:
     image: kartoza/geoserver:2.25.2
     hostname: geoserver-master
     ports:
-      - 8080
+      - "3100:8080"
     networks:
       - proxy
     volumes:
@@ -46,7 +46,7 @@ services:
     image: kartoza/geoserver:2.25.2
     hostname: geoserver-slave1
     ports:
-      - 8080
+      - "3101:8080"
     networks:
       - proxy
     volumes:
@@ -86,7 +86,7 @@ services:
     image: kartoza/geoserver:2.25.2
     hostname: geoserver-slave2
     ports:
-      - 8080
+      - "3102:8080"
     networks:
       - proxy
     volumes:
@@ -126,7 +126,7 @@ services:
     image: kartoza/geoserver:2.25.2
     hostname: geoserver-slave3
     ports:
-      - 8080
+      - "3103:8080"
     networks:
       - proxy
     volumes:
@@ -166,7 +166,7 @@ services:
     image: kartoza/geoserver:2.25.2
     hostname: geoserver-slave4
     ports:
-      - 8080
+      - "3104:8080"
     networks:
       - proxy
     volumes:
@@ -206,7 +206,7 @@ services:
     image: kartoza/geoserver:2.25.2
     hostname: geoserver-slave5
     ports:
-      - 8080
+      - "3105:8080"
     networks:
       - proxy
     volumes:
