@@ -18,6 +18,8 @@ services:
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/master/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/master/logs/geoserver.log
+      # confs of GWC like xml files
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: master
       GEOSERVER_PORT: 8080
@@ -32,10 +34,19 @@ services:
       # JVM Startup option for encoding
       ENCODING: 'UTF8'
       # JVM Startup option for timezone
-      TIMEZONE: 'GMT'
+      TIMEZONE: 'America/Sao_Paulo'
+      # LANGUAGE: 'pt'
+      # REGION: 'BR'
+      # COUNTRY: 'BR'
+      # LANGUAGE: 'pt'
+      # REGION: 'BR'
+      # COUNTRY: 'BR'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
       # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # It seems that the option that works for the Kartoza image is this one.
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill %p"
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
     deploy:
       replicas: 1
       placement:
@@ -60,8 +71,11 @@ services:
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave1/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave1
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/slave1/logs/geoserver.log
+      # confs of GWC like xml files
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave1
+      DISABLE_WEB_INTERFACE: 'true'
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
       EXISTING_DATA_DIR: 'true'
@@ -74,10 +88,16 @@ services:
       # JVM Startup option for encoding
       ENCODING: 'UTF8'
       # JVM Startup option for timezone
-      TIMEZONE: 'GMT'
+      TIMEZONE: 'America/Sao_Paulo'
+      # LANGUAGE: 'pt'
+      # REGION: 'BR'
+      # COUNTRY: 'BR'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
       # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # It seems that the option that works for the Kartoza image is this one.
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill %p"
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
     deploy:
       replicas: 1
       placement:
@@ -102,8 +122,11 @@ services:
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave2/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave2
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/slave2/logs/geoserver.log
+      # confs of GWC like xml files
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave2
+      DISABLE_WEB_INTERFACE: 'true'
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
       EXISTING_DATA_DIR: 'true'
@@ -116,10 +139,16 @@ services:
       # JVM Startup option for encoding
       ENCODING: 'UTF8'
       # JVM Startup option for timezone
-      TIMEZONE: 'GMT'
+      TIMEZONE: 'America/Sao_Paulo'
+      # LANGUAGE: 'pt'
+      # REGION: 'BR'
+      # COUNTRY: 'BR'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
       # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # It seems that the option that works for the Kartoza image is this one.
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill %p"
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
     deploy:
       replicas: 1
       placement:
@@ -144,8 +173,11 @@ services:
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave3/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave3
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/slave3/logs/geoserver.log
+      # confs of GWC like xml files
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave3
+      DISABLE_WEB_INTERFACE: 'true'
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
       EXISTING_DATA_DIR: 'true'
@@ -158,10 +190,16 @@ services:
       # JVM Startup option for encoding
       ENCODING: 'UTF8'
       # JVM Startup option for timezone
-      TIMEZONE: 'GMT'
+      TIMEZONE: 'America/Sao_Paulo'
+      # LANGUAGE: 'pt'
+      # REGION: 'BR'
+      # COUNTRY: 'BR'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
       # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # It seems that the option that works for the Kartoza image is this one.
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill %p"
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
     deploy:
       replicas: 1
       placement:
@@ -186,8 +224,11 @@ services:
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave4/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave4
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/slave4/logs/geoserver.log
+      # confs of GWC like xml files
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave4
+      DISABLE_WEB_INTERFACE: 'true'
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
       EXISTING_DATA_DIR: 'true'
@@ -200,10 +241,16 @@ services:
       # JVM Startup option for encoding
       ENCODING: 'UTF8'
       # JVM Startup option for timezone
-      TIMEZONE: 'GMT'
+      TIMEZONE: 'America/Sao_Paulo'
+      # LANGUAGE: 'pt'
+      # REGION: 'BR'
+      # COUNTRY: 'BR'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
       # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # It seems that the option that works for the Kartoza image is this one.
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill %p"
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
     deploy:
       replicas: 1
       placement:
@@ -228,8 +275,11 @@ services:
       GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
       GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave5/logs
       CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave5
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/slave5/logs/geoserver.log
+      # confs of GWC like xml files
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave5
+      DISABLE_WEB_INTERFACE: 'true'
       GEOSERVER_PORT: 8080
       CLUSTERING: 'False'
       EXISTING_DATA_DIR: 'true'
@@ -242,10 +292,16 @@ services:
       # JVM Startup option for encoding
       ENCODING: 'UTF8'
       # JVM Startup option for timezone
-      TIMEZONE: 'GMT'
+      TIMEZONE: 'America/Sao_Paulo'
+      # LANGUAGE: 'pt'
+      # REGION: 'BR'
+      # COUNTRY: 'BR'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
       # Example ADDITIONAL_JAVA_STARTUP_OPTIONS='-Dorg.geotools.shapefile.datetime=true'
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill -9 %p"
+      # It seems that the option that works for the Kartoza image is this one.
+      # ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:OnOutOfMemoryError="kill %p"
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
     deploy:
       replicas: 1
       placement:
