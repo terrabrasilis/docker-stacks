@@ -36,6 +36,19 @@ services:
       restart_policy:
         condition: on-failure
 
+  prodes_dashboard_files_h:
+    image: nginx:1.22-alpine
+    volumes:
+      - /data/homologation/prodes/dashboard/deforestation:/usr/share/nginx/html:ro
+    networks:
+      - proxy
+    ports:
+      - 80
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
 networks:
   proxy:
     external: true
