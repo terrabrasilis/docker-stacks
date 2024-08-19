@@ -27,7 +27,7 @@ services:
         condition: on-failure
 
   deforestation-dashboard-h:
-    image: terrabrasilis/deforestation-dashboard:hom_v3.4.0
+    image: terrabrasilis/deforestation-dashboard:hom_v3.4.1
     hostname: deforestation.dashboard.homologation
     networks:
       - proxy
@@ -39,10 +39,10 @@ services:
         condition: on-failure
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
+      interval: 40s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 20s
 
   amazon-alert-aggregated-h:
     image: terrabrasilis/amazon-alert-aggregated:v2.13.1
@@ -56,10 +56,10 @@ services:
         condition: on-failure
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
+      interval: 40s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 20s
 
   amazon-alert-daily-h:
     image: terrabrasilis/amazon-alert-daily:v2.13.1
@@ -73,10 +73,10 @@ services:
         condition: on-failure
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
+      interval: 40s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 20s
 
   cerrado-nb-alert-daily-h:
     image: terrabrasilis/cerrado-alert-daily:v2.12.1
