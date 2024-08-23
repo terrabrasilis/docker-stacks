@@ -22,7 +22,7 @@ services:
       # confs of GWC like xml files
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: master
-      CSRF_WHITELIST: 'inpe.br'
+      # CSRF_WHITELIST: 'inpe.br'
       GEOSERVER_PORT: 8080
       USE_DATETIME_IN_SHAPEFILE: 'false'
       CLUSTERING: 'False'
@@ -65,7 +65,7 @@ services:
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave1
       DISABLE_WEB_INTERFACE: 'true'
-      CSRF_WHITELIST: 'inpe.br'
+      # CSRF_WHITELIST: 'inpe.br'
       GEOSERVER_PORT: 8080
       USE_DATETIME_IN_SHAPEFILE: 'false'
       CLUSTERING: 'False'
@@ -108,7 +108,7 @@ services:
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave2
       DISABLE_WEB_INTERFACE: 'true'
-      CSRF_WHITELIST: 'inpe.br'
+      # CSRF_WHITELIST: 'inpe.br'
       GEOSERVER_PORT: 8080
       USE_DATETIME_IN_SHAPEFILE: 'false'
       CLUSTERING: 'False'
@@ -151,7 +151,7 @@ services:
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave3
       DISABLE_WEB_INTERFACE: 'true'
-      CSRF_WHITELIST: 'inpe.br'
+      # CSRF_WHITELIST: 'inpe.br'
       GEOSERVER_PORT: 8080
       USE_DATETIME_IN_SHAPEFILE: 'false'
       CLUSTERING: 'False'
@@ -194,7 +194,7 @@ services:
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave4
       DISABLE_WEB_INTERFACE: 'true'
-      CSRF_WHITELIST: 'inpe.br'
+      # CSRF_WHITELIST: 'inpe.br'
       GEOSERVER_PORT: 8080
       USE_DATETIME_IN_SHAPEFILE: 'false'
       CLUSTERING: 'False'
@@ -237,7 +237,7 @@ services:
       GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
       instanceName: slave5
       DISABLE_WEB_INTERFACE: 'true'
-      CSRF_WHITELIST: 'inpe.br'
+      # CSRF_WHITELIST: 'inpe.br'
       GEOSERVER_PORT: 8080
       USE_DATETIME_IN_SHAPEFILE: 'false'
       CLUSTERING: 'False'
