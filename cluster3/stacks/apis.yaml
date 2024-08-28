@@ -18,7 +18,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   # The instance of RedisDB to store the Deforestation dashboard documents
   redisdb:
@@ -32,7 +35,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -57,13 +63,16 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:3000/dashboard/api/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
+      interval: 20s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 20s
 
   # Business API as a Service
   business-api:
@@ -80,13 +89,16 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:8090/api/v1/layer/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
+      interval: 20s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 20s
 
   # File delivery service API with authentication
   file_delivery_api:
@@ -108,13 +120,16 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:9000/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
+      interval: 20s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 20s
         
   # Middleware authentication service
   oauth_api:
@@ -135,13 +150,16 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:9000/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
+      interval: 20s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 20s
 
   oauth-jwt-api:
     image: registry.dpi.inpe.br/dpi/oauth:0.1.1
@@ -161,7 +179,10 @@ services:
         constraints:
           - node.hostname==node1cluster3
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 secrets:
   jwt.private.key:
