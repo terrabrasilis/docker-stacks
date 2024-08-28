@@ -100,6 +100,93 @@ services:
       restart_policy:
         condition: on-failure
 
+  # Queimadas database update task within the TerraBrasilis infrastructure
+  general-fires-data-task:
+    image: terrabrasilis/general-fires-data-task-main:v1.2.0
+    hostname: fires.sync
+    volumes:
+      - /data/fires/sync:/usr/local/data
+    environment:
+      GEOSERVER_BASE_URL: https://terrabrasilis.dpi.inpe.br
+      GEOSERVER_BASE_PATH: queimadas/geoserver
+    networks:
+      - backgroundtask
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # to update dashboard-fires database statistics
+  dashboard-fires-data-task:
+    image: terrabrasilis/fires-data-task-main:v1.4.0
+    volumes:
+      - /data/fires/input/raster:/usr/local/data
+      - /data/download/static/fires-dashboard/deter/raster:/usr/local/download
+    environment:
+      GEOSERVER_BASE_URL: https://terrabrasilis.dpi.inpe.br
+      GEOSERVER_BASE_PATH: geoserver
+    networks:
+      - backgroundtask
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          # force the service on node5 node because its has more memory than others
+          - node.hostname==node5
+      restart_policy:
+        condition: on-failure
+
+  # Amazon Biome Database Update Task for AMS Application
+  ams-sync-amazonia:
+    image: terrabrasilis/ams-sync:v2.2.1
+    hostname: ams.amazonia.sync
+    volumes:
+      - /data/ams-task/amazonia/sync:/usr/local/data
+    environment:
+      - "BIOME=Amazônia"
+      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
+      - "DATABASE_URL=/run/secrets/ams.database.url.amz.v2"
+      - "ALL_DATA=True"
+      - "FTP_HOST=/run/secrets/risk.ftp.host"
+      - "FTP_PORT=/run/secrets/risk.ftp.port"
+      - "FTP_PATH=/run/secrets/risk.ftp.path"
+      - "FTP_USER=/run/secrets/risk.ftp.user"
+      - "FTP_PASS=/run/secrets/risk.ftp.pass"
+      - "RISK_OUTPUT_PATH=/usr/local/data"
+    secrets:
+      - ams.database.url.amz.v2
+      - risk.ftp.host
+      - risk.ftp.port
+      - risk.ftp.path
+      - risk.ftp.user
+      - risk.ftp.pass
+    networks:
+      - backgroundtask
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  # Cerrado Biome Database Update Task for AMS Application
+  ams-sync-cerrado:
+    image: terrabrasilis/ams-sync:v2.2.1
+    hostname: ams.cerrado.sync
+    volumes:
+      - /data/ams-task/cerrado/sync:/usr/local/data
+    environment:
+      - "BIOME=Cerrado"
+      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
+      - "DATABASE_URL=/run/secrets/ams.database.url.cer.v2"
+      - "ALL_DATA=True"
+    secrets:
+      - ams.database.url.cer.v2
+    networks:
+      - backgroundtask
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
 # configuration files in Portainer
 configs:
   ssmtp-tb.conf:
