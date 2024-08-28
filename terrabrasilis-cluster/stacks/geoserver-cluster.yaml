@@ -12,6 +12,7 @@ services:
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
       - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
+      - /geoserver/cluster/tomcat/master/logs:/usr/local/tomcat/logs
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
@@ -54,6 +55,7 @@ services:
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
       - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
+      - /geoserver/cluster/tomcat/slave1/logs:/usr/local/tomcat/logs
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
@@ -97,6 +99,7 @@ services:
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
       - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
+      - /geoserver/cluster/tomcat/slave2/logs:/usr/local/tomcat/logs
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
@@ -140,6 +143,7 @@ services:
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
       - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
+      - /geoserver/cluster/tomcat/slave3/logs:/usr/local/tomcat/logs
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
@@ -183,6 +187,7 @@ services:
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
       - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
+      - /geoserver/cluster/tomcat/slave4/logs:/usr/local/tomcat/logs
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
@@ -226,6 +231,7 @@ services:
     volumes:
       - /geoserver/cluster/gs_datadir:/var/local/geoserver
       - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
+      - /geoserver/cluster/tomcat/slave5/logs:/usr/local/tomcat/logs
     environment:
       GEOSERVER_DATA_DIR: /var/local/geoserver
       GEOSERVER_CONTEXT_ROOT: geoserver
