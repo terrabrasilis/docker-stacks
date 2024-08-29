@@ -195,26 +195,6 @@ configs:
     external: true
 
 secrets:
-  www1.ecdsa.private.key:
-    external: true
-  www1.user.scp:
-    external: true
-  www1.path.scp:
-    external: true
-  postgres.port.deter_r:
-    external: true
-  postgres.db.deter_r:
-    external: true
-  postgres.host.deter_r:
-    external: true
-  postgres.user.deter_r:
-    external: true
-  postgres.pass.deter_r:
-    external: true
-  postgres.table.deter_r:
-    external: true
-  postgres.schema.deter_r:
-    external: true
   postgres.port.deter_cerrado_ibama:
     external: true
   postgres.db.deter_cerrado_ibama:
@@ -228,14 +208,6 @@ secrets:
   postgres.table.deter_cerrado_ibama:
     external: true
   postgres.schema.deter_cerrado_ibama:
-    external: true
-  ftp.user.censipam:
-    external: true
-  ftp.pass.censipam:
-    external: true
-  ftp.host.censipam:
-    external: true
-  ftp.path.censipam:
     external: true
   google.mail.user:
     external: true
