@@ -1,6 +1,28 @@
 version: '3.4'
 services:
 
+  # The instance of MongoDB to store the BusinessAPI documents
+  mongodb:
+    image: mongo:4.4
+    hostname: "mongo.db"
+    networks:
+      - backend
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+    volumes:
+      - /data/mongodb:/data/db
+      - /data/backup/mongodb:/data/backup
+    ports:
+      - "27017"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
   # The instance of MongoDB to store the Oauth Service data
   mongo-oauth:
     image: mongo:4.2.7

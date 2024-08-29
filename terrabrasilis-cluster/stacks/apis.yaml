@@ -1,69 +1,6 @@
+# Use in Swarm (apis)
 version: '3.4'
 services:
-
-  # The instance of MongoDB to store the BusinessAPI documents
-  mongodb:
-    image: mongo:4.4
-    hostname: "mongo.db"
-    networks:
-      - backend
-    environment:
-      MONGO_DATA_DIR: /data/db
-      MONGO_LOG_DIR: /dev/null
-    volumes:
-      - /data/mongodb:/data/db
-      - /data/backup/mongodb:/data/backup
-    ports:
-      - "27017"
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-
-  # The instance of RedisDB to store the Deforestation dashboard documents
-  redisdb:
-    image: terrabrasilis/redis:v01
-    ports:
-      - "6379"
-    networks:
-      - backend
-    volumes:
-      - /data/redis:/data
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 30s
-      retries: 50
-      start_period: 30s
-
-  # Deforestation dashboard API
-  redis-api:
-    image: terrabrasilis/redis-api:v1.1.2
-    ports:
-      - "3000"
-    networks:
-      - proxy
-      - backend
-    depends_on:
-      - redisdb
-    environment:
-      - REDIS_HOSTNAME=redisdb
-      - REDIS_PORT=6379
-      - API_PORT=3000
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    healthcheck:
-      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:3000/dashboard/api/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
   # Business API as a Service
   business-api:
@@ -80,13 +17,16 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:8090/api/v1/layer/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
+      interval: 20s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 20s
 
   # File delivery service API with authentication
   file_delivery_api:
@@ -108,13 +48,16 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:9000/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
+      interval: 20s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 20s
         
   # Middleware authentication service
   oauth_api:
@@ -135,33 +78,16 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:9000/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
+      interval: 20s
       timeout: 10s
       retries: 3
-      start_period: 40s
-
-  oauth-jwt-api:
-    image: registry.dpi.inpe.br/dpi/oauth:0.1.1
-    hostname: oauth-jwt-api
-    env_file:
-      - /data/oauth-service.env
-    ports:
-      - "30035:80"
-    volumes:
-      - "/data/oauth-service/certs:/data/certs"
-    networks:
-      - proxy
-      - backend
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-          - node.hostname==node1
-      restart_policy:
-        condition: on-failure
+      start_period: 20s
 
 secrets:
   jwt.private.key:
