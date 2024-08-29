@@ -100,6 +100,23 @@ services:
       restart_policy:
         condition: on-failure
 
+  focuses-of-fires-h:
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.9
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
 secrets:
   ams.database.url.amzh.v2:
     external: true

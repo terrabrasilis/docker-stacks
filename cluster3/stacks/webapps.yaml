@@ -38,23 +38,6 @@ services:
       retries: 3
       start_period: 40s
 
-  focuses-of-fires:
-    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.8
-    networks:
-      - proxy
-    ports:
-      - "80"
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    healthcheck:
-      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
   cerrado-alert-daily:
     image: terrabrasilis/cerrado-alert-daily:v2.7.9
     networks:
