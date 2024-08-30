@@ -109,7 +109,7 @@
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "terrabrasilis-cluster/stacks/webapps-manager.yaml"
+          "stackfile": "terrabrasilis-cluster/stacks/manager-apps.yaml"
         }
       },
       {
@@ -168,7 +168,7 @@
       {
           "id": 10,
         "type": 2,
-          "name": "homepage",
+          "name": "homepage-app",
           "title": "The home page as an entry point to the site",
           "description": "The home page of TerraBrasilis based on Wordpress. It is the gateway to all TerraBrasilis resources.",
           "note": "This stack is mandatory and responds by the root URL.",
@@ -177,7 +177,7 @@
           "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
           "repository": {
               "url": "https://github.com/terrabrasilis/docker-stacks",
-              "stackfile": "terrabrasilis-cluster/stacks/home-page.yaml"
+              "stackfile": "terrabrasilis-cluster/stacks/homepage-app.yaml"
           }
       },
       {
