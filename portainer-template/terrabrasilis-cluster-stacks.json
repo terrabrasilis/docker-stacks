@@ -4,31 +4,33 @@
       {
         "id": 1,
         "type": 2,
-        "name": "ogc-proxy",
-        "title": "The proxy to bypass CORS",
-        "description": "The http used to bypass CORS when webmap calls GeoServer capabilities",
-        "note": "The PROXY Server will be deployed globally inside the cluster and available on port 80.",
-        "categories": [
-          "service",
-          "proxy"
-        ],
-        "platform": "linux",
-        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
-        "repository": {
-          "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "terrabrasilis-cluster/stacks/ogc-proxy.yaml"
-        }
+          "name": "homepage-app",
+          "title": "The Home Page stack as an entry point to the TerraBrasilis site for production.",
+          "description": "The home page of TerraBrasilis based on Wordpress. It is the gateway to all TerraBrasilis resources.",
+          "note": "This stack is mandatory and responds by the root URL.",
+          "categories": [
+            "Wordpress",
+            "homepage",
+            "production"
+          ],
+          "platform": "linux",
+          "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+          "repository": {
+              "url": "https://github.com/terrabrasilis/docker-stacks",
+              "stackfile": "terrabrasilis-cluster/stacks/homepage-app.yaml"
+          }
       },
       {
         "id": 2,
         "type": 2,
         "name": "webservers",
-        "title": "Nginx HTTP web server based services",
-        "description": "Includes the main http proxy and another instance for delivery static files.",
+        "title": "The Web Servers stack for production",
+        "description": "Includes the main NGINX http proxy and another instances for delivery static files.",
         "note": "This stack is mandatory to provide the main proxy and delivery of files for download.",
         "categories": [
-          "webserver",
-          "proxy"
+          "nginx",
+          "proxy",
+          "production"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
@@ -41,14 +43,12 @@
         "id": 3,
         "type": 2,
         "name": "apis",
-        "title": "Backend APIs.",
+        "title": "The Backend APIs stack for production.",
         "description": "A collection of APIs for most backend services.",
         "note": "This stack is mandatory to configure Dashboards, WebMap and WebSite Download list, in addition to providing middleware service for authentication and time series. This stack includes an instance of MongoDB and Redis to store and delivery the JSON documents.",
         "categories": [
           "API",
-          "service",
-          "oauth",
-          "timeseries"
+          "production"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
@@ -61,12 +61,12 @@
         "id": 4,
         "type": 2,
         "name": "background-tasks",
-        "title": "Background tasks",
+        "title": "The Background Tasks stack for production",
         "description": "A collection of services as background tasks.",
         "note": "This stack is mandatory to sync DETER data and prepare Dashboards cached files.",
         "categories": [
           "tasks",
-          "service"
+          "production"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
@@ -79,13 +79,13 @@
         "id": 5,
         "type": 2,
         "name": "security",
-        "title": "Keycloak",
-        "description": "Open Source Identity and Access Management",
+        "title": "The Security stack for production.",
+        "description": "Keycloak - Open Source Identity and Access Management",
         "note": "This stack is mandatory and is used for store and manage the credential of users to authentication and authorization flow.",
         "categories": [
           "security",
-          "API",
-          "application"
+          "Keycloak",
+          "production"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
@@ -98,12 +98,13 @@
         "id": 6,
         "type": 2,
         "name": "manager-apps",
-        "title": "The Web Client manager Apps.",
+        "title": "The Manager Apps stack for production.",
         "description": "The Apps to allow manage the resources like PostgreSQL databases.",
         "note": "This stack is optional and serves to manage the resources on TerraBrasilis cluster.",
         "categories": [
           "manager",
-          "application"
+          "PGAdmin4",
+          "production"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
@@ -116,13 +117,13 @@
         "id": 7,
         "type": 2,
         "name": "metadata-app",
-        "title": "The GeoNetwork app for managing metadata.",
+        "title": "The GeoNetwork stack for production.",
         "description": "The GeoNetwork application allows managing the metadata catalog and serving it through the WCS API.",
         "note": "This stack is mandatory and serves to manage the metadata catalog for TerraBrasilis data.",
         "categories": [
-          "service",
           "API",
-          "GeoNetwork"
+          "GeoNetwork",
+          "production"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
@@ -134,14 +135,14 @@
       {
         "id": 8,
         "type": 2,
-        "name": "cluster-geoserver",
-        "title": "The GeoServer cluster to publish data compliant with the OGC services standard.",
+        "name": "geoserver-cluster",
+        "title": "The GeoServer Cluster stack for production.",
         "description": "The GeoServer application allows managing data sources and making them available through the OGC API as WMS and WFS services.",
         "note": "This stack is mandatory and serves to manage the publication of data layers for TerraBrasilis databases.",
         "categories": [
-          "service",
           "API",
-          "Geoserver"
+          "Geoserver",
+          "production"
         ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
@@ -151,13 +152,16 @@
         }
       },
       {
-          "id": 9,
+        "id": 9,
         "type": 2,
           "name": "webapps",
-          "title": "The WebMap and deforestation-dashboard Apps for production",
-          "description": "The TerraBrasilis WebMap is the main component of the Web GUIs for explore our maps using the OGC services. The dashboard is the main component Web GUI for explore the deforestation data analytics produced by PRODES.",
+          "title": "The WebApps stack like WebMap and Dashboards for production.",
+          "description": "The TerraBrasilis WebMap is the main component of the Web GUIs for explore our maps using the OGC services. The dashboard is the main component Web GUI for explore the deforestation data analytics produced by PRODES and DETER.",
           "note": "This stack are mandatory and responds by the Map and Deforestation-dashboard URLs for production use.",
-          "categories": ["application"],
+          "categories": [
+            "webapps",
+            "production"
+          ],
           "platform": "linux",
           "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
           "repository": {
@@ -166,28 +170,16 @@
           }
       },
       {
-          "id": 10,
+        "id": 10,
         "type": 2,
-          "name": "homepage-app",
-          "title": "The home page as an entry point to the site",
-          "description": "The home page of TerraBrasilis based on Wordpress. It is the gateway to all TerraBrasilis resources.",
-          "note": "This stack is mandatory and responds by the root URL.",
-          "categories": ["application"],
-          "platform": "linux",
-          "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
-          "repository": {
-              "url": "https://github.com/terrabrasilis/docker-stacks",
-              "stackfile": "terrabrasilis-cluster/stacks/homepage-app.yaml"
-          }
-      },
-      {
-        "id": 11,
-        "type": 2,
-        "name": "sgdbs",
-        "title": "The SGDBs stack with relational SQL and NoSQL databases.",
+        "name": "sgdb",
+        "title": "The SGDBs stack with relational SQL and NoSQL databases for production.",
         "description": "The main stack with document databases and relational databases.",
         "note": "This stack is mandatory to support some Applications and services stacks.",
-        "categories": ["SGDB"],
+        "categories": [
+          "SGDB",
+          "production"
+        ],
         "platform": "linux",
         "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
         "repository": {
@@ -196,13 +188,16 @@
         }
       },
       {
-          "id": 12,
+        "id": 11,
         "type": 2,
-          "name": "homologation-webapps",
-          "title": "The Apps Stack for homologation",
+          "name": "webapps-homologation",
+          "title": "The WebApps stack like WebMap and Dashboards for homologation",
           "description": "The TerraBrasilis homologation WebApps stack.",
           "note": "This stack are optional for homologation use.",
-          "categories": ["application", "homologation"],
+          "categories": [
+            "webapps",
+            "homologation"
+          ],
           "platform": "linux",
           "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
           "repository": {
@@ -211,10 +206,10 @@
           }
       },
       {
-        "id": 13,
+        "id": 12,
         "type": 2,
-        "name": "homologation-sgdbs",
-        "title": "The homologation SGDBs stack with relational SQL and NoSQL databases.",
+        "name": "sgdb-homologation",
+        "title": "The SGDBs stack with relational and NoSQL databases for homologation.",
         "description": "The TerraBrasilis homologation SGDBs stack.",
         "note": "This stack are optional for homologation use.",
         "categories": [
@@ -229,10 +224,10 @@
         }
       },
       {
-        "id": 14,
+        "id": 13,
         "type": 2,
-        "name": "homologation-apis",
-        "title": "Homologation backend APIs.",
+        "name": "apis-homologation",
+        "title": "The API stack for homologation.",
         "description": "The TerraBrasilis homologation APIs stack.",
         "note": "This stack are optional for homologation use.",
         "categories": [
@@ -247,10 +242,10 @@
         }
       },
       {
-        "id": 15,
+        "id": 14,
         "type": 2,
-        "name": "homologation-background-tasks",
-        "title": "Homologation background tasks",
+        "name": "background-tasks-homologation",
+        "title": "The Background Tasks stack for homologation.",
         "description": "A collection of services as Homologation background tasks.",
         "note": "This stack are optional for homologation use.",
         "categories": [
