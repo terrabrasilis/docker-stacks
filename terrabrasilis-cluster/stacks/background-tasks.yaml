@@ -195,20 +195,6 @@ configs:
     external: true
 
 secrets:
-  postgres.port.deter_cerrado_ibama:
-    external: true
-  postgres.db.deter_cerrado_ibama:
-    external: true
-  postgres.host.deter_cerrado_ibama:
-    external: true
-  postgres.user.deter_cerrado_ibama:
-    external: true
-  postgres.pass.deter_cerrado_ibama:
-    external: true
-  postgres.table.deter_cerrado_ibama:
-    external: true
-  postgres.schema.deter_cerrado_ibama:
-    external: true
   google.mail.user:
     external: true
   google.mail.pass:

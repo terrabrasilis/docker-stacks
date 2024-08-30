@@ -1,10 +1,10 @@
-# The NGINX stack
+# Used for deploy webservers stack
 version: '3.4'
+
 services:
 
   main_proxy:
     image: nginx:1.22-alpine
-    hostname: main.nginx.swarm.proxy
     networks:
       - proxy
     ports:
@@ -21,10 +21,12 @@ services:
         constraints:
           - node.hostname==node1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        window: 120s
 
   download_static_files:
-    image: nginx:1.17-alpine
+    image: nginx:1.22-alpine
     volumes:
       - /data/download/static:/usr/share/nginx/html:ro
     networks:
@@ -34,7 +36,26 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  prodes_dashboard_files:
+    image: nginx:1.22-alpine
+    volumes:
+      - /data/prodes/dashboard/deforestation:/usr/share/nginx/html:ro
+    networks:
+      - proxy
+    ports:
+      - 80
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 networks:
   proxy:

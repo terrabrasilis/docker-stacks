@@ -1,4 +1,4 @@
-# Used for deploy and test keycloak into swarm
+# Used for deploy security stack
 version: '3.4'
 
 services:

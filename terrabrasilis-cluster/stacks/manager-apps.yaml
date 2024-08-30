@@ -1,4 +1,4 @@
-# Used for deploy manager Apps
+# Used for deploy manager-apps stack
 version: '3.4'
 
 services:
@@ -9,6 +9,8 @@ services:
     image: dpage/pgadmin4:8.5
     ports:
       - 5555:80
+    networks:
+      - proxy
     #environment:
       # after starting for the first time, use the web app to change this password
       # and then remove these entries.
@@ -21,9 +23,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
-    networks:
-      - proxy
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.8.5
@@ -35,32 +38,16 @@ services:
       - "25111:80" 
     environment:   
       - "PMA_ARBITRARY=1"
-      - "PMA_ABSOLUTE_URI=https://terrabrasilis.dpi.inpe.br/phpmyadmin/"
+      - "PMA_ABSOLUTE_URI=https://pve12.dpi.inpe.br/phpmyadmin/"
     volumes: 
       - /data/manager-apps/phpmyadmin/sessions:/sessions
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
-
-  geoserver-analyzer:
-    image: terrabrasilis/geoserver-analyzer:v1.0.0
-    networks:
-      - proxy
-    volumes:
-      - /data/manager-apps/geoserver-analyzer/output/:/usr/local/geoserver-analyzer/output/
-    environment:      
-      GEOSERVER_USERNAME_FILE: /run/secrets/geoserver.admin.user
-      GEOSERVER_PASSWORD_FILE: /run/secrets/geoserver.admin.password
-      BUSINESS_API_URL: "https://terrabrasilis.dpi.inpe.br/business/api/v1/vision/name/deforestation/all;https://terrabrasilis.dpi.inpe.br/business/api/v1/vision/name/alerts/all;https://terrabrasilis.dpi.inpe.br/business/api/v1/vision/name/vegetation/all"
-      GEOSERVER_URL: "https://terrabrasilis.dpi.inpe.br/geoserver/"    
-    secrets:
-      - geoserver.admin.user
-      - geoserver.admin.password
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: none
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 networks: 
   proxy:

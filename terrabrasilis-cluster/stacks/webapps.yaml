@@ -1,8 +1,10 @@
+# Used for deploy webapps stack
 version: '3.4'
+
 services:
+
   webmap:
     image: terrabrasilis/webmap:prod_v2.5.7
-    hostname: webmap.production
     networks:
       - proxy
     ports:
@@ -10,7 +12,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     environment:
       - "AUTHENTICATION_PROXY_HOST=https://terrabrasilis.dpi.inpe.br/oauth-api/proxy?url="
     healthcheck:
@@ -21,8 +26,7 @@ services:
       start_period: 10s
 
   deforestation-dashboard:
-    image: terrabrasilis/deforestation-dashboard:prod_v3.3.0
-    hostname: deforestation.dashboard.production
+    image: terrabrasilis/deforestation-dashboard:prod_v3.4.1
     networks:
       - proxy
     ports:
@@ -30,7 +34,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
       interval: 1m30s
@@ -39,7 +46,7 @@ services:
       start_period: 10s
 
   focuses-of-fires:
-    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.8
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.9
     networks:
       - proxy
     ports:
@@ -47,7 +54,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
       interval: 1m30s
@@ -64,7 +74,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
       interval: 1m30s
@@ -81,7 +94,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
       interval: 1m30s
@@ -98,7 +114,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
       interval: 1m30s
@@ -115,7 +134,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
       interval: 1m30s
@@ -132,7 +154,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     networks: 
       - proxy
 
@@ -145,7 +170,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
         
   cerrado-nb-alert-aggregated:
     image: terrabrasilis/cerrado-alert-aggregated:v2.12.0
@@ -156,7 +184,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   ams-webapp:
     image: terrabrasilis/ams-webapp:v2.2.3
@@ -179,7 +210,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 secrets:
   ams.database.url.amz.v2:

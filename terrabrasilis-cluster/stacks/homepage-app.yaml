@@ -1,5 +1,8 @@
+# Used for deploy homepage-app stack
 version: '3.4'
+
 services:
+
   homepage:
     image: wordpress:5.0.3-apache
     hostname: homepage
@@ -26,8 +29,10 @@ services:
     deploy:
       replicas: 2
       restart_policy:
-        condition: on-failure
-
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 secrets:
   wordpress.homepage.db.name:
@@ -38,6 +43,7 @@ secrets:
     external: true
   wordpress.homepage.db.host:
     external: true
+
 networks:
   proxy:
     external: true
