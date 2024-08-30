@@ -27,11 +27,11 @@ services:
     depends_on:
       - db_mysql
     deploy:
-      replicas: 2
+      replicas: 1
       restart_policy:
         condition: any
-        delay: 5s
-        max_attempts: 3
+        delay: 15s
+        max_attempts: 5
         window: 120s
 
 secrets:
