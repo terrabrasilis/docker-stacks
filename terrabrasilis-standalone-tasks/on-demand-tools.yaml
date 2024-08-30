@@ -1,3 +1,4 @@
+# Used for deploy on-demand-tools stack
 version: '3.4'
 
 services:
@@ -20,3 +21,13 @@ services:
       replicas: 1
       restart_policy:
         condition: none
+
+networks:
+  proxy:
+    external: true
+
+secrets:
+  geoserver.admin.user:
+    external: true
+  geoserver.admin.password:
+    external: true
