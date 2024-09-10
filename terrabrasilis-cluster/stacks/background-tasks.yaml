@@ -102,7 +102,7 @@ services:
 
   # Queimadas database update task within the TerraBrasilis infrastructure
   general-fires-data-task:
-    image: terrabrasilis/general-fires-data-task-main:v1.2.0
+    image: terrabrasilis/general-fires-data-task-main:v2.0.0
     hostname: fires.sync
     volumes:
       - /data/fires/sync:/usr/local/data
