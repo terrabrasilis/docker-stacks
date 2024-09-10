@@ -138,7 +138,7 @@ services:
 
   # Amazon Biome Database Update Task for AMS Application
   ams-sync-amazonia:
-    image: terrabrasilis/ams-sync:v2.2.1
+    image: terrabrasilis/ams-sync:v2.2.4
     hostname: ams.amazonia.sync
     volumes:
       - /data/ams-task/amazonia/sync:/usr/local/data
@@ -169,7 +169,7 @@ services:
 
   # Cerrado Biome Database Update Task for AMS Application
   ams-sync-cerrado:
-    image: terrabrasilis/ams-sync:v2.2.1
+    image: terrabrasilis/ams-sync:v2.2.4
     hostname: ams.cerrado.sync
     volumes:
       - /data/ams-task/cerrado/sync:/usr/local/data
