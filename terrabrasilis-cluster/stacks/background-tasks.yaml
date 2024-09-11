@@ -4,7 +4,7 @@ version: '3.4'
 services:
   # export DETER data to shp and json files, among other things
   generate_files:
-    image: terrabrasilis/deter-generate-files:v2.1.0
+    image: terrabrasilis/deter-generate-files:v2.2.0
     hostname: generate.files
     volumes:
       - /data/deter-auth/generated-files:/data/files
