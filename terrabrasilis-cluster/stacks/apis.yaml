@@ -4,7 +4,8 @@ services:
 
   # Business API as a Service
   business_api:
-    image: terrabrasilis/business-api:v1.2.4
+    hostname: business_api
+    image: terrabrasilis/business-api:v1.2.5
     networks:
       - proxy
       - backend
@@ -22,9 +23,9 @@ services:
         max_attempts: 3
         window: 120s
     healthcheck:
-      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:8090/api/v1/layer/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 20s
-      timeout: 10s
+      test: ["CMD-SHELL", "httpcode=`curl -o /dev/null --max-time 15 --silent --head --write-out \"%{http_code}\" \"http://localhost:8090/api/v1/layer/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 30s
+      timeout: 20s
       retries: 3
       start_period: 20s
 
@@ -35,10 +36,7 @@ services:
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
       - /data/deter-auth/logs:/logs
-    secrets:
-      - jwt.private.key
     environment:
-      JWT_SECRET: /run/secrets/jwt.private.key
       OAUTH_API_URL: "https://terrabrasilis.dpi.inpe.br/oauth-api/"
       NODE_TLS_REJECT_UNAUTHORIZED: "0"
     networks:
@@ -53,23 +51,26 @@ services:
         max_attempts: 3
         window: 120s
     healthcheck:
-      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:9000/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 20s
-      timeout: 10s
+      test: ["CMD-SHELL", "httpcode=`curl -o /dev/null --max-time 15 --silent --head --write-out \"%{http_code}\" \"http://localhost:9000/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 30s
+      timeout: 20s
       retries: 3
       start_period: 20s
         
   # Middleware authentication service
   oauth_api:
-    image: terrabrasilis/terrabrasilis-oauth-api:v2.0.1
+    image: terrabrasilis/terrabrasilis-oauth-api:v2.0.2
     hostname: oauth.api
     volumes:
       - /data/oauth-api/logs:/logs
       - /data/oauth-api/config:/data/oauth-api/config
     secrets:
-      - jwt.private.key
-    environment:
-      JWT_SECRET: /run/secrets/jwt.private.key
+      - jwt.public.key      
+    environment:      
+      JWT_PUBLIC_KEY: /run/secrets/jwt.public.key
+      OAUTH_CONFIG_FILE: /data/oauth-api/config/oauth_config.json
+      GET_CAPABILITIES_CONFIG_FILE: /data/oauth-api/config/getcapabilities_config.json
+      OPENSSL_CONF: /dev/null
       PROXY_CONFIG_FILE: /data/oauth-api/config/proxy_config.json
     networks:
       - proxy
@@ -83,14 +84,14 @@ services:
         max_attempts: 3
         window: 120s
     healthcheck:
-      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:9000/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 20s
-      timeout: 10s
+      test: ["CMD-SHELL", "httpcode=`curl -o /dev/null --max-time 15 --silent --head --write-out \"%{http_code}\" \"http://localhost:9000/health\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 30s
+      timeout: 20s
       retries: 3
       start_period: 20s
 
 secrets:
-  jwt.private.key:
+  jwt.public.key:
     external: true
 
 networks:
