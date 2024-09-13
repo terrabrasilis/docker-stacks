@@ -46,7 +46,7 @@ services:
       start_period: 10s
 
   focuses-of-fires:
-    image: terrabrasilis/focuses-of-fires-dashboard:v1.3.9
+    image: terrabrasilis/focuses-of-fires-dashboard:v1.4.1
     networks:
       - proxy
     ports:
