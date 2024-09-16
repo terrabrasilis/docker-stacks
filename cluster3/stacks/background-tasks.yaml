@@ -70,7 +70,7 @@ services:
     networks:
       - backgroundtask
     environment:
-      CREATED_DATE: '2022-12-01'
+      CREATED_DATE: '2024-01-01'
     deploy:
       replicas: 1
       restart_policy:
