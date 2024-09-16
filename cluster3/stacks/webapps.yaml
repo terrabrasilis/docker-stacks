@@ -124,7 +124,7 @@ services:
       - backend
 
   deter_pantanal_report:
-    image: terrabrasilis/deter-pantanal-app:v0.0.8
+    image: terrabrasilis/deter-pantanal-app:v0.1.0
     ports:
       - "80"
     volumes:
@@ -132,7 +132,26 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    networks: 
+      - proxy
+
+  deter_nf_report:
+    image: terrabrasilis/deter-nf-app:v0.1.0
+    ports:
+      - "80"
+    volumes:
+      - /data/deter-app:/var/www/html/config
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     networks: 
       - proxy
 
