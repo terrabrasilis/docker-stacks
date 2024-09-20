@@ -159,7 +159,7 @@ services:
     image: 'terrabrasilis/deter-cmask-data-task:v1.0.9'
     hostname: cmask.data.task
     volumes:
-      - '/main/storage/deter/cmask:/usr/local/data'
+      - '/data/deter-task/cmask:/usr/local/data'
     environment:
       - "FORCE_YEAR_MONTH=no"
       - "EVERY_DAY=no"
