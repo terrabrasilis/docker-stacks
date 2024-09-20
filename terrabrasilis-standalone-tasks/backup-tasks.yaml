@@ -7,7 +7,7 @@ services:
   backup-business-mongo:
     image: terrabrasilis/business-api-task:v1.0.0
     volumes:
-      - '/main/storage/mongodb/business:/usr/local/data'
+      - '/main/storage/database/mongodb/business:/usr/local/data'
     configs:
       - source: business-api-task.conf
         target: /usr/mongodb/conf/business-api-task.conf
@@ -24,7 +24,7 @@ services:
   backup-pg-d:
     image: 'terrabrasilis/backup-pg-dump:v1.3.1'
     volumes:
-      - '/main/storage/pg/daily:/data'
+      - '/main/storage/database/pg/daily:/data'
     environment:
       # if omitted or different from "DAILY" the default value of "WEEKLY" mode will be used
       - "FREQUENCY=DAILY"
@@ -40,7 +40,7 @@ services:
   backup-pg-w:
     image: 'terrabrasilis/backup-pg-dump:v1.3.1'
     volumes:
-      - '/main/storage/pg/weekly:/data'
+      - '/main/storage/database/pg/weekly:/data'
     deploy:
       replicas: 1
       restart_policy:
