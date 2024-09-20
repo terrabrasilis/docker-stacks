@@ -29,7 +29,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   deter_amz_sync:
     image: terrabrasilis/deter-amz-sync-client:v1.8.10
@@ -54,13 +57,16 @@ services:
       POSTGRES_USER_FILE: /run/secrets/postgres.user.geoserver
       POSTGRES_PASS_FILE: /run/secrets/postgres.pass.geoserver
       POSTGRES_HOST: 192.168.1.17
-      OUTPUT_DATABASE: deter_amazonia
+      OUTPUT_DATABASE: deter_amazonia_nb
     networks:
       - backgroundtask
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   deter_cerrado_sync:
     image: terrabrasilis/cerradodeter-syncdata:v1.4.1
@@ -74,7 +80,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   # verify DETER amz data and send a report by email
   deter_report_amz:
@@ -98,7 +107,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   # Queimadas database update task within the TerraBrasilis infrastructure
   general-fires-data-task:
@@ -114,7 +126,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   # to update dashboard-fires database statistics
   dashboard-fires-data-task:
@@ -134,7 +149,31 @@ services:
           # force the service on node5 node because its has more memory than others
           - node.hostname==node5
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  # to generate the cloud cover using cmask data for DETER Cerrado and Amazonia
+  cmask-data-task:
+    image: 'terrabrasilis/deter-cmask-data-task:v1.0.9'
+    hostname: cmask.data.task
+    volumes:
+      - '/main/storage/deter/cmask:/usr/local/data'
+    environment:
+      - "FORCE_YEAR_MONTH=no"
+      - "EVERY_DAY=no"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          # force the service on node5 node because its has more memory than others
+          - node.hostname==node5
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   # Amazon Biome Database Update Task for AMS Application
   ams-sync-amazonia:
@@ -165,7 +204,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   # Cerrado Biome Database Update Task for AMS Application
   ams-sync-cerrado:
@@ -185,7 +227,10 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 # configuration files in Portainer
 configs:
