@@ -1,0 +1,54 @@
+# Used for deploy backup-tasks stack
+version: '3.4'
+
+services:
+
+  # Business API backup task
+  backup-business-mongo:
+    image: terrabrasilis/business-api-task:v1.0.0
+    volumes:
+      - '/main/storage/mongodb/business:/usr/local/data'
+    configs:
+      - source: business-api-task.conf
+        target: /usr/mongodb/conf/business-api-task.conf
+        mode: 0644
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  # Postgres daily backups
+  backup-pg-d:
+    image: 'terrabrasilis/backup-pg-dump:v1.3.1'
+    volumes:
+      - '/main/storage/pg/daily:/data'
+    environment:
+      # if omitted or different from "DAILY" the default value of "WEEKLY" mode will be used
+      - "FREQUENCY=DAILY"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  # Postgres weekly backups
+  backup-pg-w:
+    image: 'terrabrasilis/backup-pg-dump:v1.3.1'
+    volumes:
+      - '/main/storage/pg/weekly:/data'
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+configs:
+  business-api-task.conf:
+    external: true

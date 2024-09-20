@@ -1,0 +1,58 @@
+{
+    "version": "3",
+    "templates": [
+      {
+        "id": 1,
+        "type": 2,
+          "name": "permanent-tasks",
+          "title": "TerraBrasilis complementary jobs.",
+          "description": "Used to make some products that need runs only once.",
+          "note": "This stack is mandatory and represents the complementary TerraBrasilis tasks.",
+          "categories": [
+            "production"
+          ],
+          "platform": "linux",
+          "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+          "repository": {
+              "url": "https://github.com/terrabrasilis/docker-stacks",
+              "stackfile": "terrabrasilis-standalone-tasks/permanent-tasks.yaml"
+          }
+      },
+      {
+        "id": 2,
+        "type": 2,
+        "name": "backup-tasks",
+        "title": "TerraBrasilis database backup jobs.",
+        "description": "Used to make backups of PostgreSQL, MongoDB and other databases.",
+        "note": "This stack is mandatory to produce the recovery artifacts.",
+        "categories": [
+          "backup",
+          "production"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+          "url": "https://github.com/terrabrasilis/docker-stacks",
+          "stackfile": "terrabrasilis-standalone-tasks/backup-tasks.yaml"
+        }
+      },
+      {
+        "id": 3,
+        "type": 2,
+        "name": "on-demand-tools",
+        "title": "TerraBrasilis on demand tools.",
+        "description": "A collection of tools triggered manually.",
+        "note": "This stack is optional.",
+        "categories": [
+          "tools",
+          "production"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+          "url": "https://github.com/terrabrasilis/docker-stacks",
+          "stackfile": "terrabrasilis-standalone-tasks/on-demand-tools.yaml"
+        }
+      }
+    ]
+  }

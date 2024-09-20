@@ -3,17 +3,36 @@ version: '3.4'
 
 services:
 
-  geoserver-analyzer:
+  geoserver-analyzer-pve12:
     image: terrabrasilis/geoserver-analyzer:v1.0.0
     networks:
       - proxy
     volumes:
-      - /data/manager-apps/geoserver-analyzer/output/:/usr/local/geoserver-analyzer/output/
+      - /data/on-demand-tools/geoserver-analyzer/output:/usr/local/geoserver-analyzer/output/
     environment:      
       GEOSERVER_USERNAME_FILE: /run/secrets/geoserver.admin.user
       GEOSERVER_PASSWORD_FILE: /run/secrets/geoserver.admin.password
       BUSINESS_API_URL: "https://pve12.dpi.inpe.br/business/api/v1/vision/name/deforestation/all;https://pve12.dpi.inpe.br/business/api/v1/vision/name/alerts/all;https://pve12.dpi.inpe.br/business/api/v1/vision/name/vegetation/all"
       GEOSERVER_URL: "https://pve12.dpi.inpe.br/geoserver/"    
+    secrets:
+      - geoserver.admin.user
+      - geoserver.admin.password
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+
+  geoserver-analyzer-pve9:
+    image: terrabrasilis/geoserver-analyzer:v1.0.0
+    networks:
+      - proxy
+    volumes:
+      - /data/on-demand-tools/geoserver-analyzer/output:/usr/local/geoserver-analyzer/output/
+    environment:      
+      GEOSERVER_USERNAME_FILE: /run/secrets/geoserver.admin.user
+      GEOSERVER_PASSWORD_FILE: /run/secrets/geoserver.admin.password
+      BUSINESS_API_URL: "https://pve9.dpi.inpe.br/business/api/v1/vision/name/deforestation/all;https://pve9.dpi.inpe.br/business/api/v1/vision/name/alerts/all;https://pve9.dpi.inpe.br/business/api/v1/vision/name/vegetation/all"
+      GEOSERVER_URL: "https://pve9.dpi.inpe.br/geoserver/"    
     secrets:
       - geoserver.admin.user
       - geoserver.admin.password
