@@ -213,24 +213,24 @@ services:
         condition: on-failure
 
   # to update dashboard-fires database statistics
-  dashboard-fires-data-task:
-    image: terrabrasilis/fires-data-task-main:v1.4.0
-    volumes:
-      - /data/fires/input/raster:/usr/local/data
-      - /data/download/static/fires-dashboard/deter/raster:/usr/local/download
-    environment:
-      GEOSERVER_BASE_URL: https://terrabrasilis.dpi.inpe.br
-      GEOSERVER_BASE_PATH: geoserver
-    networks:
-      - backgroundtask
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-          # force the service on node5cluster3 node because its has more memory than others
-          - node.hostname==node5cluster3
-      restart_policy:
-        condition: on-failure
+  # dashboard-fires-data-task:
+  #   image: terrabrasilis/fires-data-task-main:v1.4.0
+  #   volumes:
+  #     - /data/fires/input/raster:/usr/local/data
+  #     - /data/download/static/fires-dashboard/deter/raster:/usr/local/download
+  #   environment:
+  #     GEOSERVER_BASE_URL: https://terrabrasilis.dpi.inpe.br
+  #     GEOSERVER_BASE_PATH: geoserver
+  #   networks:
+  #     - backgroundtask
+  #   deploy:
+  #     replicas: 1
+  #     placement:
+  #       constraints:
+  #         # force the service on node5cluster3 node because its has more memory than others
+  #         - node.hostname==node5cluster3
+  #     restart_policy:
+  #       condition: on-failure
 
   # Amazon Biome Database Update Task for AMS Application
   ams-sync-amazonia:

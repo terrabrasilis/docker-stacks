@@ -132,27 +132,27 @@ services:
         window: 120s
 
   # to update dashboard-fires database statistics
-  dashboard-fires-data-task:
-    image: terrabrasilis/fires-data-task-main:v1.4.0
-    volumes:
-      - /data/fires/input/raster:/usr/local/data
-      - /data/download/static/fires-dashboard/deter/raster:/usr/local/download
-    environment:
-      GEOSERVER_BASE_URL: https://terrabrasilis.dpi.inpe.br
-      GEOSERVER_BASE_PATH: geoserver
-    networks:
-      - backgroundtask
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-          # force the service on node5 node because its has more memory than others
-          - node.hostname==node5
-      restart_policy:
-        condition: any
-        delay: 5s
-        max_attempts: 3
-        window: 120s
+  # dashboard-fires-data-task:
+  #   image: terrabrasilis/fires-data-task-main:v1.4.0
+  #   volumes:
+  #     - /data/fires/input/raster:/usr/local/data
+  #     - /data/download/static/fires-dashboard/deter/raster:/usr/local/download
+  #   environment:
+  #     GEOSERVER_BASE_URL: https://terrabrasilis.dpi.inpe.br
+  #     GEOSERVER_BASE_PATH: geoserver
+  #   networks:
+  #     - backgroundtask
+  #   deploy:
+  #     replicas: 1
+  #     placement:
+  #       constraints:
+  #         # force the service on node5 node because its has more memory than others
+  #         - node.hostname==node5
+  #     restart_policy:
+  #       condition: any
+  #       delay: 5s
+  #       max_attempts: 3
+  #       window: 120s
 
   # to generate the cloud cover using cmask data for DETER Cerrado and Amazonia
   cmask-data-task:
