@@ -8,7 +8,7 @@ services:
     networks:
       - proxy
     volumes:
-      - /data/on-demand-tools/geoserver-analyzer/output:/usr/local/geoserver-analyzer/output/
+      - /data/on-demand-tools/geoserver-analyzer/pve12/output:/usr/local/geoserver-analyzer/output/
     environment:      
       GEOSERVER_USERNAME_FILE: /run/secrets/geoserver.admin.user
       GEOSERVER_PASSWORD_FILE: /run/secrets/geoserver.admin.password
@@ -27,7 +27,7 @@ services:
     networks:
       - proxy
     volumes:
-      - /data/on-demand-tools/geoserver-analyzer/output:/usr/local/geoserver-analyzer/output/
+      - /data/on-demand-tools/geoserver-analyzer/pve9/output:/usr/local/geoserver-analyzer/output/
     environment:      
       GEOSERVER_USERNAME_FILE: /run/secrets/geoserver.admin.user
       GEOSERVER_PASSWORD_FILE: /run/secrets/geoserver.admin.password
