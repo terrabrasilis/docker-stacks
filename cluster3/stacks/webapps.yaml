@@ -124,7 +124,7 @@ services:
       - backend
 
   deter_pantanal_report:
-    image: terrabrasilis/deter-pantanal-app:v0.1.0
+    image: terrabrasilis/deter-pantanal-app:v0.1.1
     ports:
       - "80"
     volumes:
@@ -140,7 +140,7 @@ services:
       - proxy
 
   deter_nf_report:
-    image: terrabrasilis/deter-nf-app:v0.1.0
+    image: terrabrasilis/deter-nf-app:v0.1.1
     ports:
       - "80"
     volumes:
