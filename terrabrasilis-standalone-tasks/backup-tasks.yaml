@@ -22,11 +22,11 @@ services:
 
   # Postgres daily backups
   backup-pg-d:
-    image: 'terrabrasilis/backup-pg-dump:v1.3.1'
+    image: 'terrabrasilis/backup-pg-dump:v1.4.0'
     volumes:
       - '/main/storage/database/pg/daily:/data'
     environment:
-      # if omitted or different from "DAILY" the default value of "WEEKLY" mode will be used
+      # if omitted or different from "DAILY" the "WEEKLY" mode will be used.
       - "FREQUENCY=DAILY"
     deploy:
       replicas: 1
@@ -38,7 +38,7 @@ services:
 
   # Postgres weekly backups
   backup-pg-w:
-    image: 'terrabrasilis/backup-pg-dump:v1.3.1'
+    image: 'terrabrasilis/backup-pg-dump:v1.4.0'
     volumes:
       - '/main/storage/database/pg/weekly:/data'
     deploy:
