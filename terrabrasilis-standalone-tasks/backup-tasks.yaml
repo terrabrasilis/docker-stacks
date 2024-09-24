@@ -5,7 +5,7 @@ services:
 
   # Business API backup task
   backup-business-mongo:
-    image: terrabrasilis/business-api-task:v1.0.0
+    image: terrabrasilis/business-api-task:v1.1.0
     volumes:
       - '/main/storage/database/mongodb/business:/usr/local/data'
     configs:
