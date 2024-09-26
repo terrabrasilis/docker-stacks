@@ -22,7 +22,7 @@ services:
     configs:
       - source: ssmtp-tb.conf
         target: /etc/ssmtp/ssmtp.conf
-      - source: deter-etc-environment_ssl
+      - source: deter-etc-environment
         target: /etc/environment
     networks:
       - backgroundtask
@@ -236,7 +236,7 @@ services:
 configs:
   ssmtp-tb.conf:
     external: true
-  deter-etc-environment_ssl:
+  deter-etc-environment:
     external: true
 
 secrets:
