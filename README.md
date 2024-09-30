@@ -9,14 +9,6 @@ We adopted the Portainer to manage the stacks into our Docker cluster. To turn i
 For details read [this documentation](https://portainer.readthedocs.io/en/stable/templates.html).
 
 
-# Docker Stack YAMLs - FIP Cerrado Server
+### Looking for old service stacks?
 
-A set of YAML files to deploy the services that compose the GeoTiffs Publisher for interpretation team of FIP project.
-
-See the [README file](services/geoserver-publisher) for more details.
-
-# Docker Compose for Demonstration
-
-A Docker Compose yaml to up the minimum containers and run the services of the WebMap.
-
-See the [README file](demo/) for more details.
+[Old stacks are kept in the olds-1.0 branch](https://github.com/terrabrasilis/docker-stacks/tree/olds-1.0)
