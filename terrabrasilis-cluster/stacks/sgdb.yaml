@@ -13,7 +13,7 @@ services:
     volumes:
       - /data/mongodb:/data/db
     ports:
-      - "27017"
+      - "30051:27017"
     deploy:
       replicas: 1
       restart_policy:
