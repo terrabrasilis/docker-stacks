@@ -28,6 +28,26 @@ services:
         max_attempts: 3
         window: 120s
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.8.5
+    hostname: phpmyadmin
+    networks:
+      - proxy
+    ports:
+      - "25111:80" 
+    environment:   
+      - "PMA_ARBITRARY=1"
+      - "PMA_ABSOLUTE_URI=https://ears.dpi.inpe.br/phpmyadmin/"
+    volumes: 
+      - /main/ears/manager-apps/phpmyadmin/sessions:/sessions
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
 networks: 
   proxy:
     external: true
