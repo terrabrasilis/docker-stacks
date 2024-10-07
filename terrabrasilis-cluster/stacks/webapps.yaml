@@ -4,7 +4,7 @@ version: '3.4'
 services:
 
   webmap:
-    image: terrabrasilis/webmap:prod_v2.5.7
+    image: terrabrasilis/webmap:prod_v2.6.4
     networks:
       - proxy
     ports:
@@ -17,7 +17,9 @@ services:
         max_attempts: 3
         window: 120s
     environment:
-      - "AUTHENTICATION_PROXY_HOST=https://terrabrasilis.dpi.inpe.br/oauth-api/proxy?url="
+      - "PUBLIC_PROXY=/oauth-api/publicproxy?url="
+      - "AUTHENTICATION_RESOURCE_ROLE=terrabrasilis-user"
+      - "AUTHENTICATION_CLIENT_ID=terrabrasilis-apps"
     healthcheck:
       test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
       interval: 1m30s
@@ -150,7 +152,7 @@ services:
     ports:
       - "80"
     volumes:
-      - /data/deter-app:/var/www/html/config
+      - /data/deter-app/pantanal:/var/www/html/config
     deploy:
       replicas: 1
       restart_policy:
@@ -166,7 +168,7 @@ services:
     ports:
       - "80"
     volumes:
-      - /data/deter-app:/var/www/html/config
+      - /data/deter-app/nf:/var/www/html/config
     deploy:
       replicas: 1
       restart_policy:
@@ -206,7 +208,7 @@ services:
         window: 120s
 
   ams-webapp:
-    image: terrabrasilis/ams-webapp:v2.2.3
+    image: terrabrasilis/ams-webapp:v2.2.5
     hostname: ams.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
