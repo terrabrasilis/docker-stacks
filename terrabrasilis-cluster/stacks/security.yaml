@@ -33,8 +33,8 @@ services:
       - "KC_HEALTH_ENABLED=true"
       - "KC_PROXY_HEADERS=xforwarded"
       - "KC_HTTP_RELATIVE_PATH=/app/security/"
-      - "KC_HOSTNAME=pve12.dpi.inpe.br"
-      - "KC_HOSTNAME_ADMIN=https://pve12.dpi.inpe.br/app/security/"
+      - "KC_HOSTNAME=terrabrasilis.dpi.inpe.br"
+      - "KC_HOSTNAME_ADMIN=https://terrabrasilis.dpi.inpe.br/app/security/"
     networks:
       - proxy
     ports:
