@@ -31,13 +31,15 @@ services:
 
   # File delivery service API with authentication
   file_delivery_api:
-    image: terrabrasilis/file-delivery:v1.0.6
+    image: terrabrasilis/file-delivery:v2.0.1
     hostname: file.delivery.auth
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
       - /data/deter-auth/logs:/logs
     environment:
-      OAUTH_API_URL: "https://terrabrasilis.dpi.inpe.br/oauth-api/"
+      OAUTH_API_URL: "https://pve12.dpi.inpe.br/oauth-api/"
+      OAUTH_API_ROLE : "terrabrasilis-user"
+      OAUTH_API_CLIENT_ID : "terrabrasilis-apps"
       NODE_TLS_REJECT_UNAUTHORIZED: "0"
     networks:
       - proxy
@@ -59,7 +61,7 @@ services:
         
   # Middleware authentication service
   oauth_api:
-    image: terrabrasilis/terrabrasilis-oauth-api:v2.0.2
+    image: terrabrasilis/terrabrasilis-oauth-api:v2.0.6
     hostname: oauth.api
     volumes:
       - /data/oauth-api/logs:/logs
@@ -69,7 +71,7 @@ services:
     environment:      
       JWT_PUBLIC_KEY: /run/secrets/jwt.public.key
       OAUTH_CONFIG_FILE: /data/oauth-api/config/oauth_config.json
-      GET_CAPABILITIES_CONFIG_FILE: /data/oauth-api/config/getcapabilities_config.json
+      PUBLIC_PROXY_CONFIG_FILE: /data/oauth-api/config/publicproxy_config.json
       OPENSSL_CONF: /dev/null
       PROXY_CONFIG_FILE: /data/oauth-api/config/proxy_config.json
     networks:
