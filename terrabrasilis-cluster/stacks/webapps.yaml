@@ -4,7 +4,7 @@ version: '3.4'
 services:
 
   webmap:
-    image: terrabrasilis/webmap:prod_v2.6.4
+    image: terrabrasilis/webmap:prod_v2.6.5
     networks:
       - proxy
     ports:
