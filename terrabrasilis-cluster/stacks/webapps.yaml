@@ -28,7 +28,7 @@ services:
       start_period: 10s
 
   deforestation-dashboard:
-    image: terrabrasilis/deforestation-dashboard:prod_v3.4.5
+    image: terrabrasilis/deforestation-dashboard:prod_v3.4.6
     networks:
       - proxy
     ports:
