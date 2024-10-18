@@ -133,10 +133,9 @@ services:
 
   # to update dashboard-fires database statistics
   dashboard-fires-data-task:
-    image: terrabrasilis/fires-data-task-all-biomes:v1.5.0
+    image: terrabrasilis/fires-data-task-all-biomes:v1.5.1
     volumes:
       - /data/fires-task:/usr/local/data
-      - /data/download/static/fires-dashboard/deter/raster:/usr/local/download
     environment:
       DETER_VIEW_DATE: '2023-08-01'
     networks:
