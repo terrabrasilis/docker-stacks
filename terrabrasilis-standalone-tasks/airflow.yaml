@@ -17,8 +17,8 @@ x-airflow-common:
       AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
       _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
     volumes:
-      - /dados/share/terrabrasilis/standalone/airflow/projects:/opt/airflow/projects
-      - /dados/share/terrabrasilis/standalone/airflow/:/opt/airflow/
+      - /main/ears/airflow/projects:/opt/airflow/projects
+      - /main/ears/airflow/:/opt/airflow/
     user: "1000:0"
     depends_on:      
       - redis
@@ -101,7 +101,7 @@ services:
       AIRFLOW_UID: 1000    
     user: "0:0"
     volumes:
-      - /dados/share/terrabrasilis/standalone/airflow:/sources 
+      - /main/ears/airflow:/sources 
     deploy:
       restart_policy:
         condition: none
