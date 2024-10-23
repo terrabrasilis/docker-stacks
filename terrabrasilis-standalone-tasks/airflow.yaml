@@ -171,9 +171,9 @@ services:
     command: celery flower
 
     ports:
-      - "5555:5555"
+      - "5556:5555"
     healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:5555/"]
+      test: ["CMD", "curl", "--fail", "http://localhost:5556/"]
       interval: 30s
       timeout: 10s
       retries: 5
