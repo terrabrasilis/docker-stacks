@@ -71,6 +71,24 @@
           "url": "https://github.com/terrabrasilis/docker-stacks",
           "stackfile": "terrabrasilis-standalone-tasks/manager-apps.yaml"
         }
+      },
+      {
+        "id": 5,
+        "type": 2,
+        "name": "airflow",
+        "title": "The Airflow stack for production.",
+        "description": "The Airflow services to run background task.",
+        "note": "This stack is essential to schedule and run background tasks on airflow platform.",
+        "categories": [
+          "airflow",
+          "production"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+          "url": "https://github.com/terrabrasilis/docker-stacks",
+          "stackfile": "terrabrasilis-standalone-tasks/airflow.yaml"
+        }
       }
     ]
   }
