@@ -61,7 +61,7 @@ services:
         
   # Middleware authentication service
   oauth_api:
-    image: terrabrasilis/terrabrasilis-oauth-api:v2.0.7
+    image: terrabrasilis/terrabrasilis-oauth-api:v2.0.8
     hostname: oauth.api
     volumes:
       - /data/oauth-api/logs:/logs
