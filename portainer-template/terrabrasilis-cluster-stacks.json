@@ -246,7 +246,7 @@
         "type": 2,
         "name": "background-tasks-homologation",
         "title": "The Background Tasks stack for homologation.",
-        "description": "A collection of services as Homologation background tasks.",
+        "description": "A collection of services for homologation purposes.",
         "note": "This stack are optional for homologation use.",
         "categories": [
           "tasks",
@@ -257,6 +257,24 @@
         "repository": {
           "url": "https://github.com/terrabrasilis/docker-stacks",
           "stackfile": "terrabrasilis-cluster/stacks/background-tasks-homologation.yaml"
+        }
+      },
+      {
+        "id": 15,
+        "type": 2,
+        "name": "webservers-homologation",
+        "title": "The Web Servers stack for homologation",
+        "description": "A collection of web servers for homologation purposes.",
+        "note": "This stack are optional for homologation use.",
+        "categories": [
+          "nginx",
+          "homologation"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/backend.png",
+        "repository": {
+          "url": "https://github.com/terrabrasilis/docker-stacks",
+          "stackfile": "terrabrasilis-cluster/stacks/webservers-homologation.yaml"
         }
       }
     ]
