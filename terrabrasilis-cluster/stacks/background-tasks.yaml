@@ -133,7 +133,7 @@ services:
 
   # to update dashboard-fires database statistics
   dashboard-fires-data-task:
-    image: terrabrasilis/fires-data-task-all-biomes:v1.5.2
+    image: terrabrasilis/fires-data-task-all-biomes:v1.5.3
     volumes:
       - /data/fires-task:/usr/local/data
     environment:
