@@ -45,7 +45,7 @@ services:
         condition: on-failure
 
 secrets:
-  ams.database.url.v2:
+  amsh.database.url:
     external: true
 
 networks:
