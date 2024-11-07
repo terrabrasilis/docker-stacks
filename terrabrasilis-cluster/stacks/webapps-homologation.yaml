@@ -36,9 +36,9 @@ services:
       - "GEOSERVER_URL=https://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams-homologation/"
-      - "DB_URL=/run/secrets/ams.database.url.v2"
+      - "DB_URL=/run/secrets/amsh.database.url"
     secrets:
-      - ams.database.url.v2
+      - amsh.database.url
     deploy:
       replicas: 1
       restart_policy:
