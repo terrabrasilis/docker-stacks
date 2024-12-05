@@ -24,7 +24,7 @@ services:
       start_period: 10s
 
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v2.2.7.priority_municipalities.rc
+    image: terrabrasilis/ams-webapp:v2.2.9.priority_municipalities.rc
     hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
