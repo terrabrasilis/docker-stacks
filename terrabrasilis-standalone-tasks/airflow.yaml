@@ -19,6 +19,8 @@ x-airflow-common:
     volumes:
       - /main/ears/airflow/projects:/opt/airflow/projects
       - /main/ears/airflow/:/opt/airflow/
+      - /main/ears/airflow/config/default:/etc/sudoers.d/default
+      - /main/ears/airflow/config/shadow:/etc/shadow
     user: "1000:0"
     depends_on:      
       - redis
