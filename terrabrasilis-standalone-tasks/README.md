@@ -28,13 +28,13 @@ Used to produce a copy of all documents, for a specific MongoDB instance used by
 
 Deploy some Apps used to manager databases like PgAdmin4 for Postgres and phpMyAdmin for Mysql.
 
- > See the manager-apps.yaml
+ > See the [manager-apps.yaml](./manager-apps.yaml)
 
 ## Permanent tasks
 
 Some tasks used to produce data for non-TerraBrasilis purposes.
 
- > See the permanent-tasks.yaml
+ > See the [permanent-tasks.yaml](./permanent-tasks.yaml)
 
 In the future that tasks can be migrated to AirFlow environment.
 
@@ -42,11 +42,12 @@ In the future that tasks can be migrated to AirFlow environment.
 
 Some tasks used on demand to provide specific analysis of some components of the TerraBrasilis platform, such as GeoServer.
 
- > See the on-demand-tools.yaml
+ > See the [on-demand-tools.yaml](./on-demand-tools.yaml)
 
 ## Apache AirFlow
 
 An environment to organize processes. We expect all ETL routines to be migrated to this environment.
 
+ > See the [airflow.yaml](./airflow.yaml)
 
- > See the airflow.yaml
+ > Configuration details in [AIRFLOW.md](./AIRFLOW.md).
