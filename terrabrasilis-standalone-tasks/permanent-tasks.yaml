@@ -5,7 +5,7 @@ services:
   
   # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
   deter_amazonia_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.3.6
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.7
     hostname: deter.amazonia.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
@@ -22,10 +22,10 @@ services:
       FTP_PASS_FILE: /run/secrets/ftp.pass.censipam
       FTP_HOST_FILE: /run/secrets/ftp.host.censipam
       FTP_PATH_FILE: /run/secrets/ftp.path.censipam
-      WWW1_USER_FILE: /run/secrets/www1.user.scp
-      WWW1_PATH_FILE: /run/secrets/www1.path.scp
-      WWW1_PRIVATE_KEY_FILE: /run/secrets/www1.ecdsa.private.key
-      WWW1_HOST: www1.dpi.inpe.br
+      WWW1_USER_FILE: /run/secrets/www_user
+      WWW1_PATH_FILE: /run/secrets/www_path
+      WWW1_PRIVATE_KEY_FILE: /run/secrets/www_private_key
+      WWW1_HOST: pve10.dpi.inpe.br
       SUFFIX_PROJECT: amz
       PREFIX_CONTROL_FILE: deter
       IBAMA_REF_DATE: '2024-08-01'
@@ -41,9 +41,9 @@ services:
       - ftp.pass.censipam
       - ftp.host.censipam
       - ftp.path.censipam
-      - www1.ecdsa.private.key
-      - www1.user.scp
-      - www1.path.scp
+      - www_private_key
+      - www_user
+      - www_path
     networks:
       - backgroundtask
     deploy:
@@ -56,7 +56,7 @@ services:
 
   # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
   deter_cerrado_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.3.6
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.7
     hostname: deter.cerrado.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
@@ -73,10 +73,10 @@ services:
       FTP_PASS_FILE: /run/secrets/ftp.pass.censipam
       FTP_HOST_FILE: /run/secrets/ftp.host.censipam
       FTP_PATH_FILE: /run/secrets/ftp.path.censipam
-      WWW1_USER_FILE: /run/secrets/www1.user.scp
-      WWW1_PATH_FILE: /run/secrets/www1.path.scp
-      WWW1_PRIVATE_KEY_FILE: /run/secrets/www1.ecdsa.private.key
-      WWW1_HOST: www1.dpi.inpe.br
+      WWW1_USER_FILE: /run/secrets/www_user
+      WWW1_PATH_FILE: /run/secrets/www_path
+      WWW1_PRIVATE_KEY_FILE: /run/secrets/www_private_key
+      WWW1_HOST: pve10.dpi.inpe.br
       SUFFIX_PROJECT: cerrado
       PREFIX_CONTROL_FILE: deter_cerrado
       IBAMA_REF_DATE: '2024-08-01'
@@ -92,9 +92,9 @@ services:
       - ftp.pass.censipam
       - ftp.host.censipam
       - ftp.path.censipam
-      - www1.ecdsa.private.key
-      - www1.user.scp
-      - www1.path.scp
+      - www_private_key
+      - www_user
+      - www_path
     networks:
       - backgroundtask
     deploy:
@@ -110,11 +110,11 @@ networks:
     external: false
 
 secrets:
-  www1.ecdsa.private.key:
+  www_private_key:
     external: true
-  www1.user.scp:
+  www_user:
     external: true
-  www1.path.scp:
+  www_path:
     external: true
   postgres.port.deter_r:
     external: true
