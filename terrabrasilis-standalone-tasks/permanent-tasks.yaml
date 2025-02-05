@@ -5,7 +5,7 @@ services:
   
   # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
   deter_amazonia_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.3.7
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.8
     hostname: deter.amazonia.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
@@ -26,6 +26,7 @@ services:
       WWW1_PATH_FILE: /run/secrets/www_path
       WWW1_PRIVATE_KEY_FILE: /run/secrets/www_private_key
       WWW1_HOST: pve10.dpi.inpe.br
+      CONTROL_BASE_URL: "http://www.dpi.inpe.br/fipcerrado/deter2ibama/dados/controle"
       SUFFIX_PROJECT: amz
       PREFIX_CONTROL_FILE: deter
       IBAMA_REF_DATE: '2024-08-01'
@@ -56,7 +57,7 @@ services:
 
   # from git repository: https://github.com/terrabrasilis/daily-deter-for-ibama.git
   deter_cerrado_for_ibama:
-    image: terrabrasilis/daily-deter-for-ibama:v1.3.7
+    image: terrabrasilis/daily-deter-for-ibama:v1.3.8
     hostname: deter.cerrado.for.ibama
     volumes:
       - /data/deter-auth/deter-ibama:/data/files
@@ -77,6 +78,7 @@ services:
       WWW1_PATH_FILE: /run/secrets/www_path
       WWW1_PRIVATE_KEY_FILE: /run/secrets/www_private_key
       WWW1_HOST: pve10.dpi.inpe.br
+      CONTROL_BASE_URL: "http://www.dpi.inpe.br/fipcerrado/deter2ibama/dados/controle"
       SUFFIX_PROJECT: cerrado
       PREFIX_CONTROL_FILE: deter_cerrado
       IBAMA_REF_DATE: '2024-08-01'
