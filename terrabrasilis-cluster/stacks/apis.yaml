@@ -31,7 +31,7 @@ services:
 
   # File delivery service API with authentication
   file_delivery_api:
-    image: terrabrasilis/file-delivery:v2.0.1
+    image: terrabrasilis/file-delivery:v3.0.0
     hostname: file.delivery.auth
     volumes:
       - /data/deter-auth/generated-files:/data/files:ro
