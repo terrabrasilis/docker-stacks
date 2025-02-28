@@ -231,6 +231,20 @@ services:
         max_attempts: 3
         window: 120s
 
+  deter-dashboard:
+    image: terrabrasilis/deter-dashboard:v1.0.0.release-1.0.rc
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
 secrets:
   ams1.database.url:
     external: true
