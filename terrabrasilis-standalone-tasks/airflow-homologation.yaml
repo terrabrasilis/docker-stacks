@@ -19,6 +19,16 @@ x-airflow-common:
       AIRFLOW_PROJECTS_DIR: '/opt/airflow/projects/'
       AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
       _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
+      AIRFLOW__CORE__TEST_CONNECTION: 'Enabled'
+      AIRFLOW__SMTP__SMTP_HOST: "smtp.gmail.com"
+      AIRFLOW__SMTP__SMTP_MAIL_FROM: "andrefuncate@gmail.com"
+      AIRFLOW__SMTP__SMTP_PASSWORD_CMD: 'cat /run/secrets/airflow_smtp_password'
+      AIRFLOW__SMTP__SMTP_PORT: 587
+      AIRFLOW__SMTP__SMTP_SSL: "False"
+      AIRFLOW__SMTP__SMTP_STARTTLS: "True"
+      AIRFLOW__SMTP__SMTP_USER: "andrefuncate@gmail.com"
+      AIRFLOW__EMAIL__SUBJECT_TEMPLATE: /opt/airflow/email_subject_template
+      AIRFLOW__EMAIL__HTML_CONTENT_TEMPLATE: /opt/airflow/email_content_template
     volumes:
       - /main/ears/airflow-homologation/projects:/opt/airflow/projects
       - /main/ears/airflow-homologation/:/opt/airflow/
@@ -30,6 +40,7 @@ x-airflow-common:
     secrets:
       - airflow_homologation_database_sql_alchemy_conn
       - airflow_homologation_celery_result_backend_conn
+      - airflow_smtp_password
 
 services:
 
@@ -158,6 +169,8 @@ services:
 
 secrets:
   airflow_homologation_database_sql_alchemy_conn:
-      external: true
+    external: true
   airflow_homologation_celery_result_backend_conn:
-      external: true
+    external: true
+  airflow_smtp_password:
+    external: true
