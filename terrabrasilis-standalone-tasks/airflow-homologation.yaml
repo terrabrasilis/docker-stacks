@@ -35,7 +35,7 @@ x-airflow-common:
       - /main/ears/airflow-homologation/config/default:/etc/sudoers.d/default
       - /main/ears/airflow-homologation/config/shadow:/etc/shadow
     user: "1000:0"
-    depends_on:      
+    depends_on:
       - redis
     secrets:
       - airflow_homologation_database_sql_alchemy_conn
@@ -114,7 +114,7 @@ services:
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
       _PIP_ADDITIONAL_REQUIREMENTS: ''
-      AIRFLOW_UID: 1000    
+      AIRFLOW_UID: 1000
     user: "0:0"
     volumes:
       - /main/ears/airflow:/sources 
