@@ -24,7 +24,7 @@ services:
       start_period: 10s
 
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v3.0.3.homologation.rc
+    image: terrabrasilis/ams-webapp:v3.0.1.homologation.rc
     hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -43,6 +43,33 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+
+  forecast-viewer-h:
+    image: terrabrasilis/def-forecast-viewer:v0.1.0-alpha1
+    networks:
+      - proxy
+    configs:
+      - source: secrets.toml
+        target: /usr/src/app/.streamlit/secrets.toml
+        mode: 0644
+      - source: config.toml
+        target: /usr/src/app/.streamlit/config.toml
+        mode: 0644
+    ports:
+      - 8502
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+configs:
+  secrets.toml:
+    external: true
+  config.toml:
+    external: true
 
 secrets:
   amsh.database.url.v3:
