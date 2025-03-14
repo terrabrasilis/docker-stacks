@@ -55,6 +55,10 @@ services:
       - source: config.toml
         target: /usr/src/app/.streamlit/config.toml
         mode: 0644
+    volumes:
+      - /data/homologation/forecast-app/data:/usr/src/app/data
+      - /data/homologation/forecast-app/prepared:/usr/src/app/prepared
+      - /data/homologation/forecast-app/evaluated:/usr/src/app/evaluated
     ports:
       - 8502
     deploy:
