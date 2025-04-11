@@ -45,7 +45,7 @@ services:
         condition: on-failure
 
   forecast-viewer-h:
-    image: terrabrasilis/def-forecast-viewer:v0.2.0
+    image: terrabrasilis/def-forecast-viewer:v0.1.0-alpha4
     networks:
       - proxy
     configs:
