@@ -51,3 +51,7 @@ An environment to organize processes. We expect all ETL routines to be migrated 
  > See the [airflow.yaml](./airflow.yaml)
 
  > Configuration details in [AIRFLOW.md](./AIRFLOW.md).
+
+We have a test environment called homologation, where all workflows must be put through the validation stage.
+
+ > See the [airflow-homologation.yaml](./airflow-homologation.yaml)
