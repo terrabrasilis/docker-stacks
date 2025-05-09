@@ -92,6 +92,36 @@ services:
       retries: 3
       start_period: 20s
 
+  # STAC API to delivery risk data
+  risk_stac_api:
+    image: terrabrasilis/stac-api:v3.0.2
+    hostname: risk.stac.api
+    volumes:
+      - /data/risk-stac-api:/opt/data
+    environment:
+      - "STAC_CATALOG_PATH=/opt/data/risk_catalog/catalog.json"
+      - "STAC_ASSETS_BASE_URL=https://terrabrasilis.dpi.inpe.br/stac"
+      - "STAC_ASSETS_ROOT_DIR=/opt/data/risk/stac"
+      - "STAC_HOST=0.0.0.0"
+      - "STAC_PORT=8002"
+    networks:
+      - proxy
+    ports:
+      - "8002"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    healthcheck:
+      test: ["CMD-SHELL", "httpcode=`curl -o /dev/null --max-time 15 --silent --head --write-out \"%{http_code}\" \"http://localhost:8002/stac\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+      start_period: 20s
+
 secrets:
   jwt.public.key:
     external: true
