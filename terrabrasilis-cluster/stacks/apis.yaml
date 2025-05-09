@@ -101,7 +101,7 @@ services:
       - /data/risk-stac-api/risk/stac:/opt/airflow/projects/risk-background-tasks/src/data/stac/risk/stac
     environment:
       - "STAC_CATALOG_PATH=/opt/airflow/projects/risk-background-tasks/src/data/stac/risk_catalog/catalog.json"
-      - "STAC_ASSETS_BASE_URL=https://terrabrasilis.dpi.inpe.br/stac-api"
+      - "STAC_ASSETS_BASE_URL=http://terrabrasilis.dpi.inpe.br/stac-api"
       - "STAC_ASSETS_ROOT_DIR=/opt/airflow/projects/risk-background-tasks/src/data/stac/risk/stac"
       - "STAC_HOST=0.0.0.0"
       - "STAC_PORT=8002"
@@ -117,7 +117,7 @@ services:
         max_attempts: 3
         window: 120s
     healthcheck:
-      test: ["CMD-SHELL", "httpcode=`curl -o /dev/null --max-time 15 --silent --head --write-out \"%{http_code}\" \"http://localhost:8002/stac\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      test: ["CMD-SHELL", "httpcode=`curl -o /dev/null --max-time 15 --silent --head --write-out \"%{http_code}\" \"http://localhost:8002\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
       interval: 30s
       timeout: 20s
       retries: 3
