@@ -94,7 +94,7 @@ services:
 
   # STAC API to delivery risk data
   risk_stac_api:
-    image: terrabrasilis/stac-api:v3.0.2
+    image: terrabrasilis/stac-api:v1.0.1
     hostname: risk.stac.api
     volumes:
       - /data/risk-stac-api:/opt/data
