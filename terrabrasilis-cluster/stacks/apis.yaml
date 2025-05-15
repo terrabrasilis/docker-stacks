@@ -97,10 +97,10 @@ services:
     image: terrabrasilis/stac-api:v1.0.1
     hostname: risk.stac.api
     volumes:
-      - /data/risk-stac-api/risk_catalog:/opt/airflow/projects/risk-background-tasks/src/data/stac/risk_catalog
+      - /data/risk-stac-api/risk_catalog:/opt/airflow/projects/risk-background-tasks/src/data/risk_catalog
       - /data/risk-stac-api/risk/stac:/opt/airflow/projects/risk-background-tasks/src/data/stac
     environment:
-      - "STAC_CATALOG_PATH=/opt/airflow/projects/risk-background-tasks/src/data/stac/risk_catalog/catalog.json"
+      - "STAC_CATALOG_PATH=/opt/airflow/projects/risk-background-tasks/src/data/risk_catalog/catalog.json"
       - "STAC_ASSETS_BASE_URL=https://terrabrasilis.dpi.inpe.br/stac-api/collection1"
       - "STAC_ASSETS_ROOT_DIR=/opt/airflow/projects/risk-background-tasks/src/data/stac/"
       - "STAC_HOST=0.0.0.0"
@@ -117,7 +117,7 @@ services:
         max_attempts: 3
         window: 120s
     healthcheck:
-      test: ["CMD-SHELL", "httpcode=`curl -o /dev/null --max-time 15 --silent --get --write-out \"%{http_code}\" \"http://localhost:8002\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
+      test: ["CMD-SHELL", "httpcode=`curl -o /dev/null --max-time 15 --silent --get --write-out \"%{http_code}\" \"http://localhost:8002\"`; if [ ! $httpcode = \"200\" ]; then kill 1; fi"]
       interval: 30s
       timeout: 20s
       retries: 3
