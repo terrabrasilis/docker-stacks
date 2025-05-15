@@ -101,7 +101,7 @@ services:
       - /data/risk-stac-api/risk/stac:/opt/airflow/projects/risk-background-tasks/src/data/stac
     environment:
       - "STAC_CATALOG_PATH=/opt/airflow/projects/risk-background-tasks/src/data/risk_catalog/catalog.json"
-      - "STAC_ASSETS_BASE_URL=https://terrabrasilis.dpi.inpe.br/stac-api/collection1"
+      - "STAC_ASSETS_BASE_URL=https://terrabrasilis.dpi.inpe.br/stac-api/v1/data/collection1"
       - "STAC_ASSETS_ROOT_DIR=/opt/airflow/projects/risk-background-tasks/src/data/stac/"
       - "STAC_HOST=0.0.0.0"
       - "STAC_PORT=8002"
