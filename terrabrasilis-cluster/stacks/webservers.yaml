@@ -4,7 +4,7 @@ version: '3.4'
 services:
 
   main_proxy:
-    image: nginx:1.22-alpine
+    image: nginx:1.27-alpine
     networks:
       - proxy
     ports:
@@ -15,6 +15,7 @@ services:
       - /data/nginx/log:/var/log/nginx
       - /data/nginx/html:/usr/share/nginx/html
       - /data/nginx/base/nginx.conf:/etc/nginx/nginx.conf
+      - /data/risk-stac-api/risk:/data/risk-stac-api/risk:ro
     deploy:
       replicas: 1
       placement:
@@ -26,7 +27,7 @@ services:
         window: 120s
 
   download_static_files:
-    image: nginx:1.22-alpine
+    image: nginx:1.27-alpine
     volumes:
       - /data/download/static:/usr/share/nginx/html:ro
     networks:
@@ -42,25 +43,9 @@ services:
         window: 120s
 
   prodes_dashboard_files:
-    image: nginx:1.22-alpine
-    volumes:
-      - /data/prodes/dashboard/deforestation:/usr/share/nginx/html:ro
-    networks:
-      - proxy
-    ports:
-      - 80
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-
-  risk_stac_files:
     image: nginx:1.27-alpine
     volumes:
-      - /data/risk-stac-api/risk:/usr/share/nginx/html:ro
+      - /data/prodes/dashboard/deforestation:/usr/share/nginx/html:ro
     networks:
       - proxy
     ports:
