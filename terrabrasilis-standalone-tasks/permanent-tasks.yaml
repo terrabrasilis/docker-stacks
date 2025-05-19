@@ -107,6 +107,22 @@ services:
         max_attempts: 3
         window: 120s
 
+  # The experimental XGBoost forecasting model used to generate deforestation risk.
+  deforestation_risk_inference:
+    image: terrabrasilis/risk-model-environment:v0.1.0
+    hostname: deforestation.risk.inference
+    volumes:
+      - /main/ears/deforestation-risk-inference/risk-model-environment:/usr/local/data
+    networks:
+      - backgroundtask
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
 networks:
   backgroundtask:
     external: false
