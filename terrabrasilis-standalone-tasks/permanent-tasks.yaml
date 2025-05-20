@@ -113,6 +113,10 @@ services:
     hostname: deforestation.risk.inference
     volumes:
       - /main/ears/deforestation-risk-inference/risk-model-environment:/usr/local/data
+    environment:
+      STAC_API_URL: "https://terrabrasilis.dpi.inpe.br/stac-api/v1"
+      ROOT_PATH: "/usr/local/data/operational"
+      OUTPUT_FILE_PREFIX: "xgboost25k"
     networks:
       - backgroundtask
     deploy:
