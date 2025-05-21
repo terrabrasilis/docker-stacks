@@ -116,7 +116,7 @@ services:
     environment:
       STAC_API_URL: "https://terrabrasilis.dpi.inpe.br/stac-api/v1"
       ROOT_PATH: "/usr/local/data/operational"
-      OUTPUT_FILE_PREFIX: "xgboost25k"
+      OUTPUT_FILE_PREFIX: "XGBOOST25K"
     networks:
       - backgroundtask
     deploy:
