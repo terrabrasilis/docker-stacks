@@ -94,15 +94,13 @@ services:
 
   # STAC API to delivery risk data
   risk_stac_api:
-    image: terrabrasilis/stac-api:v1.0.1
+    image: terrabrasilis/stac-api:v1.1.2
     hostname: risk.stac.api
     volumes:
-      - /data/risk-stac-api/risk_catalog:/opt/airflow/projects/risk-background-tasks/src/data/risk_catalog
-      - /data/risk-stac-api/risk/stac:/opt/airflow/projects/risk-background-tasks/src/data/stac
+      - /data/risk-stac-api/risk/stac:/opt/airflow/projects/stac-server/data/stac
     environment:
-      - "STAC_CATALOG_PATH=/opt/airflow/projects/risk-background-tasks/src/data/risk_catalog/catalog.json"
-      - "STAC_ASSETS_BASE_URL=https://terrabrasilis.dpi.inpe.br/stac-api/v1/data/collection1"
-      - "STAC_ASSETS_ROOT_DIR=/opt/airflow/projects/risk-background-tasks/src/data/stac/"
+      - "STAC_CATALOG_PATH=/opt/airflow/projects/stac-server/data/stac/catalog/catalog.json"
+      - "STAC_BASE_URL=https://terrabrasilis.dpi.inpe.br/stac-api/v1"
       - "STAC_HOST=0.0.0.0"
       - "STAC_PORT=8002"
     networks:
