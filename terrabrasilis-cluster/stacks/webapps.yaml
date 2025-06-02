@@ -108,7 +108,7 @@ services:
       start_period: 10s
 
   amazon-alert-aggregated:
-    image: terrabrasilis/amazon-alert-aggregated:v2.13.2
+    image: terrabrasilis/amazon-alert-aggregated:v2.13.4
     networks:
       - proxy
     ports:
@@ -128,7 +128,7 @@ services:
       start_period: 10s
 
   amazon-alert-daily:
-    image: terrabrasilis/amazon-alert-daily:v2.13.3
+    image: terrabrasilis/amazon-alert-daily:v2.13.4
     networks:
       - proxy
     ports:
