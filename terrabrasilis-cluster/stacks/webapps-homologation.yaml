@@ -3,6 +3,20 @@ version: '3.4'
 
 services:
 
+  deter-dashboard-h:
+    image: terrabrasilis/deter-dashboard:v1.0.6.release-1.0.rc
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
   deforestation-dashboard-h:
     image: terrabrasilis/deforestation-dashboard:hom_v3.4.6
     networks:
@@ -52,7 +66,7 @@ services:
       - source: secrets.toml
         target: /usr/src/app/.streamlit/secrets.toml
         mode: 0644
-      - source: config.toml
+      - source: config_v1.toml
         target: /usr/src/app/.streamlit/config.toml
         mode: 0644
     volumes:
@@ -66,13 +80,13 @@ services:
       restart_policy:
         condition: any
         delay: 5s
-        max_attempts: 3
+        max_attempts: 10
         window: 120s
 
 configs:
   secrets.toml:
     external: true
-  config.toml:
+  config_v1.toml:
     external: true
 
 secrets:
