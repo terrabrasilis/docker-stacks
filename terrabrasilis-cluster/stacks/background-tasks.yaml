@@ -158,6 +158,7 @@ services:
     hostname: cmask.data.task
     volumes:
       - '/data/deter-task/cmask:/usr/local/data'
+      - '/data/download/static/cmask:/usr/local/download/static/cmask'
     environment:
       - "FORCE_YEAR_MONTH=no"
       - "EVERY_DAY=no"
