@@ -4,7 +4,7 @@ version: '3.4'
 services:
 
   deter-dashboard-h:
-    image: terrabrasilis/deter-dashboard:v1.0.6.release-1.0.rc
+    image: terrabrasilis/deter-dashboard:v1.0.7.release-1.0.rc
     networks:
       - proxy
     ports:
@@ -38,7 +38,7 @@ services:
       start_period: 10s
 
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v3.0.8.homologation.rc
+    image: terrabrasilis/ams-webapp:v3.0.9.homologation.rc
     hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -59,7 +59,7 @@ services:
         condition: on-failure
 
   forecast-viewer-h:
-    image: terrabrasilis/def-forecast-viewer:v0.1.0-alpha4
+    image: terrabrasilis/def-forecast-viewer:v0.1.0-alpha5
     networks:
       - proxy
     configs:
