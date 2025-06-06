@@ -154,7 +154,7 @@ services:
 
   # to generate the cloud cover using cmask data for DETER Cerrado and Amazonia
   cmask-data-task:
-    image: 'terrabrasilis/deter-cmask-data-task:v1.0.12'
+    image: 'terrabrasilis/deter-cmask-data-task:v1.0.13'
     hostname: cmask.data.task
     volumes:
       - '/data/deter-task/cmask:/usr/local/data'
