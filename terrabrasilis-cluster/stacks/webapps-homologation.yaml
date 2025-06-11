@@ -4,7 +4,7 @@ version: '3.4'
 services:
 
   deter-dashboard-h:
-    image: terrabrasilis/deter-dashboard:v1.0.9.release-1.0.rc
+    image: terrabrasilis/deter-dashboard:v1.0.10
     networks:
       - proxy
     ports:
@@ -38,7 +38,7 @@ services:
       start_period: 10s
 
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v3.0.9.homologation.rc
+    image: terrabrasilis/ams-webapp:v3.0.11.homologation.rc
     hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
