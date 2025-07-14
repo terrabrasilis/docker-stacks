@@ -38,7 +38,7 @@ services:
       start_period: 10s
 
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v3.0.12.homologation.rc
+    image: terrabrasilis/ams-webapp:v3.0.15.homologation.rc
     hostname: amsh.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -50,9 +50,9 @@ services:
       - "GEOSERVER_URL=https://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams-homologation/"
-      - "DB_URL=/run/secrets/amsh.database.url.v3"
+      - "DB_URL=/run/secrets/amsh.database.url.v4"
     secrets:
-      - amsh.database.url.v3
+      - amsh.database.url.v4
     deploy:
       replicas: 1
       restart_policy:
@@ -90,7 +90,7 @@ configs:
     external: true
 
 secrets:
-  amsh.database.url.v3:
+  amsh.database.url.v4:
     external: true
 
 networks:
