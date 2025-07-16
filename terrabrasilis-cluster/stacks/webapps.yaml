@@ -208,7 +208,7 @@ services:
         window: 120s
 
   ams-webapp:
-    image: terrabrasilis/ams-webapp:v3.0.5
+    image: terrabrasilis/ams-webapp:v3.0.17
     hostname: ams.webapp
     entrypoint: /docker-entrypoint.sh
     networks:
@@ -220,9 +220,9 @@ services:
       - "GEOSERVER_URL=https://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams/"
-      - "DB_URL=/run/secrets/ams1.database.url.v2"
+      - "DB_URL=/run/secrets/ams1.database.url.v3"
     secrets:
-      - ams1.database.url.v2
+      - ams1.database.url.v3
     deploy:
       replicas: 1
       restart_policy:
@@ -232,7 +232,7 @@ services:
         window: 120s
 
 secrets:
-  ams1.database.url.v2:
+  ams1.database.url.v3:
     external: true
 
 networks:
