@@ -4,7 +4,7 @@ version: '3.4'
 services:
 
   deter-dashboard-h:
-    image: terrabrasilis/deter-dashboard:v1.0.14
+    image: terrabrasilis/deter-dashboard:v1.0.15
     networks:
       - proxy
     ports:
