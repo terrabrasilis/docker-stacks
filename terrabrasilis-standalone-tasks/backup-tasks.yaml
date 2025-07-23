@@ -9,7 +9,7 @@ services:
     volumes:
       - '/main/storage/database/mongodb/business:/usr/local/data'
     configs:
-      - source: business-api-task.conf
+      - source: pve12-business-api-task.conf
         target: /usr/mongodb/conf/business-api-task.conf
         mode: 0644
     deploy:
@@ -17,7 +17,6 @@ services:
       restart_policy:
         condition: any
         delay: 5s
-        max_attempts: 3
         window: 120s
 
   # Postgres daily backups
@@ -33,7 +32,6 @@ services:
       restart_policy:
         condition: any
         delay: 5s
-        max_attempts: 3
         window: 120s
 
   # Postgres weekly backups
@@ -46,9 +44,8 @@ services:
       restart_policy:
         condition: any
         delay: 5s
-        max_attempts: 3
         window: 120s
 
 configs:
-  business-api-task.conf:
+  pve12-business-api-task.conf:
     external: true
