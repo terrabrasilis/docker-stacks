@@ -38,7 +38,7 @@ services:
       start_period: 10s
 
   amsh-webapp:
-    image: terrabrasilis/ams-webapp:v3.0.20.homologation.rc
+    image: terrabrasilis/ams-webapp:v3.1.0.homologation.rc
     hostname: amsh.webapp
     entrypoint: ["bash", "/docker-entrypoint.sh"]
     networks:
