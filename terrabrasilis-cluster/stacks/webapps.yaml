@@ -220,9 +220,9 @@ services:
       - "GEOSERVER_URL=https://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams/"
-      - "DB_URL=/run/secrets/ams2.database.url"
+      - "DB_URL=/run/secrets/ams2.database.url.v2"
     secrets:
-      - ams2.database.url
+      - ams2.database.url.v2
     deploy:
       replicas: 1
       restart_policy:
@@ -232,7 +232,7 @@ services:
         window: 120s
 
 secrets:
-  ams2.database.url:
+  ams2.database.url.v2:
     external: true
 
 networks:
