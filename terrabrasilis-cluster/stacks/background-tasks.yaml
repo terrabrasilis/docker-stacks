@@ -178,63 +178,6 @@ services:
         max_attempts: 3
         window: 120s
 
-  # Amazon Biome Database Update Task for AMS Application
-  ams-sync-amazonia:
-    image: terrabrasilis/ams-sync:v2.2.4
-    hostname: ams.amazonia.sync
-    volumes:
-      - /data/ams-task/amazonia/sync:/usr/local/data
-    environment:
-      - "BIOME=Amazônia"
-      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cst_2023.tif"
-      - "DATABASE_URL=/run/secrets/ams.database.url.amz.v2"
-      - "ALL_DATA=True"
-      - "FTP_HOST=/run/secrets/risk.ftp.host"
-      - "FTP_PORT=/run/secrets/risk.ftp.port"
-      - "FTP_PATH=/run/secrets/risk.ftp.path"
-      - "FTP_USER=/run/secrets/risk.ftp.user"
-      - "FTP_PASS=/run/secrets/risk.ftp.pass"
-      - "RISK_OUTPUT_PATH=/usr/local/data"
-    secrets:
-      - ams.database.url.amz.v2
-      - risk.ftp.host
-      - risk.ftp.port
-      - risk.ftp.path
-      - risk.ftp.user
-      - risk.ftp.pass
-    networks:
-      - backgroundtask
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-
-  # Cerrado Biome Database Update Task for AMS Application
-  ams-sync-cerrado:
-    image: terrabrasilis/ams-sync:v2.2.4
-    hostname: ams.cerrado.sync
-    volumes:
-      - /data/ams-task/cerrado/sync:/usr/local/data
-    environment:
-      - "BIOME=Cerrado"
-      - "INPUT_GEOTIFF_FUNDIARY_STRUCTURE=estrutura_fundiaria_cerrado_cst_lzw.tif"
-      - "DATABASE_URL=/run/secrets/ams.database.url.cer.v2"
-      - "ALL_DATA=True"
-    secrets:
-      - ams.database.url.cer.v2
-    networks:
-      - backgroundtask
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-
 # configuration files in Portainer
 configs:
   ssmtp-tb.conf:
@@ -266,20 +209,6 @@ secrets:
   postgres.user.prod:
     external: true
   postgres.pass.prod:
-    external: true
-  ams.database.url.amz.v2:
-    external: true
-  ams.database.url.cer.v2:
-    external: true
-  risk.ftp.host:
-    external: true
-  risk.ftp.port:
-    external: true
-  risk.ftp.path:
-    external: true
-  risk.ftp.user:
-    external: true
-  risk.ftp.pass:
     external: true
 
 networks:
