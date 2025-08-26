@@ -97,25 +97,6 @@
       {
         "id": 6,
         "type": 2,
-        "name": "manager-apps",
-        "title": "The Manager Apps stack for production.",
-        "description": "The Apps to allow manage the resources like PostgreSQL databases.",
-        "note": "This stack is optional and serves to manage the resources on TerraBrasilis cluster.",
-        "categories": [
-          "manager",
-          "PGAdmin4",
-          "production"
-        ],
-        "platform": "linux",
-        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
-        "repository": {
-          "url": "https://github.com/terrabrasilis/docker-stacks",
-          "stackfile": "terrabrasilis-cluster/stacks/manager-apps.yaml"
-        }
-      },
-      {
-        "id": 7,
-        "type": 2,
         "name": "metadata-app",
         "title": "The GeoNetwork stack for production.",
         "description": "The GeoNetwork application allows managing the metadata catalog and serving it through the WCS API.",
@@ -133,7 +114,7 @@
         }
       },
       {
-        "id": 8,
+        "id": 7,
         "type": 2,
         "name": "geoserver-cluster",
         "title": "The GeoServer Cluster stack for production.",
@@ -152,7 +133,7 @@
         }
       },
       {
-        "id": 9,
+        "id": 8,
         "type": 2,
           "name": "webapps",
           "title": "The WebApps stack like WebMap and Dashboards for production.",
@@ -170,7 +151,7 @@
           }
       },
       {
-        "id": 10,
+        "id": 9,
         "type": 2,
         "name": "sgdb",
         "title": "The SGDBs stack with relational SQL and NoSQL databases for production.",
@@ -188,25 +169,25 @@
         }
       },
       {
-        "id": 11,
+        "id": 10,
         "type": 2,
-          "name": "webapps-homologation",
-          "title": "The WebApps stack like WebMap and Dashboards for homologation",
-          "description": "The TerraBrasilis homologation WebApps stack.",
-          "note": "This stack are optional for homologation use.",
-          "categories": [
-            "webapps",
-            "homologation"
-          ],
-          "platform": "linux",
-          "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
-          "repository": {
-              "url": "https://github.com/terrabrasilis/docker-stacks",
-              "stackfile": "terrabrasilis-cluster/stacks/webapps-homologation.yaml"
-          }
+        "name": "webapps-homologation",
+        "title": "The WebApps stack like WebMap and Dashboards for homologation",
+        "description": "The TerraBrasilis homologation WebApps stack.",
+        "note": "This stack are optional for homologation use.",
+        "categories": [
+          "webapps",
+          "homologation"
+        ],
+        "platform": "linux",
+        "logo": "https://raw.githubusercontent.com/terrabrasilis/docker-stacks/master/icons/frontend.png",
+        "repository": {
+          "url": "https://github.com/terrabrasilis/docker-stacks",
+          "stackfile": "terrabrasilis-cluster/stacks/webapps-homologation.yaml"
+        }
       },
       {
-        "id": 12,
+        "id": 11,
         "type": 2,
         "name": "sgdb-homologation",
         "title": "The SGDBs stack with relational and NoSQL databases for homologation.",
@@ -224,7 +205,7 @@
         }
       },
       {
-        "id": 13,
+        "id": 12,
         "type": 2,
         "name": "apis-homologation",
         "title": "The API stack for homologation.",
@@ -242,7 +223,7 @@
         }
       },
       {
-        "id": 14,
+        "id": 13,
         "type": 2,
         "name": "background-tasks-homologation",
         "title": "The Background Tasks stack for homologation.",
@@ -260,7 +241,7 @@
         }
       },
       {
-        "id": 15,
+        "id": 14,
         "type": 2,
         "name": "webservers-homologation",
         "title": "The Web Servers stack for homologation",
