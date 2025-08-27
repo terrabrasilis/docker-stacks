@@ -9,7 +9,6 @@ services:
     volumes:
       - /data/deter-auth/generated-files:/data/files
       - /data/deter-auth/logs:/logs
-      - /data/deter-auth/to-terrama:/data/terrama/deter-amz
     secrets:
       - geoserver.user.dashboard
       - geoserver.pass.dashboard
