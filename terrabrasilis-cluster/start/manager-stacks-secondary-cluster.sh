@@ -9,10 +9,12 @@ if [[ "$1" = "rm" ]]; then
         echo "removing the stack: ${STACK_NAME}"
         docker stack rm ${STACK_NAME}
     done
+
     docker network rm proxy
     docker network rm backend
     docker network rm agent_network
 
+    sleep 30
     docker system prune -f
 
 else
@@ -21,23 +23,23 @@ else
     cd /home/andre/docker-stacks/
     git pull origin master
 
-    cd /home/andre/docker-stacks/terrabrasilis-cluster/stacks/
+    STACK_PATH="/home/andre/docker-stacks/terrabrasilis-cluster"
 
     docker network create -d overlay proxy
     docker network create -d overlay backend
     docker network create -d overlay --attachable agent_network
 
-    docker stack deploy sgdb --compose-file sgdb.yaml --detach=true
-    docker stack deploy geoserver-cluster --compose-file geoserver-cluster.yaml --detach=true
-    docker stack deploy metadata-app --compose-file metadata-app.yaml --detach=true
-    docker stack deploy security --compose-file security.yaml --detach=true
-    docker stack deploy webapps --compose-file webapps.yaml --detach=true
-    docker stack deploy webapps-homologation --compose-file webapps-homologation.yaml --detach=true
-    docker stack deploy apis --compose-file apis.yaml --detach=true
-    docker stack deploy homepage-app --compose-file homepage-app.yaml --detach=true
-    docker stack deploy webservers-homologation --compose-file webservers-homologation.yaml --detach=true
-    docker stack deploy portainer -c portainer.yaml --detach=true
+    docker stack deploy sgdb --compose-file ${STACK_PATH}/stacks/sgdb.yaml --detach=true
+    docker stack deploy geoserver-cluster --compose-file ${STACK_PATH}/stacks/geoserver-cluster.yaml --detach=true
+    docker stack deploy metadata-app --compose-file ${STACK_PATH}/stacks/metadata-app.yaml --detach=true
+    docker stack deploy security --compose-file ${STACK_PATH}/stacks/security.yaml --detach=true
+    docker stack deploy webapps --compose-file ${STACK_PATH}/stacks/webapps.yaml --detach=true
+    docker stack deploy webapps-homologation --compose-file ${STACK_PATH}/stacks/webapps-homologation.yaml --detach=true
+    docker stack deploy apis --compose-file ${STACK_PATH}/stacks/apis.yaml --detach=true
+    docker stack deploy homepage-app --compose-file ${STACK_PATH}/stacks/homepage-app.yaml --detach=true
+    docker stack deploy webservers-homologation --compose-file ${STACK_PATH}/stacks/webservers-homologation.yaml --detach=true
+    docker stack deploy portainer --compose-file ${STACK_PATH}/start/portainer.yaml --detach=true
     sleep 60
-    docker stack deploy webservers --compose-file webservers.yaml --detach=true
+    docker stack deploy webservers --compose-file ${STACK_PATH}/stacks/webservers.yaml --detach=true
 
 fi
