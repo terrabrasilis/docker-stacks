@@ -17,6 +17,10 @@ if [[ "$1" = "rm" ]]; then
 
 else
 
+    # update stacks repository
+    cd /home/andre/docker-stacks/
+    git pull origin master
+
     cd /home/andre/docker-stacks/terrabrasilis-cluster/stacks/
 
     docker network create -d overlay proxy
