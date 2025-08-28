@@ -14,9 +14,6 @@ if [[ "$1" = "rm" ]]; then
     docker network rm backend
     docker network rm agent_network
 
-    sleep 30
-    docker system prune -f
-
 else
 
     # update stacks repository
@@ -24,6 +21,8 @@ else
     git pull origin master
 
     STACK_PATH="/home/andre/docker-stacks/terrabrasilis-cluster"
+
+    docker system prune --filter "until=24h" -f
 
     docker network create -d overlay proxy
     docker network create -d overlay backend
