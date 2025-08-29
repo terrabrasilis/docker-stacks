@@ -22,7 +22,8 @@ else
 
     STACK_PATH="/home/andre/docker-stacks/terrabrasilis-cluster"
 
-    docker system prune --filter "until=24h" -f
+    # Disable because we get the error to repull the images from docker hub after a wile. error: "Too many requests: You have reached your pull rate limit"
+    #docker system prune --filter "until=24h" -f
 
     docker network create -d overlay proxy
     docker network create -d overlay backend
