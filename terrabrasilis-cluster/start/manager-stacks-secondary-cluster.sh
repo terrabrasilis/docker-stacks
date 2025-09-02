@@ -33,8 +33,6 @@ else
 
     # the security stack has a keycloak application that does not work on a read-only database, so we keep that stack disabled for now.
     # docker stack deploy security --compose-file ${STACK_PATH}/stacks/security.yaml --detach=true
-    # and we need to disable the internal nginx proxy configuration for keycloak app.
-    rm /data/nginx/conf.d/security*
 
     docker stack deploy sgdb --compose-file ${STACK_PATH}/stacks/sgdb.yaml --detach=true
     docker stack deploy geoserver-cluster --compose-file ${STACK_PATH}/stacks/geoserver-cluster.yaml --detach=true
