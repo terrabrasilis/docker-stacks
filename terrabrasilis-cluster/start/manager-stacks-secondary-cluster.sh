@@ -29,16 +29,24 @@ else
     docker network create -d overlay backend
     docker network create -d overlay --attachable agent_network
 
+    sleep 10
+
+    # the security stack has a keycloak application that does not work on a read-only database, so we keep that stack disabled for now.
+    # docker stack deploy security --compose-file ${STACK_PATH}/stacks/security.yaml --detach=true
+    # and we need to disable the internal nginx proxy configuration for keycloak app.
+    rm /data/nginx/conf.d/security*
+
     docker stack deploy sgdb --compose-file ${STACK_PATH}/stacks/sgdb.yaml --detach=true
     docker stack deploy geoserver-cluster --compose-file ${STACK_PATH}/stacks/geoserver-cluster.yaml --detach=true
     docker stack deploy metadata-app --compose-file ${STACK_PATH}/stacks/metadata-app.yaml --detach=true
-    docker stack deploy security --compose-file ${STACK_PATH}/stacks/security.yaml --detach=true
     docker stack deploy webapps --compose-file ${STACK_PATH}/stacks/webapps.yaml --detach=true
     docker stack deploy webapps-homologation --compose-file ${STACK_PATH}/stacks/webapps-homologation.yaml --detach=true
     docker stack deploy apis --compose-file ${STACK_PATH}/stacks/apis.yaml --detach=true
     docker stack deploy homepage-app --compose-file ${STACK_PATH}/stacks/homepage-app.yaml --detach=true
     docker stack deploy webservers-homologation --compose-file ${STACK_PATH}/stacks/webservers-homologation.yaml --detach=true
     docker stack deploy portainer --compose-file ${STACK_PATH}/start/portainer.yaml --detach=true
+
+    # waiting for the services to be fully started before starting the nginx proxy
     sleep 60
     docker stack deploy webservers --compose-file ${STACK_PATH}/stacks/webservers.yaml --detach=true
 
