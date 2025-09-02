@@ -45,7 +45,7 @@ else
     docker stack deploy portainer --compose-file ${STACK_PATH}/start/portainer.yaml --detach=false
 
     # waiting for the services to be fully started before starting the nginx proxy
-    sleep 60
+    sleep 30
     docker stack deploy webservers --compose-file ${STACK_PATH}/stacks/webservers.yaml --detach=false
 
 fi
