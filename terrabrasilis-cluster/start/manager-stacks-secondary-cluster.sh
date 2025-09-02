@@ -10,9 +10,9 @@ if [[ "$1" = "rm" ]]; then
         docker stack rm ${STACK_NAME}
     done
 
-    docker network rm proxy
-    docker network rm backend
-    docker network rm agent_network
+    sleep 45
+    docker network prune -f
+    docker volume prune -f
 
 else
 
