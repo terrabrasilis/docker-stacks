@@ -11,8 +11,6 @@ services:
       - backend
     volumes:
       - /data/homepage:/var/www/html
-
-
     secrets:
       - wordpress.homepage.db.name
       - wordpress.homepage.db.user
@@ -27,7 +25,6 @@ services:
       - "VIRTUAL_HOST=terrabrasilis.dpi.inpe.br"
     ports:
       - 80
-
     depends_on:
       - db_mysql
     deploy:
@@ -35,7 +32,6 @@ services:
       restart_policy:
         condition: any
         delay: 15s
-        max_attempts: 5
         window: 120s
 
 secrets:
