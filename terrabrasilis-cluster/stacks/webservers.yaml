@@ -39,6 +39,7 @@ services:
       restart_policy:
         condition: any
         delay: 5s
+        max_attempts: 3
         window: 120s
 
   prodes_dashboard_files:
@@ -54,6 +55,7 @@ services:
       restart_policy:
         condition: any
         delay: 5s
+        max_attempts: 3
         window: 120s
 
 networks:

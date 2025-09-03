@@ -11,6 +11,8 @@ services:
       - backend
     volumes:
       - /data/homepage:/var/www/html
+
+
     secrets:
       - wordpress.homepage.db.name
       - wordpress.homepage.db.user
@@ -22,8 +24,10 @@ services:
       - "WORDPRESS_DB_PASSWORD_FILE=/run/secrets/wordpress.homepage.db.pass"
       - "WORDPRESS_DB_HOST_FILE=/run/secrets/wordpress.homepage.db.host"
       - "WORDPRESS_TABLE_PREFIX=wp_"
+      - "VIRTUAL_HOST=terrabrasilis.dpi.inpe.br"
     ports:
       - 80
+
     depends_on:
       - db_mysql
     deploy:

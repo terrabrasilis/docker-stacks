@@ -1,4 +1,4 @@
-# Used for deploy security stack
+# Used for deploy and test keycloak into swarm
 version: '3.4'
 
 services:
@@ -21,6 +21,7 @@ services:
         mode: 0644
     volumes:
       - "/data/security/keycloak:/data"
+      - "/data/security/keycloak/themes/:/opt/keycloak/themes/"
     environment:
       - "KC_DB=postgres"
       - "KC_DB_SCHEMA=public"
