@@ -1,4 +1,4 @@
-# Used for deploy webapps stack
+ Used for deploy webapps stack
 version: '3.4'
 
 services:
@@ -208,7 +208,7 @@ services:
         window: 120s
 
   ams-webapp:
-    image: terrabrasilis/ams-webapp:v3.0.17
+    image: terrabrasilis/ams-webapp:v3.1.4
     hostname: ams.webapp
     entrypoint: ["bash", "/docker-entrypoint.sh"]
     networks:
@@ -220,7 +220,7 @@ services:
       - "GEOSERVER_URL=https://terrabrasilis.dpi.inpe.br/geoserver"
       - "SERVER_NAME=terrabrasilis.dpi.inpe.br"
       - "APPLICATION_ROOT=/ams/"
-      - "DB_URL=/run/secrets/ams2.database.url.v2"
+      - "DB_URL=/run/secrets/amsh.database.url.v5"
     secrets:
       - ams2.database.url.v2
     deploy:
