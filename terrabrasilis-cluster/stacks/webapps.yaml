@@ -1,4 +1,4 @@
- Used for deploy webapps stack
+# Used for deploy webapps stack
 version: '3.4'
 
 services:
