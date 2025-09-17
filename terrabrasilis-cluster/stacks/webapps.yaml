@@ -208,7 +208,7 @@ services:
         window: 120s
 
   ams-webapp:
-    image: terrabrasilis/ams-webapp:v4.0.0
+    image: terrabrasilis/ams-webapp:v4.0.2
     hostname: ams.webapp
     entrypoint: ["bash", "/docker-entrypoint.sh"]
     networks:
