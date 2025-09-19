@@ -107,7 +107,6 @@ services:
         max_attempts: 3
         window: 120s
 
-
   # The experimental XGBoost forecasting model used to generate deforestation risk.
   deforestation_risk_inference:
     image: terrabrasilis/risk-model-environment:v1.0.1
@@ -119,6 +118,25 @@ services:
       STAC_API_URL: "https://terrabrasilis.dpi.inpe.br/stac-api/v1"
       ROOT_PATH: "/usr/local/data/operational"
       OUTPUT_FILE_PREFIX: "XGBOOST25K"
+    networks:
+      - backgroundtask
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  # Automation to calculate the last observed day for each DETER alert polygon.
+  # from git repository: https://github.com/terrabrasilis/deter-last-obs-ibama
+  last_obs_task:
+    image: terrabrasilis/deter-last-obs-task:v1.0.0
+    hostname: deter.last.obs.task
+    volumes:
+      - /main/ears/deter_to_ibama/cmask_last_obs:/usr/local/data
+    environment:
+      BASE_URL: "http://150.163.2.139:8089/files"
     networks:
       - backgroundtask
     deploy:
