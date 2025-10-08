@@ -16,11 +16,15 @@ if [[ "$1" = "rm" ]]; then
 
 else
 
+    # update docker swarm secrets using the backup script
+    /bin/bash /data/swarm_secrets/create_secrets.sh
+
     # update stacks repository
-    cd /home/andre/docker-stacks/
+    REPOSITORY_PATH="/home/andre/docker-stacks"
+    cd ${REPOSITORY_PATH}
     git pull origin master
 
-    STACK_PATH="/home/andre/docker-stacks/terrabrasilis-cluster"
+    STACK_PATH="${REPOSITORY_PATH}/terrabrasilis-cluster"
 
     # Disable because we get the error to repull the images from docker hub after a wile. error: "Too many requests: You have reached your pull rate limit"
     #docker system prune --filter "until=24h" -f
