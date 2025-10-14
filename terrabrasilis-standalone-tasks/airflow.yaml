@@ -2,45 +2,62 @@ version: '3.8'
 
 x-airflow-common:
     &airflow-common
-    image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.9.2-python3.9}
+    image: ${AIRFLOW_IMAGE_NAME:-terrabrasilis/airflow:2.10.5-python3.9}
     environment:
       &airflow-common-env
       AIRFLOW__CORE__EXECUTOR: CeleryExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN_CMD: 'cat /run/secrets/airflow_database_sql_alchemy_conn'
       AIRFLOW__CELERY__RESULT_BACKEND_CMD: 'cat /run/secrets/airflow_celery_result_backend_conn'
-      AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+      AIRFLOW__CELERY__BROKER_URL: redis://:@redis_prod:6379/0
       AIRFLOW__CORE__FERNET_KEY: ''
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
+      AIRFLOW__CORE__DEFAULT_TIMEZONE: 'America/Sao_Paulo'
+      AIRFLOW__WEBSERVER__DEFAULT_UI_TIMEZONE: 'America/Sao_Paulo'
+      AIRFLOW__WEBSERVER__BASE_URL: 'https://ears.dpi.inpe.br/airflow'
       AIRFLOW_PROJECTS_DIR: '/opt/airflow/projects/'
       AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
       _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
+      AIRFLOW__CORE__TEST_CONNECTION: 'Enabled'
+      AIRFLOW__SMTP__SMTP_HOST: "smtp.gmail.com"
+      AIRFLOW__SMTP__SMTP_MAIL_FROM: "andrefuncate@gmail.com"
+      AIRFLOW__SMTP__SMTP_PASSWORD_CMD: 'cat /run/secrets/airflow_smtp_password'
+      AIRFLOW__SMTP__SMTP_PORT: 587
+      AIRFLOW__SMTP__SMTP_SSL: "False"
+      AIRFLOW__SMTP__SMTP_STARTTLS: "True"
+      AIRFLOW__SMTP__SMTP_USER: "andrefuncate@gmail.com"
+      AIRFLOW__EMAIL__SUBJECT_TEMPLATE: /opt/airflow/email_subject_template
+      AIRFLOW__EMAIL__HTML_CONTENT_TEMPLATE: /opt/airflow/email_content_template
     volumes:
       - /main/ears/airflow/projects:/opt/airflow/projects
       - /main/ears/airflow/:/opt/airflow/
       - /main/ears/airflow/config/default:/etc/sudoers.d/default
       - /main/ears/airflow/config/shadow:/etc/shadow
     user: "1000:0"
-    depends_on:      
-      - redis
+    depends_on:
+      - redis_prod
     secrets:
       - airflow_database_sql_alchemy_conn
       - airflow_celery_result_backend_conn
+      - airflow_smtp_password
 
 services:
 
-  redis:
+  redis_prod:
     image: redis:7.2-bookworm
-    expose:
-      - 6379
+    ports:
+      - "6379:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 30s
       retries: 50
       start_period: 30s
-    restart: always
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
     
   airflow-init:
     <<: *airflow-common
@@ -48,7 +65,7 @@ services:
     command:
       - -c
       - |
-        if [[ -z "${AIRFLOW_UID}" ]]; then
+        if [[ -z $${AIRFLOW_UID} ]]; then
           echo
           echo -e "\033[1;33mWARNING!!!: AIRFLOW_UID not set!\e[0m"
           echo "If you are on Linux, you SHOULD follow the instructions below to set "
@@ -91,16 +108,16 @@ services:
           echo
         fi
         mkdir -p /sources/logs /sources/dags /sources/plugins
-        chown -R "${AIRFLOW_UID}:0" /sources/{logs,dags,plugins}
+        chown -R "$${AIRFLOW_UID}:0" /sources/{logs,dags,plugins}
         exec /entrypoint airflow version
     environment:
       <<: *airflow-common-env
-      _AIRFLOW_DB_MIGRATE: 'true'
+      #_AIRFLOW_DB_MIGRATE: 'true'
       _AIRFLOW_WWW_USER_CREATE: 'true'
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
       _PIP_ADDITIONAL_REQUIREMENTS: ''
-      AIRFLOW_UID: 1000    
+      AIRFLOW_UID: 1000
     user: "0:0"
     volumes:
       - /main/ears/airflow:/sources 
@@ -119,7 +136,10 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
-    restart: always
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
     depends_on:
       - airflow-init
         
@@ -133,13 +153,19 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
-    restart: always
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
     depends_on:
       - airflow-init
 
   airflow-worker:
     <<: *airflow-common
     command: bash -c "cd /opt/airflow/ && airflow celery worker"
+    environment:
+      <<: *airflow-common-env
+      DUMB_INIT_SETSID: "0"
     healthcheck:
       test:
         - "CMD-SHELL"
@@ -148,10 +174,10 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
-    environment:
-      <<: *airflow-common-env
-      DUMB_INIT_SETSID: "0"
-    restart: always
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
     depends_on:
       - airflow-init
 
@@ -164,14 +190,16 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
-    restart: always
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
     depends_on:
       - airflow-init
 
   flower:
     <<: *airflow-common
     command: celery flower
-
     ports:
       - "5555:5555"
     healthcheck:
@@ -180,13 +208,17 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
-    restart: always
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
     depends_on:
       - airflow-init
 
-
 secrets:
   airflow_database_sql_alchemy_conn:
-      external: true
+    external: true
   airflow_celery_result_backend_conn:
-      external: true
+    external: true
+  airflow_smtp_password:
+    external: true
