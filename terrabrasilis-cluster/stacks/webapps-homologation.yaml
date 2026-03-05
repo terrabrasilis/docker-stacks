@@ -18,7 +18,7 @@ services:
         window: 120s
 
   deforestation-dashboard-h:
-    image: terrabrasilis/deforestation-dashboard:hom_v3.5.2
+    image: terrabrasilis/deforestation-dashboard:hom_v3.5.3
     networks:
       - proxy
     ports:
