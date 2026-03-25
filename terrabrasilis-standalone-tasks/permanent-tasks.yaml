@@ -29,7 +29,7 @@ services:
       CONTROL_BASE_URL: "http://www.dpi.inpe.br/fipcerrado/deter2ibama/dados/controle"
       SUFFIX_PROJECT: amz
       PREFIX_CONTROL_FILE: deter
-      IBAMA_REF_DATE: '2024-08-01'
+      IBAMA_REF_DATE: '2025-08-01'
     secrets:
       - postgres.port.deter_r
       - postgres.db.deter_r
@@ -81,7 +81,7 @@ services:
       CONTROL_BASE_URL: "http://www.dpi.inpe.br/fipcerrado/deter2ibama/dados/controle"
       SUFFIX_PROJECT: cerrado
       PREFIX_CONTROL_FILE: deter_cerrado
-      IBAMA_REF_DATE: '2024-08-01'
+      IBAMA_REF_DATE: '2025-08-01'
     secrets:
       - postgres.port.deter_cerrado_ibama
       - postgres.db.deter_cerrado_ibama
