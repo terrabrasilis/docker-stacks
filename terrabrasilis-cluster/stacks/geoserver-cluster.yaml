@@ -3,7 +3,7 @@
 version: '3.4'
 services:
   gsmaster:
-    image: kartoza/geoserver:2.25.2
+    image: kartoza/geoserver:2.25.4
     hostname: geoserver-master
     ports:
       - "3100:8080"
@@ -47,7 +47,7 @@ services:
         condition: on-failure
 
   gsslave1:
-    image: kartoza/geoserver:2.25.2
+    image: kartoza/geoserver:2.25.4
     hostname: geoserver-slave1
     ports:
       - "3101:8080"
@@ -92,7 +92,7 @@ services:
         condition: on-failure
 
   gsslave2:
-    image: kartoza/geoserver:2.25.2
+    image: kartoza/geoserver:2.25.4
     hostname: geoserver-slave2
     ports:
       - "3102:8080"
@@ -137,7 +137,7 @@ services:
         condition: on-failure
 
   gsslave3:
-    image: kartoza/geoserver:2.25.2
+    image: kartoza/geoserver:2.25.4
     hostname: geoserver-slave3
     ports:
       - "3103:8080"
@@ -182,7 +182,7 @@ services:
         condition: on-failure
 
   gsslave4:
-    image: kartoza/geoserver:2.25.2
+    image: kartoza/geoserver:2.25.4
     hostname: geoserver-slave4
     ports:
       - "3104:8080"
@@ -227,7 +227,7 @@ services:
         condition: on-failure
 
   gsslave5:
-    image: kartoza/geoserver:2.25.2
+    image: kartoza/geoserver:2.25.4
     hostname: geoserver-slave5
     ports:
       - "3105:8080"
