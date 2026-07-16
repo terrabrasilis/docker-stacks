@@ -2,7 +2,7 @@ services:
 
   # The instance of API to PRODES appeals system
   sicar-prodes-api-h:
-    image: terrabrasilis/sicar-appeals-analysis-api:v1.0.0
+    image: terrabrasilis/sicar-appeals-analysis-api:v1.0.1
     secrets:
       - prodes.pantanal.database.url
       - prodes.amazonia.database.url
