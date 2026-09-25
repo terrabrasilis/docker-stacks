@@ -1,0 +1,174 @@
+# ams-geoserver
+
+version: '3.4'
+services:
+  gsmaster:
+    image: kartoza/geoserver:2.25.4
+    hostname: geoserver-master
+    ports:
+      - "3100:8080"
+    networks:
+      - proxy
+    volumes:
+      - /geoserver/cluster/gs_datadir:/var/local/geoserver
+      - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
+      - /geoserver/cluster/tomcat/master/logs:/usr/local/tomcat/logs
+      - /geoserver/cluster/tomcat/conf:/usr/local/tomcat/conf
+    environment:
+      GEOSERVER_DATA_DIR: /var/local/geoserver
+      GEOSERVER_CONTEXT_ROOT: ams_gs
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/master/logs
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/master
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/master/logs/geoserver.log
+      # confs of GWC like xml files
+      GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
+      instanceName: master
+      # CSRF_WHITELIST: 'inpe.br'
+      GEOSERVER_PORT: 8080
+      USE_DATETIME_IN_SHAPEFILE: 'false'
+      CLUSTERING: 'False'
+      EXISTING_DATA_DIR: 'true'
+      ENABLE_JSONP: 'false'
+      # JVM options
+      INITIAL_MEMORY: 1G
+      MAXIMUM_MEMORY: 2G
+      INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+      ENCODING: 'UTF8'
+      TIMEZONE: 'America/Sao_Paulo'
+      # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  gsslave1:
+    image: kartoza/geoserver:2.25.4
+    hostname: geoserver-slave1
+    ports:
+      - "3101:8080"
+    networks:
+      - proxy
+    volumes:
+      - /geoserver/cluster/gs_datadir:/var/local/geoserver
+      - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
+      - /geoserver/cluster/tomcat/slave1/logs:/usr/local/tomcat/logs
+      - /geoserver/cluster/tomcat/conf:/usr/local/tomcat/conf
+    environment:
+      GEOSERVER_DATA_DIR: /var/local/geoserver
+      GEOSERVER_CONTEXT_ROOT: ams_gs
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave1/logs
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave1
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/slave1/logs/geoserver.log
+      # confs of GWC like xml files
+      GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
+      instanceName: slave1
+      DISABLE_WEB_INTERFACE: 'true'
+      # CSRF_WHITELIST: 'inpe.br'
+      GEOSERVER_PORT: 8080
+      USE_DATETIME_IN_SHAPEFILE: 'false'
+      CLUSTERING: 'False'
+      EXISTING_DATA_DIR: 'true'
+      ENABLE_JSONP: 'false'
+      # JVM options
+      INITIAL_MEMORY: 1G
+      MAXIMUM_MEMORY: 2G
+      INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+      ENCODING: 'UTF8'
+      TIMEZONE: 'America/Sao_Paulo'
+      # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  gsslave2:
+    image: kartoza/geoserver:2.25.4
+    hostname: geoserver-slave2
+    ports:
+      - "3102:8080"
+    networks:
+      - proxy
+    volumes:
+      - /geoserver/cluster/gs_datadir:/var/local/geoserver
+      - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
+      - /geoserver/cluster/tomcat/slave2/logs:/usr/local/tomcat/logs
+      - /geoserver/cluster/tomcat/conf:/usr/local/tomcat/conf
+    environment:
+      GEOSERVER_DATA_DIR: /var/local/geoserver
+      GEOSERVER_CONTEXT_ROOT: ams_gs
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave2/logs
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave2
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/slave2/logs/geoserver.log
+      # confs of GWC like xml files
+      GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
+      instanceName: slave2
+      DISABLE_WEB_INTERFACE: 'true'
+      # CSRF_WHITELIST: 'inpe.br'
+      GEOSERVER_PORT: 8080
+      USE_DATETIME_IN_SHAPEFILE: 'false'
+      CLUSTERING: 'False'
+      EXISTING_DATA_DIR: 'true'
+      ENABLE_JSONP: 'false'
+      # JVM options
+      INITIAL_MEMORY: 1G
+      MAXIMUM_MEMORY: 2G
+      INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+      ENCODING: 'UTF8'
+      TIMEZONE: 'America/Sao_Paulo'
+      # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  gsslave3:
+    image: kartoza/geoserver:2.25.4
+    hostname: geoserver-slave3
+    ports:
+      - "3103:8080"
+    networks:
+      - proxy
+    volumes:
+      - /geoserver/cluster/gs_datadir:/var/local/geoserver
+      - /geoserver/cluster/gs_gwc:/var/local/geoserver_gwc
+      - /geoserver/cluster/tomcat/slave3/logs:/usr/local/tomcat/logs
+      - /geoserver/cluster/tomcat/conf:/usr/local/tomcat/conf   
+    environment:
+      GEOSERVER_DATA_DIR: /var/local/geoserver
+      GEOSERVER_CONTEXT_ROOT: ams_gs
+      GEOSERVER_LOG_PROFILE: PRODUCTION_LOGGING
+      GEOSERVER_LOG_DIR: /var/local/geoserver/cluster/slave3/logs
+      CLUSTER_CONFIG_DIR: /var/local/geoserver/cluster/slave3
+      GEOSERVER_LOG_LOCATION: /var/local/geoserver/cluster/slave3/logs/geoserver.log
+      # confs of GWC like xml files
+      GEOWEBCACHE_CACHE_DIR: /var/local/geoserver/gwc/
+      instanceName: slave3
+      DISABLE_WEB_INTERFACE: 'true'
+      # CSRF_WHITELIST: 'inpe.br'
+      GEOSERVER_PORT: 8080
+      USE_DATETIME_IN_SHAPEFILE: 'false'
+      CLUSTERING: 'False'
+      EXISTING_DATA_DIR: 'true'
+      ENABLE_JSONP: 'false'
+      # JVM options
+      INITIAL_MEMORY: 1G
+      MAXIMUM_MEMORY: 2G
+      INITIAL_HEAP_OCCUPANCY_PERCENT: 45
+      ENCODING: 'UTF8'
+      TIMEZONE: 'America/Sao_Paulo'
+      # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  proxy:
+    external: true
