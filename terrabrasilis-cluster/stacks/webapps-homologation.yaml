@@ -3,6 +3,20 @@ version: '3.4'
 
 services:
 
+  sinaveg-dashboard-h:
+    image: terrabrasilis/sinaveg-dashboard:1.0.0-rc.1
+    networks:
+      - proxy
+    ports:
+      - "80"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
   deter-dashboard-h:
     image: terrabrasilis/deter-dashboard:v1.0.40
     networks:
