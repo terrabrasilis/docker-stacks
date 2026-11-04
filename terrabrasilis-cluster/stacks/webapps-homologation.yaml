@@ -4,7 +4,7 @@ version: '3.4'
 services:
 
   sinaveg-dashboard-h:
-    image: terrabrasilis/sinaveg-dashboard:1.0.0-rc.2
+    image: terrabrasilis/sinaveg-dashboard:1.1.0-rc.2
     networks:
       - proxy
     ports:
