@@ -37,7 +37,7 @@ services:
       ENCODING: 'UTF8'
       TIMEZONE: 'America/Sao_Paulo'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError -XX:+UnlockDiagnosticVMOptions -XX:-UseBASE64Intrinsics
     deploy:
       replicas: 1
       placement:
@@ -82,7 +82,7 @@ services:
       ENCODING: 'UTF8'
       TIMEZONE: 'America/Sao_Paulo'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError -XX:+UnlockDiagnosticVMOptions -XX:-UseBASE64Intrinsics
     deploy:
       replicas: 1
       placement:
@@ -127,7 +127,7 @@ services:
       ENCODING: 'UTF8'
       TIMEZONE: 'America/Sao_Paulo'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError -XX:+UnlockDiagnosticVMOptions -XX:-UseBASE64Intrinsics
     deploy:
       replicas: 1
       placement:
@@ -172,7 +172,7 @@ services:
       ENCODING: 'UTF8'
       TIMEZONE: 'America/Sao_Paulo'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError -XX:+UnlockDiagnosticVMOptions -XX:-UseBASE64Intrinsics
     deploy:
       replicas: 1
       placement:
@@ -217,7 +217,7 @@ services:
       ENCODING: 'UTF8'
       TIMEZONE: 'America/Sao_Paulo'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError -XX:+UnlockDiagnosticVMOptions -XX:-UseBASE64Intrinsics
     deploy:
       replicas: 1
       placement:
@@ -262,7 +262,7 @@ services:
       ENCODING: 'UTF8'
       TIMEZONE: 'America/Sao_Paulo'
       # Additional JVM startup options not specified in https://github.com/kartoza/docker-geoserver/blob/master/scripts/entrypoint.sh#L21
-      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError
+      ADDITIONAL_JAVA_STARTUP_OPTIONS: -XX:+ExitOnOutOfMemoryError -XX:+UnlockDiagnosticVMOptions -XX:-UseBASE64Intrinsics
     deploy:
       replicas: 1
       placement:

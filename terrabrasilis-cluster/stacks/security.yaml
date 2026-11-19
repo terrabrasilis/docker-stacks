@@ -23,6 +23,7 @@ services:
       - "/data/security/keycloak:/data"
       - "/data/security/keycloak/themes/:/opt/keycloak/themes/"
     environment:
+      - "JAVA_OPTS_APPEND=-XX:+UnlockDiagnosticVMOptions -XX:-UseBASE64Intrinsics"
       - "KC_DB=postgres"
       - "KC_DB_SCHEMA=public"
       - "KC_DB_URL=jdbc:postgresql://192.168.1.18:5432/keycloak"
