@@ -2,32 +2,64 @@
 version: '3.4'
 
 services:
-
   geonetwork:
-    image: terrabrasilis/geonetwork:v3.4.4
+    image: terrabrasilis/geonetwork:v4.4.12
     networks:
       - proxy
+      - backend
     ports:
       - "8080"
     environment:
-      DATA_DIR: /var/lib/geonetwork_data
+      GEONETWORK_DB_HOST: ${GEONETWORK_DB_HOST:-}
+      GEONETWORK_DB_PORT: ${GEONETWORK_DB_PORT:-}
+      GEONETWORK_DB_NAME: ${GEONETWORK_DB_NAME:-}
+      WEBAPP_CONTEXT_PATH: /geonetwork
+      REMOTE_IP_INTERNAL_PROXIES: ${METADATA_TRUSTED_PROXIES:-}
+    secrets:
+      - geonetwork_db_username
+      - geonetwork_db_password
     volumes:
-      - /data/geonetwork:/var/lib/geonetwork_data
-      - /data/geonetwork/gn.h2.db:/usr/local/tomcat/webapps/gn.h2.db
+      - /data/metadata/catalogue:/catalogue-data
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          # force the service on node5 because its has more memory than others
+          - node.hostname==node5
       restart_policy:
         condition: any
         delay: 5s
         max_attempts: 3
         window: 120s
-    healthcheck:
-      test: ["CMD-SHELL", "httpcode=`curl -s -o /dev/null --head -w \"%{http_code}\" -X GET \"http://localhost:8080\"`; if [ ! $httpcode = \"200\" ]; then exit 1; fi"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.19.26
+    networks:
+      - backend
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+    volumes:
+      - /data/metadata/elasticsearch:/usr/share/elasticsearch/data
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          # force the service on node5 because its has more memory than others
+          - node.hostname==node5
+      resources:
+        limits:
+          memory: 2G
 
 networks:
   proxy:
+    external: true
+  backend:
+    external: true
+
+secrets:
+  geonetwork_db_username:
+    external: true
+  geonetwork_db_password:
     external: true
